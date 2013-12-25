@@ -8,12 +8,6 @@ enyo.kind({
 	handlers: {
 		onTapTest: "tapTest"
 	},
-	/*create: enyo.inherit(function (sup) {
-		return function () {
-			sup.apply(this, arguments);
-			this.zLog("initialize...");
-		};
-	}),*/
 	/**
 	 * Action method
 	 * @method 
@@ -28,5 +22,6 @@ enyo.kind({
 	},
 	tapTest: function (inSender, inEvent) {
 		this.zLog("inSender: ", inSender, "inEvent: ",inEvent);
+		return true;
 	}
 });

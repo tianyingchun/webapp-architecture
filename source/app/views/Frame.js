@@ -12,6 +12,9 @@ enyo.kind({
 			{kind: "onyx.Button", content: "Tap me", ontap: "helloWorldTap"}
 		]}
 	],
+	handlers: {
+		onTapTest: "tapTest"
+	},
 	helloWorldTap: function(inSender, inEvent) {
 		this.$.main.setContent("The button was tapped.<br/>");
 	},
@@ -29,5 +32,8 @@ enyo.kind({
 	setDockContent: function (viewConfig) {
 		var $dock = this.$.dock;
 		// do something..
+	},
+	tapTest: function () {
+		this.zLog("test tap.....");
 	}
 })
