@@ -1,4 +1,6 @@
-webapp-architecture
-===================
+bootplate
+=========
 
-The customized mobile framework based on ENYO 2.3 pre
+Application template for packaged Enyo
+
+Refer to the [Wiki](https://github.com/enyojs/enyo/wiki/Bootplate) for how to get started.

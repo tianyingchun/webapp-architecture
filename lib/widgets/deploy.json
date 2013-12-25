@@ -1,0 +1,6 @@
+
+{
+	"packagejs": "./package.js",
+	"assets": ["images"],
+	"libs": []
+}
