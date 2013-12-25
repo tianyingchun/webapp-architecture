@@ -1754,9 +1754,16 @@
 
 /* lib/theme/default/css/base/font.css */
 
-.testclass{
-	background: url('../lib/theme/default/images/default-logo.png') no-repeat 0 0 ;
+/*@font-face {
+    font-family: "HPSimplified Regular";
+    src: url('../lib/theme/default/webfonts/HPSimplified/HPSimplified_eot_files/HPSimplifiedW04-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../lib/theme/default/webfonts/HPSimplified/HPSimplified_woff_files/HPSimplifiedW04-Regular.woff') format('woff'),
+         url('../lib/theme/default/webfonts/HPSimplified/HPSimplified_ttf_files/HPSimplifiedW04-Regular.ttf')  format('truetype'),
+         url('../lib/theme/default/webfonts/HPSimplified/HPSimplified_svg_files/HPSimplifiedW04-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
+*/
 
 /* lib/theme/default/css/base/normalize.css */
 

@@ -17,11 +17,16 @@
 	</head>
 	<body class="enyo-unselectable">
 		<script>
-			if (!Master.Application) {
-				alert('No application build found, redirecting to debug.html.');
-				location = 'debug.html';
-			}
-			new Master.Application().renderInto(document.body);
+			enyo.ready(function (){
+				if (!Master.Application) {
+					alert('No application build found, redirecting to debug.html.');
+					location = 'debug.html';
+				}
+				new Master.Application({
+					name: Master.config.appName
+				}).renderInto(document.body);
+			});
+			
 		</script>
 	</body>
 </html>
