@@ -13,12 +13,21 @@ enyo.kind({
 	 * @method 
 	 */
 	index: function () {
-		this.zLog("params: ",this.view, arguments);
+		var viewData = null;
+		this.zLog("action data: ", viewData);
 		var viewKindName = "home.Index";
-		return this.bindingView(viewKindName, {});
+		// maybe async fetch data here.
+		this.getHomeData();
+
+		this.bindingView(viewKindName, null, null);
 	},
-	show: function () {
-		this.zLog("params: ", arguments);
+	/**
+	 * Ajax request data from server.
+	 */
+	getHomeData: function (inArgs) {
+		// do some thing..
+		var viewModel = {test: "viewModel"};
+		this.notifyView(viewModel);
 	},
 	tapTest: function (inSender, inEvent) {
 		this.zLog("inSender: ", inSender, "inEvent: ",inEvent);

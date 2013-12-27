@@ -24,12 +24,12 @@
 		{ path: "product/:page/:id", controller: "ProductController", action: "show"},
 		/**
 		 * dynamic router:
-		 * 1. match '#product/100' ->index(id:100)
-		 * 2. match '#product/' -> index(id:"")
+		 * 1. match '#product/100' ->index(page:100)
+		 * 2. match '#product/' -> index(page:"")
 		 * 3. don't matched '#product' if there are no another matched router rules.
 		 * it will use "home/index" as default router match
 		 * 
 		 */
-		{ path: "product/:id", controller: "ProductController", action: "index"}
+		{ path: "product/:page", controller: "ProductController", action: "index"}
 	]);
 })(enyo);

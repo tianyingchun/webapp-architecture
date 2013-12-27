@@ -8,27 +8,31 @@ enyo.kind({
 	handlers: {
 		onTapTest: "tapTest"
 	},
-	/*create: enyo.inherit(function (sup) {
-		return function () {
-			sup.apply(this, arguments);
-			this.zLog("initialize...");
-		};
-	}),*/
 	/**
-	 * Action method
-	 * @method Index it alwasy be invoked by route handler
+	 * Action method 
+	 * @method index corresponding the router config "product/:page"
+	 * @param {number} page current page
 	 */ 
-	index: function () {
-		this.zLog("params: ", arguments);
+	index: function (page) {
+		var viewData = {page: page};
+		this.zLog("action data: ", viewData);
+		var viewKindName = "product.Index";
+		this.bindingView(viewKindName, null, viewData);
 	},	
 	/**
 	 * Action method 
-	 * @method Show
+	 * @method Show corrsponding routerconfig. "product/:page/:id"
 	 */
-	show: function () {
-		this.zLog("params: ", arguments);
+	show: function (page, productId) {
+		var viewData = { page: page, productId: productId };
+		this.zLog("action data: ", viewData);
+		var viewKindName = "product.Show";
+		this.bindingView(viewKindName, null, viewData);
 	},
 	tapTest: function (inSender, inEvent) {
 		this.zLog("inSender: ", inSender, "inEvent: ",inEvent);
+		// notify view to update ui interface.
+		this.set("viewModel", {test:'test product controller sysnc!'});
+		return true;
 	}
 });
