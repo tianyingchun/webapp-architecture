@@ -1,3 +1,4 @@
 enyo.depends(
-	"key.js"
+	"key.js",
+	"errorcode.js"
 );

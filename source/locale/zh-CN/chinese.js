@@ -44,6 +44,7 @@ enyo.singleton({
 	},
 	// messages
 	message: {
-
+		"HTTP_404": "404 服务不存在!",
+		"HTTP_500": "500 内部错误!"
 	}
 });

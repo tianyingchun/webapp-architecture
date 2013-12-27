@@ -12,16 +12,19 @@ enyo.kind({
 				enabled: true,
 				cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
 			},
-			dto: "apiListDataDTO",
-			success: null,
-			fail: null
+			dto: "apiListDataDTO"
 		}
 	},
+	/**
+	 * Get api list 
+	 * @public
+	 * @param  {Function} fn data response result
+	 */
 	getApiList: function(fn) {
 		this.zLog("get api list...");
 		this.fetchApiData("getApiList", {
 			postBody: { user: 'tianyingchun' },
-			success: fn
+			callback: fn
 		});
 	},
 	apiListDataDTO: function (data, call) {

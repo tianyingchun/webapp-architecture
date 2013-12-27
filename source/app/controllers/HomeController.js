@@ -26,7 +26,10 @@ enyo.kind({
 	 */
 	getHomeData: function (inArgs) {
 		var apiPoolModel = new Master.models.ApiPool();
-		// apiPoolModel.getApiList();
+		apiPoolModel.getApiList(enyo.bindSafely(this, "showApiList"));
+	},
+	showApiList: function (response) {
+		this.zLog("response: ", response);
 		var viewModel = {test: "viewModel"};
 		this.notifyView(viewModel);
 	},
