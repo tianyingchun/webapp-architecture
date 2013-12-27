@@ -28,10 +28,9 @@ enyo.kind({
 		var apiPoolModel = new Master.models.ApiPool();
 		apiPoolModel.getApiList(enyo.bindSafely(this, "showApiList"));
 	},
-	showApiList: function (response) {
+	showApiList: function (viewModel, response) {
 		this.zLog("response: ", response);
-		var viewModel = {test: "viewModel"};
-		this.notifyView(viewModel);
+		this.notifyView(response);
 	},
 	tapTest: function (inSender, inEvent) {
 		this.zLog("inSender: ", inSender, "inEvent: ",inEvent);

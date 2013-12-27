@@ -14,6 +14,13 @@ enyo.kind({
 			{ kind: "Button", name:"testTap", content:"test Tap", ontap:"testTap"}
 		]}
 	],
+	receiveMessage: function (viewModel) {
+		if (viewModel.retCode ==1) {
+			// do nothing now..
+		} else {	
+			alert(viewModel.retMessage);
+		}
+	},
 	testTap: function () {
 		this.zLog("test tap.....");
 		this.doTapTest();

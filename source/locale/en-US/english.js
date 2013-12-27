@@ -44,6 +44,7 @@ enyo.singleton({
 	},
 	// messages
 	message: {
+		"SUCCESS": "successfull!",
 		"HTTP_404": "404 not found!",
 		"HTTP_500": "500 internal error!"
 	}

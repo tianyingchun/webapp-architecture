@@ -15,6 +15,15 @@ enyo.kind({
 			dto: "apiListDataDTO"
 		}
 	},
+	defaults: {
+		apiName: "",
+		apiDescription: "",
+		apiParams:{},
+		apiSampleCode:{
+			cshap: "cshap",
+			java:"java"
+		}
+	},
 	/**
 	 * Get api list 
 	 * @public

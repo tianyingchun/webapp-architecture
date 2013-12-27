@@ -13,6 +13,7 @@ enyo.singleton({
 	appName: "z",// define app name is z (lowercase), z is so cool ^-^.
 	// service request url root.
 	urlRoot:"http://locahost:8000/",
+	cacheBust: true, // ajax cache Bust.
 	// cache settings.
 	cache: {
 		// default enable cache.
