@@ -22,7 +22,7 @@ enyo.kind({
 	create: enyo.inherit(function(sup) {
 		return function () {
 			sup.apply(this, arguments);
-			this.zLog("home index create: controller", this);
+			// this.zLog("home index create: controller", this);
 		};
 	})
 });
