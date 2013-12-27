@@ -19,7 +19,7 @@ enyo.kind({
 		// maybe async fetch data here.
 		this.getHomeData();
 
-		this.bindingView(viewKindName, null, null);
+		this.bindingView(viewKindName, null, viewData);
 	},
 	/**
 	 * Ajax request data from server.
