@@ -1,3 +1,4 @@
 enyo.depends(
-	"Session.js"
+	"Session.js",
+	"ApiPool.js"
 );

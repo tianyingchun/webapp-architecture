@@ -11,6 +11,8 @@ enyo.singleton({
 	defaultLocale: "zh-CN",
 	defaultHash: "home/index",// redirect to home/index page if we can't find corresponding router handler.
 	appName: "z",// define app name is z (lowercase), z is so cool ^-^.
+	// service request url root.
+	urlRoot:"http://locahost:8000/",
 	// cache settings.
 	cache: {
 		// default enable cache.

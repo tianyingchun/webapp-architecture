@@ -25,7 +25,8 @@ enyo.kind({
 	 * Ajax request data from server.
 	 */
 	getHomeData: function (inArgs) {
-		// do some thing..
+		var apiPoolModel = new Master.models.ApiPool();
+		// apiPoolModel.getApiList();
 		var viewModel = {test: "viewModel"};
 		this.notifyView(viewModel);
 	},
