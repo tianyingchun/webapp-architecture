@@ -2,18 +2,15 @@ enyo.kind({
 	name: "Master.models.ApiPool",
 	kind: "Master.Model",
 	// Api configurations here!
-	apis: {
-		// api id: getApiList
-		getApiList:{
-			url: "/api/list",
-			postBody: { username: "tianyingchun" }, // {username:'terence tian', pwd:'123456'}
-			headers: { Authorization:"" }, 
-			cache: {
-				enabled: true,
-				cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
-			},
-			dto: "apiListDataDTO"
-		}
+	api: {
+		url: "/api/list",
+		postBody: { username: "tianyingchun" }, // {username:'terence tian', pwd:'123456'}
+		headers: { Authorization:"" }, 
+		cache: {
+			enabled: true,
+			cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
+		},
+		dto: "apiListDataDTO"
 	},
 	defaults: {
 		apiName: "",
@@ -31,7 +28,8 @@ enyo.kind({
 	 */
 	getApiList: function(fn) {
 		this.zLog("get api list...");
-		this.fetchApiData("getApiList", {
+		// get request.
+		this.fetch({
 			postBody: { user: 'tianyingchun' },
 			callback: fn
 		});
