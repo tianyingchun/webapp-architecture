@@ -25,12 +25,13 @@ enyo.kind({
 	 * Ajax request data from server.
 	 */
 	getHomeData: function (inArgs) {
-		var apiPoolModel = new Master.models.ApiPool();
-		apiPoolModel.getApiList(enyo.bindSafely(this, "showApiList"));
+		var apiCategories = new Master.models.docs.ApiCategories();
+		apiCategories.getApiCategories(enyo.bindSafely(this, "showApiCategories"));
 	},
-	showApiList: function (viewModel, response) {
-		this.zLog("response: ", response);
-		this.notifyView(response);
+	showApiCategories: function (viewModel) {
+		this.zLog("response: ", viewModel);
+		// update current viewModel for current controller.
+		this.set("viewModel",viewModel);
 	},
 	tapTest: function (inSender, inEvent) {
 		this.zLog("inSender: ", inSender, "inEvent: ",inEvent);

@@ -12,7 +12,7 @@ enyo.singleton({
 	},
 	// titles
 	title: {
-		appName: "ENYO APP DEMO"
+		APP_NAME: "ENYO APP DEMO"
 	},
 	//arbitrary page content
 	content: {
