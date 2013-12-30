@@ -1,5 +1,5 @@
 enyo.depends(
 	"mixins/",
-	"docs/",
+	"apipool/",
 	"Session.js"
 );

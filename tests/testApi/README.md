@@ -1,7 +1,7 @@
 ### Set up restfull api demo for test purpose.
 
 
-## dependency libs for nodejs restfull lib.
+### dependency libs for nodejs restfull lib.
 
 -http://blog.nodejitsu.com/a-simple-webservice-in-nodejs
 -Journey: A liberal JSON-only HTTP request router for node.js
@@ -9,7 +9,7 @@
 -Winston: A multi-transport async logging library for node.js
 -Optimist: Light-weight option parsing for node.js
 
-## install guides
+### install guides
 
 - npm install journey     --https://github.com/cloudhead/journey
 - npm install winston     --https://github.com/flatiron/winston
@@ -19,7 +19,7 @@
 - /demo/api/apilist
 - /demo/api/apidetail
 
-## maybe you need to add disable web security for chrom in mac:
+### maybe you need to add disable web security for chrom in mac:
 
 alias chrome="open /Applications/Google\ Chrome.app/ --args --disable-web-security
 

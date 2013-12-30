@@ -14,12 +14,13 @@ router.map(function() {
     //
     this.get("/api/categories").bind(function(req,res,id) {
         var result = [
-            { id: 1, name: "category name 1" },
-            { id: 2, name: "category name 2" },
-            { id: 3, name: "category name 3" },
-            { id: 4, name: "category name 4" },
-            { id: 5, name: "category name 5" },
-            { id: 6, name: "category name 6" }
+            // category item info.
+            { categoryId: 1, categroyName: "category name 1" },
+            { categoryId: 2, categroyName: "category name 2" },
+            { categoryId: 3, categroyName: "category name 3" },
+            { categoryId: 4, categroyName: "category name 4" },
+            { categoryId: 5, categroyName: "category name 5" },
+            { categoryId: 6, categroyName: "category name 6" }
 
         ];
         res.send(200, { 'Content-Type': 'application/json' }, result);
@@ -30,14 +31,14 @@ router.map(function() {
     //
     this.get("/api/apilist").bind(function(req, res, id) {
         var result = [
-            { id: 1, name: "api name 1" },
-            { id: 2, name: "api name 2" },
-            { id: 3, name: "api name 3" },
-            { id: 4, name: "api name 4" },
-            { id: 5, name: "api name 5" },
-            { id: 6, name: "api name 6" },
-            { id: 7, name: "api name 7" },
-            { id: 8, name: "api name 8" }
+            { apiId: 1, apiName: "api name 1" ,apiDesc: "api description"},
+            { apiId: 2, apiName: "api name 2" ,apiDesc: "api description"},
+            { apiId: 3, apiName: "api name 3" ,apiDesc: "api description"},
+            { apiId: 4, apiName: "api name 4" ,apiDesc: "api description"},
+            { apiId: 5, apiName: "api name 5" ,apiDesc: "api description"},
+            { apiId: 6, apiName: "api name 6" ,apiDesc: "api description"},
+            { apiId: 7, apiName: "api name 7" ,apiDesc: "api description"},
+            { apiId: 8, apiName: "api name 8" ,apiDesc: "api description"}
 
         ];
         res.send(200, {}, result);

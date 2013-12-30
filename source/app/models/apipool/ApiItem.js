@@ -1,5 +1,5 @@
 enyo.kind({
-	name: "Master.models.docs.ApiItem",
+	name: "Master.models.apipool.ApiItem",
 	kind: "Master.Model",
 	// api configrations for specific category item.
 	api: {
@@ -10,6 +10,12 @@ enyo.kind({
 			cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
 		},
 		dto: "apiDetailDTO"
+	},
+	// api detail default fields. it will be auto instanced.
+	defaults:{
+		apiId: "",
+		apiName: "",
+		apiDesc: ""
 	},
 	/**
 	 * Get current api details by api id.

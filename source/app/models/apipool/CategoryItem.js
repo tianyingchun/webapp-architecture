@@ -1,16 +1,21 @@
 enyo.kind({
-	name: "Master.models.docs.ApiCategoryItem",
+	name: "Master.models.apipool.CategoryItem",
 	kind: "Master.Collection",
-	model: "Master.models.docs.ApiItem",
+	model: "Master.models.apipool.ApiItem",
 	// api configrations for specific category item.
 	api: {
-		url: "/api/category",
+		url: "/api/apilist",
 		headers: { Authorization: "" }, 
 		cache: {
 			enabled: true,
 			cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
 		},
-		dto: "apiCategoriesDataDTO"
+		dto: "apiListDTO"
+	},
+	// for collection, only allow us use published defined, don't use defaults to defined fields.
+	published: {
+		categoryId: "",
+		categoryName: ""
 	},
 	/**
 	 * Get all api item list from an specific category.
@@ -18,7 +23,7 @@ enyo.kind({
 	 * @param  {function} fn the callback function for api doc categories.
 	 * @return {void}
 	 */
-	getApiCategoryItem: function (categroyId, fn) {
+	getApiList: function (categroyId, fn) {
 		this.fetch({
 			postBody: { categoryId: categoryId },
 			callback: fn
@@ -27,7 +32,7 @@ enyo.kind({
 	/**
 	 * Get category item info, it should be contains all api list for this category.
 	 */
-	apiCategoriesItemDTO: function (data) {
+	apiListDTO: function (data) {
 		this.zLog(data);
 	}
 });	

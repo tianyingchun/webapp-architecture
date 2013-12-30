@@ -25,7 +25,7 @@ enyo.kind({
 	 * Ajax request data from server.
 	 */
 	getHomeData: function (inArgs) {
-		var apiCategories = new Master.models.docs.ApiCategories();
+		var apiCategories = new Master.models.apipool.Categories();
 		apiCategories.getApiCategories(enyo.bindSafely(this, "showApiCategories"));
 	},
 	showApiCategories: function (viewModel) {

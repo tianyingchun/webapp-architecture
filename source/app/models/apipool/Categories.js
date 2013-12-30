@@ -1,7 +1,7 @@
 enyo.kind({
-	name: "Master.models.docs.ApiCategories",
+	name: "Master.models.apipool.Categories",
 	kind: "Master.Collection",
-	model: "Master.models.docs.ApiCategoryItem",
+	model: "Master.models.apipool.CategoryItem",
 	// api configrations for api categories.
 	api: {
 		url: "/api/categories",
@@ -11,10 +11,9 @@ enyo.kind({
 		// },
 		dto: "apiCategoriesDataDTO"
 	},
-	defaults: {
-		name: "",
-		id: ""
-	},
+	// default we don't need to instance all records as specificed model. 
+	instanceAllRecords: false,
+
 	/**
 	 * Get all api doc categories.
 	 * @param  {function} fn the callback function for api doc categories.
