@@ -12,7 +12,7 @@ enyo.singleton({
 	defaultHash: "home/index",// redirect to home/index page if we can't find corresponding router handler.
 	appName: "z",// define app name is z (lowercase), z is so cool ^-^.
 	// service request url root.
-	urlRoot:"http://locahost:8000/",
+	urlRoot:"http://localhost:7000/",
 	cacheBust: true, // ajax cache Bust.
 	// cache settings.
 	cache: {

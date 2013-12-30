@@ -4,7 +4,7 @@ enyo.kind({
 	model: "Master.models.docs.ApiCategoryItem",
 	// api configrations for api categories.
 	api: {
-		url: "/tests/data/apicategories.js",
+		url: "/api/categories",
 		// cache: {
 		// 	enabled: true,
 		// 	cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
