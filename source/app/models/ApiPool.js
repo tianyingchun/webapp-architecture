@@ -1,7 +1,7 @@
 enyo.kind({
 	name: "Master.models.ApiPool",
 	kind: "Master.Model",
-	// Api configurations here!
+	// override api configurations here!
 	api: {
 		url: "/api/list",
 		postBody: { username: "tianyingchun" }, // {username:'terence tian', pwd:'123456'}
@@ -30,7 +30,7 @@ enyo.kind({
 		this.zLog("get api list...");
 		// get request.
 		this.fetch({
-			postBody: { user: 'tianyingchun' },
+			postBody: { user: 'tianyingchun1111' },
 			callback: fn
 		});
 	},
