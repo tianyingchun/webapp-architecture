@@ -13,7 +13,7 @@ enyo.kind({
 		]}
 	],
 	handlers: {
-		onTapTest: "tapTest"
+		onGetCategoryDetail: "getCategoryDetail"
 	},
 	helloWorldTap: function(inSender, inEvent) {
 		this.$.main.setContent("The button was tapped.<br/>");
@@ -33,7 +33,7 @@ enyo.kind({
 		var $dock = this.$.dock;
 		// do something..
 	},
-	tapTest: function () {
-		this.zLog("test tap.....");
+	getCategoryDetail: function () {
+		this.zLog("getCategoryDetail for test.....");
 	}
 })

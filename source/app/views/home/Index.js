@@ -6,26 +6,39 @@ enyo.kind({
 	name: "Master.views.home.Index",
 	kind: "Master.View",
 	events:{
-		"onTapTest": ""
+		"onGetAllCategories": "",
+		"onGetCategoryDetail": ""
 	},
 	components: [
 		{ tag: "div", classes: "home-index", components: [
-			{ tag: "div", content:"teststtt........home index view"},
-			{ kind: "Button", name:"testTap", content:"test Tap", ontap:"testTap"}
+			{ tag: "div", content:"home index view"},
+			{ components: [
+				{ kind: "Button", name:"allcategories", content:"Get All Categories", ontap:"getAllCategories"},
+				{ kind: "Button", name:"categorydetail", content:"Get CategoryDetail", ontap:"getCategoryDetail"}	
+			]}
 		]}
 	],
 	receiveMessage: function (viewModel) {
-		if (viewModel.retCode ==1) {
+		var restInfo = viewModel.restInfo;
+		if (restInfo.retCode ==1) {
 			// do nothing now..
+			// 
 		} else {	
-			alert(viewModel.retMessage);
+			alert(restInfo.retMessage);
 		}
 	},
-	testTap: function () {
-		this.zLog("test tap.....");
-		this.doTapTest();
+	// Get all categories from controller.
+	getAllCategories: function (inSender, inEvent) {
+		this.zLog("dispatch get all categories event to controller...");
+		this.doGetAllCategories();
 		return true;
-	},	
+	},
+	// Get category detail.	
+	getCategoryDetail: function (inSender, inEvent) {
+		this.zLog("dispatch get category detail event to controller...");
+		this.doGetCategoryDetail({categoryId: 1});
+		return true;
+	},
 	create: enyo.inherit(function(sup) {
 		return function () {
 			sup.apply(this, arguments);

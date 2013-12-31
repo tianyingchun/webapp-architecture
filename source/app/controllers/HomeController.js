@@ -6,7 +6,8 @@ enyo.kind({
 	name: "Master.controllers.HomeController",
 	kind: "Master.Controller",
 	handlers: {
-		onTapTest: "tapTest"
+		onGetAllCategories: "getAllCategories",
+		onGetCategoryDetail: "getCategoryDetail"
 	},
 	/**
 	 * Action method
@@ -17,24 +18,28 @@ enyo.kind({
 		this.zLog("action data: ", viewData);
 		var viewKindName = "home.Index";
 		// maybe async fetch data here.
-		this.getHomeData();
+		this.getAllCategories();
 
 		this.bindingView(viewKindName, null, viewData);
-	},
-	/**
-	 * Ajax request data from server.
-	 */
-	getHomeData: function (inArgs) {
-		var apiCategories = new Master.models.apipool.Categories();
-		apiCategories.getApiCategories(enyo.bindSafely(this, "showApiCategories"));
 	},
 	showApiCategories: function (viewModel) {
 		this.zLog("response: ", viewModel);
 		// update current viewModel for current controller.
 		this.set("viewModel",viewModel);
 	},
-	tapTest: function (inSender, inEvent) {
-		this.zLog("inSender: ", inSender, "inEvent: ",inEvent);
+	showCategoryDetal: function (viewModel) {
+		
+	},
+	// do server request.
+	getAllCategories: function (inSender, inEvent) {
+		var apiCategories = new Master.models.apipool.Categories();
+		apiCategories.getApiCategories(enyo.bindSafely(this, "showApiCategories"));
+		return true;
+	},
+	// do server request.
+	getCategoryDetail:function (inSender, inEvent) {
+		// var apiCategoryDetail = 
+		this.zLog("getCategoryDetail...");
 		return true;
 	}
 });

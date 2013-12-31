@@ -15,14 +15,30 @@ router.map(function() {
     this.get("/api/categories").bind(function(req,res,id) {
         var result = [
             // category item info.
-            { categoryId: 1, categroyName: "category name 1" },
-            { categoryId: 2, categroyName: "category name 2" },
-            { categoryId: 3, categroyName: "category name 3" },
-            { categoryId: 4, categroyName: "category name 4" },
-            { categoryId: 5, categroyName: "category name 5" },
-            { categoryId: 6, categroyName: "category name 6" }
+            { id: 1, name: "category name 1" },
+            { id: 2, name: "category name 2" },
+            { id: 3, name: "category name 3" },
+            { id: 4, name: "category name 4" },
+            { id: 5, name: "category name 5" },
+            { id: 6, name: "category name 6" }
 
         ];
+        res.send(200, { 'Content-Type': 'application/json' }, result);
+    });
+
+    /**
+     * Get category detail information
+     */
+    this.get("/^\/api\/category\/([0-9]+)$/").bind(function(req, res, id) {
+        winston.info("categoryId: ", id)
+        var result = {
+            id: id,
+            name: "category name",
+            details: {
+                detail1: "detail",
+                detail2: "detail2"
+            }
+        }
         res.send(200, { 'Content-Type': 'application/json' }, result);
     });
 

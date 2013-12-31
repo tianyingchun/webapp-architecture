@@ -1,38 +1,52 @@
 enyo.kind({
 	name: "Master.models.apipool.CategoryItem",
-	kind: "Master.Collection",
+	kind: "Master.Model",
 	model: "Master.models.apipool.ApiItem",
 	// api configrations for specific category item.
 	api: {
-		url: "/api/apilist",
+		url: "/api/category",
 		headers: { Authorization: "" }, 
 		cache: {
 			enabled: true,
 			cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
 		},
-		dto: "apiListDTO"
+		dto: "categoryDetailDTO"
 	},
-	// for collection, only allow us use published defined, don't use defaults to defined fields.
-	published: {
+	// for model, defined record schema.
+	attributes: {
 		categoryId: "",
-		categoryName: ""
+		categoryName: "",
+		categoryDetails: []
+	},
+	// default values for record schema.
+	defaults: {
+		categoryDetails: [
+			{ detail1: "detail1"}
+		]
 	},
 	/**
-	 * Get all api item list from an specific category.
+	 * Get category details for an specific category.
 	 * @param {number} categroyId specific category id.
 	 * @param  {function} fn the callback function for api doc categories.
 	 * @return {void}
 	 */
-	getApiList: function (categroyId, fn) {
+	getCategoryDetail: function (categoryId, fn) {
 		this.fetch({
 			postBody: { categoryId: categoryId },
 			callback: fn
 		});
 	},
 	/**
-	 * Get category item info, it should be contains all api list for this category.
+	 * Get category item info, we can fetch all detail information for current category item.
 	 */
-	apiListDTO: function (data) {
+	categoryDetailDTO: function (data) {
 		this.zLog(data);
+		data = data || {};
+		var result = {
+			categoryId: data.id,
+			categoryName: data.name,
+			categoryDetails: data.details
+		};
+		return result;
 	}
 });	
