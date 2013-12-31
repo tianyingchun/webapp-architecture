@@ -1767,4 +1767,12 @@
 
 /* lib/theme/default/css/base/normalize.css */
 
+body{color:#000}
 
+/* lib/theme/default/css/layout/header.css */
+
+#header{color:#000;background:url('../lib/theme/default/images/sprites-horizontal.png') no-repeat #56b3e6;font-size:14px;border:0}.logo{width:100px;height:50px}.top-nav{padding:0;margin:0}.top-nav li{list-style:none;float:left;padding-left:10px}
+
+/* lib/theme/default/css/layout/footer.css */
+
+#footer{color:#000}

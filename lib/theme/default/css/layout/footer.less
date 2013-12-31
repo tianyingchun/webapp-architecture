@@ -1,0 +1,46 @@
+// variables here
+@color: #636363;
+@color-hover: #06c;
+@font-small: 13px;
+#footer {
+	color: @color; // red
+	font-size: @font-small;
+ 	border: none;	
+	border-top: 1px solid #E2E2E2;
+ 	background: #f6f6f2;
+ 	overflow: hidden;
+	li {
+		float: left;
+		padding: 0 5px;
+		a {
+			color: @color;
+			&:hover {
+				color: @color-hover;
+				text-decoration: underline;
+				cursor: pointer;
+			}
+		}
+	}
+}
+.left-aside {
+	float: left;
+	width: 300px;
+	.aside-link {
+		float:left;
+	}
+	.copyright{
+		padding-top: 10px;
+		clear: both;
+	}
+}
+.right-aside {
+	width: 500px;
+	float:right;
+	.our-service {
+		overflow:hidden;
+		& >div {
+			float:right;
+			padding: 5px;
+		}
+	}
+}

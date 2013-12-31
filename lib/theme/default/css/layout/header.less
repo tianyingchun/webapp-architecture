@@ -1,0 +1,26 @@
+// header.css
+@import "variables.less";
+@import "mixins.less"; 
+
+#header {
+	color: @black;
+	height:130px;
+	background: url(../../images/sprites-horizontal.png) repeat-x @light-blue;
+	background-position: 0 -1088px;
+	font-size: @font-normal;
+	border: 0;
+	.box-shadow(1px 1px 5px rgba(133, 133, 133, 0.85));
+}
+.logo {
+	width: 100px;
+	height: 50px;
+}
+.top-nav {
+	padding: 0;
+	margin: 0;	
+}
+.top-nav li {
+	list-style: none;
+	float: left;
+	padding-left: 10px;
+}
