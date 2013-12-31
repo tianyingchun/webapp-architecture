@@ -28,11 +28,12 @@ router.map(function() {
 
     /**
      * Get category detail information
+     * /^\/api\/category\/([0-9]+)$/  ->/api/category/1
      */
-    this.get("/^\/api\/category\/([0-9]+)$/").bind(function(req, res, id) {
-        winston.info("categoryId: ", id)
+    this.get("/api/category").bind(function(req, res, data) {
+        winston.info("categoryId: ", data);
         var result = {
-            id: id,
+            id: data && data.categoryId,
             name: "category name",
             details: {
                 detail1: "detail",
@@ -42,6 +43,32 @@ router.map(function() {
         res.send(200, { 'Content-Type': 'application/json' }, result);
     });
 
+    // Update category information
+    this.post("/api/category").bind(function (req, res, data) {
+        winston.info("update info: ", data);
+        var result = {
+            id: data && data.categoryId,
+            name: "New category name",
+            details: {
+                detail1: "updated detail",
+                detail2: "updated detail2"
+            }
+        };
+        res.send(200, { 'Content-Type': 'application/json' }, result);
+    });
+    // Post category..
+    this.put("/api/category").bind(function (req, res, data) {
+        winston.info("update info: ", data);
+        var result = {
+            id: data && data.categoryId,
+            name: "updated category name",
+            details: {
+                detail1: "updated detail",
+                detail2: "updated detail2"
+            }
+        };
+        res.send(200, { 'Content-Type': 'application/json' }, result);
+    });
     //
     // SHOW: GET to /api/apilist/:id list all api list
     //
@@ -58,33 +85,6 @@ router.map(function() {
 
         ];
         res.send(200, {}, result);
-    });
-
-    //
-    // CREATE: POST to /bookmarks creates a new bookmark
-    //
-    this.post().bind(function(res, bookmark) {
-        res.send(501, {}, {
-            action: 'create'
-        });
-    });
-
-    //
-    // UPDATE: PUT to /bookmarks updates an existing bookmark
-    //
-    this.put(/\/([\w|\d|\-|\_]+)/).bind(function(res, bookmark) {
-        res.send(501, {}, {
-            action: 'update'
-        });
-    });
-
-    //
-    // DELETE: DELETE to /bookmarks/:id deletes a specific bookmark
-    //
-    this.del(/\/([\w|\d|\-|\_]+)/).bind(function(res, id) {
-        res.send(501, { }, {
-            action: 'delete'
-        });
     });
 });
 /**

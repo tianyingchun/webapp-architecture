@@ -6,7 +6,6 @@ enyo.kind({
 	apis: {
 		// apiKey: categoryInfo
 		categoryInfo: {
-			isDefault: true,
 			url: "/api/category",
 			headers: { Authorization: "" }, 
 			cache: {
@@ -15,6 +14,13 @@ enyo.kind({
 			},
 			dto: "categoryDetailDTO"
 		},
+		// update.
+		updateCategoryInfo: {
+			url: "/api/category",
+			cache: false,
+			dto: "categoryDetailDTO"
+		},
+		// get category config info.
 		categoryConfig:  {
 			url: "/api/categoryconfig",
 			// directly set cache is false.
@@ -45,7 +51,22 @@ enyo.kind({
 	getCategoryDetail: function (categoryId, fn) {
 		this.fetch({
 			apiKey: "categoryInfo",
-			postBody: { categoryId: categoryId },
+			data: { categoryId: categoryId },
+			callback: fn
+		});
+	},
+	/**
+	 * Update category info
+	 * @param  {category}   category category data.
+	 */
+	updateCategoryInfo: function (category, fn) {
+		// re-set the value for update filed.
+		this.set("categoryName", "Updated category Name....");
+		// force do post request.
+		this.isNew = true;
+		this.commit({
+			apiKey: "updateCategoryInfo",
+			method: "POST",// 'POST','PUT'
 			callback: fn
 		});
 	},

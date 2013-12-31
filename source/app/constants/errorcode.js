@@ -5,7 +5,8 @@
 	var errorCode = {
 		// constant errorCode mapping.	
 		"404": "HTTP_404",
-		"500": "HTTP_500"
+		"500": "HTTP_500",
+		"405": "HTTP_405"
 	};
 	ns.ErrorCode = errorCode;
 })(window)

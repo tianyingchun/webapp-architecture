@@ -4,7 +4,6 @@ enyo.kind({
 	// api configrations for specific category item.
 	apis: {
 		apiDetail:{
-			isDefault: true,
 			url: "/api/detail",
 			headers: { Authorization: "" }, 
 			cache: {

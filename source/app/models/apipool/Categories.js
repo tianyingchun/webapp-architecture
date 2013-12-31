@@ -5,7 +5,6 @@ enyo.kind({
 	// api configrations for api categories.
 	apis: {
 		allcategories: {
-			isDefault: true,
 			url: "/api/categories",
 			// cache: {
 			// 	enabled: true,

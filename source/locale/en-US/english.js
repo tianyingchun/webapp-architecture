@@ -46,6 +46,7 @@ enyo.singleton({
 	message: {
 		"SUCCESS": "successfull!",
 		"HTTP_404": "404 not found!",
-		"HTTP_500": "500 internal error!"
+		"HTTP_500": "500 internal error!",
+		"HTTP_405": "405 Method Not Allowed!"
 	}
 });
