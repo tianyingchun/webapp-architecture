@@ -147,7 +147,8 @@ enyo.kind({
 	*/
 	didFetch: function (rec, opts, res) {
 		// the parsed result
-		var rr = this.parse(res),
+		// Updated by terence, add api config to parse.
+		var rr = this.parse(res, opts),
 			s  = opts.strategy, fn;
 		if (rr) {
 			// unfortunately we have to mark this all as having been fetched so when they

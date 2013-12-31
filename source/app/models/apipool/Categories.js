@@ -3,13 +3,16 @@ enyo.kind({
 	kind: "Master.Collection",
 	model: "Master.models.apipool.CategoryItem",
 	// api configrations for api categories.
-	api: {
-		url: "/api/categories",
-		// cache: {
-		// 	enabled: true,
-		// 	cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
-		// },
-		dto: "apiCategoriesDataDTO"
+	apis: {
+		allcategories: {
+			isDefault: true,
+			url: "/api/categories",
+			// cache: {
+			// 	enabled: true,
+			// 	cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
+			// },
+			dto: "apiCategoriesDataDTO"
+		}
 	},
 	// default we don't need to instance all records as specificed model. 
 	instanceAllRecords: true,
@@ -21,6 +24,7 @@ enyo.kind({
 	 */
 	getApiCategories: function (fn) {
 		this.fetch({
+			apiKey: "allcategories",
 			callback: fn
 		});
 	},

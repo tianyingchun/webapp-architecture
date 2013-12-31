@@ -376,7 +376,8 @@
 		*/
 		didFetch: function (rec, opts, res) {
 			// the actual result has to be checked post-parse
-			var r = this.parse(res);
+			// Updated by terence, add api config to parse.
+			var r = this.parse(res, opts);
 			if (r) {
 				this.setObject(r);
 			}
@@ -397,7 +398,8 @@
 		*/
 		didCommit: function (rec, opts, res) {
 			// the actual result has to be checked post-parse
-			var r = this.parse(res);
+			// Updated by terence, add api config to parse.
+			var r = this.parse(res, opts);
 			if (r) {
 				this.setObject(r);
 			}

@@ -3,20 +3,32 @@ enyo.kind({
 	kind: "Master.Model",
 	model: "Master.models.apipool.ApiItem",
 	// api configrations for specific category item.
-	api: {
-		url: "/api/category",
-		headers: { Authorization: "" }, 
-		cache: {
-			enabled: true,
-			cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
+	apis: {
+		// apiKey: categoryInfo
+		categoryInfo: {
+			isDefault: true,
+			url: "/api/category",
+			headers: { Authorization: "" }, 
+			cache: {
+				enabled: true,
+				cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
+			},
+			dto: "categoryDetailDTO"
 		},
-		dto: "categoryDetailDTO"
+		categoryConfig:  {
+			url: "/api/categoryconfig",
+			// directly set cache is false.
+			cache: false,
+			dto: "categoryConfigDTO"
+		}
 	},
 	// for model, defined record schema.
 	attributes: {
 		categoryId: "",
 		categoryName: "",
-		categoryDetails: []
+		categoryDetails: [],
+		// extended information.
+		categoryConfig: {}
 	},
 	// default values for record schema.
 	defaults: {
@@ -32,11 +44,25 @@ enyo.kind({
 	 */
 	getCategoryDetail: function (categoryId, fn) {
 		this.fetch({
+			apiKey: "categoryInfo",
 			postBody: { categoryId: categoryId },
 			callback: fn
 		});
 	},
 	/**
+	 * API DTO
+	 * get category config dto.
+	 */
+	categoryConfigDTO: function (data) {
+		this.zLog(data);
+		var result = {
+			isDisplay: true,
+			groups: [],
+		};
+		return result;
+	},
+	/**
+	 * API DTO
 	 * Get category item info, we can fetch all detail information for current category item.
 	 */
 	categoryDetailDTO: function (data) {

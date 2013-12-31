@@ -2,14 +2,17 @@ enyo.kind({
 	name: "Master.models.apipool.ApiItem",
 	kind: "Master.Model",
 	// api configrations for specific category item.
-	api: {
-		url: "/api/detail",
-		headers: { Authorization: "" }, 
-		cache: {
-			enabled: true,
-			cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
-		},
-		dto: "apiDetailDTO"
+	apis: {
+		apiDetail:{
+			isDefault: true,
+			url: "/api/detail",
+			headers: { Authorization: "" }, 
+			cache: {
+				enabled: true,
+				cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
+			},
+			dto: "apiDetailDTO"
+		}
 	},
 	// api detail default fields. it will be auto instanced.
 	defaults:{
@@ -25,6 +28,7 @@ enyo.kind({
 	 */
 	getApiDetail: function (apiId, fn) {
 		this.fetch({
+			apiKey: "apiDetail",
 			postBody: { apiId: apiId },
 			callback: fn
 		});
