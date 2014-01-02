@@ -2,8 +2,7 @@ enyo.singleton({
 	name: "Master.config",
 	kind: null,
 	constructor: function () {
-		// manul config localstorage strategy.
-		this.setStoragePolicy();
+		// do nothing.
 	},
 	// #region properties.
 	storageStrategy: "localstorage", //cookie, websql,localstorage

@@ -8,7 +8,7 @@ enyo.kind({
 	kind: "Master.View",
 	classes:"frame",
 	components:[
-		{kind: "onyx.Toolbar", name:"header", id:"header", components: [
+		{name:"header", id:"header", components: [
 			{ classes: "header-inner", components: [
 				{ classes:"logo", content: Master.locale.get("LOGO_TEXT","title"), ontap:"goHome" },
 				{ classes:"top-nav", tag:"ul", components: [
@@ -23,10 +23,15 @@ enyo.kind({
 				{kind: "widgets.forms.SearchForm"}
 			]}
 		]},
-		{kind: "enyo.Scroller", name:"page", id:"page", components: [
-			{name: "main", classes: "page-inner"}
+		{name:"page", id:"page", components: [
+			{name: "main", kind: "enyo.Scroller", fit:true, classes: "page-inner", components: [
+					
+			]}
+		 //    {kind:"FittableRows", components:[ 
+				
+			// ]}
 		]},
-		{kind: "onyx.Toolbar", name:"footer", id:"footer", components: [
+		{name:"footer", id:"footer", components: [
 			{ classes:"left-aside", components: [
 				{ classes:"aside-link", tag: "ul", components: [
 					{ tag:"li", classes:"link-item", components:[
@@ -53,6 +58,7 @@ enyo.kind({
 	handlers: {
 		onGetCategoryDetail: "getCategoryDetail"
 	},
+
 	create: enyo.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);

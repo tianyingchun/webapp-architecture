@@ -13,8 +13,9 @@
 			supportedLang: [ { "zh-CN": "zh" }, {"en-US": "en"} ]
 		},
 		constructor: function () {
-			this.setLocaleLanguage();
 			this._defaultLocale = arguments[0] && "zh-CN";
+			// set locale language.
+			this.setLocaleLanguage();
 		},
 		/**
 		 * set language saved to localstorage/cookie/websql and so on.
@@ -26,7 +27,7 @@
 		},
 		getLanguage: function (){
 			var language = Master.storage.get("language");
-			return language && language["val"];
+			return (language && language["val"]) || this._defaultLocale;
 		},
 		/**
 		 * Reset locale settings.
