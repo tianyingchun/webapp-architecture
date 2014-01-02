@@ -1,6 +1,17 @@
+@import "./../variables.less";
+@import "./../mixins.less"; 
+
 @color: #000;
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 body {
 	color: @color;
+	font-size: 16px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 ul {
 	padding:0;
@@ -8,4 +19,12 @@ ul {
 }
 ul li {
 	list-style: none;
+}
+a {
+	color: @color;
+	&:hover {
+		color: @color-hover;
+		text-decoration: underline;
+		cursor: pointer;
+	}
 }

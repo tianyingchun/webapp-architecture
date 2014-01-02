@@ -12,7 +12,12 @@ enyo.singleton({
 	},
 	// titles
 	title: {
-		APP_NAME: "ENYO APP DEMO"
+		APP_NAME: "ENYO APP DEMO",
+		LOGO_TEXT: "Developer Platform - 1 Wallet"
+	},
+	nav: {
+		HOME: "Home",
+		OFFICIAL_SITE: "PingAn China"
 	},
 	//arbitrary page content
 	content: {
@@ -24,11 +29,11 @@ enyo.singleton({
 	},
 	// form labels
 	label: {
-
+		REFINE_SEARCH: "Refine your search"
 	},
 	// button labels
 	button: {
-
+		SEARCH: "Search"
 	},
 	// tooltips
 	tooltip: {
@@ -36,7 +41,7 @@ enyo.singleton({
 	},
 	// place holders
 	placeholder: {
-
+		SEARCH_HINT: "Type keywords to search!"
 	},
 	// form field validation messages
 	validationMsg: {

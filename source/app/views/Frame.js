@@ -1,20 +1,35 @@
+
+/**
+ * Now for the ui layout we support pc broswer. if use mobile maybe need to re-fined or re-define the layout
+ *
+ **/
 enyo.kind({
 	name: "Master.views.Frame",
 	kind: "Master.View",
-	layoutKind: "FittableRowsLayout",
-	fit: true,
+	classes:"frame",
 	components:[
-		{kind: "onyx.Toolbar", id:"header", components: [
-			{ classes:"logo", content:"开发者平台", ontap:"goHome" },
-			{ classes:"top-nav", tag:"ul", components: [
-				{tag:"li", classes:"nav-item", content:"首页"},
-				{tag:"li", classes:"nav-item", content:"平安官网"}
+		{kind: "onyx.Toolbar", name:"header", id:"header", components: [
+			{ classes: "header-inner", components: [
+				{ classes:"logo", content: Master.locale.get("LOGO_TEXT","title"), ontap:"goHome" },
+				{ classes:"top-nav", tag:"ul", components: [
+					{ tag:"li", classes:"nav-item", components: [
+						{ tag: "a", href:"/", content: Master.locale.get("HOME", "nav")}
+					]},
+					{ tag:"li", classes:"nav-item", components: [
+						{ tag: "a", href:"/", content: Master.locale.get("OFFICIAL_SITE", "nav")}
+					]}
+				]},
+				{ classes: "search-form", components: [
+					{ classes: "search-input", placeholder:Master.locale.get("SEARCH_HINT", "placeholder"), kind: "onyx.Input"},
+					{ classes: "search-button", kind: "onyx.Button",content: Master.locale.get("SEARCH","button")},
+					{ classes:"search-filter", content: Master.locale.get("REFINE_SEARCH","label")}
+				]}
 			]}
 		]},
-		{kind: "enyo.Scroller", fit: true, components: [
-			{name: "main", classes: "nice-padding"}
+		{kind: "enyo.Scroller", name:"page", id:"page", components: [
+			{name: "main", classes: "page-inner"}
 		]},
-		{kind: "onyx.Toolbar", id:"footer", components: [
+		{kind: "onyx.Toolbar", name:"footer", id:"footer", components: [
 			{ classes:"left-aside", components: [
 				{ classes:"aside-link", tag: "ul", components: [
 					{ tag:"li", classes:"link-item", components:[
@@ -41,6 +56,47 @@ enyo.kind({
 	handlers: {
 		onGetCategoryDetail: "getCategoryDetail"
 	},
+	create: enyo.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			// apply the global classes to frame.
+			this.addClass(this.getPlatformType());
+		};
+	}),
+	rendered: enyo.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			// set minimal height for page body.
+			this.reflowPageLayout();
+		};
+	}),
+	// override reflow workflow.
+	reflow: enyo.inherit(function (sup){
+		return function () {
+			// do our stuff here while resize window.
+			// last resize event.
+			enyo.job("reflowPageLayout", this.bindSafely("reflowPageLayout"),300);
+			sup.apply(this, arguments);
+		};
+	}),
+	// fresh the page body container layout
+	reflowPageLayout: function () {
+		var minimalHeight = this.calMinimalPageheight();
+		minimalHeight = minimalHeight < 200 ? 200 : minimalHeight; 
+		this.$.page.applyStyle("min-height", minimalHeight+"px");
+	},
+	/**
+	 * For pc browser model we calculate the minimal height.
+	 */
+	calMinimalPageheight: function () {
+		// window height.
+		var wheight = enyo.dom.getWindowHeight();
+		var headerHeight = this.$.header.getBounds().height;
+		var footerHeight = this.$.footer.getBounds().height;		
+		var minimalHeight = wheight - headerHeight - footerHeight;
+		return minimalHeight;
+	},
+
 	/**
 	 * Set view config as child client control for main frame view.
 	 * @param {object} viewConfig  the object that hold all configurations of enyo kind.

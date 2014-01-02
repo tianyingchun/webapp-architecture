@@ -35,9 +35,19 @@
 .border-radius (@radius: 5px) {
   -webkit-border-radius: @radius;
   -moz-border-radius:    @radius;
+  -ms-border-radius:     @radius;
+  -o-border-radius:      @radius;
   border-radius:         @radius;
 
   -moz-background-clip:    padding;
   -webkit-background-clip: padding-box;
   background-clip:         padding-box;
 }
+
+// css sprite mixin.
+// css sprite for small icons.
+.small-icons{
+  background: url(../../images/small-icons.png) no-repeat;
+}
+
+

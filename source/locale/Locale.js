@@ -58,6 +58,8 @@
 				var langShort = this.supportedLang[i][lang];
 				if (langShort) {
 					this._destLocaleLang = Master.lang[langShort];
+					// save this lang.
+					this.lang = lang;
 					isFind = true;
 					break;
 				}
@@ -80,7 +82,7 @@
 				localeStr = this._destLocaleLang[key];
 			}
 			if (!localeStr) {
-				this.zError("get locale failed:  key: " + key +" context: "+ context);
+				this.zError("get locale failed:  key: " + key +" context: "+ context +" lang:" + this.lang);
 			} 
 			return localeStr;
 		}

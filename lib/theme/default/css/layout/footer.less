@@ -1,7 +1,6 @@
-// variables here
-@color: #636363;
-@color-hover: #06c;
-@font-small: 13px;
+@import "./../variables.less";
+@import "./../mixins.less"; 
+
 #footer {
 	color: @color; // red
 	font-size: @font-small;
@@ -12,14 +11,6 @@
 	li {
 		float: left;
 		padding: 0 5px;
-		a {
-			color: @color;
-			&:hover {
-				color: @color-hover;
-				text-decoration: underline;
-				cursor: pointer;
-			}
-		}
 	}
 }
 .left-aside {
@@ -34,7 +25,7 @@
 	}
 }
 .right-aside {
-	width: 500px;
+	// width: 500px;
 	float:right;
 	.our-service {
 		overflow:hidden;

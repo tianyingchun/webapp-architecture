@@ -12,7 +12,13 @@ enyo.singleton({
 	},
 	// titles
 	title: {
-		APP_NAME: "ENYO 应用程序！"
+		APP_NAME: "ENYO 应用程序！",
+		LOGO_TEXT: "Developer Platform - 平安付"
+	},
+	// navgator links.
+	nav: {
+		HOME: "首页",
+		OFFICIAL_SITE: "平安官网"
 	},
 	//arbitrary page content
 	content: {
@@ -24,11 +30,11 @@ enyo.singleton({
 	},
 	// form labels
 	label: {
-
+		REFINE_SEARCH: "搜索选项"
 	},
 	// button labels
 	button: {
-
+		SEARCH: "搜索"
 	},
 	// tooltips
 	tooltip: {
@@ -36,7 +42,7 @@ enyo.singleton({
 	},
 	// place holders
 	placeholder: {
-
+		SEARCH_HINT: "请输入API名字！"
 	},
 	// form field validation messages
 	validationMsg: {

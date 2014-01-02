@@ -1,26 +1,105 @@
 // header.css
-@import "variables.less";
-@import "mixins.less"; 
+@import "./../variables.less";
+@import "./../mixins.less"; 
 
+// header layout
 #header {
 	color: @black;
-	height:130px;
+	height: 110px;
+	padding:0;
+	position: relative;
 	background: url(../../images/sprites-horizontal.png) repeat-x @light-blue;
 	background-position: 0 -1088px;
 	font-size: @font-normal;
 	border: 0;
+	.header-inner {
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;// note maybe it don't support ie.
+		padding: 0 @container-left-padding;
+	}
 	.box-shadow(1px 1px 5px rgba(133, 133, 133, 0.85));
 }
 .logo {
-	width: 100px;
-	height: 50px;
+	width: 300px;
+	padding-top: 40px;
+	color: #fff;
+	font-size: 20px;
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+             0px 8px 13px rgba(0,0,0,0.1),
+             0px 18px 23px rgba(0,0,0,0.1);
 }
-.top-nav {
-	padding: 0;
-	margin: 0;	
+.top-nav {	
+	position: absolute;
+	right: @container-left-padding;
+	top: 0;
+	padding: 3px 5px;
+	background: rgba(6, 71, 113,0.9);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	color: #fff;
+	.nav-item {
+		font-size:@font-normal;
+		float: right;
+		margin: 0 5px;
+	}
+	a {
+		color:#fff;
+		&:hover{
+			color: @light-blue;
+			text-decoration: none;
+		}
+	}
 }
-.top-nav li {
-	list-style: none;
-	float: left;
-	padding-left: 10px;
+
+// search form
+.search-form {
+	position: absolute;
+	bottom: 0px;
+	padding-bottom: 25px;
+	right: @container-left-padding;;
+	.search-input {
+		border: 3px solid #1885C8;
+		float: left;
+		background: url(../../images/search-icon.png) no-repeat 4px 9px #fff;
+		color: #000;
+		line-height: 1.5em;
+		margin: 0 4px 0 0;
+		padding: 10px 10px 10px 30px;
+		width: 275px;
+		&:focus{
+			outline: #E4E4E4 solid 2px;
+		}
+	}
+	.search-button {
+		.border-radius(5px);
+		font-size: @font-big;
+		font-weight: normal;
+		line-height: 1em;
+		margin-top: 3px;
+		padding: .33em 1em;
+		overflow: hidden;
+		text-align: center;
+		color: #FFF;
+		background-color: #9fc748;
+		border: 0;
+		display: inline-block;
+		background-image: -webkit-gradient(linear,50% 0%,50% 100%,color-stop(50%,#9fc748),color-stop(50%,#96bc44));
+		background-image: -webkit-linear-gradient(top,#9fc748 50%,#96bc44 50%);
+		background-image: -moz-linear-gradient(top,#9fc748 50%,#96bc44 50%);
+		background-image: -o-linear-gradient(top,#9fc748 50%,#96bc44 50%);
+		background-image: linear-gradient(top,#9fc748 50%,#96bc44 50%);
+	}
+	.search-filter{
+		position: absolute;
+		left: 140px;
+		padding-right: 15px;
+		bottom:2px;
+		.small-icons;
+		background-position: 100% -473px;
+		&:hover {
+			text-decoration: underline;
+			cursor: pointer;
+		}
+	}
 }
