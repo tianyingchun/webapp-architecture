@@ -68,11 +68,15 @@
 		padding: 25px 5px 10px 5px;
 		.option {
 			padding-left: 20px;
+			padding-right: 5px;
 			width: 50%;
 			background-size: 16px !important;
 			float:left;
 			color: #fff;
 			font-size: @font-medium;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 			background:url(../../images/radio-button.png) no-repeat 0 0;
 			&.active{
 				background-position: 0px -24px;
