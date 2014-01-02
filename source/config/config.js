@@ -7,8 +7,7 @@ enyo.singleton({
 	},
 	// #region properties.
 	storageStrategy: "localstorage", //cookie, websql,localstorage
-	// default locale if system can't find the specific locale setting.
-	defaultLocale: "zh-CN",
+	
 	defaultHash: "home/index",// redirect to home/index page if we can't find corresponding router handler.
 	appName: "z",// define app name is z (lowercase), z is so cool ^-^.
 	// service request url root.

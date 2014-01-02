@@ -1,0 +1,82 @@
+@import "./../variables.less";
+@import "./../mixins.less"; 
+// search form widgets.
+.search-form {
+	position: absolute;
+	bottom: 0px;
+	padding-bottom: 25px;
+	right: @container-left-padding;;
+	.search-input {
+		border: 3px solid #1885C8;
+		float: left;
+		background: url(../../images/search-icon.png) no-repeat 4px 9px #fff;
+		color: #000;
+		line-height: 1.5em;
+		margin: 0 4px 0 0;
+		padding: 10px 10px 10px 30px;
+		width: 275px;
+		&:focus{
+			outline: #E4E4E4 solid 2px;
+		}
+	}
+	.search-button {
+		.border-radius(5px);
+		font-size: @font-big;
+		font-weight: normal;
+		line-height: 1em;
+		margin-top: 3px;
+		padding: .33em 1em;
+		overflow: hidden;
+		text-align: center;
+		color: #FFF;
+		background-color: #9fc748;
+		border: 0;
+		display: inline-block;
+		background-image: -webkit-gradient(linear,50% 0%,50% 100%,color-stop(50%,#9fc748),color-stop(50%,#96bc44));
+		background-image: -webkit-linear-gradient(top,#9fc748 50%,#96bc44 50%);
+		background-image: -moz-linear-gradient(top,#9fc748 50%,#96bc44 50%);
+		background-image: -o-linear-gradient(top,#9fc748 50%,#96bc44 50%);
+		background-image: linear-gradient(top,#9fc748 50%,#96bc44 50%);
+	}
+	.show-advanced-search {
+		.small-icons;
+		padding-right: 15px;
+		text-align: right;
+		width: 275px;
+		position: absolute;
+		left: 0;
+		top: 42px;
+		z-index: 100;
+		background-position: 100% -473px;
+		&:hover {
+			text-decoration: underline;
+			cursor: pointer;
+		}
+	}
+	.search-filter{
+		position: absolute;
+		width: 275px;
+		left: 0;
+		overflow: hidden;
+		top: 42px;
+		background-color: #0678be;
+		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: 8px;
+	}
+	.radio{
+		overflow: hidden;
+		padding: 25px 5px 10px 5px;
+		.option {
+			padding-left: 20px;
+			width: 50%;
+			background-size: 16px !important;
+			float:left;
+			color: #fff;
+			font-size: @font-medium;
+			background:url(../../images/radio-button.png) no-repeat 0 0;
+			&.active{
+				background-position: 0px -24px;
+			}
+		}
+	}
+}

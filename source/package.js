@@ -3,6 +3,8 @@ enyo.depends(
 	"$lib/onyx",
 	// universal mobile app engine infrustrures
 	"$lib/engine",
+	// put locale on the front cause of the widget maybe contains locale
+	"locale/",
 	// universal widgets for app.
 	"$lib/widgets",
 	// current app themes.
@@ -10,7 +12,6 @@ enyo.depends(
 	// keep config as before of all customized logics 
 	"config/",
 	// --------other resource files depends---------//
-	"locale/",
 	"app/",
 	"boot/"
 );

@@ -19,11 +19,8 @@ enyo.kind({
 						{ tag: "a", href:"/", content: Master.locale.get("OFFICIAL_SITE", "nav")}
 					]}
 				]},
-				{ classes: "search-form", components: [
-					{ classes: "search-input", placeholder:Master.locale.get("SEARCH_HINT", "placeholder"), kind: "onyx.Input"},
-					{ classes: "search-button", kind: "onyx.Button",content: Master.locale.get("SEARCH","button")},
-					{ classes:"search-filter", content: Master.locale.get("REFINE_SEARCH","label")}
-				]}
+				// search form
+				{kind: "widgets.forms.SearchForm"}
 			]}
 		]},
 		{kind: "enyo.Scroller", name:"page", id:"page", components: [

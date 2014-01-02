@@ -14,6 +14,7 @@
 		},
 		constructor: function () {
 			this.setLocaleLanguage();
+			this._defaultLocale = arguments[0] && "zh-CN";
 		},
 		/**
 		 * set language saved to localstorage/cookie/websql and so on.
@@ -42,7 +43,7 @@
 			if (!this.getLocaleInstance(lang)) {
 				this.zWarn("get locale instance failed! current lang: "+ lang);
 				// try get default locale instance.
-				this.getLocaleInstance(Master.config.defaultLocale);
+				this.getLocaleInstance(this._defaultLocale);
 			}
 		},
 		/**
@@ -89,6 +90,6 @@
 	
 	});
 	// auto instance locale.
-	Master.locale = new Master.Locale();
+	Master.locale = new Master.Locale("zh-CN");
 })(enyo);
 
