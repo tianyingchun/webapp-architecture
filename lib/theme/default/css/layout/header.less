@@ -31,6 +31,43 @@
              0px 8px 13px rgba(0,0,0,0.1),
              0px 18px 23px rgba(0,0,0,0.1);
 }
+.menu {
+	padding-top: 43px;
+	float: left;
+	overflow: hidden;
+	.item {
+		float: left;
+		background: #0d7dc1;
+		-webkit-border-radius: 10px 10px 0 0;
+		-moz-border-radius: 10px 10px 0 0;
+		-ms-border-radius: 10px 10px 0 0;
+		-o-border-radius: 10px 10px 0 0;
+		border-radius: 10px 10px 0 0;
+		padding: 0 5px;
+		&:hover{
+			background:#fff;
+			cursor: pointer;
+			a,span {
+				color: #000;
+			}
+		}
+	}
+	a,span {
+		font-size: @font-normal;
+		color: #FFF;
+		float:left;
+		display: block;
+		padding: 4px 2px;
+		text-decoration: none;
+	}
+	.sign-in {
+		float:left; 
+		margin-right: 5px;
+	}
+	.register{
+		float:left;
+	}
+}
 .top-nav {	
 	position: absolute;
 	right: @container-left-padding;

@@ -11,12 +11,19 @@ enyo.kind({
 		{name:"header", id:"header", components: [
 			{ classes: "header-inner", components: [
 				{ classes:"logo", content: Master.locale.get("LOGO_TEXT","title"), ontap:"goHome" },
+				{ classes: "menu", components:[
+					{ classes:"item", components:[
+						{tag:"a", classes:"sign-in", attributes: { href:"/" }, content:Master.locale.get("SIGN_IN","menu")},
+						{tag: "span",classes:"seperator", content:"/"},						
+						{tag:"a", classes:"register", attributes: { href:"/" }, content:Master.locale.get("REGISTER","menu")}
+					]}
+				]},
 				{ classes:"top-nav", tag:"ul", components: [
 					{ tag:"li", classes:"nav-item", components: [
-						{ tag: "a", href:"/", content: Master.locale.get("HOME", "nav")}
+						{ tag: "a", attributes: { href:"/" }, content: Master.locale.get("HOME", "nav")}
 					]},
 					{ tag:"li", classes:"nav-item", components: [
-						{ tag: "a", href:"/", content: Master.locale.get("OFFICIAL_SITE", "nav")}
+						{ tag: "a", attributes: { href:"/" }, content: Master.locale.get("OFFICIAL_SITE", "nav")}
 					]}
 				]},
 				// search form
@@ -33,13 +40,13 @@ enyo.kind({
 				{ classes:"left-aside", components: [
 					{ classes:"aside-link", tag: "ul", components: [
 						{ tag:"li", classes:"link-item", components:[
-							{tag:"a", href:"#", content:"平安"}
+							{tag:"a", attributes: { href:"/" }, content:"平安"}
 						]},
 						{ tag:"li", classes:"link-item", components:[
-							{tag:"a", href:"#", content:"开发者"}
+							{tag:"a", attributes: { href:"/" }, content:"开发者"}
 						]},
 						{ tag:"li", classes:"link-item", components:[
-							{tag:"a", href:"#", content:"1钱包"}
+							{tag:"a", attributes: { href:"/" }, content:"1钱包"}
 						]}
 					]},
 					{classes:"copyright", content:"© 2013 pingan 使用前必读 | 京ICP证030173号"}

@@ -8,7 +8,8 @@ enyo.singleton({
 	kind: null,
 	// menu items
 	menu: {
-
+		SIGN_IN:"登陆",
+		REGISTER:"注册"
 	},
 	// titles
 	title: {
