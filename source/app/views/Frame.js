@@ -91,8 +91,9 @@ enyo.kind({
 	// fresh the page body container layout
 	reflowPageLayout: function () {
 		var minimalHeight = this.calMinimalPageheight();
-		minimalHeight = minimalHeight < 200 ? 200 : minimalHeight; 
-		this.$.page.applyStyle("min-height", minimalHeight+"px");
+		var pageBodyHeight = this.$.page.getBounds().height;
+		var currHeight = Math.max(minimalHeight, pageBodyHeight); 
+		this.$.page.applyStyle("min-height", currHeight+"px");
 	},
 	/**
 	 * For pc browser model we calculate the minimal height.

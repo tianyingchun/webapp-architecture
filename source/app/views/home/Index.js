@@ -11,7 +11,7 @@ enyo.kind({
 	},
 	components: [
 		{kind: "Selection", onSelect: "select", onDeselect: "deselect"},	
-		{kind: "Node", icon: "assets/folder-open.png", content: "Tree", expandable: true, expanded: true, onExpand: "nodeExpand", onNodeTap: "nodeTap", components: [
+		{kind: "Node", icon: "assets/folder-open.png", content: "Tree", expandable: false, expanded: true, onExpand: "nodeExpand", onNodeTap: "nodeTap", components: [
 			{icon: "assets/file.png", content: "Alpha"},
 			{icon: "assets/folder-open.png", content: "Bravo", expandable: true, expanded: true, components: [
 				{icon: "assets/file.png", content: "Bravo-Alpha"},
@@ -46,11 +46,14 @@ enyo.kind({
 			{icon: "assets/file.png", content: "Epsilon"}
 		]}
 	],
-	receiveMessage: function (viewModel) {
+	receiveMessage: function (viewModel, viewAction) {
 		var restInfo = viewModel.restInfo;
 		if (restInfo.retCode ==1) {
 			// do nothing now..
-			// 
+			var viewActionFn = viewAction && this[viewAction];
+			if (viewActionFn) {
+				viewActionFn.call(this, viewModel);
+			}
 		} else {	
 			alert(restInfo.retMessage);
 		}
@@ -70,11 +73,17 @@ enyo.kind({
 		inEvent.data.$.caption.applyStyle("background-color", null);
 	},
 
+
+
 	// Get all categories from controller.
 	getAllCategories: function (inSender, inEvent) {
 		this.zLog("dispatch get all categories event to controller...");
-		this.doGetAllCategories();
+		this.doGetAllCategories({viewAction:"showCategories"});
 		return true;
+	},
+	// show categories.
+	showCategories: function (viewModel) {
+		this.zLog("show categories view model: ", viewModel);
 	},
 	// Get category detail.	
 	getCategoryDetail: function (inSender, inEvent) {
@@ -82,6 +91,7 @@ enyo.kind({
 		this.doGetCategoryDetail({categoryId: 1});
 		return true;
 	},
+
 	create: enyo.inherit(function(sup) {
 		return function () {
 			sup.apply(this, arguments);

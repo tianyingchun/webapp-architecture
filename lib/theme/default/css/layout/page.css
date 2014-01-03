@@ -1,1 +1,1 @@
-.small-icons{background:url(../../images/small-icons.png) no-repeat}#page{width:100%;z-index:990;position:relative}#page .page-inner{width:100%;height:100%;box-sizing:border-box;padding:10px 10%}
+.small-icons{background:url(../../images/small-icons.png) no-repeat}#page{width:100%;z-index:990;overflow:hidden;position:relative}#page .page-inner{width:100%;height:100%;box-sizing:border-box;padding:10px 10%}

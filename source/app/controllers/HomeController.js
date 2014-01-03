@@ -18,12 +18,14 @@ enyo.kind({
 		this.zLog("action data: ", viewData);
 		var viewKindName = "home.Index";
 		// maybe async fetch data here.
-		this.getAllCategories();
+		this.getAllCategories(null, {viewAction: "showCategories"});
 
 		this.bindingView(viewKindName, null, viewData);
 	},
-	showApiCategories: function (viewModel) {
-		this.zLog("response: ", viewModel);
+	showApiCategories: function (viewAction, viewModel) {
+		this.zLog("response: ", viewModel, viewAction);
+		// save current request view model action. we should put viewAction invoke before viewModel property changed.
+		this.set("viewAction", viewAction);
 		// update current viewModel for current controller.
 		this.set("viewModel",viewModel);
 	},
@@ -32,8 +34,9 @@ enyo.kind({
 	},
 	// do server request.
 	getAllCategories: function (inSender, inEvent) {
+		var viewAction = inEvent && inEvent.viewAction;
 		var apiCategories = new Master.models.apipool.Categories();
-		apiCategories.getApiCategories(enyo.bindSafely(this, "showApiCategories"));
+		apiCategories.getApiCategories(enyo.bindSafely(this, "showApiCategories", viewAction));
 		return true;
 	},
 	// do server request.
