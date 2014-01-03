@@ -14,7 +14,8 @@ enyo.singleton({
 	// titles
 	title: {
 		APP_NAME: "ENYO APP DEMO",
-		LOGO_TEXT: "Developer Platform - 1 Wallet"
+		LOGO_TEXT: "Developer Platform - 1 Wallet",
+		API_CATALOG:"API Catalog"
 	},
 	nav: {
 		HOME: "Home",

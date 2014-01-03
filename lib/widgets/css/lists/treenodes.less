@@ -1,0 +1,29 @@
+@import "./../variables.less";
+@import "./../mixins.less"; 
+.widget-treenodes{
+	padding: 5px 0;
+	color: #0678be;
+	font-size: 0.9em;
+	.enyo-node {
+		padding-left: 5px !important;
+		&> {
+			.enyo-node:before{
+				content:"▸";	
+				font-size: 1.1em;
+			}
+		}
+		&.expanded:before{
+			content:"▾";
+			font-size: 1.1em;
+		}
+	}
+	.selected >div:first{
+		background:#f0f0f0;
+	}
+	.enyo-node-box{
+		padding-left: 16px;
+	}
+	.enyo-node-client .enyo-node:before{
+		content:"";
+	}
+}

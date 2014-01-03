@@ -32,7 +32,10 @@ enyo.kind({
 		]},
 		{name:"page", id:"page", components: [
 			{name: "main", classes: "page-inner", components: [
-					
+				{name:"colmain", classes:"col-main", components: [
+					{name:"colWrapper", classes:"col-wrapper"}
+				]},
+				{name:"coldock", classes:"col-dock"}
 			]}
 		]},
 		{name:"footer", id:"footer", components: [
@@ -92,8 +95,12 @@ enyo.kind({
 	reflowPageLayout: function () {
 		var minimalHeight = this.calMinimalPageheight();
 		var pageBodyHeight = this.$.page.getBounds().height;
-		var currHeight = Math.max(minimalHeight, pageBodyHeight); 
+		var dockHeight = this.$.coldock.getBounds().height;
+		var dockContent = this.$.colmain.getBounds().height;
+
+		var currHeight = Math.max(minimalHeight, pageBodyHeight, dockHeight, dockContent); 
 		this.$.page.applyStyle("min-height", currHeight+"px");
+		this.$.coldock.applyStyle("min-height", currHeight +"px");
 	},
 	/**
 	 * For pc browser model we calculate the minimal height.
@@ -113,14 +120,16 @@ enyo.kind({
 	 */
 	setMainContent: function (viewConfig) {
 		this.zLog("viewConfig: ", viewConfig);
-		var $main = this.$.main;
+		var $main = this.$.colWrapper;
 		$main.destroyClientControls();
 		$main.createClientComponents([viewConfig]);
 		$main.render();
 	},
 	setDockContent: function (viewConfig) {
-		var $dock = this.$.dock;
-		// do something..
+		var $dock = this.$.coldock;
+		$dock.destroyClientControls();
+		$dock.createClientComponents([viewConfig]);
+		$dock.render();
 	},
 	getCategoryDetail: function () {
 		this.zLog("getCategoryDetail for test.....");

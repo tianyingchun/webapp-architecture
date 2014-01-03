@@ -20,7 +20,9 @@ enyo.kind({
 		// maybe async fetch data here.
 		this.getAllCategories(null, {viewAction: "showCategories"});
 
-		this.bindingView(viewKindName, null, viewData);
+		var viewKindConfig = this.bindingView(viewKindName, null, viewData);
+ 		// show in dock.
+ 		Master.view.frame.setDockContent(viewKindConfig);
 	},
 	showApiCategories: function (viewAction, viewModel) {
 		this.zLog("response: ", viewModel, viewAction);

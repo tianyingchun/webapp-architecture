@@ -1,6 +1,6 @@
 @import "./../variables.less";
 @import "./../mixins.less"; 
-
+// for frame.js update the layout frame styles.
 #page {
 	width: 100%;
 	z-index: 990;
@@ -9,7 +9,25 @@
 	.page-inner {
 		width: 100%;
 		height: 100%;
+		overflow: hidden;
 		box-sizing: border-box;
-		padding: 10px @container-left-padding;
+		padding: 0 @container-left-padding;
+	}
+	.col-main{
+		float: left;
+		width:100%;
+		min-height: 20px;
+		.col-wrapper{
+			margin-left: 190px;
+		}
+	}
+	.col-dock{
+		border-right: 1px solid #ccc;
+		float:left;
+		background: #fafafa;
+		margin-left: -100%;
+		min-height: 1px;
+		width:180px;
+		font-size: @font-normal;
 	}
 }
