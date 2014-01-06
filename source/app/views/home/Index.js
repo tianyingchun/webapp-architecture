@@ -8,10 +8,9 @@ enyo.kind({
 	events:{
 		"onGetAllCategories": ""
 	},
-	content:"loading api categories....",
-
-	receiveMessage: enyo.inherit(function (sup) {
-		return function (viewModel, viewAction){
+	content: Master.locale.get("LOAD_CATEGORIES", "message"),
+	receiveMessage: enyo.inherit(function(sup) {
+		return function (viewModel, viewAction) {
 			sup.apply(this, arguments);
 			// do nothing now..
 			var viewActionFn = viewAction && this[viewAction];
@@ -20,20 +19,14 @@ enyo.kind({
 			} else {
 				this.zWarn("viewActonFn don't exist!");
 			}
-		};
+		}
 	}),
 	// show categories.
-	showCategories: function (viewModel) {
+	showUICategories: function (viewModel) {
 		this.zLog("show categories view model: ", viewModel);
 		this.destroyClientControls();
 		var records = viewModel.records;
 		this.createClientComponents([{ kind: "widgets.lists.TreeNodes", source: records }]);
 		this.render();
-	},
-	create: enyo.inherit(function(sup) {
-		return function () {
-			sup.apply(this, arguments);
-			// this.zLog("home index create: controller", this);
-		};
-	})
+	}
 });

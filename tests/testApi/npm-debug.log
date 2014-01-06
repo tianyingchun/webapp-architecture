@@ -1,0 +1,280 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'sleep' ]
+2 info using npm@1.3.17
+3 info using node@v0.10.23
+4 warn package.json journey@0.4.0-pre-3 No repository field.
+5 warn package.json restful@0.2.3 No repository field.
+6 verbose cache add [ 'sleep', null ]
+7 verbose cache add name=undefined spec="sleep" args=["sleep",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'sleep',
+8 verbose parsed url   path: 'sleep',
+8 verbose parsed url   href: 'sleep' }
+9 silly lockFile c3ca5f78-sleep sleep
+10 verbose lock sleep /Users/tianyingchun/.npm/c3ca5f78-sleep.lock
+11 silly lockFile c3ca5f78-sleep sleep
+12 silly lockFile c3ca5f78-sleep sleep
+13 verbose addNamed [ 'sleep', '' ]
+14 verbose addNamed [ null, '*' ]
+15 silly lockFile e2b4ed60-sleep sleep@
+16 verbose lock sleep@ /Users/tianyingchun/.npm/e2b4ed60-sleep.lock
+17 silly addNameRange { name: 'sleep', range: '*', hasData: false }
+18 verbose url raw sleep
+19 verbose url resolving [ 'https://registry.npmjs.org/', './sleep' ]
+20 verbose url resolved https://registry.npmjs.org/sleep
+21 info trying registry request attempt 1 at 16:02:42
+22 verbose etag "14Q8T09XHTEQQ4H7M9C9UH7Q2"
+23 http GET https://registry.npmjs.org/sleep
+24 http 304 https://registry.npmjs.org/sleep
+25 silly registry.get cb [ 304,
+25 silly registry.get   { date: 'Mon, 06 Jan 2014 08:02:42 GMT',
+25 silly registry.get     server: 'Apache',
+25 silly registry.get     connection: 'Keep-Alive',
+25 silly registry.get     'keep-alive': 'timeout=10, max=50',
+25 silly registry.get     etag: '"14Q8T09XHTEQQ4H7M9C9UH7Q2"',
+25 silly registry.get     vary: 'Accept' } ]
+26 verbose etag sleep from cache
+27 silly addNameRange number 2 { name: 'sleep', range: '*', hasData: true }
+28 silly addNameRange versions [ 'sleep',
+28 silly addNameRange   [ '1.0.0', '1.0.1', '1.0.2', '1.1.0', '1.1.1', '1.1.2', '1.1.3' ] ]
+29 verbose addNamed [ 'sleep', '1.1.3' ]
+30 verbose addNamed [ '1.1.3', '1.1.3' ]
+31 silly lockFile b5524579-sleep-1-1-3 sleep@1.1.3
+32 verbose lock sleep@1.1.3 /Users/tianyingchun/.npm/b5524579-sleep-1-1-3.lock
+33 silly lockFile b5524579-sleep-1-1-3 sleep@1.1.3
+34 silly lockFile b5524579-sleep-1-1-3 sleep@1.1.3
+35 silly lockFile e2b4ed60-sleep sleep@
+36 silly lockFile e2b4ed60-sleep sleep@
+37 silly resolved [ { name: 'sleep',
+37 silly resolved     version: '1.1.3',
+37 silly resolved     main: './lib/index.js',
+37 silly resolved     description: 'Add sleep() and usleep() to nodejs',
+37 silly resolved     homepage: 'http://github.com/ErikDubbelboer/node-sleep',
+37 silly resolved     author: { name: 'Erik Dubbelboer', email: 'erik@dubbelboer.com' },
+37 silly resolved     engines: { node: '>=0.4.0' },
+37 silly resolved     keywords: [ 'sleep', 'usleep' ],
+37 silly resolved     repository:
+37 silly resolved      { type: 'git',
+37 silly resolved        url: 'https://github.com/ErikDubbelboer/node-sleep.git' },
+37 silly resolved     repositories: [ [Object] ],
+37 silly resolved     dependencies: { mkdirp: '~0.3.5' },
+37 silly resolved     scripts: { install: 'node build.js || nodejs build.js' },
+37 silly resolved     gypfile: true,
+37 silly resolved     readme: 'sleep\n=====\n\nAdd `sleep()` and `usleep()` to nodejs.\n\nThis is mainly useful for debugging.\n\n**Sleep will block execution of all javascript!**\n===================================================\n\nOn windows the module will fall back to a while loop which will use 100% CPU!\n\nUsage\n-----\n\n`var sleep = require(\'sleep\');`\n\n* `sleep.sleep(n)`: sleep for n seconds\n* `sleep.usleep(n)`: sleep for n microseconds (1 second is 1000000 microseconds)\n\nUpdate\n------\n\nNow bulids properly using node-gyp :)\n\n',
+37 silly resolved     readmeFilename: 'README.md',
+37 silly resolved     bugs: { url: 'https://github.com/ErikDubbelboer/node-sleep/issues' },
+37 silly resolved     _id: 'sleep@1.1.3',
+37 silly resolved     _from: 'sleep@' } ]
+38 info install sleep@1.1.3 into /Users/tianyingchun
+39 info installOne sleep@1.1.3
+40 info /Users/tianyingchun/node_modules/sleep unbuild
+41 verbose tar unpack /Users/tianyingchun/.npm/sleep/1.1.3/package.tgz
+42 silly lockFile 3b3d59bb--tianyingchun-node-modules-sleep tar:///Users/tianyingchun/node_modules/sleep
+43 verbose lock tar:///Users/tianyingchun/node_modules/sleep /Users/tianyingchun/.npm/3b3d59bb--tianyingchun-node-modules-sleep.lock
+44 silly lockFile 943d2f4c-chun-npm-sleep-1-1-3-package-tgz tar:///Users/tianyingchun/.npm/sleep/1.1.3/package.tgz
+45 verbose lock tar:///Users/tianyingchun/.npm/sleep/1.1.3/package.tgz /Users/tianyingchun/.npm/943d2f4c-chun-npm-sleep-1-1-3-package-tgz.lock
+46 silly gunzTarPerm modes [ '755', '644' ]
+47 silly gunzTarPerm extractEntry package.json
+48 silly gunzTarPerm extractEntry .npmignore
+49 silly gunzTarPerm extractEntry README.md
+50 silly gunzTarPerm extractEntry test.js
+51 silly gunzTarPerm extractEntry build.js
+52 silly gunzTarPerm extractEntry .jshintrc
+53 silly gunzTarPerm extractEntry .jshintignore
+54 silly gunzTarPerm extractEntry lib/binary_name.js
+55 silly gunzTarPerm extractEntry lib/index.js
+56 silly gunzTarPerm extractEntry binding.gyp
+57 silly gunzTarPerm extractEntry sleep.cc
+58 silly gunzTarPerm extractEntry build-util/tools.js
+59 silly lockFile 3b3d59bb--tianyingchun-node-modules-sleep tar:///Users/tianyingchun/node_modules/sleep
+60 silly lockFile 3b3d59bb--tianyingchun-node-modules-sleep tar:///Users/tianyingchun/node_modules/sleep
+61 silly lockFile 943d2f4c-chun-npm-sleep-1-1-3-package-tgz tar:///Users/tianyingchun/.npm/sleep/1.1.3/package.tgz
+62 silly lockFile 943d2f4c-chun-npm-sleep-1-1-3-package-tgz tar:///Users/tianyingchun/.npm/sleep/1.1.3/package.tgz
+63 info preinstall sleep@1.1.3
+64 verbose readDependencies using package.json deps
+65 verbose readDependencies using package.json deps
+66 verbose cache add [ 'mkdirp@~0.3.5', null ]
+67 verbose cache add name=undefined spec="mkdirp@~0.3.5" args=["mkdirp@~0.3.5",null]
+68 verbose parsed url { protocol: null,
+68 verbose parsed url   slashes: null,
+68 verbose parsed url   auth: null,
+68 verbose parsed url   host: null,
+68 verbose parsed url   port: null,
+68 verbose parsed url   hostname: null,
+68 verbose parsed url   hash: null,
+68 verbose parsed url   search: null,
+68 verbose parsed url   query: null,
+68 verbose parsed url   pathname: 'mkdirp@~0.3.5',
+68 verbose parsed url   path: 'mkdirp@~0.3.5',
+68 verbose parsed url   href: 'mkdirp@~0.3.5' }
+69 verbose cache add name="mkdirp" spec="~0.3.5" args=["mkdirp","~0.3.5"]
+70 verbose parsed url { protocol: null,
+70 verbose parsed url   slashes: null,
+70 verbose parsed url   auth: null,
+70 verbose parsed url   host: null,
+70 verbose parsed url   port: null,
+70 verbose parsed url   hostname: null,
+70 verbose parsed url   hash: null,
+70 verbose parsed url   search: null,
+70 verbose parsed url   query: null,
+70 verbose parsed url   pathname: '~0.3.5',
+70 verbose parsed url   path: '~0.3.5',
+70 verbose parsed url   href: '~0.3.5' }
+71 verbose addNamed [ 'mkdirp', '~0.3.5' ]
+72 verbose addNamed [ null, '>=0.3.5-0 <0.4.0-0' ]
+73 silly lockFile c3f0fe9b-mkdirp-0-3-5 mkdirp@~0.3.5
+74 verbose lock mkdirp@~0.3.5 /Users/tianyingchun/.npm/c3f0fe9b-mkdirp-0-3-5.lock
+75 silly addNameRange { name: 'mkdirp', range: '>=0.3.5-0 <0.4.0-0', hasData: false }
+76 verbose url raw mkdirp
+77 verbose url resolving [ 'https://registry.npmjs.org/', './mkdirp' ]
+78 verbose url resolved https://registry.npmjs.org/mkdirp
+79 info trying registry request attempt 1 at 16:02:43
+80 verbose etag "DBC495601MPJBLUZWFOLO6F6N"
+81 http GET https://registry.npmjs.org/mkdirp
+82 http 304 https://registry.npmjs.org/mkdirp
+83 silly registry.get cb [ 304,
+83 silly registry.get   { date: 'Mon, 06 Jan 2014 08:02:43 GMT',
+83 silly registry.get     server: 'Apache',
+83 silly registry.get     connection: 'Keep-Alive',
+83 silly registry.get     'keep-alive': 'timeout=10, max=50',
+83 silly registry.get     etag: '"DBC495601MPJBLUZWFOLO6F6N"',
+83 silly registry.get     vary: 'Accept' } ]
+84 verbose etag mkdirp from cache
+85 silly addNameRange number 2 { name: 'mkdirp', range: '>=0.3.5-0 <0.4.0-0', hasData: true }
+86 silly addNameRange versions [ 'mkdirp',
+86 silly addNameRange   [ '0.0.1',
+86 silly addNameRange     '0.0.2',
+86 silly addNameRange     '0.0.3',
+86 silly addNameRange     '0.0.4',
+86 silly addNameRange     '0.0.5',
+86 silly addNameRange     '0.0.6',
+86 silly addNameRange     '0.0.7',
+86 silly addNameRange     '0.1.0',
+86 silly addNameRange     '0.2.0',
+86 silly addNameRange     '0.2.1',
+86 silly addNameRange     '0.2.2',
+86 silly addNameRange     '0.3.0',
+86 silly addNameRange     '0.3.1',
+86 silly addNameRange     '0.3.2',
+86 silly addNameRange     '0.3.3',
+86 silly addNameRange     '0.3.4',
+86 silly addNameRange     '0.3.5' ] ]
+87 verbose addNamed [ 'mkdirp', '0.3.5' ]
+88 verbose addNamed [ '0.3.5', '0.3.5' ]
+89 silly lockFile 67d2df2a-mkdirp-0-3-5 mkdirp@0.3.5
+90 verbose lock mkdirp@0.3.5 /Users/tianyingchun/.npm/67d2df2a-mkdirp-0-3-5.lock
+91 silly lockFile 67d2df2a-mkdirp-0-3-5 mkdirp@0.3.5
+92 silly lockFile 67d2df2a-mkdirp-0-3-5 mkdirp@0.3.5
+93 silly lockFile c3f0fe9b-mkdirp-0-3-5 mkdirp@~0.3.5
+94 silly lockFile c3f0fe9b-mkdirp-0-3-5 mkdirp@~0.3.5
+95 silly resolved [ { name: 'mkdirp',
+95 silly resolved     description: 'Recursively mkdir, like `mkdir -p`',
+95 silly resolved     version: '0.3.5',
+95 silly resolved     author:
+95 silly resolved      { name: 'James Halliday',
+95 silly resolved        email: 'mail@substack.net',
+95 silly resolved        url: 'http://substack.net' },
+95 silly resolved     main: './index',
+95 silly resolved     keywords: [ 'mkdir', 'directory' ],
+95 silly resolved     repository:
+95 silly resolved      { type: 'git',
+95 silly resolved        url: 'http://github.com/substack/node-mkdirp.git' },
+95 silly resolved     scripts: { test: 'tap test/*.js' },
+95 silly resolved     devDependencies: { tap: '~0.4.0' },
+95 silly resolved     license: 'MIT',
+95 silly resolved     readme: '# mkdirp\n\nLike `mkdir -p`, but in node.js!\n\n[![build status](https://secure.travis-ci.org/substack/node-mkdirp.png)](http://travis-ci.org/substack/node-mkdirp)\n\n# example\n\n## pow.js\n\n```js\nvar mkdirp = require(\'mkdirp\');\n    \nmkdirp(\'/tmp/foo/bar/baz\', function (err) {\n    if (err) console.error(err)\n    else console.log(\'pow!\')\n});\n```\n\nOutput\n\n```\npow!\n```\n\nAnd now /tmp/foo/bar/baz exists, huzzah!\n\n# methods\n\n```js\nvar mkdirp = require(\'mkdirp\');\n```\n\n## mkdirp(dir, mode, cb)\n\nCreate a new directory and any necessary subdirectories at `dir` with octal\npermission string `mode`.\n\nIf `mode` isn\'t specified, it defaults to `0777 & (~process.umask())`.\n\n`cb(err, made)` fires with the error or the first directory `made`\nthat had to be created, if any.\n\n## mkdirp.sync(dir, mode)\n\nSynchronously create a new directory and any necessary subdirectories at `dir`\nwith octal permission string `mode`.\n\nIf `mode` isn\'t specified, it defaults to `0777 & (~process.umask())`.\n\nReturns the first directory that had to be created, if any.\n\n# install\n\nWith [npm](http://npmjs.org) do:\n\n```\nnpm install mkdirp\n```\n\n# license\n\nMIT\n',
+95 silly resolved     readmeFilename: 'readme.markdown',
+95 silly resolved     bugs: { url: 'https://github.com/substack/node-mkdirp/issues' },
+95 silly resolved     homepage: 'https://github.com/substack/node-mkdirp',
+95 silly resolved     _id: 'mkdirp@0.3.5',
+95 silly resolved     _from: 'mkdirp@~0.3.5' } ]
+96 info install mkdirp@0.3.5 into /Users/tianyingchun/node_modules/sleep
+97 info installOne mkdirp@0.3.5
+98 info /Users/tianyingchun/node_modules/sleep/node_modules/mkdirp unbuild
+99 verbose tar unpack /Users/tianyingchun/.npm/mkdirp/0.3.5/package.tgz
+100 silly lockFile df6b16cb-odules-sleep-node-modules-mkdirp tar:///Users/tianyingchun/node_modules/sleep/node_modules/mkdirp
+101 verbose lock tar:///Users/tianyingchun/node_modules/sleep/node_modules/mkdirp /Users/tianyingchun/.npm/df6b16cb-odules-sleep-node-modules-mkdirp.lock
+102 silly lockFile ef218bf7-hun-npm-mkdirp-0-3-5-package-tgz tar:///Users/tianyingchun/.npm/mkdirp/0.3.5/package.tgz
+103 verbose lock tar:///Users/tianyingchun/.npm/mkdirp/0.3.5/package.tgz /Users/tianyingchun/.npm/ef218bf7-hun-npm-mkdirp-0-3-5-package-tgz.lock
+104 silly gunzTarPerm modes [ '755', '644' ]
+105 silly gunzTarPerm extractEntry package.json
+106 silly gunzTarPerm extractEntry .npmignore
+107 silly gunzTarPerm extractEntry LICENSE
+108 silly gunzTarPerm extractEntry index.js
+109 silly gunzTarPerm extractEntry .travis.yml
+110 silly gunzTarPerm extractEntry examples/pow.js
+111 silly gunzTarPerm extractEntry readme.markdown
+112 silly gunzTarPerm extractEntry test/chmod.js
+113 silly gunzTarPerm extractEntry test/perm.js
+114 silly gunzTarPerm extractEntry test/perm_sync.js
+115 silly gunzTarPerm extractEntry test/race.js
+116 silly gunzTarPerm extractEntry test/mkdirp.js
+117 silly gunzTarPerm extractEntry test/return.js
+118 silly gunzTarPerm extractEntry test/return_sync.js
+119 silly gunzTarPerm extractEntry test/root.js
+120 silly gunzTarPerm extractEntry test/sync.js
+121 silly gunzTarPerm extractEntry test/umask.js
+122 silly gunzTarPerm extractEntry test/clobber.js
+123 silly gunzTarPerm extractEntry test/umask_sync.js
+124 silly gunzTarPerm extractEntry test/rel.js
+125 silly lockFile df6b16cb-odules-sleep-node-modules-mkdirp tar:///Users/tianyingchun/node_modules/sleep/node_modules/mkdirp
+126 silly lockFile df6b16cb-odules-sleep-node-modules-mkdirp tar:///Users/tianyingchun/node_modules/sleep/node_modules/mkdirp
+127 silly lockFile ef218bf7-hun-npm-mkdirp-0-3-5-package-tgz tar:///Users/tianyingchun/.npm/mkdirp/0.3.5/package.tgz
+128 silly lockFile ef218bf7-hun-npm-mkdirp-0-3-5-package-tgz tar:///Users/tianyingchun/.npm/mkdirp/0.3.5/package.tgz
+129 info preinstall mkdirp@0.3.5
+130 verbose readDependencies using package.json deps
+131 verbose readDependencies using package.json deps
+132 silly resolved []
+133 verbose about to build /Users/tianyingchun/node_modules/sleep/node_modules/mkdirp
+134 info build /Users/tianyingchun/node_modules/sleep/node_modules/mkdirp
+135 verbose linkStuff [ false,
+135 verbose linkStuff   false,
+135 verbose linkStuff   false,
+135 verbose linkStuff   '/Users/tianyingchun/node_modules/sleep/node_modules' ]
+136 info linkStuff mkdirp@0.3.5
+137 verbose linkBins mkdirp@0.3.5
+138 verbose linkMans mkdirp@0.3.5
+139 verbose rebuildBundles mkdirp@0.3.5
+140 info install mkdirp@0.3.5
+141 info postinstall mkdirp@0.3.5
+142 verbose about to build /Users/tianyingchun/node_modules/sleep
+143 info build /Users/tianyingchun/node_modules/sleep
+144 verbose linkStuff [ false, false, false, '/Users/tianyingchun/node_modules' ]
+145 info linkStuff sleep@1.1.3
+146 verbose linkBins sleep@1.1.3
+147 verbose linkMans sleep@1.1.3
+148 verbose rebuildBundles sleep@1.1.3
+149 verbose rebuildBundles [ 'mkdirp' ]
+150 info install sleep@1.1.3
+151 verbose unsafe-perm in lifecycle true
+152 info sleep@1.1.3 Failed to exec install script
+153 info /Users/tianyingchun/node_modules/sleep unbuild
+154 info preuninstall sleep@1.1.3
+155 info uninstall sleep@1.1.3
+156 verbose true,/Users/tianyingchun/node_modules,/Users/tianyingchun/node_modules unbuild sleep@1.1.3
+157 info postuninstall sleep@1.1.3
+158 error sleep@1.1.3 install: `node build.js || nodejs build.js`
+158 error Exit status 127
+159 error Failed at the sleep@1.1.3 install script.
+159 error This is most likely a problem with the sleep package,
+159 error not with npm itself.
+159 error Tell the author that this fails on your system:
+159 error     node build.js || nodejs build.js
+159 error You can get their info via:
+159 error     npm owner ls sleep
+159 error There is likely additional logging output above.
+160 error System Darwin 12.5.0
+161 error command "node" "/usr/local/bin/npm" "install" "sleep"
+162 error cwd /Users/tianyingchun/SkyDrive/PingAn_Work/webapp-architecture/tests/testApi
+163 error node -v v0.10.23
+164 error npm -v 1.3.17
+165 error code ELIFECYCLE
+166 verbose exit [ 1, true ]

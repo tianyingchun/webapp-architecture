@@ -55,6 +55,7 @@ enyo.singleton({
 		"SUCCESS": "成功了!",
 		"HTTP_404": "404 服务不存在!",
 		"HTTP_500": "500 内部错误!",
-		"HTTP_405": "方法不被允许!"
+		"HTTP_405": "方法不被允许!",
+		"LOAD_CATEGORIES": "加载API分类列表..."
 	}
 });

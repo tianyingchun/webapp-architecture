@@ -40,7 +40,9 @@ router.map(function() {
             { id: 20, key:"detage", name: "category name 5" }
 
         ];
-        res.send(200, { 'Content-Type': 'application/json' }, result);
+        setTimeout(function () {
+            res.send(200, { 'Content-Type': 'application/json' }, result);
+        },2000);
     });
 
     /**

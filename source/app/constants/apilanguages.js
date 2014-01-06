@@ -7,5 +7,8 @@
 		"csharp",
 		"node"
 	];
-	ns.ApiLanguages = apilanguages;
+	ns.ApiLanguage ={
+		languages: apilanguages,
+		storageKey:"apiLanguage"
+	};
 })(window)

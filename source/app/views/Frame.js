@@ -131,7 +131,18 @@ enyo.kind({
 		$dock.createClientComponents([viewConfig]);
 		$dock.render();
 	},
-	getCategoryDetail: function () {
-		this.zLog("getCategoryDetail for test.....");
+	// go to application home page.
+	goHome: function () {
+		this.home();
+		return true;
+	},
+	/**
+	 * Check if current dock cotnains any valid contents.
+	 * @return {Boolean} [description]
+	 */
+	hasContentsIndock: function () {
+		var $dock = this.$.coldock;
+		var $dockControls = $dock.getControls();
+		return $dockControls.length;
 	}
 })

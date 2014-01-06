@@ -6,17 +6,18 @@ enyo.kind({
 	name: "Master.controllers.ApiController",
 	kind: "Master.Controller",
 	// set up default language for current api document.
-	defaultLanguage: "java",
-	
-	handlers: {
-		
-	},
+	defaultLanguage: Master.config.defaultAPILanguage,
+
+	mixins:[
+		//Note we have bindinged view and controller mapping for leftdock view. so 
+		//if we need to render main content we need use event bubble to update.
+		"Master.DockSupport"
+	],
 	// default action :/node/api
 	index: function (apiName){
 		this.zLog("apiname: ", apiName);
-		var viewName = "api.Index";
-		var viewKindConfig = this.bindingView(viewName, null, null);
-		Master.view.frame.setMainContent(viewKindConfig);
+		// show left dock categories.
+		this.showDockCategories("api.Index");
 	},
 	/**
 	 * Action: node,
@@ -26,8 +27,14 @@ enyo.kind({
 		this.zLog("apiname: ", apiName, " ,language:", language);
 		language = language || this.defaultLanguage;
 
-		var viewName = "api.Node";
-		var viewKindConfig = this.bindingView(viewName, null, null );
-		Master.view.frame.setMainContent(viewKindConfig);
+		// SHOW left dock categories if not.
+		this.showDockCategories("api.Node");
+	},
+	//@* public show categories on left dock
+	showDockCategories: function (viewKindName) {
+		if (!Master.view.frame.hasContentsIndock()) {
+			// maybe async fetch data here.
+			this.getAllCategories(null, {viewAction: "showUICategories",viewKindName: viewKindName});
+		}
 	}
 });

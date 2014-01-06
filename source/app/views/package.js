@@ -1,4 +1,5 @@
 enyo.depends(
+	"mixins/",
 	"Frame.js",
 	"home/",
 	// "product/",

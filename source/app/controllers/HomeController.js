@@ -5,6 +5,9 @@
 enyo.kind({
 	name: "Master.controllers.HomeController",
 	kind: "Master.Controller",
+	mixins:[
+		"Master.DockSupport"
+	],
 	handlers: {
 		onGetAllCategories: "getAllCategories"
 	},
@@ -13,28 +16,11 @@ enyo.kind({
 	 * @method 
 	 */
 	index: function () {
-		var viewData = null;
-		this.zLog("action data: ", viewData);
-		var viewKindName = "home.Index";
-		// maybe async fetch data here.
-		this.getAllCategories(null, {viewAction: "showCategories"});
-
-		var viewKindConfig = this.bindingView(viewKindName, null, viewData);
- 		// show in dock.
- 		Master.view.frame.setDockContent(viewKindConfig);
-	},
-	showApiCategories: function (viewAction, viewModel) {
-		this.zLog("response: ", viewModel, viewAction);
-		// save current request view model action. we should put viewAction invoke before viewModel property changed.
-		this.set("viewAction", viewAction);
-		// update current viewModel for current controller.
-		this.set("viewModel",viewModel);
-	},
-	// do server request.
-	getAllCategories: function (inSender, inEvent) {
-		var viewAction = inEvent && inEvent.viewAction;
-		var apiCategories = new Master.models.apipool.Categories();
-		apiCategories.getApiCategories(enyo.bindSafely(this, "showApiCategories", viewAction));
-		return true;
+		if (!Master.view.frame.hasContentsIndock()) {
+			// fetch all categories from server and show it on the left dock.
+			this.getAllCategories(null, {viewAction: "showUICategories", viewKindName: "home.Index"});
+		}
+		// show default category detail information in main content.
+		// DOTO...
 	}
 });

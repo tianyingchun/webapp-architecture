@@ -5,6 +5,9 @@
 	color: #0678be;
 	font-size: 0.9em;
 	.enyo-node {
+		color: #008cdd;
+		font-weight: bold;
+		font-size: @font-normal * 1.1;
 		padding-left: 0px !important;
 		&> {
 			.enyo-node:before{
@@ -19,18 +22,23 @@
 		&.noexpand:before{
 			content:"";
 		}
+		& >div:hover{
+			cursor: pointer;
+		}
 	}
 	.item {
 		padding-left: 16px !important;
-		font-weight: normal;
-
 		&>div{
-			width: 148px;
+			font-weight: normal;
+			width: 160px;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 			padding:2px 0  0 !important;
 			height: 20px;
+			&:hover{
+				text-decoration: underline;
+			}
 		}
 		&.selected{
 			background: -webkit-linear-gradient(#4f9fef,#3577d0);

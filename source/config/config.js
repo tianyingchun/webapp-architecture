@@ -11,6 +11,8 @@ enyo.singleton({
 	appName: "z",// define app name is z (lowercase), z is so cool ^-^.
 	// service request url root.
 	urlRoot:"http://localhost:7000/",
+	// set default language for apipool sdk.
+	defaultAPILanguage: "java",
 	cacheBust: true, // ajax cache Bust.
 	// cache settings.
 	cache: {
