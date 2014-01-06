@@ -14,13 +14,16 @@ enyo.kind({
 			}
 		}
 	}),
+	getSelectedKey: function () {
+		return "delta-d";
+	},
 	// show categories in left dock if we directly enter specific api page.
 	// e.g. http://localhost:8000/debug.html#node/bravo-a/java
 	showUICategories: function (viewModel) {
 		this.zLog("show categories view model: ", viewModel);
 		this.destroyClientControls();
 		var records = viewModel.records;
-		this.createClientComponents([{ kind: "widgets.lists.TreeNodes", source: records }]);
+		this.createClientComponents([{ kind: "widgets.lists.TreeNodes", source: records,selectedKey:this.getSelectedKey() }]);
 		this.render();
 	}
 });
