@@ -14,8 +14,8 @@ enyo.kind({
 		"Master.DockSupport"
 	],
 	// default action :/node/api
-	index: function (apiName){
-		this.zLog("apiname: ", apiName);
+	index: function (apiKey){
+		this.zLog("apiKey: ", apiKey);
 		// show left dock categories.
 		this.showDockCategories("api.Index");
 	},
@@ -23,18 +23,18 @@ enyo.kind({
 	 * Action: node,
 	 * mapping: { path: "node/:api/:language", controller: "ApiController", action: "node"}
 	 */
-	node: function (apiName, language) {
-		this.zLog("apiname: ", apiName, " ,language:", language);
+	node: function (apiKey, language) {
+		this.zLog("apiKey: ", apiKey, " ,language:", language);
 		language = language || this.defaultLanguage;
 
 		// SHOW left dock categories if not.
-		this.showDockCategories("api.Node");
+		this.showDockCategories("api.Node", {apiKey: apiKey});
 	},
 	//@* public show categories on left dock
-	showDockCategories: function (viewKindName) {
+	showDockCategories: function (viewKindName, extraData) {
 		if (!Master.view.frame.hasContentsIndock()) {
 			// maybe async fetch data here.
-			this.getAllCategories(null, {viewAction: "showUICategories",viewKindName: viewKindName});
+			this.getAllCategories(null, {viewAction: "showUICategories",viewKindName: viewKindName}, extraData);
 		}
 	}
 });

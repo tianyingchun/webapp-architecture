@@ -10,23 +10,26 @@ enyo.kind({
 	},
 	content: Master.locale.get("LOAD_CATEGORIES", "message"),
 	receiveMessage: enyo.inherit(function(sup) {
-		return function (viewModel, viewAction) {
+		return function (viewModel, viewData) {
 			sup.apply(this, arguments);
 			// do nothing now..
+			var viewAction  = viewData.action;
+			var extraData = viewData.data;
 			var viewActionFn = viewAction && this[viewAction];
 			if (viewActionFn) {
-				viewActionFn.call(this, viewModel);
+				viewActionFn.call(this, viewModel, extraData);
 			} else {
-				this.zWarn("viewActonFn don't exist!");
+				this.zWarn("viewActionFn don't exist!");
 			}
 		}
 	}),
 	// show categories.
-	showUICategories: function (viewModel) {
+	showUICategories: function (viewModel, extraData) {
 		this.zLog("show categories view model: ", viewModel);
 		this.destroyClientControls();
 		var records = viewModel.records;
-		this.createClientComponents([{ kind: "widgets.lists.TreeNodes", source: records }]);
+		var categoryKey = extraData && extraData.apiKey;
+		this.createClientComponents([{ kind: "widgets.lists.TreeNodes", selectedKey:categoryKey, source: records }]);
 		this.render();
 	}
 });
