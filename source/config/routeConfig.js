@@ -11,6 +11,10 @@
 		// Note: router config has order priority.
 		// static router.
 		{ path: "home/index", default:true, controller: "HomeController", action: "index"},
+		// api show router config.
+		{ path: "node/:api/:language", controller: "ApiController", action: "node"},
+		{ path: "node/:api", controller: "ApiController", action: "index"}
+
 		/**
 		 * dynamic router: controller action -> show().
 		 * 1.match #product/1/  ->show (page:1, id:"");
@@ -21,7 +25,7 @@
 		 * and also matched {path:"product/:id"} -> params:2 so we need to put {path:"product/:page/:id"} on the 
 		 * before of the {path:"product/:id"}.
 		 */
-		{ path: "product/:page/:id", controller: "ProductController", action: "show"},
+		// { path: "product/:page/:id", controller: "ProductController", action: "show"},
 		/**
 		 * dynamic router:
 		 * 1. match '#product/100' ->index(page:100)
@@ -30,6 +34,6 @@
 		 * it will use "home/index" as default router match
 		 * 
 		 */
-		{ path: "product/:page", controller: "ProductController", action: "index"}
+		// { path: "product/:page", controller: "ProductController", action: "index"}
 	]);
 })(enyo);

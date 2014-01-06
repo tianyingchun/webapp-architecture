@@ -1,6 +1,7 @@
 /**
  * controllers namespace start Master.controllers.xxxController
  * directory structure related path view app.controllers.
+ * Note: only for demo.
  */
 enyo.kind({
 	name: "Master.controllers.ProductController",

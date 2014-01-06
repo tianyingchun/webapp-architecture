@@ -1,4 +1,5 @@
 enyo.depends(
 	"HomeController.js",
-	"ProductController.js"
+	// "ProductController.js"
+	"ApiController.js"
 );

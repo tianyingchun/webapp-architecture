@@ -1,5 +1,6 @@
 enyo.depends(
 	"Frame.js",
 	"home/",
-	"product/"
+	// "product/",
+	"api/"
 );

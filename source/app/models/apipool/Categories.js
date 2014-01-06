@@ -14,7 +14,7 @@ enyo.kind({
 		}
 	},
 	// default we don't need to instance all records as specificed model. 
-	instanceAllRecords: true,
+	instanceAllRecords: false,
 
 	/**
 	 * Get all api doc categories.
@@ -32,16 +32,36 @@ enyo.kind({
 	 * @param  {object} data category data, it should be array, also can be another object.
 	 */
 	apiCategoriesDataDTO: function (data) {
-		this.zLog(data);
 		data = data && enyo.isArray(data) ? data : [];
 		var result = [];
-		for (var i = 0; i < data.length; i++) {
-			var item = data[i];
-			result.push({
-				categoryId: item.id,
-				categoryName: item.name
-			});
-		};
+		// convert source data and saved into result.
+		this._convertCategories(data, result);
+		this.zLog("conterted categories: ", result);
 		return result;
+	},
+	/**
+	 * Convert categories array
+	 * @param  {array} source the source categories
+	 * @param  {array} target convert into target object.
+	 */
+	_convertCategories: function (source, target) {
+		var result = target || [];
+		if (enyo.isArray(source)){
+			for (var i = 0; i < source.length; i++) {
+				var item = source[i];
+				var convertItem = {
+					categoryId: item.id,
+					categoryKey: item.key,
+					categoryName: item.name,
+					expanded: item.expanded || false,
+					childs: []
+				};
+				result.push(convertItem);
+				// loop child source.
+				if (item.childs) {
+					this._convertCategories(item.childs, convertItem.childs);
+				}
+			};
+		}
 	}
 });	

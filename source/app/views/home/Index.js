@@ -6,39 +6,29 @@ enyo.kind({
 	name: "Master.views.home.Index",
 	kind: "Master.View",
 	events:{
-		"onGetAllCategories": "",
-		"onGetCategoryDetail": ""
+		"onGetAllCategories": ""
 	},
-	components: [
-		{ kind: "widgets.lists.TreeNodes" }
-	],
-	receiveMessage: function (viewModel, viewAction) {
-		var restInfo = viewModel.restInfo;
-		if (restInfo.retCode ==1) {
+	content:"loading api categories....",
+
+	receiveMessage: enyo.inherit(function (sup) {
+		return function (viewModel, viewAction){
+			sup.apply(this, arguments);
 			// do nothing now..
 			var viewActionFn = viewAction && this[viewAction];
 			if (viewActionFn) {
 				viewActionFn.call(this, viewModel);
+			} else {
+				this.zWarn("viewActonFn don't exist!");
 			}
-		} else {	
-			alert(restInfo.retMessage);
-		}
-	},
-	// Get all categories from controller.
-	getAllCategories: function (inSender, inEvent) {
-		this.zLog("dispatch get all categories event to controller...");
-		this.doGetAllCategories({viewAction:"showCategories"});
-		return true;
-	},
+		};
+	}),
 	// show categories.
 	showCategories: function (viewModel) {
 		this.zLog("show categories view model: ", viewModel);
-	},
-	// Get category detail.	
-	getCategoryDetail: function (inSender, inEvent) {
-		this.zLog("dispatch get category detail event to controller...");
-		this.doGetCategoryDetail({categoryId: 1});
-		return true;
+		this.destroyClientControls();
+		var records = viewModel.records;
+		this.createClientComponents([{ kind: "widgets.lists.TreeNodes", source: records }]);
+		this.render();
 	},
 	create: enyo.inherit(function(sup) {
 		return function () {

@@ -1,4 +1,5 @@
 enyo.depends(
 	"key.js",
-	"errorcode.js"
+	"errorcode.js",
+	"apilanguages.js"
 );

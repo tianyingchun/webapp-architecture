@@ -32,6 +32,9 @@ enyo.kind({
 	attributes: {
 		categoryId: "",
 		categoryName: "",
+		categoryKey: "",
+		expanded: false,
+		childs: [],
 		categoryDetails: [],
 		// extended information.
 		categoryConfig: {}
@@ -40,7 +43,8 @@ enyo.kind({
 	defaults: {
 		categoryDetails: [
 			{ detail1: "detail1"}
-		]
+		],
+		categoryConfig: {}
 	},
 	/**
 	 * Get category details for an specific category.

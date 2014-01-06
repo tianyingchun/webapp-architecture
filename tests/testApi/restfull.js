@@ -12,15 +12,32 @@ router.map(function() {
     //
     // LIST: GET to /api/categories lists all api categories
     //
-    this.get("/api/categories").bind(function(req,res,id) {
+    this.get("/api/categories").bind(function(req,res) {
         var result = [
             // category item info.
-            { id: 1, name: "category name 1" },
-            { id: 2, name: "category name 2" },
-            { id: 3, name: "category name 3" },
-            { id: 4, name: "category name 4" },
-            { id: 5, name: "category name 5" },
-            { id: 6, name: "category name 6" }
+            { id: 1, key: "bravo", expanded:true, name: "category name 1", childs:[
+                {id: 2, key: "bravo-a", name: "bravo-a", childs:null },
+                {id: 3, key: "bravo-b", name: "bravo-b", childs:null },
+                {id: 4, key: "bravo-c", name: "bravo-c", childs:null },
+                {id: 5, key: "bravo-d", name: "bravo-d", childs:null },
+                {id: 6, key: "bravo-e", name: "bravo-e", childs:null },
+                {id: 7, key: "bravo-f", name: "bravo-f", childs:null }
+            ]},
+            { id: 8, key:"delta", name: "category name 2",childs: [
+                {id: 9, key: "delta-a", name: "delta-a", childs:null },
+                {id: 10, key: "delta-b", name: "delta-b", childs:null },
+                {id: 11, key: "delta-c", name: "delta-c", childs:null },
+                {id: 12, key: "delta-d", name: "delta-d", childs:null }
+            ]},
+            { id: 13, key:"epsilon", expanded:true, name: "category name 3", childs:[
+                {id: 14, key: "epsilon-a", name: "epsilon-a", childs:null },
+                {id: 15, key: "epsilon-b", name: "epsilon-b", childs:null },
+                {id: 16, key: "epsilon-c", name: "epsilon-c", childs:null },
+                {id: 17, key: "epsilon-d", name: "epsilon-d", childs:null },
+                {id: 18, key: "epsilon-e", name: "epsilon-e", childs:null }
+            ]},
+            { id: 19, key:"charlie", name: "category name 4" },
+            { id: 20, key:"detage", name: "category name 5" }
 
         ];
         res.send(200, { 'Content-Type': 'application/json' }, result);

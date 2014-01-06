@@ -6,8 +6,7 @@ enyo.kind({
 	name: "Master.controllers.HomeController",
 	kind: "Master.Controller",
 	handlers: {
-		onGetAllCategories: "getAllCategories",
-		onGetCategoryDetail: "getCategoryDetail"
+		onGetAllCategories: "getAllCategories"
 	},
 	/**
 	 * Action method
@@ -31,20 +30,11 @@ enyo.kind({
 		// update current viewModel for current controller.
 		this.set("viewModel",viewModel);
 	},
-	showCategoryDetal: function (viewModel) {
-		
-	},
 	// do server request.
 	getAllCategories: function (inSender, inEvent) {
 		var viewAction = inEvent && inEvent.viewAction;
 		var apiCategories = new Master.models.apipool.Categories();
 		apiCategories.getApiCategories(enyo.bindSafely(this, "showApiCategories", viewAction));
-		return true;
-	},
-	// do server request.
-	getCategoryDetail:function (inSender, inEvent) {
-		// var apiCategoryDetail = 
-		this.zLog("getCategoryDetail...");
 		return true;
 	}
 });
