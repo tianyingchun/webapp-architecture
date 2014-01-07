@@ -43,7 +43,7 @@ router.map(function() {
         var result = soruceData;
         setTimeout(function () {
             res.send(200, { 'Content-Type': 'application/json' }, result);
-        },2000);
+        },500);
     });
 
     /**
@@ -56,24 +56,33 @@ router.map(function() {
         var result = {};
         for (var i = 0; i < soruceData.length; i++) {
             var item = soruceData[i];
+            // console.log(item.key, categoryKey);
             if (item.key == categoryKey) {
-                winston.info("item,", item);
-
                 result = item;
                 break;
             }
         };
         result.details = {
-            description: "",
+            description: "使用原生的REST API，可以使您更加自由地开发出灵活的功能.<br /><ul>"
+                        +"<li><span>name01</span></li>"
+                        +"<li><span>name02</span></li>"
+                        +"<li><span>name03</span></li>"
+                        +"</ul>",
             request: {
-                body: "PUT /BucketName?sign=MBO:aCLCZtoFQg8I:WQMFNZEhN2k8xxlgikuPfCJMuE8%3D HTTP/1.1 Host: bcs.duapp.com Content-Length:0 ",
-                headers:[ 
-                    {name: "x-bs-acl", value: "abear MBO", required: true, description: "设置bucket的权限，复杂的权限控制可以参考acl设置"},
-                    {name: "client-id", value: "gcc_client", required: true, description: "gcc client settup description"}
-                ]
+                body: "PUT /BucketName?sign=MBO:aCLCZtoFQg8I:WQMFNZEhN2k8xxlgikuPfCJMuE8%3D <br />HTTP/1.1 Host: bcs.duapp.com <br />Content-Length:0 ",
+                params: [
+                    {name:"", value:"", isRequired: true, description: ""},
+                    {name:"", value:"", isRequired: true, description: ""},
+                    {name:"", value:"", isRequired: true, description: ""}
+                ],
+                headers:'<table class="newpcs_table"><tbody><tr>'
+                        +'<th scope="col" width="60">字段</th><th scope="col">取值</th><th scope="col">是否必需</th><th scope="col">描述</th></tr><tr>'
+                        +'<td>x-bs-acl</td><td>[public-read|public-write|public-read-write|public-control|private]<p>default: private</p>'
+                        +'</td><td>否</td><td>设置bucket的权限，复杂的权限控制可以参考acl设置</td></tr></tbody></table>'
             },
             response: {
-                body: "response result..."
+                body: '{"bucket_name":"test","status":"0", "cdatetime":"1371765410", "used_capacity":"21148", "total_capacity":"0", "region":"beijing"}',
+                Headers:"HTTP/1.1 200 OK <br />Date: Sat, 01 Jan 2011 00:00:00 GMT </br>Server: BaiduBS"
             },
             examples: {
                 postCommand: 'curl -v -X PUT "http://bcs.duapp.com/mybucket?sign=MBO:aCLCZtoFQg8I:WQMFNZEhN2k8xxlgikuPfCJMuE8%3D"',
@@ -89,8 +98,9 @@ router.map(function() {
                             +"Server: BaiduBS"
             }
         };
-
-        res.send(200, { 'Content-Type': 'application/json' }, result);
+        setTimeout(function () {
+            res.send(200, { 'Content-Type': 'application/json' }, result);
+        },500);
     });
 
     // Update category information

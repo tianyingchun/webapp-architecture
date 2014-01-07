@@ -15,7 +15,16 @@ enyo.singleton({
 	title: {
 		APP_NAME: "ENYO 应用程序！",
 		LOGO_TEXT: "Developer Platform - 平安付",
-		API_CATALOG:"API分类"
+		API_CATALOG:"API分类",
+		API_DESCRIPTION:"概述",
+		API_REQUEST: "请求",
+		API_RESPONSE: "响应",
+		API_EXAMPLES: "示例",
+		API_REQUEST_EXAMPLE: "请求示例",
+		API_RESPONSE_EXAMPLE: "响应示例",
+		API_REQUEST_HEADERS: "请求头",
+		API_RESPONSE_HEADERS: "响应头",
+		API_REQUEST_PARAMS:"接口参数"
 	},
 	// navgator links.
 	nav: {

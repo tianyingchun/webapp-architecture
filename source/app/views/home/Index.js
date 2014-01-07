@@ -8,7 +8,14 @@ enyo.kind({
 	events:{
 		"onGetAllCategories": ""
 	},
-	content: Master.locale.get("LOAD_CATEGORIES", "message"),
+	content: Master.locale.get("LOAD_CATEGORY_DETAIL", "message"),
+	// only for testing purpose for view dispatch event to corresponding controller and then bubble it to Master.view.frame
+	rendered: enyo.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			// this.doGetAllCategories({name:'xxxtest'});
+		};	
+	}),
 	receiveMessage: enyo.inherit(function(sup) {
 		return function (viewModel, viewData) {
 			sup.apply(this, arguments);
@@ -22,5 +29,9 @@ enyo.kind({
 				this.zWarn("viewActionFn don't exist!");
 			}
 		}
-	})
+	}),
+	// show category detail page.
+	showCategoryDetailPage: function (viewModel, viewData) {
+
+	}
 });

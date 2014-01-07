@@ -9,8 +9,11 @@ enyo.kind({
 		"Master.controllers.DockSupport"
 	],
 	handlers: {
-		onGetAllCategories: "getAllCategories"
+		// only for testing purpose for view dispatch event to corresponding controller and then bubble it to Master.view.frame
+		onGetAllCategories: "getAllCategoriesTest"
 	},
+	// detial view kind name.
+	_detailViewKindName: "home.Index",
 	/**
 	 * Action method
 	 * @method 
@@ -21,6 +24,24 @@ enyo.kind({
 		this.getAllCategories();
 
 		// show default category detail information in main content.
-		// DOTO...
+		
+		// fetch category details information here.
+		this.fetchCategoryDetailInfo();
+	},
+	fetchCategoryDetailInfo: function (apiKey) {
+		// binding view,
+		this.bindingViewToContent(this._detailViewKindName, null, null);
+
+		var apiDetail = new Master.models.apipool.CategoryItem();
+		apiDetail.getCategoryDetail(apiKey, enyo.bindSafely(this, "showCategoryDetailInfo", {action: "showCategoryDetailPage"}));
+		// binding view.
+	},
+	showCategoryDetailInfo: function (viewData, viewModel) {
+		// this.zLog("categoryDetail: ", viewData, viewModel);
+		this.notifyView(this._detailViewKindName, viewModel, viewData);
+	},
+	getAllCategoriesTest: function (inSender, inEvent) {
+		this.zLog("get all getAllCategories...", inEvent);
+		return true;
 	}
 });

@@ -49,13 +49,14 @@
 				var _request = details.request;
 				result.request =  { 
 					body: _request && _request.body || "",
-					headers: _request && _request.headers || []
+					params: _request && _request.params || [],
+					headers: _request && _request.headers || ""
 				};
 				// response.
 				var _response = details.response;
 				result.response = {
 					body:  _response && _response.body || "",
-					headers: _response && _response.headers || []
+					headers: _response && _response.headers || ""
 				};
 				// examples
 				var _examples = details.examples;

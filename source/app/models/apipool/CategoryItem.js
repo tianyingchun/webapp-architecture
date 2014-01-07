@@ -40,14 +40,14 @@ enyo.kind({
 		expanded: false,
 		childs: [],
 		// category detail information
-		categoryDetails: {},
+		details: {},
 		// extended information.
-		categoryConfig: {}
+		config: {}
 	},
 	// default values for record schema.
 	defaults: {
-		categoryDetails: {},
-		categoryConfig: {}
+		details: {},
+		config: {}
 	},
 	/**
 	 * Get category details for an specific category.

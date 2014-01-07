@@ -65,9 +65,11 @@ enyo.kind({
 		]}
 	],
 	handlers: {
-		onGetCategoryDetail: "getCategoryDetail"
+		onGetAllCategories: "getAllCategoriesTest"
 	},
-
+	getAllCategoriesTest: function (inSender, inEvent) {
+		this.zLog("get all categories testing...", inEvent);
+	},	
 	create: enyo.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);
