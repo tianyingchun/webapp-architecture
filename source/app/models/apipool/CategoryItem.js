@@ -55,10 +55,10 @@ enyo.kind({
 	 * @param  {function} fn the callback function for api doc categories.
 	 * @return {void}
 	 */
-	getCategoryDetail: function (categoryId, fn) {
+	getCategoryDetail: function (categoryKey, fn) {
 		this.fetch({
 			apiKey: "categoryInfo",
-			data: { categoryId: categoryId },
+			data: { key: categoryKey },
 			callback: fn
 		});
 	},
@@ -94,10 +94,12 @@ enyo.kind({
 	 * Get category item info, we can fetch all detail information for current category item.
 	 */
 	categoryDetailDTO: function (data) {
-		// this.zLog(data);
-		data = data && enyo.isArray(data) ? data : [data];
-		var result = [];
-		this.categoryBasicInfoDTO(data, result);
+		var details = data.details;
+		var basic = data && enyo.isArray(data) ? data : [data];
+		var tempBasicResult = [], result = {};
+		this.categoryBasicInfoDTO(basic, tempBasicResult);		
+		enyo.mixin(result, tempBasicResult[0]);
+		result.details = this.categoryDetailInfoDTO(details);
 		this.zLog("converted data: ", result);
 		return result;
 	}

@@ -16,6 +16,13 @@ enyo.kind({
 			}
 		}
 	}),
+	showCategoryDetailPage: function (viewModel) {
+		this.zLog("viewModel", viewModel);
+		var viewKindConfig = {
+			
+		};
+		Master.view.frame.setMainContent(viewKindConfig);
+	},
 	// show categories in left dock if we directly enter specific api page.
 	// e.g. http://localhost:8000/debug.html#node/bravo-a/java
 	showUICategories: function (viewModel, extraData) {

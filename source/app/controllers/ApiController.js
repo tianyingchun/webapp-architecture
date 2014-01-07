@@ -27,8 +27,25 @@ enyo.kind({
 		this.zLog("apiKey: ", apiKey, " ,language:", language);
 		language = language || this.defaultLanguage;
 
-		// SHOW left dock categories if not.
+		// show left dock categories if not.
 		this.showDockCategories("api.Node", {apiKey: apiKey});
+
+		// fetch category details information here.
+		this.fetchCategoryDetailInfo(apiKey);
+	},
+	fetchCategoryDetailInfo: function (apiKey) {
+		var apiDetail = new Master.models.apipool.CategoryItem();
+		apiDetail.getCategoryDetail(apiKey, enyo.bindSafely(this, "showCategoryDetailInfo", {action: "showCategoryDetailPage"}));
+		// binding view.
+		// var viewKindConfig = this.bindingView({
+
+		// }, null, null);
+ 		// show in dock.
+ 		// Master.view.frame.setDockContent(viewKindConfig);
+	},
+	showCategoryDetailInfo: function (viewData, viewModel) {
+		// this.zLog("categoryDetail: ", viewData, viewModel);
+		this.notifyView(viewModel, viewData);
 	},
 	//@* public show categories on left dock
 	showDockCategories: function (viewKindName, extraData) {

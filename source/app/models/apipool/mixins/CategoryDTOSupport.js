@@ -19,20 +19,53 @@
 			if (enyo.isArray(source)){
 				for (var i = 0; i < source.length; i++) {
 					var item = source[i];
-					var convertItem = {
-						categoryId: item.id,
-						categoryKey: item.key,
-						categoryName: item.name,
-						expanded: item.expanded || false,
-						childs: []
-					};
-					result.push(convertItem);
-					// loop child source.
-					if (item.childs && item.childs.length) {
-						this.categoryBasicInfoDTO(item.childs, convertItem.childs);
+					if(typeof(item.isDisplay) == "undefined" || item.isDisplay == true) {
+						var convertItem = {
+							categoryId: item.id,
+							categoryKey: item.key,
+							categoryName: item.name,
+							expanded: item.expanded || false,
+							childs: []
+						};
+						result.push(convertItem);
+						// loop child source.
+						if (item.childs && item.childs.length) {
+							this.categoryBasicInfoDTO(item.childs, convertItem.childs);
+						}
 					}
 				};
 			}
-		}
+		},
+		/**
+		 * Convert detail information for each  category
+		 * @param  {object} data the source data of category
+		 * @return {object}      the converted category detail info.
+		 */
+		categoryDetailInfoDTO: function (details) {
+			var result = {};
+			if (enyo.isObject(details)) {
+				result.description = details.description;
+				// request.
+				var _request = details.request;
+				result.request =  { 
+					body: _request && _request.body || "",
+					headers: _request && _request.headers || []
+				};
+				// response.
+				var _response = details.response;
+				result.response = {
+					body:  _response && _response.body || "",
+					headers: _response && _response.headers || []
+				};
+				// examples
+				var _examples = details.examples;
+				result.examples = {
+					postCommand: _examples && _examples.postCommand,
+					request: _examples && _examples.request,
+					response: _examples && _examples.response
+				};
+			}
+			return result;
+ 		}
 	});
 })(enyo);
