@@ -32,10 +32,10 @@ enyo.kind({
 		]},
 		{name:"page", id:"page", components: [
 			{name: "main", classes: "page-inner", components: [
+				{name:"coldock", classes:"col-dock"},
 				{name:"colmain", classes:"col-main", components: [
 					{name:"colWrapper", classes:"col-wrapper"}
-				]},
-				{name:"coldock", classes:"col-dock"}
+				]}
 			]}
 		]},
 		{name:"footer", id:"footer", components: [
@@ -81,25 +81,25 @@ enyo.kind({
 		return function () {
 			sup.apply(this, arguments);
 			// set minimal height for page body.
-			this.reflowPageLayout();
+			//this.reflowPageLayout();
 		};
 	}),
 	// override reflow workflow.
-	reflow: enyo.inherit(function (sup){
-		return function () {
-			// do our stuff here while resize window.
-			// last resize event.
-			enyo.job("reflowPageLayout", this.bindSafely("reflowPageLayout"),300);
-			sup.apply(this, arguments);
-		};
-	}),
+	// reflow: enyo.inherit(function (sup){
+	// 	return function () {
+	// 		sup.apply(this, arguments);
+	// 		// last resize event.
+	// 		// do our stuff here while resize window.
+	// 		enyo.job("reflowPageLayout", this.bindSafely("reflowPageLayout"),500);
+	// 	};
+	// }),
 	// fresh the page body container layout
 	reflowPageLayout: function () {
 		var minimalHeight = this.calMinimalPageheight();
 		var pageBodyHeight = this.$.page.getBounds().height;
 		var dockHeight = this.$.coldock.getBounds().height;
 		var dockContent = this.$.colmain.getBounds().height;
-
+		// this.zError(pageBodyHeight,dockHeight,dockContent);
 		var currHeight = Math.max(minimalHeight, pageBodyHeight, dockHeight, dockContent); 
 		this.$.page.applyStyle("min-height", currHeight+"px");
 		this.$.coldock.applyStyle("min-height", currHeight +"px");

@@ -1,35 +1,43 @@
 @import "./../variables.less";
 @import "./../mixins.less"; 
 // for frame.js update the layout frame styles.
+// http://matthewjamestaylor.com/blog/equal-height-columns-2-column.htm
+// fluid layout two column auto height.
+// we don't use reflow(). it has perforamce issue.
+// 
 #page {
 	width: 100%;
 	z-index: 990;
 	overflow: hidden;
 	position: relative;
+	background: #fff;
 	.page-inner {
 		width: 100%;
-		height: 100%;
-		overflow: hidden;
+		float: left;
+		background: #fafafa;
+		right: 74%;
+		border-right: 1px solid #ccc;
+		position: relative;
 		box-sizing: border-box;
 		padding: 0 ;//@container-left-padding;
 	}
-	.col-main{
-		float: left;
-		width:100%;
-		min-height: 20px;
-		.col-wrapper{
-			// margin-left: 190px;
-			margin-left: 330px;
-		}
-	}
 	.col-dock{
-		border-right: 1px solid #ccc;
 		float:left;
-		background: #fafafa;
-		margin-left: -100%;
-		min-height: 1px;
-		width:320px;
-		padding-left: 10%;
+		position: relative;
+		overflow: hidden;
+		left: 84%; /* 74% + 10%, padding-left:10%*/
+		width:16%;
 		font-size: @font-normal;
+	}
+	.col-main{
+		padding: 0 15px;
+		float: left;
+		width: 75%;
+		position: relative;
+		left: 84%;
+		overflow: hidden;
+		.col-wrapper{
+			// margin-left: 330px;
+		}
 	}
 }
