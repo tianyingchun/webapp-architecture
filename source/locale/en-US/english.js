@@ -55,6 +55,7 @@ enyo.singleton({
 		"HTTP_404": "404 not found!",
 		"HTTP_500": "500 internal error!",
 		"HTTP_405": "405 Method Not Allowed!",
-		"LOAD_CATEGORIES": "Loading categroies...."
+		"LOAD_CATEGORIES": "Loading categroies....",
+		"LOAD_CATEGORY_DETAIL": "Loading api details..."
 	}
 });

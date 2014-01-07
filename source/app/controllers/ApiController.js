@@ -7,6 +7,8 @@ enyo.kind({
 	kind: "Master.Controller",
 	// set up default language for current api document.
 	defaultLanguage: Master.config.defaultAPILanguage,
+	// detial view kind name.
+	_detailViewKindName: "api.Node",
 
 	mixins:[
 		//Note we have bindinged view and controller mapping for leftdock view. so 
@@ -28,30 +30,28 @@ enyo.kind({
 		language = language || this.defaultLanguage;
 
 		// show left dock categories if not.
-		this.showDockCategories("api.Node", {apiKey: apiKey});
+		this.showDockCategories({apiKey: apiKey});
 
 		// fetch category details information here.
 		this.fetchCategoryDetailInfo(apiKey);
 	},
 	fetchCategoryDetailInfo: function (apiKey) {
+		// binding view,
+		this.bindingViewToContent(this._detailViewKindName, null, null);
+
 		var apiDetail = new Master.models.apipool.CategoryItem();
 		apiDetail.getCategoryDetail(apiKey, enyo.bindSafely(this, "showCategoryDetailInfo", {action: "showCategoryDetailPage"}));
 		// binding view.
-		// var viewKindConfig = this.bindingView({
-
-		// }, null, null);
- 		// show in dock.
- 		// Master.view.frame.setDockContent(viewKindConfig);
 	},
 	showCategoryDetailInfo: function (viewData, viewModel) {
 		// this.zLog("categoryDetail: ", viewData, viewModel);
-		this.notifyView(viewModel, viewData);
+		this.notifyView(this._detailViewKindName, viewModel, viewData);
 	},
 	//@* public show categories on left dock
-	showDockCategories: function (viewKindName, extraData) {
+	showDockCategories: function (extraData) {
 		if (!Master.view.frame.hasContentsIndock()) {
 			// maybe async fetch data here.
-			this.getAllCategories(null, {viewAction: "showUICategories",viewKindName: viewKindName}, extraData);
+			this.getAllCategories(extraData);
 		}
 	}
 });

@@ -117,6 +117,7 @@ enyo.kind({
 	/**
 	 * Set view config as child client control for main frame view.
 	 * @param {object} viewConfig  the object that hold all configurations of enyo kind.
+	 * @returns {object} the viewConfig enyo instance.
 	 */
 	setMainContent: function (viewConfig) {
 		this.zLog("viewConfig: ", viewConfig);

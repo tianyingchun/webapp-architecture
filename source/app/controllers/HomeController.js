@@ -18,7 +18,7 @@ enyo.kind({
 	index: function () {
 		// fetch all categories from server and show it on the left dock.
 		// force refresh categories shown on left dock.
-		this.getAllCategories(null, {viewAction: "showUICategories", viewKindName: "home.Index"});
+		this.getAllCategories();
 
 		// show default category detail information in main content.
 		// DOTO...
