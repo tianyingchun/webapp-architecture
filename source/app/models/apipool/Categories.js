@@ -1,6 +1,9 @@
 enyo.kind({
 	name: "Master.models.apipool.Categories",
 	kind: "Master.Collection",
+	mixins:[
+		"Master.models.CategoryDTOSupport"
+	],
 	model: "Master.models.apipool.CategoryItem",
 	// api configrations for api categories.
 	apis: {
@@ -35,33 +38,8 @@ enyo.kind({
 		data = data && enyo.isArray(data) ? data : [];
 		var result = [];
 		// convert source data and saved into result.
-		this._convertCategories(data, result);
+		this.categoryBasicInfoDTO(data, result);
 		this.zLog("conterted categories: ", result);
 		return result;
-	},
-	/**
-	 * Convert categories array
-	 * @param  {array} source the source categories
-	 * @param  {array} target convert into target object.
-	 */
-	_convertCategories: function (source, target) {
-		var result = target || [];
-		if (enyo.isArray(source)){
-			for (var i = 0; i < source.length; i++) {
-				var item = source[i];
-				var convertItem = {
-					categoryId: item.id,
-					categoryKey: item.key,
-					categoryName: item.name,
-					expanded: item.expanded || false,
-					childs: []
-				};
-				result.push(convertItem);
-				// loop child source.
-				if (item.childs) {
-					this._convertCategories(item.childs, convertItem.childs);
-				}
-			};
-		}
 	}
 });	

@@ -11,13 +11,13 @@ enyo.kind({
 	mixins:[
 		//Note we have bindinged view and controller mapping for leftdock view. so 
 		//if we need to render main content we need use event bubble to update.
-		"Master.DockSupport"
+		"Master.controllers.DockSupport"
 	],
 	// default action :/node/api
 	index: function (apiKey){
 		this.zLog("apiKey: ", apiKey);
 		// show left dock categories.
-		this.showDockCategories("api.Index");
+		this.node(apiKey, null);
 	},
 	/**
 	 * Action: node,

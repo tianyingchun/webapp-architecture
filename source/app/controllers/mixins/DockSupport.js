@@ -1,7 +1,7 @@
 // Note: tahe mixins support has some method will depends on controller.
 // so we only can use it in controllers.
-enyo.setPath("Master.DockSupport", {
-	name: "Master.DockSupport",
+enyo.setPath("Master.controllers.DockSupport", {
+	name: "Master.controllers.DockSupport",
 	/**
 	 * Get all categories
 	 * @param inEvent must contain two parameters @viewAction, @viewkindName.

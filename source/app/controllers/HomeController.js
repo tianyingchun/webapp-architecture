@@ -6,7 +6,7 @@ enyo.kind({
 	name: "Master.controllers.HomeController",
 	kind: "Master.Controller",
 	mixins:[
-		"Master.DockSupport"
+		"Master.controllers.DockSupport"
 	],
 	handlers: {
 		onGetAllCategories: "getAllCategories"
@@ -16,10 +16,10 @@ enyo.kind({
 	 * @method 
 	 */
 	index: function () {
-		if (!Master.view.frame.hasContentsIndock()) {
-			// fetch all categories from server and show it on the left dock.
-			this.getAllCategories(null, {viewAction: "showUICategories", viewKindName: "home.Index"});
-		}
+		// fetch all categories from server and show it on the left dock.
+		// force refresh categories shown on left dock.
+		this.getAllCategories(null, {viewAction: "showUICategories", viewKindName: "home.Index"});
+
 		// show default category detail information in main content.
 		// DOTO...
 	}

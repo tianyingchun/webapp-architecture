@@ -8,7 +8,6 @@
 		"node"
 	];
 	ns.ApiLanguage ={
-		languages: apilanguages,
-		storageKey:"apiLanguage"
+		languages: apilanguages
 	};
 })(window)

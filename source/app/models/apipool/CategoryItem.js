@@ -1,6 +1,9 @@
 enyo.kind({
 	name: "Master.models.apipool.CategoryItem",
 	kind: "Master.Model",
+	mixins:[
+		"Master.models.CategoryDTOSupport"
+	],
 	model: "Master.models.apipool.ApiItem",
 	// api configrations for specific category item.
 	apis: {
@@ -30,20 +33,20 @@ enyo.kind({
 	},
 	// for model, defined record schema.
 	attributes: {
+		// categoroy basic information.
 		categoryId: "",
 		categoryName: "",
 		categoryKey: "",
 		expanded: false,
 		childs: [],
-		categoryDetails: [],
+		// category detail information
+		categoryDetails: {},
 		// extended information.
 		categoryConfig: {}
 	},
 	// default values for record schema.
 	defaults: {
-		categoryDetails: [
-			{ detail1: "detail1"}
-		],
+		categoryDetails: {},
 		categoryConfig: {}
 	},
 	/**
@@ -91,13 +94,11 @@ enyo.kind({
 	 * Get category item info, we can fetch all detail information for current category item.
 	 */
 	categoryDetailDTO: function (data) {
-		this.zLog(data);
-		data = data || {};
-		var result = {
-			categoryId: data.id,
-			categoryName: data.name,
-			categoryDetails: data.details
-		};
+		// this.zLog(data);
+		data = data && enyo.isArray(data) ? data : [data];
+		var result = [];
+		this.categoryBasicInfoDTO(data, result);
+		this.zLog("converted data: ", result);
 		return result;
 	}
 });	
