@@ -77,22 +77,23 @@ enyo.kind({
 			this.addClass(this.getPlatformType());
 		};
 	}),
+	/*
 	rendered: enyo.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);
 			// set minimal height for page body.
-			//this.reflowPageLayout();
+			this.reflowPageLayout();
 		};
 	}),
 	// override reflow workflow.
-	// reflow: enyo.inherit(function (sup){
-	// 	return function () {
-	// 		sup.apply(this, arguments);
-	// 		// last resize event.
-	// 		// do our stuff here while resize window.
-	// 		enyo.job("reflowPageLayout", this.bindSafely("reflowPageLayout"),500);
-	// 	};
-	// }),
+	reflow: enyo.inherit(function (sup){
+		return function () {
+			sup.apply(this, arguments);
+			// last resize event.
+			// do our stuff here while resize window.
+			enyo.job("reflowPageLayout", this.bindSafely("reflowPageLayout"),500);
+		};
+	}),
 	// fresh the page body container layout
 	reflowPageLayout: function () {
 		var minimalHeight = this.calMinimalPageheight();
@@ -104,9 +105,7 @@ enyo.kind({
 		this.$.page.applyStyle("min-height", currHeight+"px");
 		this.$.coldock.applyStyle("min-height", currHeight +"px");
 	},
-	/**
-	 * For pc browser model we calculate the minimal height.
-	 */
+	//For pc browser model we calculate the minimal height. 
 	calMinimalPageheight: function () {
 		// window height.
 		var wheight = enyo.dom.getWindowHeight();
@@ -114,7 +113,7 @@ enyo.kind({
 		var footerHeight = this.$.footer.getBounds().height;		
 		var minimalHeight = wheight - headerHeight - footerHeight;
 		return minimalHeight;
-	},
+	},*/
 
 	/**
 	 * Set view config as child client control for main frame view.
