@@ -14,7 +14,7 @@ enyo.singleton({
 	// titles
 	title: {
 		APP_NAME: "ENYO 应用程序！",
-		LOGO_TEXT: "Developer Platform - 平安付",
+		LOGO_TEXT: "平安付开发者平台",
 		API_CATALOG:"API分类",
 		API_DESCRIPTION:"概述",
 		API_REQUEST: "请求",
@@ -39,7 +39,6 @@ enyo.singleton({
 		TABLE_API_PARAMS_VALUE: "取值",
 		TABLE_API_PARAMS_REQUIRED: "是否必需",
 		TABLE_API_PARAMS_DESC: "描述"
-		// 
 	},
 	// table legend labels
 	legend: {
@@ -47,7 +46,11 @@ enyo.singleton({
 	},
 	// form labels
 	label: {
-		REFINE_SEARCH: "搜索选项"
+		REFINE_SEARCH: "搜索选项",
+		// question & answer
+		TABLE_API_QUESTION:"问题: ",
+		TABLE_API_ANSWER:"回答: "
+			
 	},
 	// button labels
 	button: {

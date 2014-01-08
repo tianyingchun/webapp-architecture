@@ -99,12 +99,14 @@ enyo.kind({
 			for (var i = 0; i < questions.length; i++) {
 				var q = questions[i];
 				if (q.question && q.answer) { 
+					var q_txt = Master.locale.get("TABLE_API_QUESTION","label") + q.question;
+					var a_txt = Master.locale.get("TABLE_API_ANSWER","label") + q.answer;
 					components.push({
 						tag: "li",
 						classes:"qa-item",
 						components: [
-							{tag:"span", classes: "question", content: q.question},
-							{tag:"span", allowHtml:true, classes: "answer", content: q.answer}
+							{tag:"span", allowHtml:true, classes: "question", content: q_txt},
+							{tag:"span", allowHtml:true, classes: "answer", content: a_txt}
 						]
 					});
 				}

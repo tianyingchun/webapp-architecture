@@ -46,7 +46,9 @@ enyo.singleton({
 	},
 	// form labels
 	label: {
-		REFINE_SEARCH: "Refine your search"
+		REFINE_SEARCH: "Refine your search",
+		TABLE_API_QUESTION:"Q: ",
+		TABLE_API_ANSWER:"A: "
 	},
 	// button labels
 	button: {

@@ -34,9 +34,12 @@ enyo.kind({
 			{name: "main", classes: "page-inner", components: [
 				{name:"coldock", classes:"col-dock"},
 				{name:"colmain", classes:"col-main", components: [
-					{name:"colWrapper", classes:"col-wrapper"}
+					{name:"colWrapper", classes:"col-wrapper", components: [
+						{name:"apiDetails"}
+					]}
 				]}
-			]}
+			]},
+			// {name:"apiSdk", classes:"sdk", kind: "widgets.custom.TabControl"}
 		]},
 		{name:"footer", id:"footer", components: [
 			{classes:"footer-inner", components:[
@@ -97,11 +100,11 @@ enyo.kind({
 	// fresh the page body container layout
 	reflowPageLayout: function () {
 		var minimalHeight = this.calMinimalPageheight();
-		var pageBodyHeight = this.$.page.getBounds().height;
+		// var pageBodyHeight = this.$.page.getBounds().height;
 		var dockHeight = this.$.coldock.getBounds().height;
 		var dockContent = this.$.colmain.getBounds().height;
 		// this.zError(pageBodyHeight,dockHeight,dockContent);
-		var currHeight = Math.max(minimalHeight, pageBodyHeight, dockHeight, dockContent); 
+		var currHeight = Math.max(minimalHeight/*, pageBodyHeight*/, dockHeight, dockContent); 
 		this.$.page.applyStyle("min-height", currHeight+"px");
 		this.$.coldock.applyStyle("min-height", currHeight +"px");
 	},
@@ -122,7 +125,7 @@ enyo.kind({
 	 */
 	setMainContent: function (viewConfig) {
 		this.zLog("viewConfig: ", viewConfig);
-		var $main = this.$.colWrapper;
+		var $main = this.$.apiDetails;
 		$main.destroyClientControls();
 		$main.createClientComponents([viewConfig]);
 		$main.render();
