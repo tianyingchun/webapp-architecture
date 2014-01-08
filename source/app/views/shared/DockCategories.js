@@ -1,7 +1,10 @@
 enyo.kind({
 	name: "Master.views.shared.DockCategories",
 	kind: "Master.View",
-	content: Master.locale.get("LOAD_CATEGORIES", "message"),
+	components:[
+		{name:"message",kind:"widgets.base.Spinner",size:25, message: Master.locale.get("LOAD_CATEGORIES", "message")},
+		{name: "categoriesContainer", showing: false}
+	],
 	receiveMessage: enyo.inherit(function(sup) {
 		return function (viewModel, viewData) {
 			sup.apply(this, arguments);
@@ -24,7 +27,10 @@ enyo.kind({
 		var records = viewModel.records;
 		var categoryKey = extraData && extraData.apiKey;
 
-		this.createClientComponents([{ kind: "widgets.lists.TreeNodes",selectedKey:categoryKey, source: records}]);
-		this.render();
+		this.$.categoriesContainer.createClientComponents([{ kind: "widgets.lists.TreeNodes",selectedKey:categoryKey, source: records}]);
+		this.$.categoriesContainer.render();
+		// show categories, hide message.
+		this.$.message.hide();
+		this.$.categoriesContainer.show();
 	}
 });

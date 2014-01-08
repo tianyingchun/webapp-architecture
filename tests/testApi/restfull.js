@@ -63,27 +63,32 @@ router.map(function() {
             }
         };
         result.details = {
+            // api functional descriptions.
             description: "使用原生的REST API，可以使您更加自由地开发出灵活的功能.<br /><ul>"
                         +"<li><span>name01</span></li>"
                         +"<li><span>name02</span></li>"
                         +"<li><span>name03</span></li>"
                         +"</ul>",
+            // request body and parameters and headers.
             request: {
                 body: "PUT /BucketName?sign=MBO:aCLCZtoFQg8I:WQMFNZEhN2k8xxlgikuPfCJMuE8%3D <br />HTTP/1.1 Host: bcs.duapp.com <br />Content-Length:0 ",
                 params: [
-                    {name:"", value:"", isRequired: true, description: ""},
-                    {name:"", value:"", isRequired: true, description: ""},
-                    {name:"", value:"", isRequired: true, description: ""}
+                    {name:"x-bs-acl1", value:"[public-read|public-write|public-read-write", isRequired: true, description: "设置bucket的权限，复杂的权限控制可以参考acl设置"},
+                    {name:"name2", value:"value2", isRequired: true, description: "desc2"},
+                    {name:"name3", value:"value3", isRequired: true, description: "desc3"}
                 ],
-                headers:'<table class="newpcs_table"><tbody><tr>'
-                        +'<th scope="col" width="60">字段</th><th scope="col">取值</th><th scope="col">是否必需</th><th scope="col">描述</th></tr><tr>'
-                        +'<td>x-bs-acl</td><td>[public-read|public-write|public-read-write|public-control|private]<p>default: private</p>'
-                        +'</td><td>否</td><td>设置bucket的权限，复杂的权限控制可以参考acl设置</td></tr></tbody></table>'
+                // headers.
+                headers:[
+                    {name:"x-bs-acl1", value:"[public-read|public-write|public-read-write", isRequired: true, description: "设置bucket的权限，复杂的权限控制可以参考acl设置"},
+                    {name:"name2", value:"value2", isRequired: true, description: "desc2"}
+                ]
             },
+            // response body and headers.
             response: {
                 body: '{"bucket_name":"test","status":"0", "cdatetime":"1371765410", "used_capacity":"21148", "total_capacity":"0", "region":"beijing"}',
                 Headers:"HTTP/1.1 200 OK <br />Date: Sat, 01 Jan 2011 00:00:00 GMT </br>Server: BaiduBS"
             },
+            // rest api request, response sample
             examples: {
                 postCommand: 'curl -v -X PUT "http://bcs.duapp.com/mybucket?sign=MBO:aCLCZtoFQg8I:WQMFNZEhN2k8xxlgikuPfCJMuE8%3D"',
                 request:"PUT /mybucket?sign=MBO:aCLCZtoFQg8I:WQMFNZEhN2k8xxlgikuPfCJMuE8%3D HTTP/1.1"
@@ -96,7 +101,20 @@ router.map(function() {
                             +"Content-Length: 0"
                             +"Date: Wed, 20 Apr 2011 07:29:17 GMT"
                             +"Server: BaiduBS"
-            }
+            },
+            // sdk code samples
+            sdk: {
+                java: "",
+                javascript: "",
+                php: ""
+            },
+            // question and answers
+            questions: [
+                {question: "为什么这个接口老抛出500内部错误！", answer: "请注意在发起调用请求的时候需要带上Header,</br > 同时需要确保请求METHOD 为POST"},
+                {question: "", answer: ""},
+                {question: "", answer: ""},
+                {question: "", answer: ""}
+            ]
         };
         setTimeout(function () {
             res.send(200, { 'Content-Type': 'application/json' }, result);

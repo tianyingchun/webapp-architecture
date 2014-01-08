@@ -77,7 +77,7 @@ enyo.kind({
 			this.addClass(this.getPlatformType());
 		};
 	}),
-	/*
+	
 	rendered: enyo.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);
@@ -113,7 +113,7 @@ enyo.kind({
 		var footerHeight = this.$.footer.getBounds().height;		
 		var minimalHeight = wheight - headerHeight - footerHeight;
 		return minimalHeight;
-	},*/
+	},
 
 	/**
 	 * Set view config as child client control for main frame view.

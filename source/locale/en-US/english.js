@@ -20,6 +20,7 @@ enyo.singleton({
 		API_REQUEST: "Request",
 		API_RESPONSE: "Response",
 		API_EXAMPLES: "Example",
+		API_QUESTIONS: "Questions & Answers",
 		API_REQUEST_EXAMPLE: "Request Example",
 		API_RESPONSE_EXAMPLE: "Response Example",
 		API_REQUEST_HEADERS: "Request Headers",
@@ -32,7 +33,12 @@ enyo.singleton({
 	},
 	//arbitrary page content
 	content: {
-
+		// for api interface parameters
+		TABLE_API_PARAMS_NAME: "Field",
+		TABLE_API_PARAMS_VALUE: "Value",
+		TABLE_API_PARAMS_REQUIRED: "Is Required",
+		TABLE_API_PARAMS_DESC: "Description"
+		// 
 	},
 	// table legend labels
 	legend: {

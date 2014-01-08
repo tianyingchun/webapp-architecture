@@ -20,6 +20,7 @@ enyo.singleton({
 		API_REQUEST: "请求",
 		API_RESPONSE: "响应",
 		API_EXAMPLES: "示例",
+		API_QUESTIONS: "问题解答",
 		API_REQUEST_EXAMPLE: "请求示例",
 		API_RESPONSE_EXAMPLE: "响应示例",
 		API_REQUEST_HEADERS: "请求头",
@@ -33,7 +34,12 @@ enyo.singleton({
 	},
 	//arbitrary page content
 	content: {
-
+		// for api interface parameters
+		TABLE_API_PARAMS_NAME: "字段",
+		TABLE_API_PARAMS_VALUE: "取值",
+		TABLE_API_PARAMS_REQUIRED: "是否必需",
+		TABLE_API_PARAMS_DESC: "描述"
+		// 
 	},
 	// table legend labels
 	legend: {

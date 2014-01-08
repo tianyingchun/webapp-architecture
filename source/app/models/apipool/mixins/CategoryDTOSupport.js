@@ -50,7 +50,7 @@
 				result.request =  { 
 					body: _request && _request.body || "",
 					params: _request && _request.params || [],
-					headers: _request && _request.headers || ""
+					headers: _request && _request.headers || []
 				};
 				// response.
 				var _response = details.response;
@@ -65,6 +65,12 @@
 					request: _examples && _examples.request,
 					response: _examples && _examples.response
 				};
+				// sdk
+				var _sdk = details.sdk;
+				result.sdk = _sdk || {};
+				// question answers
+				var _questions = details.questions;
+				result.questions = _questions || [];
 			}
 			return result;
  		}

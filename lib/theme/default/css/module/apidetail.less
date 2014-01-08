@@ -8,23 +8,27 @@
 	.title {
 		background-color: #fafafa;
 		border: 1px solid #ccc;
+		border-left-width: 3px;
 		padding:2px 10px;
 		color: #333;
-		margin-bottom: 10px;
+		margin: 10px 0;
 		font-size: 1.2em;
 	}
 	.child-title{
-		padding-left: 20px;
+		padding: 10px 0;
 	}
 	.description{
 		padding: 10px;
-		li:before{
-			content: "• ";
-    		color: #999CB1; /* or whatever color you prefer */
+		ul {
+			margin: 5px 0 5px 20px;
+		}
+		li{
+			list-style-type: square;
+			line-height: 1.5em;
+    		color: #666; /* or whatever color you prefer */
 		}
 	}
 	.body{
-		margin:10px 0;
 		padding: 1em;
 		border: 1px dashed #2f6fab;
 		color: #666652;
@@ -43,7 +47,24 @@
 		.body;
 	}
 	.headers{
-		padding: 10px 0;
+		padding: 0;
+	}
+	.question-answers{
+		margin-left: 20px;
+		.qa-item {
+			margin: 10px 0;
+			list-style-type: decimal;
+		}
+		.question {
+			line-height: 1.5em;
+			height:25px;
+			color: #000;
+			display: block;
+		}
+		.anaswer {
+			.question;
+			color: #666;
+		}
 	}
 	table {
 		margin: 10px 0;
