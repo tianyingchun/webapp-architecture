@@ -8,7 +8,9 @@ enyo.kind({
 	events:{
 		"onGetAllCategories": ""
 	},
-	content: Master.locale.get("LOAD_CATEGORY_DETAIL", "message"),
+	components:[
+		{name:"message",kind:"widgets.base.Spinner", message: Master.locale.get("LOAD_CATEGORY_DETAIL", "message")}
+	],
 	// only for testing purpose for view dispatch event to corresponding controller and then bubble it to Master.view.frame
 	rendered: enyo.inherit(function (sup) {
 		return function () {

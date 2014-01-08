@@ -21,24 +21,21 @@ enyo.kind({
 	index: function () {
 		// fetch all categories from server and show it on the left dock.
 		// force refresh categories shown on left dock.
-		this.getAllCategories();
-
-		// show default category detail information in main content.
-		
-		// fetch category details information here.
-		this.fetchCategoryDetailInfo();
+		this.getAllCategories({
+			callback: enyo.bindSafely(this, "fetchCategoryDetailInfo")
+		});
 	},
-	fetchCategoryDetailInfo: function (apiKey) {
-		// binding view,
-		this.bindingViewToContent(this._detailViewKindName, null, null);
 
-		var apiDetail = new Master.models.apipool.CategoryItem();
-		apiDetail.getCategoryDetail(apiKey, enyo.bindSafely(this, "showCategoryDetailInfo", {action: "showCategoryDetailPage"}));
+	fetchCategoryDetailInfo: function (viewModel) {
+ 		var apiDetail = viewModel.records[0] || null;
+ 		if (apiDetail) {
+ 			// now directly redirect to first api detail page.
+ 			this.zLog("apiDetail: ", apiDetail);
+ 			var apiKey = apiDetail.categoryKey;
+ 			// now just redirect to specifc api item.
+ 			this.locationApiItem(apiKey);
+ 		}
 		// binding view.
-	},
-	showCategoryDetailInfo: function (viewData, viewModel) {
-		// this.zLog("categoryDetail: ", viewData, viewModel);
-		this.notifyView(this._detailViewKindName, viewModel, viewData);
 	},
 	getAllCategoriesTest: function (inSender, inEvent) {
 		this.zLog("get all getAllCategories...", inEvent);

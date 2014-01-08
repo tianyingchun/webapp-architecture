@@ -15,7 +15,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 		// view data.
 		var viewData = {
 			action: "showUICategories",
-			data: extraData
+			data: extraData || {}
 		}
 		apiCategories.getApiCategories(enyo.bindSafely(this, "showApiCategories", viewData));
 		// binding view to left dock
@@ -24,6 +24,12 @@ enyo.setPath("Master.controllers.DockSupport", {
 	// the callback function of getAllCategories().
 	showApiCategories: function (viewData, viewModel) {
 		this.zLog("response: viewModel: ", viewModel,"viewData:", viewData);
+		// check the callback fn
+		var extraData = viewData && viewData.data;
+		if (extraData.callback) {
+			extraData.callback(viewModel);
+			delete extraData.callback;
+		}
 		// show categories view kind.
 		var dockViewKind = this._dockKindViewName; //Master.views.shared.DockCategories
 		// notify view to update ui interface.

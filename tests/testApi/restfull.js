@@ -111,9 +111,7 @@ router.map(function() {
             // question and answers
             questions: [
                 {question: "为什么这个接口老抛出500内部错误！", answer: "请注意在发起调用请求的时候需要带上Header,</br > 同时需要确保请求METHOD 为POST"},
-                {question: "", answer: ""},
-                {question: "", answer: ""},
-                {question: "", answer: ""}
+                {question: "为什么这个接口老抛出500内部错误！", answer: "请注意在发起调用请求的时候需要带上Header, 同时需要确保请求METHOD 为POST"}
             ]
         };
         setTimeout(function () {
