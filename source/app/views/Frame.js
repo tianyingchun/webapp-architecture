@@ -39,7 +39,7 @@ enyo.kind({
 					]}
 				]}
 			]},
-			// {name:"apiSdk", classes:"sdk", kind: "widgets.custom.TabControl"}
+			{name:"apiSdk", classes:"sdk", kind: "widgets.custom.TabControl"}
 		]},
 		{name:"footer", id:"footer", components: [
 			{classes:"footer-inner", components:[
@@ -106,7 +106,7 @@ enyo.kind({
 		// this.zError(pageBodyHeight,dockHeight,dockContent);
 		var currHeight = Math.max(minimalHeight/*, pageBodyHeight*/, dockHeight, dockContent); 
 		this.$.page.applyStyle("min-height", currHeight+"px");
-		this.$.coldock.applyStyle("min-height", currHeight +"px");
+	    this.$.coldock.applyStyle("min-height", currHeight +"px");
 	},
 	//For pc browser model we calculate the minimal height. 
 	calMinimalPageheight: function () {
@@ -135,6 +135,11 @@ enyo.kind({
 		$dock.destroyClientControls();
 		$dock.createClientComponents([viewConfig]);
 		$dock.render();
+	},
+	// set sdk content for header, tab contents.
+	setSDKContent: function (tabItemsSource) {
+		var $sdk = this.$.apiSdk;
+		$sdk.set("itemSource", tabItemsSource);
 	},
 	// go to application home page.
 	goHome: function () {

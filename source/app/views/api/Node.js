@@ -55,8 +55,8 @@ enyo.kind({
 		}
 	}),
 	// show category detail information.
-	showCategoryDetailPage: function (viewModel, viewData) {
-		this.zLog("viewModel", viewModel);	
+	showCategoryDetailPage: function (viewModel, extraData) {
+		this.zLog("viewModel: ", viewModel, "extraData: " ,extraData);	
 		this.$.message.hide();
 		var details = viewModel.get("details") || {};
 		// description.
@@ -92,7 +92,39 @@ enyo.kind({
 		this.showQuestionAnswers(questions);
 		// show detail information.
 		this.$.detailcontainer.show();
+
+		//sdk
+		var sdk = details.sdk || {};
+		this.showSDKPanel(sdk, extraData);
 	},
+	showSDKPanel: function (sdk, extraData) {
+		var tabItems = [];
+		for (var item in sdk) {
+			var languageName = item.toString();
+			var newItem = {
+				name: languageName,
+				text: languageName,
+				link: this.getSDKLanguageLink(languageName),
+				content: sdk[languageName]
+			};
+			if (extraData.language == languageName) {
+				newItem.selected = true;
+			}
+			tabItems.push(newItem);
+		}
+		Master.view.frame.setSDKContent(tabItems);
+ 	},
+ 	getSDKLanguageLink:function (language) {
+ 		var path = location.hash;
+ 		var regex = /node\/([a-zA-Z0-9-]*)\/([a-zA-Z([a-zA-Z0-9-]*)/;
+ 		var matches = regex.exec(path);
+ 		matches = matches.slice(1);
+ 		// delete language.
+ 		matches.pop();
+ 		matches.push(language || Master.config.defaultAPILanguage);
+ 		matches.unshift("node");
+ 		return "#" + matches.join("/");
+ 	},
 	showQuestionAnswers: function (questions) {
 		if(questions.length) {
 			var components = [];

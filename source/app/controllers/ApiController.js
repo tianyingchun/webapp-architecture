@@ -33,14 +33,22 @@ enyo.kind({
 		this.showDockCategories({apiKey: apiKey});
 
 		// fetch category details information here.
-		this.fetchCategoryDetailInfo(apiKey);
+		this.fetchCategoryDetailInfo(apiKey, language);
 	},
-	fetchCategoryDetailInfo: function (apiKey) {
+	fetchCategoryDetailInfo: function (apiKey, language) {
 		// binding view,
 		this.bindingViewToContent(this._detailViewKindName, null, null);
 
 		var apiDetail = new Master.models.apipool.CategoryItem();
-		apiDetail.getCategoryDetail(apiKey, enyo.bindSafely(this, "showCategoryDetailInfo", {action: "showCategoryDetailPage"}));
+		// view data.
+		var viewData = {
+			action: "showCategoryDetailPage", 
+			data: {
+				apiKey: apiKey,
+				language: language
+			}
+		};
+		apiDetail.getCategoryDetail(apiKey, enyo.bindSafely(this, "showCategoryDetailInfo", viewData));
 		// binding view.
 	},
 	showCategoryDetailInfo: function (viewData, viewModel) {
