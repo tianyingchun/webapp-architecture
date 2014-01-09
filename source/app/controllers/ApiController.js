@@ -28,7 +28,8 @@ enyo.kind({
 	node: function (apiKey, language) {
 		this.zLog("apiKey: ", apiKey, " ,language:", language);
 		language = language || this.defaultLanguage;
-
+		//save current user selected language.
+		this.saveUserApiLanguage(language);
 		// show left dock categories if not.
 		this.showDockCategories({apiKey: apiKey});
 
