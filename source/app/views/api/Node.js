@@ -104,7 +104,7 @@ enyo.kind({
 			var newItem = {
 				name: languageName,
 				text: languageName,
-				link: this.getSDKLanguageLink(languageName),
+				link: this.getSDKLanguageLink(extraData.apiKey, languageName),
 				content: sdk[languageName]
 			};
 			if (extraData.language == languageName) {
@@ -114,16 +114,9 @@ enyo.kind({
 		}
 		Master.view.frame.setSDKContent(tabItems);
  	},
- 	getSDKLanguageLink:function (language) {
- 		var path = location.hash;
- 		var regex = /node\/([a-zA-Z0-9-]*)\/([a-zA-Z([a-zA-Z0-9-]*)/;
- 		var matches = regex.exec(path);
- 		matches = matches.slice(1);
- 		// delete language.
- 		matches.pop();
- 		matches.push(language || Master.config.defaultAPILanguage);
- 		matches.unshift("node");
- 		return "#" + matches.join("/");
+ 	getSDKLanguageLink:function (key, language) {
+ 		var hash = ["#node",key, language];
+ 		return hash.join("/");
  	},
 	showQuestionAnswers: function (questions) {
 		if(questions.length) {
