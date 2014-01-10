@@ -68,7 +68,8 @@ enyo.kind({
 		]}
 	],
 	handlers: {
-		onGetAllCategories: "getAllCategoriesTest"
+		onGetAllCategories: "getAllCategoriesTest",
+		onTransitionStep: "sdkTransactionStep"
 	},
 	getAllCategoriesTest: function (inSender, inEvent) {
 		this.zLog("get all categories testing...", inEvent);
@@ -154,5 +155,11 @@ enyo.kind({
 		var $dock = this.$.coldock;
 		var $dockControls = $dock.getControls();
 		return $dockControls.length;
+	},
+	sdkTransactionStep: function (inSender, inEvent) {
+		var fraction = inEvent.fraction;
+		var slideshown = inEvent.slideshown;
+
+		this.zLog("sdk animation params: ", fraction, slideshown);
 	}
 })
