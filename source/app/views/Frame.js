@@ -39,7 +39,7 @@ enyo.kind({
 					]}
 				]}
 			]},
-			{name:"apiSdk", classes:"sdk", kind: "widgets.custom.TabControl"}
+			{name:"apiSdk", classes:"sdk",offsetDistance:400, marginLeft:"81%", kind: "widgets.custom.TabControl"}
 		]},
 		{name:"footer", id:"footer", components: [
 			{classes:"footer-inner", components:[
@@ -160,6 +160,7 @@ enyo.kind({
 		var fraction = inEvent.fraction;
 		var slideshown = inEvent.slideshown;
 
-		this.zLog("sdk animation params: ", fraction, slideshown);
+		// this.zLog("sdk animation params: ", fraction, slideshown);
+		return true;
 	}
 })
