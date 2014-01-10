@@ -37,7 +37,7 @@ enyo.singleton({
 		// for api interface parameters
 		TABLE_API_PARAMS_NAME: "字段",
 		TABLE_API_PARAMS_VALUE: "取值",
-		TABLE_API_PARAMS_REQUIRED: "是否必需",
+		TABLE_API_PARAMS_REQUIRED: "必填",
 		TABLE_API_PARAMS_DESC: "描述"
 	},
 	// table legend labels

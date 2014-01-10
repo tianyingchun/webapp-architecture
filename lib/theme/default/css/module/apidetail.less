@@ -85,8 +85,25 @@
 		}
 	}
 }
+
 // sdk styles here.
 .tab-control.sdk {
 	margin-left: 81%;
 	width: 300px;
+}
+@minSize: 800px;
+@maxSize: 1440px;
+@media (min-width: @minSize){
+	.tab-control.sdk {
+    	margin-left: 81%;
+		width: 250px;
+	}
+     /* New Rules*/
+}
+@media (min-width: @maxSize) {
+	.tab-control.sdk {
+    	margin-left: 81%;
+		width: 270px;
+	}
+     /* New Rules*/
 }
