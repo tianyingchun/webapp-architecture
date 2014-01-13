@@ -3,6 +3,8 @@ enyo.depends(
 	"$lib/onyx",
 	// universal mobile app engine infrustrures
 	"$lib/engine",
+	// for text editor libaray.
+	"$lib/markitup",
 	// put locale on the front cause of the widget maybe contains locale
 	"locale/",
 	// universal widgets for app.

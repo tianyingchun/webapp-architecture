@@ -13,8 +13,15 @@
 		{ path: "home/index", default:true, controller: "HomeController", action: "index"},
 		// api show router config.
 		{ path: "node/:api/:language", controller: "ApiController", action: "node"},
-		{ path: "node/:api", controller: "ApiController", action: "index"}
+		{ path: "node/:api", controller: "ApiController", action: "index"},
 
+		// { path: "profile/login", controller: "ProfileController", "login"},
+		
+		{ path: "profile/api/list", controller: "ProfileController", action:"apiList"},
+		{ path: "profile/api/add", controller: "ProfileController", action:"addNewApi"},
+		{ path: "profile/api/edit/:id", controller: "ProfileController", action:"editApi"},
+		{ path: "profile/api/remove/:id", controller: "ProfileController", action:"removeApi"}
+		
 		/**
 		 * dynamic router: controller action -> show().
 		 * 1.match #product/1/  ->show (page:1, id:"");

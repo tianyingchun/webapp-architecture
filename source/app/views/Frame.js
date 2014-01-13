@@ -39,7 +39,7 @@ enyo.kind({
 					]}
 				]}
 			]},
-			{name:"apiSdk", classes:"sdk",offsetDistance:400, marginLeft:"81%", kind: "widgets.custom.TabControl"}
+			{name:"apiSdk", classes:"sdk",offsetDistance:500, marginLeft:"81%", kind: "widgets.custom.TabControl"}
 		]},
 		{name:"footer", id:"footer", components: [
 			{classes:"footer-inner", components:[
@@ -141,6 +141,13 @@ enyo.kind({
 	setSDKContent: function (tabItemsSource) {
 		var $sdk = this.$.apiSdk;
 		$sdk.set("itemSource", tabItemsSource);
+		$sdk.show();
+	},
+	hideSDKPanel: function () {
+		this.$.apiSdk.hide();
+	},	
+	showSDKPanel: function () {
+		this.$.apiSdk.show();
 	},
 	// go to application home page.
 	goHome: function () {
@@ -148,13 +155,24 @@ enyo.kind({
 		return true;
 	},
 	/**
-	 * Check if current dock cotnains any valid contents.
+	 * Check if current dock cotnains any valid categories contents.
 	 * @return {Boolean} [description]
 	 */
-	hasContentsIndock: function () {
+	hasCategoryContentsIndock: function () {
 		var $dock = this.$.coldock;
 		var $dockControls = $dock.getControls();
-		return $dockControls.length;
+		if ($dockControls.length && $dockControls[0].kindName == "Master.views.shared.DockCategories") {
+			return true;
+		}
+		return false;
+	},
+	hasProfileContentInDock: function () {
+		var $dock = this.$.coldock;
+		var $dockControls = $dock.getControls();
+		if ($dockControls.length && $dockControls[0].kindName == "Master.views.shared.DockProfiles") {
+			return true;
+		}
+		return false;	
 	},
 	sdkTransactionStep: function (inSender, inEvent) {
 		var fraction = inEvent.fraction;

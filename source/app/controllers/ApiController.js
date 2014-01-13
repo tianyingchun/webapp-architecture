@@ -58,7 +58,7 @@ enyo.kind({
 	},
 	//@* public show categories on left dock
 	showDockCategories: function (extraData) {
-		if (!Master.view.frame.hasContentsIndock()) {
+		if (!Master.view.frame.hasCategoryContentsIndock()) {
 			// maybe async fetch data here.
 			this.getAllCategories(extraData);
 		}

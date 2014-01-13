@@ -1,0 +1,5 @@
+{
+	"packagejs": "./package.js",
+	"assets": ["images","sets/html/images","skins/markitup/images"],
+	"libs": []
+}
