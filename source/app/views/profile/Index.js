@@ -1,5 +1,5 @@
 enyo.kind({
-	name: "Master.views.apimanager.Index",
+	name: "Master.views.profile.Index",
 	kind: "Master.View",
 	receiveMessage: enyo.inherit(function(sup) {
 		return function (viewModel, viewData) {

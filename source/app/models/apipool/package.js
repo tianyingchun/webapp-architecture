@@ -2,5 +2,6 @@ enyo.depends(
 	"mixins/",
 	"Categories.js",
 	"CategoryItem.js",
-	"ApiItem.js"
+	"ApiItem.js",
+	"ApiList.js"
 );

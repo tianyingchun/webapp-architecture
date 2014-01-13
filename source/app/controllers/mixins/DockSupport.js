@@ -40,8 +40,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 
 	// for dock profiles left menu
 	showProfileMenus: function (extraData) {
-		// hide tabcontrol.
-		Master.view.frame.hideSDKPanel();
+		
 		var menuList = new Master.models.menu.MenuList();
 		// first binding view to dock.
 		this.bindingViewToDock(this._dockProfileViewKind, null,null);

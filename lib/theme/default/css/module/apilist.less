@@ -1,0 +1,42 @@
+@import "./../variables.less";
+@import "./../mixins.less"; 
+.api-list {
+	ul {
+		font-size: @font-normal;
+		padding: 0;
+		clear: both;
+		overflow: hidden;
+		border: 1px solid #e8e8e8;
+		border-top: 0;
+		padding: 10px 5px;
+		background: #fff;
+		border-right: 0;
+		border-left: 0;
+		position: relative;
+		cursor: pointer;
+		&:hover{
+			background-color:#f1f1f1;
+		}
+		li {
+			padding: 0;
+			float: left;
+			margin: 0 10px;
+		}
+		.add-new{
+			position: absolute;
+			right: 100px;
+			&:hover {
+				color: #06c;
+				text-decoration: underline;
+			}
+		}
+		.remove{
+			.add-new;
+			right: 10px;
+		}
+		.edit{
+			.add-new;
+			right:50px;
+		}
+	}
+}

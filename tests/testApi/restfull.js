@@ -148,17 +148,15 @@ router.map(function() {
     //
     // SHOW: GET to /api/apilist/:id list all api list
     //
-    this.get("/api/apilist").bind(function(req, res, id) {
+    this.get("/api/list").bind(function(req, res, id) {
         var result = [
-            { apiId: 1, apiName: "api name 1" ,apiDesc: "api description"},
-            { apiId: 2, apiName: "api name 2" ,apiDesc: "api description"},
-            { apiId: 3, apiName: "api name 3" ,apiDesc: "api description"},
-            { apiId: 4, apiName: "api name 4" ,apiDesc: "api description"},
-            { apiId: 5, apiName: "api name 5" ,apiDesc: "api description"},
-            { apiId: 6, apiName: "api name 6" ,apiDesc: "api description"},
-            { apiId: 7, apiName: "api name 7" ,apiDesc: "api description"},
-            { apiId: 8, apiName: "api name 8" ,apiDesc: "api description"}
-
+            {id: 1, key: "bravo-a", name: "bravo-a" },
+            {id: 2, key: "bravo-a", name: "bravo-a" },
+            {id: 3, key: "bravo-b", name: "bravo-b" },
+            {id: 4, key: "bravo-c", name: "bravo-c" },
+            {id: 5, key: "bravo-d", name: "bravo-d" },
+            {id: 6, key: "bravo-e", name: "bravo-e" },
+            {id: 7, key: "bravo-f", name: "bravo-f" }
         ];
         res.send(200, {}, result);
     });

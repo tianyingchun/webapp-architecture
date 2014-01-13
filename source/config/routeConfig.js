@@ -16,7 +16,7 @@
 		{ path: "node/:api", controller: "ApiController", action: "index"},
 
 		// { path: "profile/login", controller: "ProfileController", "login"},
-		
+		{ path: "profile/api/list/:page", controller: "ProfileController", action:"apiList"},
 		{ path: "profile/api/list", controller: "ProfileController", action:"apiList"},
 		{ path: "profile/api/add", controller: "ProfileController", action:"addNewApi"},
 		{ path: "profile/api/edit/:id", controller: "ProfileController", action:"editApi"},

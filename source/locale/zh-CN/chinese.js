@@ -50,7 +50,10 @@ enyo.singleton({
 		"REFINE_SEARCH": "搜索选项",
 		// question & answer
 		"TABLE_API_QUESTION":"问题: ",
-		"TABLE_API_ANSWER":"回答: "
+		"TABLE_API_ANSWER":"回答: ",
+		"ACTION_ADD": "添加",
+		"ACTION_EDIT": "编辑",
+		"ACTION_REMOVE": "删除"
 			
 	},
 	// button labels
@@ -77,6 +80,7 @@ enyo.singleton({
 		"HTTP_405": "方法不被允许!",
 		"LOAD_CATEGORIES": "加载API分类列表...",
 		"LOAD_CATEGORY_DETAIL": "加载API详情...",
-		"LOAD_PORFILE_MENUS": "加载Profile菜单列表..."
+		"LOAD_PORFILE_MENUS": "加载Profile菜单列表...",
+		"LOAD_API_LIST": "加载API 列表信息..."
 	}
 });

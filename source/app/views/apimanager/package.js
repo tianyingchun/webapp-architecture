@@ -1,3 +1,0 @@
-enyo.depends(
-	"Index.js"
-);

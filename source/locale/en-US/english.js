@@ -49,7 +49,10 @@ enyo.singleton({
 	label: {
 		"REFINE_SEARCH": "Refine your search",
 		"TABLE_API_QUESTION":"Q: ",
-		"TABLE_API_ANSWER":"A: "
+		"TABLE_API_ANSWER":"A: ",
+		"ACTION_ADD": "Add New",
+		"ACTION_EDIT": "Edit",
+		"ACTION_REMOVE": "Remove"
 	},
 	// button labels
 	button: {
@@ -75,6 +78,7 @@ enyo.singleton({
 		"HTTP_405": "405 Method Not Allowed!",
 		"LOAD_CATEGORIES": "Loading categroies....",
 		"LOAD_CATEGORY_DETAIL": "Loading api details...",
-		"LOAD_PORFILE_MENUS": "loading profile menus..."
+		"LOAD_PORFILE_MENUS": "Loading profile menus...",
+		"LOAD_API_LIST": "Loading api list..."
 	}
 });

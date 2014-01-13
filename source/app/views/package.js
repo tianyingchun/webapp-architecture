@@ -4,6 +4,6 @@ enyo.depends(
 	"home/",
 	// "product/",
 	"api/",
-	"apimanager/",
+	"profile/",
 	"Frame.js"
 );
