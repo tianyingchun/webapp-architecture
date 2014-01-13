@@ -4,7 +4,10 @@ enyo.kind({
 	mixins:[
 		"Master.controllers.DockSupport"
 	],
+	// api list view
 	_contentProfileApiListKindView: "profile.ApiList",
+	// api add new view
+	_contentProfileApiAddNewKindView: "profile.ApiNew",
 	/**
 	 * Action method for all paged api list.
 	 * @param  {number} page the page index
@@ -32,6 +35,15 @@ enyo.kind({
 		this.zLog("add new");
 		// show profile.
 		this.showProfileDockMenus({menuKey: "list"});
+		this.bindingViewToContent(this._contentProfileApiAddNewKindView, null, null);
+		var viewModel = {
+			restInfo: {
+				retCode: 1
+			}
+		};
+		this.notifyView(this._contentProfileApiAddNewKindView, viewModel, {
+			action:"showAddNewApiUI"
+		});
 	},
 	editApi:function(apiId) {
 		this.zLog("apiId: ", apiId);
@@ -49,7 +61,7 @@ enyo.kind({
 	showProfileDockMenus: function (data) {
 		// hide tabcontrol.
 		Master.view.frame.hideSDKPanel();
-		if (Master.view.frame.hasProfileContentInDock()) {
+		if (!Master.view.frame.hasProfileContentInDock()) {
 			this.showProfileMenus(data);
 		}
 	}
