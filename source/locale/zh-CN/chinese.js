@@ -53,8 +53,9 @@ enyo.singleton({
 		"TABLE_API_ANSWER":"回答: ",
 		"ACTION_ADD": "添加",
 		"ACTION_EDIT": "编辑",
-		"ACTION_REMOVE": "删除"
-			
+		"ACTION_REMOVE": "删除",
+		"ACTION_SUBMIT": "提交",
+		"ACTION_RESET" : "重置"
 	},
 	// button labels
 	button: {

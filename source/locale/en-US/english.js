@@ -52,7 +52,9 @@ enyo.singleton({
 		"TABLE_API_ANSWER":"A: ",
 		"ACTION_ADD": "Add New",
 		"ACTION_EDIT": "Edit",
-		"ACTION_REMOVE": "Remove"
+		"ACTION_REMOVE": "Remove",
+		"ACTION_SUBMIT":"Submit",
+		"ACTION_RESET" : "Reset"
 	},
 	// button labels
 	button: {

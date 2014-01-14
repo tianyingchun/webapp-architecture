@@ -4,9 +4,15 @@ enyo.kind({
 	classes: "api-new",
 	components: [
 		{name: "container", classes:"api-container", components: [
-			{name:"textEditor", kind: "Master.TextEditor"}
+			{name:"form", kind:"widgets.forms.FormDecorator", components: [
+				{name:"apiName", kind:"widgets.forms.InputDecorator", validation: {required:"message"}}
+			]},
+			{name:"textEditor", kind: "Master.TextEditor"},
 		]}
 	],
+	handlers:{
+		ontap: "formActionButtonTap"
+	},
 	receiveMessage: enyo.inherit(function(sup) {
 		return function (viewModel, viewData) {
 			sup.apply(this, arguments);
@@ -21,8 +27,41 @@ enyo.kind({
 			}
 		}
 	}),
+	create: enyo.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			// add form customized button.
+			this.$.form.set("toolButtonConfig", {
+				first: {
+					content: Master.locale.get("ACTION_SUBMIT", "label"),
+					show: true
+				}
+			});
+		};
+	}),
 	showAddNewApiUI: function () {
 		this.$.textEditor.markItUp();
-		// this.$.textEditor.setValue("add new api content .....");
+	},
+	formActionButtonTap: function (inSender, inEvent) {
+		var originator = inEvent.originator;
+		switch(originator.action) {
+			case "first":
+				this.addNewApi(inSender, inEvent);
+				break;
+			case "second":
+				this.resetNewApi(inSender, inEvent);
+				break;
+		}
+	},
+	// button handler for creating new api
+	addNewApi: function (inSender, inEvent) {
+		var editorText = this.$.textEditor.getEditorContent();
+		this.zLog("add new text:", editorText);
+		this.$.form.submit();
+		return true;
+	},
+	resetNewApi: function (inSender, inEvent) {
+		this.zLog("reset text:", inEvent);
+		return true;
 	}
 });
