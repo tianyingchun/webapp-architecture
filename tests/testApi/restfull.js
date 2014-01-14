@@ -104,9 +104,9 @@ router.map(function() {
             },
             // sdk code samples
             sdk: {
-                java: "java",
-                javascript: "javascript",
-                php: "php"
+                "java": "private String username;",
+                "javascript": "var result = { name: 'useranme', passwrod:'password'};",
+                "c#": "using System;public class Program {}"
             },
             // question and answers
             questions: [
