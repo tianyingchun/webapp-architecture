@@ -40,6 +40,10 @@ enyo.kind({
 			{name: "questionAnswers", tag:"ul", classes:"question-answers"}
 		]}	
 	],
+	// language header title display name
+	_languageHeaderItemMapping: {
+		"cs":"c#"
+	},
 	receiveMessage: enyo.inherit(function(sup) {
 		return function (viewModel, viewData) {
 			sup.apply(this, arguments);
@@ -103,7 +107,7 @@ enyo.kind({
 			var languageName = item.toString();
 			var newItem = {
 				name: languageName,
-				text: languageName,
+				text: this._languageHeaderItemMapping[languageName] || languageName,
 				link: this.getSDKLanguageLink(extraData.apiKey, languageName),
 				content: sdk[languageName]
 			};

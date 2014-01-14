@@ -11,8 +11,8 @@ router.map(function() {
     this.root.bind(function (req, res) { res.send("Welcome") });
     var soruceData = [
         // category item info.
-        { id: 1, key: "bravo",isDisplay:true, expanded:true, name: "category name 1", childs:[
-            {id: 2, key: "bravo-a", name: "bravo-a", childs:null },
+        { id: 1, key: "binding-oauth2",isDisplay:true, expanded:true, name: "平安付绑定(oauth2)", childs:[
+            {id: 2, key: "access-token", name: "换取access_token", childs:null },
             {id: 3, key: "bravo-b", name: "bravo-b", childs:null },
             {id: 4, key: "bravo-c", name: "bravo-c", childs:null },
             {id: 5, key: "bravo-d", name: "bravo-d", childs:null },
@@ -106,7 +106,7 @@ router.map(function() {
             sdk: {
                 "java": "private String username;",
                 "javascript": "var result = { name: 'useranme', passwrod:'password'};",
-                "c#": "using System;public class Program {}"
+                "cs": "using System;public class Program {}"
             },
             // question and answers
             questions: [
@@ -114,6 +114,84 @@ router.map(function() {
                 {question: "为什么这个接口老抛出500内部错误！", answer: "请注意在发起调用请求的时候需要带上Header, 同时需要确保请求METHOD 为POST"}
             ]
         };
+        if (categoryKey == "binding-oauth2") {
+            result.details = {
+                description: "0.1.1 换取access_token接口错误信息更改",
+                request: {
+                    body: "GET https://test-www.1qianbao.com/pinganfuweb/auth",
+                    params: [
+                        {name:"response_type", value:"code", isRequired: true, description: "返回token类型,用于调用换取access_token的接口"},
+                        {name:"client_id", value:"API ID", isRequired: true, description: "此为API ID"},
+                        {name:"redirect_uri", value:"", isRequired: true, description: "返回URI(当用户授权后，会跳转回去这个URI）"},
+                        {name:"scope", value:"user|user:balance", isRequired: true, description: "授权的类型,user:用户基本信息,user:balance:用户可用余额"},
+                        {name:"state", value:"", isRequired: false, description: "此字段会被返回到返回URI(绑定后）"},
+                        {name:"constraints", value:"", isRequired: false, description: "JSON 字符串, 定义用户约束，可用字段为mobile,name,idNumber,<br />mobile -绑定用户必须是用此手机号<br />name - 绑定用户的名字必须一样<br />idNumber - 绑定用户的证件号必须一致"}
+                    ],
+                    // headers.
+                    headers:[
+                       
+                    ]
+                },
+                // response body and headers.
+                response: {
+                    body: '{"code":"......","state":"0"} <br />code: 用于调用换取access_token的接口 <br />state: 此字段会被返回到返回URI(绑定后）',
+                    Headers:""
+                },
+                examples:{
+                    postCommand: '暂时未提供。。',
+                    request:"暂时未提供。。",
+                    response: "暂时未提供。。"
+                },
+                // sdk code samples
+                sdk: {
+                    "java": "暂时未提供。。",
+                    "javascript": "暂时未提供。。",
+                    "cs": "暂时未提供。。"
+                },
+                // question and answers
+                questions: [
+                    {question: "暂时未提供。。", answer: "暂时未提供。。"}
+                ]
+            }    
+        }
+        if (categoryKey == "access-token") {
+            result.details = {
+                description: "换取access_token接口,返回的是JSON类型",
+                request: {
+                    body: "POST https://test-www.1qianbao.com/pinganfuweb/token",
+                    params: [
+                        {name:"code", value:"code", isRequired: true, description: "上述/auth接口(平安付绑定(oauth2))返回值"},
+                        {name:"client_id", value:"API ID", isRequired: true, description: "此为API ID"},
+                        {name:"client_secret", value:"", isRequired: true, description: "此为 API SECRET"},
+                        {name:"grant_type", value:"", isRequired: true, description: "此为grant类型，现只可以是'bearer'"}
+                    ],
+                    // headers.
+                    headers:[
+                        {name:"Authorization", value:"[api_id] [api_secret]", isRequired: true, description: "必须把HTTP HEADER里的Authorization填上"}
+                    ]
+                },
+                // response body and headers.
+                response: {
+                    body: '应该提供DEMO JSON 字符串模型<br />expires_in:token的有效期<br />token_type:现在只会是Bearer<br />id_token:暂为空',
+                    Headers:""
+                },
+                examples:{
+                    postCommand: '暂时未提供。。',
+                    request:"暂时未提供。。",
+                    response: "暂时未提供。。"
+                },
+                // sdk code samples
+                sdk: {
+                    "java": "暂时未提供。。",
+                    "javascript": "暂时未提供。。",
+                    "cs": "暂时未提供。。"
+                },
+                // question and answers
+                questions: [
+                    {question: "暂时未提供。。", answer: "暂时未提供。。"}
+                ]
+            }   
+        }
         setTimeout(function () {
             res.send(200, { 'Content-Type': 'application/json' }, result);
         },500);
