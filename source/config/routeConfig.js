@@ -12,7 +12,7 @@
 		// static router.
 		{ path: "home/index", default:true, controller: "HomeController", action: "index"},
 		// api show router config.
-		{ path: "node/:api/:language", controller: "ApiController", action: "node"},
+		{ path: "node/:api/:language", controller: "ApiController", action: "detail"},
 		{ path: "node/:api", controller: "ApiController", action: "index"},
 
 		// { path: "profile/login", controller: "ProfileController", "login"},

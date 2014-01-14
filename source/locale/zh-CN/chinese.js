@@ -25,8 +25,11 @@ enyo.singleton({
 		"API_REQUEST_EXAMPLE": "请求示例",
 		"API_RESPONSE_EXAMPLE": "响应示例",
 		"API_REQUEST_HEADERS": "请求头",
+		"API_REQUEST_PAYLOAD": "请求负载",
 		"API_RESPONSE_HEADERS": "响应头",
-		"API_REQUEST_PARAMS":"接口参数"
+		"API_RESPONSE_BODY": "响应结果",
+		"API_REQUEST_PARAMS":"接口参数",
+		"API_RESPONSE_PARAMS": "响应参数"
 	},
 	// navgator links.
 	nav: {

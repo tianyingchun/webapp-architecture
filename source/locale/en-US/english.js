@@ -25,8 +25,11 @@ enyo.singleton({
 		"API_REQUEST_EXAMPLE": "Request Example",
 		"API_RESPONSE_EXAMPLE": "Response Example",
 		"API_REQUEST_HEADERS": "Request Headers",
+		"API_REQUEST_PAYLOAD": "Payload",
 		"API_RESPONSE_HEADERS": "Reponse Headers",
-		"API_REQUEST_PARAMS":"API Arguments"
+		"API_RESPONSE_BODY": "Response Result",
+		"API_REQUEST_PARAMS":"API Arguments",
+		"API_RESPONSE_PARAMS": "Response Comments"
 	},
 	nav: {
 		"HOME": "Home",

@@ -8,7 +8,7 @@ enyo.kind({
 	// set up default language for current api document.
 	defaultLanguage: Master.config.defaultAPILanguage,
 	// detial view kind name.
-	_detailViewKindName: "api.Node",
+	_detailViewKindName: "api.Detail",
 
 	mixins:[
 		//Note we have bindinged view and controller mapping for leftdock view. so 
@@ -19,13 +19,13 @@ enyo.kind({
 	index: function (apiKey){
 		this.zLog("apiKey: ", apiKey);
 		// show left dock categories.
-		this.node(apiKey, null);
+		this.detail(apiKey, null);
 	},
 	/**
 	 * Action: node,
-	 * mapping: { path: "node/:api/:language", controller: "ApiController", action: "node"}
+	 * mapping: { path: "node/:api/:language", controller: "ApiController", action: "detail"}
 	 */
-	node: function (apiKey, language) {
+	detail: function (apiKey, language) {
 		this.zLog("apiKey: ", apiKey, " ,language:", language);
 		language = language || this.defaultLanguage;
 		//save current user selected language.

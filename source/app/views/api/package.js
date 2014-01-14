@@ -1,4 +1,4 @@
 enyo.depends(
 	"Index.js",
-	"Node.js"
+	"Detail.js"
 );

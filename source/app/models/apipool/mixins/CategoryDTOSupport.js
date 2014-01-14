@@ -49,6 +49,7 @@
 				var _request = details.request;
 				result.request =  { 
 					body: _request && _request.body || "",
+					payload: _request && _request.payload || "",
 					params: _request && _request.params || [],
 					headers: _request && _request.headers || []
 				};
@@ -56,6 +57,7 @@
 				var _response = details.response;
 				result.response = {
 					body:  _response && _response.body || "",
+					params: _response && _response.params || [],
 					headers: _response && _response.headers || ""
 				};
 				// examples

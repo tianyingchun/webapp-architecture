@@ -1,5 +1,5 @@
 enyo.kind({
-	name: "Master.views.api.Node",
+	name: "Master.views.api.Detail",
 	kind: "Master.View",
 	classes:"api-details",
 	components:[
@@ -10,19 +10,30 @@ enyo.kind({
 
 			{content:Master.locale.get("API_REQUEST","title"), classes:"title"},
 			{name:"request", clasess:"request", components: [
-				{name:"paramstitle",content:Master.locale.get("API_REQUEST_PARAMS","title"), classes:"child-title"},
-				{name: "params", classes:"parameters"},
-
+				// request body summary method. PUT /BucketName?sign=MBO:aCLCZtoFQg8I
 				{content:Master.locale.get("API_REQUEST","title"), classes:"child-title"},
 				{name:"reqbody", classes:"body", allowHtml: true},
-
+				// request post payload. maybe json string.
+				{name:"payloadtitle", showing:false, content:Master.locale.get("API_REQUEST_PAYLOAD","title"), classes:"child-title"},
+				{name:"reqpayload", showing: false, classes:"payload", allowHtml: true},
+				// request params comments table.
+				{name:"paramstitle",content:Master.locale.get("API_REQUEST_PARAMS","title"), classes:"child-title"},
+				{name: "params", classes:"parameters"},				
+				// request header comments table
 				{name:"reqHeaderTitle", content:Master.locale.get("API_REQUEST_HEADERS","title"), classes:"child-title"},
 				{name:"reqheader",classes:"headers"}
 			]},
 
 			{content:Master.locale.get("API_RESPONSE","title"), classes:"title"},
 			{name:"response", clasess:"response", components: [
+				// response result.
+				{name:"resbodytitle", showing:false, content:Master.locale.get("API_RESPONSE_BODY","title"), classes:"child-title"},
 				{name:"resbody", classes:"body", allowHtml: true},
+				// reponse result params comments.
+				{name:"resParamsTitle", content:Master.locale.get("API_RESPONSE_PARAMS","title"), classes:"child-title"},
+				{name:"resParams", classes:"parameters"},
+
+				// response headers.
 				{name:"resheader",allowHtml: true,  classes:"headers"}
 			]},
 
@@ -40,6 +51,7 @@ enyo.kind({
 			{name: "questionAnswers", tag:"ul", classes:"question-answers"}
 		]}	
 	],
+	// @protected.
 	// language header title display name
 	_languageHeaderItemMapping: {
 		"cs":"c#"
@@ -75,10 +87,24 @@ enyo.kind({
 		// request body
 		this.$.reqbody.setContent(request.body);
 		
+		//request payload.
+		if(request.payload) {
+			var payloadJson = hljs.highlight("js", request.payload).value;
+			this.$.reqpayload.setContent(payloadJson);
+			this.$.payloadtitle.show();
+			this.$.reqpayload.show();
+		}
+
 		// response 
 		var response = details.response || {};
-		// response body.
-		this.$.resbody.setContent(response.body);
+		if (response.body) {
+			var responseJson = hljs.highlight("js", response.body).value;
+			// response body.
+			this.$.resbody.setContent(responseJson);
+			this.$.resbodytitle.show();
+		}
+		// response parameters comments.
+		this.showResponseParameters(response.params);
 		//response headers.
 		this.$.resheader.setContent(response.headers);
 
@@ -195,5 +221,27 @@ enyo.kind({
 		} else {
 			this.$.paramstitle.hide();
 		}
-	}	
+	},
+	// help method for response parameters comments table.
+	showResponseParameters: function (params) {
+		if(params.length) {
+			this.$.resParams.createComponent({
+	            kind:'widgets.forms.TableRowItems', 
+	            keyField:"id",
+	            itemsSource: params,
+	            showCheckbox: false,
+	            captionText: [
+	            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
+	            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
+	            	Master.locale.get("TABLE_API_PARAMS_REQUIRED", "content"),
+	            	Master.locale.get("TABLE_API_PARAMS_DESC", "content")
+	            ],
+	            actions:[/*'Edit'*/],
+	            radioModel: true // support only one remove install device.
+	        });
+	        this.$.resParams.render();
+		} else {
+			this.$.resParamsTitle.hide();
+		}
+	}
 });

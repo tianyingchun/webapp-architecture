@@ -11,9 +11,9 @@ router.map(function() {
     this.root.bind(function (req, res) { res.send("Welcome") });
     var soruceData = [
         // category item info.
-        { id: 1, key: "binding-oauth2",isDisplay:true, expanded:true, name: "平安付绑定(oauth2)", childs:[
-            {id: 2, key: "access-token", name: "换取access_token", childs:null },
-            {id: 3, key: "bravo-b", name: "bravo-b", childs:null },
+        { id: 1, key: "payment",isDisplay:true, expanded:true, name: "平安支付API", childs:[
+            {id: 2, key: "binding_oauth2", name: "平安付绑定(oauth2)", childs:null },
+            {id: 3, key: "access_token", name: "换取access_token", childs:null },
             {id: 4, key: "bravo-c", name: "bravo-c", childs:null },
             {id: 5, key: "bravo-d", name: "bravo-d", childs:null },
             {id: 6, key: "bravo-e", name: "bravo-e", childs:null },
@@ -72,6 +72,7 @@ router.map(function() {
             // request body and parameters and headers.
             request: {
                 body: "PUT /BucketName?sign=MBO:aCLCZtoFQg8I:WQMFNZEhN2k8xxlgikuPfCJMuE8%3D <br />HTTP/1.1 Host: bcs.duapp.com <br />Content-Length:0 ",
+                payload:"{name:'tianyingchun', password:'xxxx', code:'bearer xhse$$#'}",// json string
                 params: [
                     {name:"x-bs-acl1", value:"[public-read|public-write|public-read-write", isRequired: true, description: "设置bucket的权限，复杂的权限控制可以参考acl设置"},
                     {name:"name2", value:"value2", isRequired: true, description: "desc2"},
@@ -86,6 +87,11 @@ router.map(function() {
             // response body and headers.
             response: {
                 body: '{"bucket_name":"test","status":"0", "cdatetime":"1371765410", "used_capacity":"21148", "total_capacity":"0", "region":"beijing"}',
+                params: [
+                    {name:"name1", value:"value1", isRequired: true, description: "desc1"},
+                    {name:"name2", value:"value2", isRequired: true, description: "desc2"},
+                    {name:"name3", value:"value3", isRequired: true, description: "desc3"}
+                ],
                 Headers:"HTTP/1.1 200 OK <br />Date: Sat, 01 Jan 2011 00:00:00 GMT </br>Server: BaiduBS"
             },
             // rest api request, response sample
@@ -114,7 +120,7 @@ router.map(function() {
                 {question: "为什么这个接口老抛出500内部错误！", answer: "请注意在发起调用请求的时候需要带上Header, 同时需要确保请求METHOD 为POST"}
             ]
         };
-        if (categoryKey == "binding-oauth2") {
+        if (categoryKey == "binding_oauth2") {
             result.details = {
                 description: "0.1.1 换取access_token接口错误信息更改",
                 request: {
@@ -134,7 +140,11 @@ router.map(function() {
                 },
                 // response body and headers.
                 response: {
-                    body: '{"code":"......","state":"0"} <br />code: 用于调用换取access_token的接口 <br />state: 此字段会被返回到返回URI(绑定后）',
+                    body: '{"code":"......","state":"0"} ',
+                    params: [
+                        {name:"code", value:"code", isRequired: true, description: "用于调用换取access_token的接口 "},
+                        {name:"state", value:"code", isRequired: true, description: "此字段会被返回到返回URI(绑定后）"}
+                    ],
                     Headers:""
                 },
                 examples:{
@@ -154,7 +164,7 @@ router.map(function() {
                 ]
             }    
         }
-        if (categoryKey == "access-token") {
+        if (categoryKey == "access_token") {
             result.details = {
                 description: "换取access_token接口,返回的是JSON类型",
                 request: {
@@ -172,7 +182,12 @@ router.map(function() {
                 },
                 // response body and headers.
                 response: {
-                    body: '应该提供DEMO JSON 字符串模型<br />expires_in:token的有效期<br />token_type:现在只会是Bearer<br />id_token:暂为空',
+                    body: '应该提供DEMO JSON 字符串模型',
+                    params: [
+                        {name:"expires_in", value:"应该提供JSON 对应节点", isRequired: true, description: "token的有效期"},
+                        {name:"token_type", value:"应该提供JSON 对应节点", isRequired: true, description: "现在只会是Bearer"},
+                        {name:"id_token", value:"应该提供JSON 对应节点", isRequired: true, description: "暂为空"}
+                    ],
                     Headers:""
                 },
                 examples:{
