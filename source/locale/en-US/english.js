@@ -15,7 +15,7 @@ enyo.singleton({
 	// titles
 	title: {
 		"APP_NAME": "ENYO APP DEMO",
-		"LOGO_TEXT": "Developer Platform - 1 Wallet",
+		"LOGO_TEXT": "Developer Platform Api Browser",
 		"API_CATALOG":"API Catalog",
 		"API_DESCRIPTION":"Summary",
 		"API_REQUEST": "Request",

@@ -15,7 +15,7 @@ enyo.singleton({
 	// titles
 	title: {
 		"APP_NAME": "ENYO 应用程序！",
-		"LOGO_TEXT": "平安付开发者平台",
+		"LOGO_TEXT": "平安付开发者API浏览器",
 		"API_CATALOG":"API分类",
 		"API_DESCRIPTION":"概述",
 		"API_REQUEST": "请求",
