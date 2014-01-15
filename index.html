@@ -23,7 +23,8 @@
 					location = 'debug.html';
 				}
 				new Master.Application({
-					name: Master.config.appName
+					name: Master.config.appName,
+					logLevel: 10
 				}).renderInto(document.body);
 			});
 			

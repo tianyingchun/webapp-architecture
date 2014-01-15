@@ -11,6 +11,12 @@ enyo.kind({
 	mixins: [
 		"Master.ClassSupport"
 	],
+	published: {
+		//{log: 20, warn: 10, error: 0},
+		// default log level is 20 enable log,warn,error.
+		// in live environment we should set it to <=10
+		logLevel: 20
+	},
 	//@private the global router $ name constants.
 	_routerName: "Master.router",
 	constructor: enyo.inherit(function (sup) {
@@ -26,6 +32,8 @@ enyo.kind({
 	create: enyo.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);
+			// logLevelChanged
+			this.logLevelChanged();
 			//append route into global singleton instance after controllers.
 			this.createComponent({
 				name: this._routerName,
@@ -35,6 +43,10 @@ enyo.kind({
 			this.appInitializatiin();
 		};
 	}),
+	//set log level.
+	logLevelChanged: function (oldValue) {
+		enyo.setLogLevel(this.logLevel);
+	},
 	/**
 	 * Application start initialization some basic infrastratures.
 	 * Note: this.view will be instanced while create lifecycle. need to put it into create().

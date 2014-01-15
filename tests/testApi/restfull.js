@@ -142,8 +142,8 @@ router.map(function() {
                 response: {
                     body: '{"code":"......","state":"0"} ',
                     params: [
-                        {name:"code", value:"code", isRequired: true, description: "用于调用换取access_token的接口 "},
-                        {name:"state", value:"code", isRequired: true, description: "此字段会被返回到返回URI(绑定后）"}
+                        {name:"code", value:"", isRequired: true, description: "用于调用换取access_token的接口 "},
+                        {name:"state", value:"", isRequired: true, description: "此字段会被返回到返回URI(绑定后）"}
                     ],
                     Headers:""
                 },
