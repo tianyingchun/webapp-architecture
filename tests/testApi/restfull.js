@@ -88,9 +88,9 @@ router.map(function() {
             response: {
                 body: '{"bucket_name":"test","status":"0", "cdatetime":"1371765410", "used_capacity":"21148", "total_capacity":"0", "region":"beijing"}',
                 params: [
-                    {name:"name1", value:"value1", isRequired: true, description: "desc1"},
-                    {name:"name2", value:"value2", isRequired: true, description: "desc2"},
-                    {name:"name3", value:"value3", isRequired: true, description: "desc3"}
+                    {name:"name1", value:"value1", description: "desc1"},
+                    {name:"name2", value:"value2", description: "desc2"},
+                    {name:"name3", value:"value3", description: "desc3"}
                 ],
                 Headers:"HTTP/1.1 200 OK <br />Date: Sat, 01 Jan 2011 00:00:00 GMT </br>Server: BaiduBS"
             },
@@ -142,8 +142,8 @@ router.map(function() {
                 response: {
                     body: '{"code":"......","state":"0"} ',
                     params: [
-                        {name:"code", value:"", isRequired: true, description: "用于调用换取access_token的接口 "},
-                        {name:"state", value:"", isRequired: true, description: "此字段会被返回到返回URI(绑定后）"}
+                        {name:"code", value:"", description: "用于调用换取access_token的接口 "},
+                        {name:"state", value:"", description: "此字段会被返回到返回URI(绑定后）"}
                     ],
                     Headers:""
                 },
@@ -184,9 +184,9 @@ router.map(function() {
                 response: {
                     body: '应该提供DEMO JSON 字符串模型',
                     params: [
-                        {name:"expires_in", value:"应该提供JSON 对应节点", isRequired: true, description: "token的有效期"},
-                        {name:"token_type", value:"应该提供JSON 对应节点", isRequired: true, description: "现在只会是Bearer"},
-                        {name:"id_token", value:"应该提供JSON 对应节点", isRequired: true, description: "暂为空"}
+                        {name:"expires_in", value:"应该提供JSON 对应节点", description: "token的有效期"},
+                        {name:"token_type", value:"应该提供JSON 对应节点", description: "现在只会是Bearer"},
+                        {name:"id_token", value:"应该提供JSON 对应节点", description: "暂为空"}
                     ],
                     Headers:""
                 },

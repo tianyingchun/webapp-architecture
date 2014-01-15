@@ -233,7 +233,6 @@ enyo.kind({
 	            captionText: [
 	            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
 	            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
-	            	Master.locale.get("TABLE_API_PARAMS_REQUIRED", "content"),
 	            	Master.locale.get("TABLE_API_PARAMS_DESC", "content")
 	            ],
 	            actions:[/*'Edit'*/],
