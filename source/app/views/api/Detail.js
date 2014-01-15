@@ -51,6 +51,9 @@ enyo.kind({
 			{name: "questionAnswers", tag:"ul", classes:"question-answers"}
 		]}	
 	],
+	handlers: {
+		ontap: "tabCellTap"
+	},
 	// @protected.
 	// language header title display name
 	_languageHeaderItemMapping: {
@@ -185,6 +188,7 @@ enyo.kind({
 	            keyField:"id",
 	            itemsSource: headers,
 	            showCheckbox: false,
+	            hideFieldItems: ["more"],
 	            captionText: [
 	            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
 	            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
@@ -208,6 +212,7 @@ enyo.kind({
 	            keyField:"id",
 	            itemsSource: params,
 	            showCheckbox: false,
+	            hideFieldItems: ["more"],
 	            captionText: [
 	            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
 	            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
@@ -230,9 +235,11 @@ enyo.kind({
 	            keyField:"id",
 	            itemsSource: params,
 	            showCheckbox: false,
+	            hideFieldItems: ["more"],
 	            captionText: [
 	            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
 	            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
+	            	Master.locale.get("TABLE_API_PARAMS_REQUIRED", "content"),
 	            	Master.locale.get("TABLE_API_PARAMS_DESC", "content")
 	            ],
 	            actions:[/*'Edit'*/],
@@ -242,5 +249,16 @@ enyo.kind({
 		} else {
 			this.$.resParamsTitle.hide();
 		}
+	},
+	tabCellTap: function (inSender, inEvent) {
+		var originator = inEvent.originator;
+		if (originator.kindName == "widgets.forms.TableRowItems") {
+			var moreInfo = inEvent.more;
+			this.zLog("kindname: ", moreInfo);
+			if (moreInfo) {
+				Master.view.frame.showNormalDialog("title",moreInfo);
+			}	
+		}
+		return true;
 	}
 });

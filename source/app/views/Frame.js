@@ -180,5 +180,11 @@ enyo.kind({
 
 		// this.zLog("sdk animation params: ", fraction, slideshown);
 		return true;
+	},
+	showNormalDialog: function (title, htmlContent) {
+		var normalDialog = new widgets.dialog.NormalDialog();
+		normalDialog.setTitle(title);
+		normalDialog.setHtmlContent(htmlContent);
+		normalDialog.show();
 	}
 })

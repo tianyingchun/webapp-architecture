@@ -4,8 +4,8 @@ enyo.kind({
 	classes: "api-new",
 	components: [
 		{name: "container", classes:"api-container", components: [
-			{name:"form", kind:"widgets.forms.FormDecorator", components: [
-				{name:"apiName", kind:"widgets.forms.InputDecorator", validation: {required:"message"}}
+			{name:"form", kind:"widgets.forms.FormDecorator",submitButtonText:"Go Submit", resetButtonText:"Go Reset", components: [
+				{name:"apiName", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"custom required message"}}
 			]},
 			{name:"textEditor", kind: "Master.TextEditor"},
 		]}
@@ -30,13 +30,6 @@ enyo.kind({
 	create: enyo.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);
-			// add form customized button.
-			this.$.form.set("toolButtonConfig", {
-				first: {
-					content: Master.locale.get("ACTION_SUBMIT", "label"),
-					show: true
-				}
-			});
 		};
 	}),
 	showAddNewApiUI: function () {

@@ -40,6 +40,7 @@ enyo.singleton({
 	content: {
 		// for api interface parameters
 		"TABLE_API_PARAMS_NAME": "字段",
+		"TABLE_API_PARAMS_NAMEDESC": "字段名",
 		"TABLE_API_PARAMS_VALUE": "取值",
 		"TABLE_API_PARAMS_REQUIRED": "必填",
 		"TABLE_API_PARAMS_DESC": "描述"

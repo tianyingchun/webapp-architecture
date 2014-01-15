@@ -39,6 +39,7 @@ enyo.singleton({
 	content: {
 		// for api interface parameters
 		"TABLE_API_PARAMS_NAME": "Field",
+		"TABLE_API_PARAMS_NAMEDESC": "Field Desc",
 		"TABLE_API_PARAMS_VALUE": "Value",
 		"TABLE_API_PARAMS_REQUIRED": "Is Required",
 		"TABLE_API_PARAMS_DESC": "Description"

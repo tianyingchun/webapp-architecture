@@ -74,9 +74,9 @@ router.map(function() {
                 body: "PUT /BucketName?sign=MBO:aCLCZtoFQg8I:WQMFNZEhN2k8xxlgikuPfCJMuE8%3D <br />HTTP/1.1 Host: bcs.duapp.com <br />Content-Length:0 ",
                 payload:"{name:'tianyingchun', password:'xxxx', code:'bearer xhse$$#'}",// json string
                 params: [
-                    {name:"x-bs-acl1", value:"[public-read|public-write|public-read-write", isRequired: true, description: "设置bucket的权限，复杂的权限控制可以参考acl设置"},
-                    {name:"name2", value:"value2", isRequired: true, description: "desc2"},
-                    {name:"name3", value:"value3", isRequired: true, description: "desc3"}
+                    {name:"x-bs-acl1",  value:"[public-read|public-write|public-read-write", isRequired: true, description: "设置bucket的权限，复杂的权限控制可以参考acl设置"},
+                    {name:"testssssss",  value:"value2", isRequired: true, description: "desc2",more:"<b>oh my god....</b>"},
+                    {name:"name3",  value:"value3", isRequired: true, description: "desc3",more:""}
                 ],
                 // headers.
                 headers:[
@@ -88,9 +88,9 @@ router.map(function() {
             response: {
                 body: '{"bucket_name":"test","status":"0", "cdatetime":"1371765410", "used_capacity":"21148", "total_capacity":"0", "region":"beijing"}',
                 params: [
-                    {name:"name1", value:"value1", description: "desc1"},
-                    {name:"name2", value:"value2", description: "desc2"},
-                    {name:"name3", value:"value3", description: "desc3"}
+                    {name:"name1", value:"value1", isRequired: true, description: "desc1",more:""},
+                    {name:"name2",  value:"value2", isRequired: true,description: "desc2",more:""},
+                    {name:"name3",  value:"value3", isRequired: true, description: "desc3",more:""}
                 ],
                 Headers:"HTTP/1.1 200 OK <br />Date: Sat, 01 Jan 2011 00:00:00 GMT </br>Server: BaiduBS"
             },
@@ -126,12 +126,12 @@ router.map(function() {
                 request: {
                     body: "GET https://test-www.1qianbao.com/pinganfuweb/auth",
                     params: [
-                        {name:"response_type", value:"code", isRequired: true, description: "返回token类型,用于调用换取access_token的接口"},
-                        {name:"client_id", value:"API ID", isRequired: true, description: "此为API ID"},
-                        {name:"redirect_uri", value:"", isRequired: true, description: "返回URI(当用户授权后，会跳转回去这个URI）"},
-                        {name:"scope", value:"user|user:balance", isRequired: true, description: "授权的类型,user:用户基本信息,user:balance:用户可用余额"},
-                        {name:"state", value:"", isRequired: false, description: "此字段会被返回到返回URI(绑定后）"},
-                        {name:"constraints", value:"", isRequired: false, description: "JSON 字符串, 定义用户约束，可用字段为mobile,name,idNumber,<br />mobile -绑定用户必须是用此手机号<br />name - 绑定用户的名字必须一样<br />idNumber - 绑定用户的证件号必须一致"}
+                        {name:"response_type",  value:"code", isRequired: true, description: "返回token类型,用于调用换取access_token的接口",more:""},
+                        {name:"client_id",  value:"API ID", isRequired: true, description: "此为API ID",more:""},
+                        {name:"redirect_uri",  value:"", isRequired: true, description: "返回URI(当用户授权后，会跳转回去这个URI）",more:""},
+                        {name:"scope",  value:"user|user:balance", isRequired: true, description: "授权的类型,user:用户基本信息,user:balance:用户可用余额",more:""},
+                        {name:"state",  value:"", isRequired: false, description: "此字段会被返回到返回URI(绑定后）",more:""},
+                        {name:"constraints", value:"", isRequired: false, description: "JSON 字符串, 定义用户约束，可用字段为mobile,name,idNumber,<br />mobile -绑定用户必须是用此手机号<br />name - 绑定用户的名字必须一样<br />idNumber - 绑定用户的证件号必须一致",more:""}
                     ],
                     // headers.
                     headers:[
@@ -142,8 +142,8 @@ router.map(function() {
                 response: {
                     body: '{"code":"......","state":"0"} ',
                     params: [
-                        {name:"code", value:"", description: "用于调用换取access_token的接口 "},
-                        {name:"state", value:"", description: "此字段会被返回到返回URI(绑定后）"}
+                        {name:"code",  value:"",isRequired: true, description: "用于调用换取access_token的接口 ",more:""},
+                        {name:"state",  value:"",isRequired: true, description: "此字段会被返回到返回URI(绑定后）",more:""}
                     ],
                     Headers:""
                 },
@@ -170,23 +170,23 @@ router.map(function() {
                 request: {
                     body: "POST https://test-www.1qianbao.com/pinganfuweb/token",
                     params: [
-                        {name:"code", value:"code", isRequired: true, description: "上述/auth接口(平安付绑定(oauth2))返回值"},
-                        {name:"client_id", value:"API ID", isRequired: true, description: "此为API ID"},
-                        {name:"client_secret", value:"", isRequired: true, description: "此为 API SECRET"},
-                        {name:"grant_type", value:"", isRequired: true, description: "此为grant类型，现只可以是'bearer'"}
+                        {name:"code",  value:"code", isRequired: true, description: "上述/auth接口(平安付绑定(oauth2))返回值",more:""},
+                        {name:"client_id",  value:"API ID", isRequired: true, description: "此为API ID",more:""},
+                        {name:"client_secret",  value:"", isRequired: true, description: "此为 API SECRET",more:""},
+                        {name:"grant_type",  value:"", isRequired: true, description: "此为grant类型，现只可以是'bearer'",more:""}
                     ],
                     // headers.
                     headers:[
-                        {name:"Authorization", value:"[api_id] [api_secret]", isRequired: true, description: "必须把HTTP HEADER里的Authorization填上"}
+                        {name:"Authorization",  value:"[api_id] [api_secret]", isRequired: true, description: "必须把HTTP HEADER里的Authorization填上"}
                     ]
                 },
                 // response body and headers.
                 response: {
                     body: '应该提供DEMO JSON 字符串模型',
                     params: [
-                        {name:"expires_in", value:"应该提供JSON 对应节点", description: "token的有效期"},
-                        {name:"token_type", value:"应该提供JSON 对应节点", description: "现在只会是Bearer"},
-                        {name:"id_token", value:"应该提供JSON 对应节点", description: "暂为空"}
+                        {name:"expires_in",  value:"应该提供JSON 对应节点",isRequired: true, description: "token的有效期",more:""},
+                        {name:"token_type",  value:"应该提供JSON 对应节点",isRequired: true, description: "现在只会是Bearer",more:""},
+                        {name:"id_token",  value:"应该提供JSON 对应节点", isRequired: true, description: "暂为空",more:""}
                     ],
                     Headers:""
                 },
