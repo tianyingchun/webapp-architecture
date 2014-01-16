@@ -1,0 +1,36 @@
+@import "./../variables.less";
+@import "./../mixins.less"; 
+.editable-table{
+	display: table;
+	border-right: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
+	ul{
+		display:table-row;
+	}
+	li {
+		word-wrap: break-word;
+		white-space: normal;
+		border: 1px solid #e8e8e8;
+		border-right: 0;
+		border-bottom: 0;
+		background: #fff;
+		display: table-cell;
+		color: #333;
+		text-align: left;
+		padding: 3px 10px;
+	}
+
+	.header-row li{
+		background: #f7f7f7;
+		font-weight: bold;
+		line-height: 1.5em;
+		background-color: #f8f8f8;
+	}
+	.onyx-checkbox{
+		background-size: 20px 80px;
+		background-position: 0 0;
+	}
+	.onyx-checkbox[checked]{
+		background-position: 0 -20px;
+	}
+}

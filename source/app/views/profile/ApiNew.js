@@ -18,7 +18,12 @@ enyo.kind({
 					]},
 					{classes:"form-item", components:[
 						{classes:"title", content:"接口参数"},
-						{name:"requestParams", allowEmpty:false, placeholder:"input something", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写API接口参数!"}
+						{name:"requestParams", kind:"widgets.forms.EdiableTable",fields:[
+							{key:"name", controlType:"text"},
+							{key:"value", controlType:"text"},
+							{key:"isRequired", controlType:"checkbox"},
+							{key:"description", controlType:"textarea"}
+						],headers:["字段","取值","必填","描述"]}
 					]}			
 				]},
 				{kind:"onyx.Groupbox", components: [
