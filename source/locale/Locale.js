@@ -83,7 +83,7 @@
 			} else {
 				localeStr = this._destLocaleLang[key];
 			}
-			if (!localeStr) {
+			if (typeof(localeStr)==="undefined") {
 				this.zError("get locale failed:  key: " + key +" context: "+ context +" lang:" + this.lang);
 			} 
 			return localeStr;

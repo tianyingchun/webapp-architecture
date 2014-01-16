@@ -1,0 +1,44 @@
+@import "./../variables.less";
+@import "./../mixins.less"; 
+.form-controls{
+	.onyx-groupbox {
+		margin-top: 10px;
+		overflow: hidden;
+	}
+	.onyx-groupbox-header{
+		background-color: #DFDDDD;
+		color: #303030;
+	}
+	.onyx-groupbox > *{
+		border-color: #d1d1d1;
+	}
+	.form-item {
+		clear:both;
+		font-size: @font-medium;
+		padding: 5px 10px;
+		overflow: hidden;
+		.title {
+			float: left;
+			height: 35px;
+			line-height: 35px;
+			margin-right: 10px;
+		}
+		.widget-forms-input{
+			float:left;
+			.onyx-input-decorator{
+				float:left;
+				padding:4px 8px 8px 8px;
+				min-width: 250px;
+			}
+			.onyx-input-decorator > input{
+				font-size: @font-medium;
+				width:100%;
+			}
+		}
+		.tip-message{
+			float:left;
+			.title;
+			margin-left:10px;
+		}
+	}
+}

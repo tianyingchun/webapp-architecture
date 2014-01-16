@@ -61,6 +61,8 @@ enyo.kind({
 	showProfileDockMenus: function (data) {
 		// hide tabcontrol.
 		Master.view.frame.hideSDKPanel();
+		//  profile page.
+		Master.view.frame.addClass("profile");
 		if (!Master.view.frame.hasProfileContentInDock()) {
 			this.showProfileMenus(data);
 		}

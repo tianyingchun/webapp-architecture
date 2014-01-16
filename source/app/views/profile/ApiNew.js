@@ -4,8 +4,62 @@ enyo.kind({
 	classes: "api-new",
 	components: [
 		{name: "container", classes:"api-container", components: [
-			{name:"form", kind:"widgets.forms.FormDecorator",submitButtonText:"Go Submit", resetButtonText:"Go Reset", components: [
-				{name:"apiName", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"custom required message"}}
+			{name:"form", kind:"widgets.forms.FormDecorator", components: [
+				{kind:"onyx.Groupbox", components: [
+					{kind: "onyx.GroupboxHeader", content: "概述"},
+					{classes:"form-item", components:[
+						{classes:"title", content:"API 描述"},
+						{name:"apiName", allowEmpty:false, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！ddd"}}
+					]},
+					{classes:"form-item", components:[
+						{classes:"title", content:"API 描述"},
+						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+					]}				
+				]},
+				{kind:"onyx.Groupbox", components: [
+					{kind: "onyx.GroupboxHeader", content: "请求"},
+					{classes:"form-item", components:[
+						{classes:"title", content:"API 描述"},
+						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+					]},
+					{classes:"form-item", components:[
+						{classes:"title", content:"API 描述"},
+						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+					]}				
+				]},
+				{kind:"onyx.Groupbox", components: [
+					{kind: "onyx.GroupboxHeader", content: "响应"},
+					{classes:"form-item", components:[
+						{classes:"title", content:"API 描述"},
+						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+					]},
+					{classes:"form-item", components:[
+						{classes:"title", content:"API 描述"},
+						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+					]}				
+				]},
+				{kind:"onyx.Groupbox", components: [
+					{kind: "onyx.GroupboxHeader", content: "示例"},
+					{classes:"form-item", components:[
+						{classes:"title", content:"API 描述"},
+						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+					]},
+					{classes:"form-item", components:[
+						{classes:"title", content:"API 描述"},
+						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+					]}				
+				]},
+				{kind:"onyx.Groupbox", components: [
+					{kind: "onyx.GroupboxHeader", content: "问答"},
+					{classes:"form-item", components:[
+						{classes:"title", content:"API 描述"},
+						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+					]},
+					{classes:"form-item", components:[
+						{classes:"title", content:"API 描述"},
+						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+					]}				
+				]}
 			]},
 			{name:"textEditor", kind: "Master.TextEditor"},
 		]}

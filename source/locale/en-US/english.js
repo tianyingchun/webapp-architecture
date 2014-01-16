@@ -74,7 +74,9 @@ enyo.singleton({
 	},
 	// form field validation messages
 	validationMsg: {
-
+		"ALLOWEMPTY":"",//该字段允许为空
+		"REQUIRED": "it's required field!",
+		"EMAIL": "email format is not correct!"
 	},
 	// messages
 	message: {
