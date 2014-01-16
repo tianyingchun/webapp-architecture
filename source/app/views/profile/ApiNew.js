@@ -4,17 +4,16 @@ enyo.kind({
 	classes: "api-new",
 	components: [
 		{name: "container", classes:"api-container", components: [
-			{name:"form", kind:"widgets.forms.FormDecorator", components: [
+			{name:"form", onValidationResult:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "概述"},
+					// api descriptons. text editor.
+					{name:"apiDescription", kind: "Master.TextEditor"},
+
 					{classes:"form-item", components:[
 						{classes:"title", content:"API 描述"},
 						{name:"apiName", allowEmpty:false, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！ddd"}}
-					]},
-					{classes:"form-item", components:[
-						{classes:"title", content:"API 描述"},
-						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
-					]}				
+					]}			
 				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "请求"},
@@ -64,9 +63,6 @@ enyo.kind({
 			{name:"textEditor", kind: "Master.TextEditor"},
 		]}
 	],
-	handlers:{
-		ontap: "formActionButtonTap"
-	},
 	receiveMessage: enyo.inherit(function(sup) {
 		return function (viewModel, viewData) {
 			sup.apply(this, arguments);
@@ -77,28 +73,29 @@ enyo.kind({
 			if (viewActionFn) {
 				viewActionFn.call(this, viewModel, extraData);
 			} else {
-				this.zWarn("viewActionFn don't exist!");
+				this.zWarn("viewActionFn don't exist!:", viewAction);
 			}
 		}
 	}),
-	create: enyo.inherit(function (sup) {
-		return function () {
-			sup.apply(this, arguments);
-		};
-	}),
-	showAddNewApiUI: function () {
+	// show app new api ui interface.
+	showAddNewApiUI: function (viewModel){
+		// show html editors.
+		this.showHtmlEditors();
+	},
+	showHtmlEditors: function () {
+		this.$.apiDescription.markItUp();
 		this.$.textEditor.markItUp();
 	},
-	formActionButtonTap: function (inSender, inEvent) {
-		var originator = inEvent.originator;
-		switch(originator.action) {
-			case "first":
-				this.addNewApi(inSender, inEvent);
-				break;
-			case "second":
-				this.resetNewApi(inSender, inEvent);
-				break;
+	formValidationSubmit: function (inSender, inEvent) {
+		var validationResult = inEvent;
+		this.zLog("form validation result", validationResult);
+		// success/failed.
+		if (validationResult.status =="success") {
+			// do bisiness logics.
+			// 
 		}
+		// stop  bubble.
+		return true;
 	},
 	// button handler for creating new api
 	addNewApi: function (inSender, inEvent) {

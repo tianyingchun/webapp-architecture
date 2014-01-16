@@ -16,7 +16,8 @@
 	text-decoration:none;
 }
 .markItUp  {
-	width: 665px;
+	/*width: 665px;*/
+	width: 100%;
 	margin:5px 0 5px 0;
 	border:5px solid #F5F5F5;	
 }
@@ -135,6 +136,7 @@
 }
 /***************************************************************************************/
 .html .markItUpEditor {
+	width: 100%;
 	background-image:url(images/bg-editor-html.png);
 }
 .markdown .markItUpEditor {
