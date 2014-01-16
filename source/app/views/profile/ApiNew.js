@@ -8,23 +8,18 @@ enyo.kind({
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "概述"},
 					// api descriptons. text editor.
-					{name:"apiDescription", kind: "Master.TextEditor"},
-
-					{classes:"form-item", components:[
-						{classes:"title", content:"API 描述"},
-						{name:"apiName", allowEmpty:false, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！ddd"}}
-					]}			
+					{name:"apiDescription", kind: "Master.TextEditor"}		
 				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "请求"},
 					{classes:"form-item", components:[
-						{classes:"title", content:"API 描述"},
-						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+						{classes:"title", content:"HTTP请求简要信息"},
+						{name:"requestBody", allowEmpty:false, placeholder:"input something", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写Http请求的BODY体内容!"}
 					]},
 					{classes:"form-item", components:[
-						{classes:"title", content:"API 描述"},
-						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
-					]}				
+						{classes:"title", content:"接口参数"},
+						{name:"requestParams", allowEmpty:false, placeholder:"input something", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写API接口参数!"}
+					]}			
 				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "响应"},
