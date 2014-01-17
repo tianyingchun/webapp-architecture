@@ -36,21 +36,12 @@ router.map(function() {
         { id: 20, key:"detage", isDisplay:true, name: "category name 5" }
 
     ];
-    //
-    // LIST: GET to /api/categories lists all api categories
-    //
-    this.get("/api/categories").bind(function(req,res) {
-        var result = soruceData;
-        setTimeout(function () {
-            res.send(200, { 'Content-Type': 'application/json' }, result);
-        },500);
-    });
-
+  
     /**
      * Get category detail information
      * /^\/api\/category\/([0-9]+)$/  ->/api/category/1
      */
-    this.get("/api/category").bind(function(req, res, data) {
+    this.get("/category").bind(function(req, res, data) {
         winston.info("category: ", data);
         var categoryKey = data.key;
         var result = {};
@@ -207,6 +198,15 @@ router.map(function() {
                 ]
             }   
         }
+        setTimeout(function () {
+            res.send(200, { 'Content-Type': 'application/json' }, result);
+        },500);
+    });
+    //
+    // LIST: GET to /api/categories lists all api categories
+    //
+    this.get("/categories").bind(function(req,res) {
+        var result = soruceData;
         setTimeout(function () {
             res.send(200, { 'Content-Type': 'application/json' }, result);
         },500);

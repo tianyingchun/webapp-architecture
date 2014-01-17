@@ -9,7 +9,7 @@ enyo.kind({
 	apis: {
 		// apiKey: categoryInfo
 		categoryInfo: {
-			url: "/api/category",
+			url: "/category",
 			headers: { Authorization: "" }, 
 			cache: {
 				enabled: true,
@@ -19,13 +19,13 @@ enyo.kind({
 		},
 		// update.
 		updateCategoryInfo: {
-			url: "/api/category",
+			url: "/category",
 			cache: false,
 			dto: "categoryDetailDTO"
 		},
 		// get category config info.
 		categoryConfig:  {
-			url: "/api/categoryconfig",
+			url: "/categoryconfig",
 			// directly set cache is false.
 			cache: false,
 			dto: "categoryConfigDTO"

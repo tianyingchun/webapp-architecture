@@ -18,12 +18,13 @@ enyo.kind({
 					]},
 					{classes:"form-item", components:[
 						{classes:"title", content:"接口参数"},
-						{name:"requestParams", kind:"widgets.forms.EdiableTable",fields:[
+						{name:"requestParams", kind:"widgets.forms.EditableTable",fields:[
 							{key:"name", controlType:"text"},
 							{key:"value", controlType:"text"},
 							{key:"isRequired", controlType:"checkbox"},
-							{key:"description", controlType:"textarea"}
-						],headers:["字段","取值","必填","描述"]}
+							{key:"description", controlType:"textarea"},
+							{key:"more", controlType:"htmleditor"}
+						],headers:["字段","取值","必填","描述","更多"]}
 					]}			
 				]},
 				{kind:"onyx.Groupbox", components: [
@@ -81,6 +82,9 @@ enyo.kind({
 	showAddNewApiUI: function (viewModel){
 		// show html editors.
 		this.showHtmlEditors();
+		// show table row datas.
+		// 
+		// 
 	},
 	showHtmlEditors: function () {
 		this.$.apiDescription.markItUp();
@@ -92,7 +96,7 @@ enyo.kind({
 		// success/failed.
 		if (validationResult.status =="success") {
 			// do bisiness logics.
-			// 
+			this.$.requestParams.getTableJSONResult();
 		}
 		// stop  bubble.
 		return true;

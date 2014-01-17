@@ -8,7 +8,7 @@ enyo.kind({
 	// api configrations for api categories.
 	apis: {
 		allcategories: {
-			url: "/api/categories",
+			url: "/categories",
 			// cache: {
 			// 	enabled: true,
 			// 	cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.

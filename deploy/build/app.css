@@ -1855,8 +1855,9 @@ p em a {
 	text-decoration:none;
 }
 .markItUp  {
-	width: 665px;
-	margin:5px 0 5px 0;
+	/*width: 665px;*/
+	width: 100%;
+	/*margin:5px 0 5px 0;*/
 	border:5px solid #F5F5F5;	
 }
 .markItUpContainer  {
@@ -1974,6 +1975,7 @@ p em a {
 }
 /***************************************************************************************/
 .html .markItUpEditor {
+	width: 100%;
 	background-image:url('../lib/markitup/skins/markitup/images/bg-editor-html.png');
 }
 .markdown .markItUpEditor {
@@ -2152,7 +2154,11 @@ Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine
 
 /* lib/widgets/css/forms/formitem.css */
 
-.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.form-controls .onyx-groupbox{margin-top:10px;overflow:hidden}.form-controls .onyx-groupbox-header{background-color:#dfdddd;color:#303030}.form-controls .onyx-groupbox>*{border-color:#d1d1d1}.form-controls .form-item{clear:both;font-size:.7em;padding:5px 10px;overflow:hidden}.form-controls .form-item .title{float:left;height:35px;line-height:35px;margin-right:10px}.form-controls .form-item .widget-forms-input{float:left}.form-controls .form-item .widget-forms-input .onyx-input-decorator{float:left;padding:4px 8px 8px 8px;min-width:250px}.form-controls .form-item .widget-forms-input .onyx-input-decorator>input{font-size:.7em}.form-controls .form-item .tip-message{float:left;height:35px;line-height:35px;margin-right:10px;margin-left:10px}
+.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.form-controls .onyx-groupbox{margin-top:10px;overflow:hidden}.form-controls .onyx-groupbox-header{background-color:#dfdddd;color:#303030}.form-controls .onyx-groupbox>*{border-color:#d1d1d1}.form-controls .form-item{clear:both;font-size:.7em;padding:5px 10px;overflow:hidden}.form-controls .form-item .title{float:left;height:35px;line-height:35px;margin-right:10px;width:150px;text-align:right;padding-right:10px}.form-controls .form-item .widget-forms-input{float:left}.form-controls .form-item .widget-forms-input .onyx-input-decorator{float:left;padding:4px 8px 8px 8px;min-width:250px}.form-controls .form-item .widget-forms-input .onyx-input-decorator>input{font-size:.7em;width:100%}.form-controls .form-item .widget-forms-textarea{float:left}.form-controls .form-item .widget-forms-textarea .onyx-input-decorator{float:left;padding:4px 8px 8px 8px;min-width:250px}.form-controls .form-item .widget-forms-textarea .onyx-input-decorator>input{font-size:.7em;width:100%}.form-controls .form-item .widget-forms-textarea .onyx-textarea{width:300px;height:50px}.form-controls .form-item .tip-message{float:left;height:35px;line-height:35px;margin-right:10px;width:150px;text-align:right;padding-right:10px;width:auto;margin-left:10px;text-align:left}
+
+/* lib/widgets/css/forms/editabletable.css */
+
+.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.editable-table{display:table;border-right:1px solid #e8e8e8;border-bottom:1px solid #e8e8e8}.editable-table ul{display:table-row}.editable-table li{word-wrap:break-word;white-space:normal;border:1px solid #e8e8e8;border-right:0;border-bottom:0;background:#fff;display:table-cell;color:#333;text-align:left;padding:3px 10px}.editable-table .header-row li{background:#f7f7f7;font-weight:bold;line-height:1.5em;background-color:#f8f8f8}.editable-table .onyx-checkbox{background-size:20px 80px;background-position:0 0}.editable-table .onyx-checkbox[checked]{background-position:0 -20px}
 
 /* lib/widgets/css/lists/treenodes.css */
 
