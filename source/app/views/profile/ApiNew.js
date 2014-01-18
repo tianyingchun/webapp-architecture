@@ -4,7 +4,7 @@ enyo.kind({
 	classes: "api-new",
 	components: [
 		{name: "container", classes:"api-container", components: [
-			{name:"form", onValidationResult:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
+			{name:"form", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "概述"},
 					// api descriptons. text editor.
