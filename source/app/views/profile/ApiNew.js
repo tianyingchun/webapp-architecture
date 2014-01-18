@@ -18,13 +18,13 @@ enyo.kind({
 					]},
 					{classes:"form-item", components:[
 						{classes:"title", content:"接口参数"},
-						{name:"requestParams", kind:"widgets.forms.EditableTable",fields:[
+						{name:"requestParams", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
 							{key:"name", controlType:"text"},
 							{key:"value", controlType:"text"},
 							{key:"isRequired", controlType:"checkbox"},
 							{key:"description", controlType:"textarea"},
 							{key:"more", controlType:"htmleditor"}
-						],headers:["字段","取值","必填","描述","更多"]}
+						]}
 					]}			
 				]},
 				{kind:"onyx.Groupbox", components: [
@@ -61,6 +61,7 @@ enyo.kind({
 					]}				
 				]}
 			]},
+			// {name:"testButton", kind:"onyx.Button",content:"TestButton", ontap: "testButtonTap"},
 			{name:"textEditor", kind: "Master.TextEditor"},
 		]}
 	],
@@ -101,6 +102,13 @@ enyo.kind({
 		// stop  bubble.
 		return true;
 	},
+	/*testButtonTap: function (inSender, inEvent) {
+		this.$.requestParams.setRowsDataSource([
+			{name:"test name", value:"test value", isRequired:true, description:"test description", more:"<html>00</html>"},
+			{name:"test name1", value:"test value1", isRequired:true, description:"test description1", more:"<html>111</html>"}
+		]);
+		return true;
+	},*/
 	// button handler for creating new api
 	addNewApi: function (inSender, inEvent) {
 		var editorText = this.$.textEditor.getEditorContent();

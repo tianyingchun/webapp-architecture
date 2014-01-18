@@ -1,0 +1,13 @@
+{
+  "name": "test-api-demo",
+  "version": "0.0.1",
+  "author":"tianyingchun@outlook.com",
+  "private": true,
+  "scripts": {
+    "start": "node api-server.js"
+  },
+  "dependencies": {
+    "journey": "*",
+    "winston": "*"
+  }
+}
