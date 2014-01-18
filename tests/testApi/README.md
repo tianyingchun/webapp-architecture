@@ -14,10 +14,8 @@
 - npm install journey     --https://github.com/cloudhead/journey
 - npm install winston     --https://github.com/flatiron/winston
 
+- or redirect this */"testapi" directory and execute "npm install", it will install related depandancy plugin package.
 
-- /demo/api/categories
-- /demo/api/apilist
-- /demo/api/apidetail
 
 ### maybe you need to add disable web security for chrom in mac:
 
