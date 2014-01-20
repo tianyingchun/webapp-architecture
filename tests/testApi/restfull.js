@@ -11,29 +11,29 @@ router.map(function() {
     this.root.bind(function (req, res) { res.send("Welcome") });
     var soruceData = [
         // category item info.
-        { id: 1, key: "payment",isDisplay:true, expanded:true, name: "平安支付API", childs:[
-            {id: 2, key: "binding_oauth2", name: "平安付绑定(oauth2)", childs:null },
-            {id: 3, key: "access_token", name: "换取access_token", childs:null },
-            {id: 4, key: "bravo-c", name: "bravo-c", childs:null },
-            {id: 5, key: "bravo-d", name: "bravo-d", childs:null },
-            {id: 6, key: "bravo-e", name: "bravo-e", childs:null },
-            {id: 7, key: "bravo-f", name: "bravo-f", childs:null }
+        { _id: 1, key: "payment",isDisplay:true, expanded:true, name: "平安支付API", apis:[
+            {_id: 2, key: "binding_oauth2", name: "平安付绑定(oauth2)", apis:null },
+            {_id: 3, key: "access_token", name: "换取access_token", apis:null },
+            {_id: 4, key: "bravo-c", name: "bravo-c", apis:null },
+            {_id: 5, key: "bravo-d", name: "bravo-d", apis:null },
+            {_id: 6, key: "bravo-e", name: "bravo-e", apis:null },
+            {_id: 7, key: "bravo-f", name: "bravo-f", apis:null }
         ]},
-        { id: 8, key:"delta", isDisplay:true, name: "category name 2",childs: [
-            {id: 9, key: "delta-a", name: "delta-a", childs:null },
-            {id: 10, key: "delta-b", name: "delta-b", childs:null },
-            {id: 11, key: "delta-c", name: "delta-c", childs:null },
-            {id: 12, key: "delta-d", name: "delta-d", childs:null }
+        { _id: 8, key:"delta", isDisplay:true, name: "category name 2",apis: [
+            {_id: 9, key: "delta-a", name: "delta-a", apis:null },
+            {_id: 10, key: "delta-b", name: "delta-b", apis:null },
+            {_id: 11, key: "delta-c", name: "delta-c", apis:null },
+            {_id: 12, key: "delta-d", name: "delta-d", apis:null }
         ]},
-        { id: 13, key:"epsilon", isDisplay:true, expanded:true, name: "category name 3", childs:[
-            {id: 14, key: "epsilon-a", name: "epsilon-a", childs:null },
-            {id: 15, key: "epsilon-b", name: "epsilon-b", childs:null },
-            {id: 16, key: "epsilon-c", name: "epsilon-c", childs:null },
-            {id: 17, key: "epsilon-d", name: "epsilon-d", childs:null },
-            {id: 18, key: "epsilon-e", name: "epsilon-e", childs:null }
+        { _id: 13, key:"epsilon", isDisplay:true, expanded:true, name: "category name 3", apis:[
+            {_id: 14, key: "epsilon-a", name: "epsilon-a", apis:null },
+            {_id: 15, key: "epsilon-b", name: "epsilon-b", apis:null },
+            {_id: 16, key: "epsilon-c", name: "epsilon-c", apis:null },
+            {_id: 17, key: "epsilon-d", name: "epsilon-d", apis:null },
+            {_id: 18, key: "epsilon-e", name: "epsilon-e", apis:null }
         ]},
-        { id: 19, key:"charlie", isDisplay:false, name: "category name 4" },
-        { id: 20, key:"detage", isDisplay:true, name: "category name 5" }
+        { _id: 19, key:"charlie", isDisplay:false, name: "category name 4" },
+        { _id: 20, key:"detage", isDisplay:true, name: "category name 5" }
 
     ];
   

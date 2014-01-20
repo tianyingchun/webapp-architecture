@@ -186,5 +186,41 @@ enyo.kind({
 		normalDialog.setTitle(title);
 		normalDialog.setHtmlContent(htmlContent);
 		normalDialog.show();
+	},
+	//@public show spinner dialog message.
+	//eg. { message:"", size:30}
+	showSpinnerPopup: function (config) {
+		var spinnerDialog = new widgets.dialog.SpinnerDialog(config);
+		spinnerDialog.show();
+	},
+	 /**
+     * Show alert dialog box
+     * @param {Object} config the alert dialog configurations
+     * eg.{
+     *      title:'title',
+     *      okButtonText: "Yes",
+            message: "", 
+            success:function(){}
+     *    }
+     */
+	showAlertDialog: function (config) {
+		var alertDialog = new widgets.dialog.AlertDialog(config);
+        alertDialog.show();
+	},
+	/**
+     * Show confirm dialog 
+     * @param {Object} config the confirm dialog configurations
+     * eg.{
+     *      title:'title',
+     *      confirmText: "Yes",
+            cancelText: "Cancel",
+            message: "", 
+            success:function(){},
+            failure:function(){}
+     *    }
+     */
+	showConfirmDialog: function (title, message) {
+		var confirmDialog = new widgets.dialog.ConfirmDialog(config);
+        confirmDialog.show();
 	}
 })

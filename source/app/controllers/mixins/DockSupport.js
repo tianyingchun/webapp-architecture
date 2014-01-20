@@ -52,5 +52,18 @@ enyo.setPath("Master.controllers.DockSupport", {
 	},
 	showProfileMenusUI: function (viewData, viewModel) {
 		this.notifyView(this._dockProfileViewKind, viewModel, viewData);
+	},
+	/**
+	 * Hightight profile menu item,
+	 * @param  {object} data the key data for highlight item.
+	 */
+	highlightProfileMenuItem: function (data) {
+		if (Master.view.frame.hasProfileContentInDock()) {
+			var viewData = {
+				action: "highlightProfileMenuItem",
+				data: data || {}
+			};
+			this.notifyView(this._dockProfileViewKind, {}, viewData);
+		}
 	}
 });

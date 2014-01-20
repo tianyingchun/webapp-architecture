@@ -19,19 +19,18 @@
 			if (enyo.isArray(source)){
 				for (var i = 0; i < source.length; i++) {
 					var item = source[i];
-					if(typeof(item.isDisplay) == "undefined" || item.isDisplay == true) {
-						var convertItem = {
-							categoryId: item.id,
-							categoryKey: item.key,
-							categoryName: item.name,
-							expanded: item.expanded || false,
-							childs: []
-						};
-						result.push(convertItem);
-						// loop child source.
-						if (item.childs && item.childs.length) {
-							this.categoryBasicInfoDTO(item.childs, convertItem.childs);
-						}
+					var convertItem = {
+						categoryId: item._id,
+						categoryKey: item.key,
+						categoryName: item.name,
+						expanded: item.expanded || false,
+						isDisplay: typeof(item.isDisplay) == "undefined" ? true: item.isDisplay,
+						childs: []
+					};
+					result.push(convertItem);
+					// loop child source.
+					if (item.apis && item.apis.length) {
+						this.categoryBasicInfoDTO(item.apis, convertItem.childs);
 					}
 				};
 			}

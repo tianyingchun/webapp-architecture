@@ -8,13 +8,17 @@ enyo.kind({
 	_contentProfileApiListKindView: "profile.ApiList",
 	// api add new view
 	_contentProfileApiAddNewKindView: "profile.ApiNew",
+	// category list view
+	_contentProfileCategoryListKindView: "profile.CategoryList",
+	// category add new view.
+	_contentProfileCategoryAddNewKindView:"profile.CategoryNew",
 	/**
 	 * Action method for all paged api list.
 	 * @param  {number} page the page index
 	 */
 	apiList: function (page) {
-		this.zLog("list current page: ", page);
-		this.showProfileDockMenus({menuKey: "list"});
+		this.zLog("api list current page: ", page);
+		this.showProfileDockMenus({menuKey: "api_list"});
 		this.bindingViewToContent(this._contentProfileApiListKindView, null, null);
 
 		// loading api list.
@@ -34,7 +38,7 @@ enyo.kind({
 	addNewApi: function () {
 		this.zLog("add new");
 		// show profile.
-		this.showProfileDockMenus({menuKey: "list"});
+		this.showProfileDockMenus({menuKey: "api_list"});
 		this.bindingViewToContent(this._contentProfileApiAddNewKindView, null, null);
 		var viewModel = {
 			restInfo: {
@@ -57,6 +61,60 @@ enyo.kind({
 	showApiListUI: function (viewData, viewModel) {
 		this.notifyView(this._contentProfileApiListKindView, viewModel, viewData);
 	},
+	/**
+	 * list all categories
+	 * @param  {number} page the current category list page
+	 */
+	categoryList: function (page) {
+		this.zLog("category list current page: ", page);
+		this.showProfileDockMenus({menuKey: "category_list"});
+		// binding view first.
+		this.bindingViewToContent(this._contentProfileCategoryListKindView, null, null);
+		var categoryModel = new Master.models.apipool.Categories();
+		var viewData = {
+			action: "showCategoriesUI", // view action.
+			data: {page: page || 1}
+		};
+		if (isNaN(page)) {
+			viewData.data.page = 1;
+		}
+		categoryModel.getApiCategories(this.bindSafely("_showCategoryListUI", viewData));
+	},
+	//@private helper method for render view model into corresponding view.
+	_showCategoryListUI: function (viewData, viewModel) {
+		this.notifyView(this._contentProfileCategoryListKindView, viewModel, viewData);
+
+	},
+	/**
+	 * Add new category
+	 */	
+	addNewCategory: function () {
+		this.showProfileDockMenus({menuKey: "category_list"});
+		this.bindingViewToContent(this._contentProfileCategoryAddNewKindView, null, null);
+		var viewModel = {
+			restInfo: {
+				retCode: 1
+			}
+		};
+		this.notifyView(this._contentProfileCategoryAddNewKindView, viewModel, {
+			action:"showAddNewCategoryUI"
+		});
+	},
+	/**
+	 * Edit exist category information
+	 * @param  {string} categoryId the category key.
+	 */
+	editCategory: function (categoryId) {
+
+	},
+	/**
+	 * remove specific cateogry
+	 * @param  {string} categoryId the category key.
+	 */
+	removeCategory: function (categoryId) {
+
+	},
+
 	// show profile dock menus.
 	showProfileDockMenus: function (data) {
 		// hide tabcontrol.
@@ -65,6 +123,9 @@ enyo.kind({
 		Master.view.frame.addClass("profile");
 		if (!Master.view.frame.hasProfileContentInDock()) {
 			this.showProfileMenus(data);
+		} else {
+			// update the profule menu hightlight item.
+			this.highlightProfileMenuItem(data);
 		}
 	}
 });

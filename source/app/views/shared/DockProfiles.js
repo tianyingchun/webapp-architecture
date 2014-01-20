@@ -41,6 +41,16 @@ enyo.kind({
 		var isSelected = this.selectedKey == currItem.get("key");
 		this.$.menuItem.addRemoveClass("selected", isSelected);
 	},
+	/**
+	 * Highlight profil menu item.
+	 * @param  {object} viewModel null
+	 * @param  {object} data      the menu item data
+	 */
+	highlightProfileMenuItem: function (viewModel, data) {
+		this.zLog("data:", data);
+		this.selectedKey = data.menuKey;
+		this.$.list.reset();
+	},
 	menuItemTap: function (inSender, inEvent) {
 		var index = inEvent.index;
 		var currItem = this.menuItems[index];

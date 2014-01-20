@@ -10,7 +10,8 @@ enyo.singleton({
 	menu: {
 		"SIGN_IN":"登陆",
 		"REGISTER":"注册",
-		"API_LIST": "API列表" 
+		"API_LIST": "API列表",
+		"CATEGORY_LIST":"API分类列表"
 	},
 	// titles
 	title: {
@@ -77,7 +78,8 @@ enyo.singleton({
 	validationMsg: {
 		"ALLOWEMPTY":"",//该字段允许为空
 		"REQUIRED": "必填字段!",
-		"EMAIL": "邮箱格式不正确!"
+		"EMAIL": "邮箱格式不正确!",
+		"HASH": "格式不正确只能为[a-z,A-Z,0-9,-_%]中的一个或者多个字符"
 	},
 	// messages
 	message: {

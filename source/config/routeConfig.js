@@ -20,8 +20,14 @@
 		{ path: "profile/api/list", controller: "ProfileController", action:"apiList"},
 		{ path: "profile/api/add", controller: "ProfileController", action:"addNewApi"},
 		{ path: "profile/api/edit/:id", controller: "ProfileController", action:"editApi"},
-		{ path: "profile/api/remove/:id", controller: "ProfileController", action:"removeApi"}
-		
+		{ path: "profile/api/remove/:id", controller: "ProfileController", action:"removeApi"},
+		// categories managerment.
+		{ path: "profile/category/list/:page", controller: "ProfileController", action:"categoryList"},
+		{ path: "profile/category/list", controller: "ProfileController", action:"categoryList"},
+		{ path: "profile/category/add", controller: "ProfileController", action:"addNewCategory"},
+		{ path: "profile/category/edit/:id", controller: "ProfileController", action:"editCategory"},
+		{ path: "profile/category/remove/:id", controller: "ProfileController", action:"removeCategory"}
+
 		/**
 		 * dynamic router: controller action -> show().
 		 * 1.match #product/1/  ->show (page:1, id:"");

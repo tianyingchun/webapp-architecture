@@ -10,7 +10,8 @@ enyo.singleton({
 	menu: {
 		"SIGN_IN":"Log in",
 		"REGISTER":"Register",
-		"API_LIST": "API List"
+		"API_LIST": "API List",
+		"CATEGORY_LIST":"API Categories"
 	},
 	// titles
 	title: {
@@ -76,7 +77,8 @@ enyo.singleton({
 	validationMsg: {
 		"ALLOWEMPTY":"",//该字段允许为空
 		"REQUIRED": "it's required field!",
-		"EMAIL": "email format is not correct!"
+		"EMAIL": "email format is not correct!",
+		"HASH": "format incorrect the character only can be [a-z,A-Z,0-9,-_%]"
 	},
 	// messages
 	message: {
