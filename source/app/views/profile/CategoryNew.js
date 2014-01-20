@@ -17,7 +17,7 @@ enyo.kind({
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "分类名称"},
 					{classes:"form-item", components:[
-						{name:"category_name", allowEmpty:false, placeholder:"分类名称", kind:"widgets.forms.InputDecorator", tipMessage:"", validation: {required:"必填字段！"}}
+						{name:"category_name", allowEmpty:false, placeholder:"分类名称", kind:"widgets.forms.InputDecorator", tipMessage:"分类名称必须填写！", validation: {required:"必填字段！"}}
 					]}
 				]},
 				{kind:"onyx.Groupbox", components: [
@@ -81,11 +81,11 @@ enyo.kind({
 	// @private commit category data.
 	commitCategorydata: function (){
 		var data = {
-			key: "",
-			name: "",
-			isExpanded: true,
-			isDisplay: true,
-			description:""
+			categoryKey: this.$.category_key.getValue(),
+			categoryName: this.$.category_name.getValue(),
+			isExpanded: this.$.category_expanded.getValue(),
+			isDisplay: this.$.category_display.getValue(),
+			description: this.$.category_description.getEditorContent()
 		};
 		this.doCommitCategory(data);
 	}

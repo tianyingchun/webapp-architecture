@@ -2,7 +2,7 @@ enyo.depends(
 	"mixins/",
 	"shared/",
 	"home/",
-	// "product/",
+	"category/",
 	"api/",
 	"profile/",
 	"Frame.js"

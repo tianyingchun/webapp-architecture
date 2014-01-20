@@ -19,6 +19,7 @@ enyo.kind({
 	 * @method 
 	 */
 	index: function () {
+		var test = 1;
 		// fetch all categories from server and show it on the left dock.
 		// force refresh categories shown on left dock.
 		this.getAllCategories({
@@ -32,8 +33,9 @@ enyo.kind({
  			// now directly redirect to first api detail page.
  			this.zLog("apiDetail: ", apiDetail);
  			var apiKey = apiDetail.categoryKey;
- 			// now just redirect to specifc api item.
- 			this.locationApiItem(apiKey);
+ 			
+ 			// now just redirect to first category item.
+ 			this.locationCategoryItem(apiKey);
  		}
 		// binding view.
 	},

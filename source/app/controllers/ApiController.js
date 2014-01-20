@@ -15,6 +15,13 @@ enyo.kind({
 		//if we need to render main content we need use event bubble to update.
 		"Master.controllers.DockSupport"
 	],
+	create: enyo.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			// cache api detail model in the whole controller lifecycle.
+			this.apiDetailModel = new Master.models.apipool.ApiItem();
+		};
+	}),
 	// default action :/node/api
 	index: function (apiKey){
 		this.zLog("apiKey: ", apiKey);
@@ -33,31 +40,34 @@ enyo.kind({
 		// show left dock categories if not.
 		this.showDockCategories({apiKey: apiKey});
 
-		// fetch category details information here.
-		this.fetchCategoryDetailInfo(apiKey, language);
+		// fetch api details information here.
+		this.fetchApiDetailInfo(apiKey, language);
 	},
-	fetchCategoryDetailInfo: function (apiKey, language) {
+	fetchApiDetailInfo: function (apiKey, language) {
 		// binding view,
 		this.bindingViewToContent(this._detailViewKindName, null, null);
 
-		var apiDetail = new Master.models.apipool.CategoryItem();
 		// view data.
 		var viewData = {
-			action: "showCategoryDetailPage", 
+			action: "showApiDetailUI", 
 			data: {
 				apiKey: apiKey,
 				language: language
 			}
 		};
-		apiDetail.getCategoryDetail(apiKey, enyo.bindSafely(this, "showCategoryDetailInfo", viewData));
+		// use cached  model instance here avoid create multiple modle instance and cached within enyo.store __global__
+		// instance.
+		this.apiDetailModel.getApiDetail(apiKey, enyo.bindSafely(this, "_showApiDetailInfo", viewData));
+
 		// binding view.
 	},
-	showCategoryDetailInfo: function (viewData, viewModel) {
+	_showApiDetailInfo: function (viewData, viewModel) {
 		// this.zLog("categoryDetail: ", viewData, viewModel);
 		this.notifyView(this._detailViewKindName, viewModel, viewData);
 	},
 	//@* public show categories on left dock
 	showDockCategories: function (extraData) {
+		Master.view.frame.showSDKPanel();
 		if (!Master.view.frame.hasCategoryContentsIndock()) {
 			// maybe async fetch data here.
 			this.getAllCategories(extraData);

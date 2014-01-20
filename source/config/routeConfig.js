@@ -14,6 +14,9 @@
 		// api show router config.
 		{ path: "node/:api/:language", controller: "ApiController", action: "detail"},
 		{ path: "node/:api", controller: "ApiController", action: "index"},
+		{ path: "c/:api", controller: "CategoryController", action: "detail"},
+
+
 
 		// { path: "profile/login", controller: "ProfileController", "login"},
 		{ path: "profile/api/list/:page", controller: "ProfileController", action:"apiList"},

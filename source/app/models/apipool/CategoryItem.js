@@ -9,7 +9,7 @@ enyo.kind({
 	apis: {
 		// apiKey: categoryInfo
 		categoryInfo: {
-			url: "/category",
+			url: "/category/query",
 			headers: { Authorization: "" }, 
 			cache: {
 				enabled: true,
@@ -17,18 +17,11 @@ enyo.kind({
 			},
 			dto: "categoryDetailDTO"
 		},
-		// update.
+		// update. add new.
 		updateCategoryInfo: {
 			url: "/category",
 			cache: false,
 			dto: "categoryDetailDTO"
-		},
-		// get category config info.
-		categoryConfig:  {
-			url: "/categoryconfig",
-			// directly set cache is false.
-			cache: false,
-			dto: "categoryConfigDTO"
 		}
 	},
 	// for model, defined record schema.
@@ -37,17 +30,19 @@ enyo.kind({
 		categoryId: "",
 		categoryName: "",
 		categoryKey: "",
-		expanded: false,
-		childs: [],
-		// category detail information
-		details: {},
-		// extended information.
-		config: {}
+		isExpanded: false,
+		isDisplay: true,
+		isCategoryNode: true,//
+		description:"",
+		childs: []
 	},
-	// default values for record schema.
-	defaults: {
-		details: {},
-		config: {}
+	//@override the to JSON, it will used to commit new data to server.
+	toJSON: function () {
+		var _data  = {
+			key: this.get("categoryKey"),
+			name: this.get("categoryName")
+		};
+		return enyo.json.stringify(_data);
 	},
 	/**
 	 * Get category details for an specific category.
@@ -67,39 +62,34 @@ enyo.kind({
 	 * @param  {category}   category category data.
 	 */
 	updateCategoryInfo: function (category, fn) {
-		// re-set the value for update filed.
-		this.set("categoryName", "Updated category Name....");
 		// force do post request.
-		this.isNew = true;
+		this.setObject(category);
 		this.commit({
 			apiKey: "updateCategoryInfo",
-			method: "POST",// 'POST','PUT'
+			method: "PUT",// 'POST','PUT'
 			callback: fn
 		});
 	},
-	/**
-	 * API DTO
-	 * get category config dto.
-	 */
-	categoryConfigDTO: function (data) {
-		this.zLog(data);
-		var result = {
-			isDisplay: true,
-			groups: [],
-		};
-		return result;
+	// add new category.
+	addNewCategory: function (category, fn) {
+		this.setObject(category);
+		// force do post request.
+		this.commit({
+			apiKey: "updateCategoryInfo",
+			method: "POST",// 'POST'
+			callback: fn
+		});
 	},
 	/**
 	 * API DTO
 	 * Get category item info, we can fetch all detail information for current category item.
 	 */
 	categoryDetailDTO: function (data) {
-		var details = data.details;
 		var basic = data && enyo.isArray(data) ? data : [data];
 		var tempBasicResult = [], result = {};
-		this.categoryBasicInfoDTO(basic, tempBasicResult);		
+		this.categoryBasicInfoDTO(basic, tempBasicResult, 0);		
 		enyo.mixin(result, tempBasicResult[0]);
-		result.details = this.categoryDetailInfoDTO(details);
+		result.description = data.description;
 		this.zLog("converted data: ", result);
 		return result;
 	}

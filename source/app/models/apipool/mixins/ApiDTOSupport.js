@@ -13,7 +13,7 @@
 				for (var i = 0; i < source.length; i++) {
 					var item = source[i];
 					var apiItem = {
-						apiId: item.id,
+						apiId: item._id,
 						apiKey: item.key,
 						apiName: item.name
 					};
@@ -49,15 +49,15 @@
 					headers: _response && _response.headers || ""
 				};
 				// examples
-				var _examples = details.examples;
-				result.examples = {
-					postCommand: _examples && _examples.postCommand,
-					request: _examples && _examples.request,
-					response: _examples && _examples.response
+				var _example = details.example;
+				result.example = {
+					postCommand: _example && _example.postCommand,
+					request: _example && _example.request,
+					response: _example && _example.response
 				};
 				// sdk
 				var _sdk = details.sdk;
-				result.sdk = _sdk || {};
+				result.sdk = _sdk;
 				// question answers
 				var _questions = details.questions;
 				result.questions = _questions || [];

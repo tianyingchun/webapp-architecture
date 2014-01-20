@@ -5,11 +5,11 @@ enyo.kind({
 	components:[
 		{name:"message",kind:"widgets.base.Spinner", message: Master.locale.get("LOAD_CATEGORY_DETAIL", "message")},
 		{name: "detailcontainer", showing: false, components: [
-			{content:Master.locale.get("API_DESCRIPTION","title"), classes:"title"},
-			{name:"description", allowHtml: true, classes:"description"},
+			{name: "descTitle", showing: false, content:Master.locale.get("API_DESCRIPTION","title"), classes:"title"},
+			{name:"description",showing: false, allowHtml: true, classes:"description"},
 
-			{content:Master.locale.get("API_REQUEST","title"), classes:"title"},
-			{name:"request", clasess:"request", components: [
+			{name: "requestTitle", showing:false, content:Master.locale.get("API_REQUEST","title"), classes:"title"},
+			{name:"request", showing:false, clasess:"request", components: [
 				// request body summary method. PUT /BucketName?sign=MBO:aCLCZtoFQg8I
 				{content:Master.locale.get("API_REQUEST","title"), classes:"child-title"},
 				{name:"reqbody", classes:"body", allowHtml: true},
@@ -24,8 +24,8 @@ enyo.kind({
 				{name:"reqheader",classes:"headers"}
 			]},
 
-			{content:Master.locale.get("API_RESPONSE","title"), classes:"title"},
-			{name:"response", clasess:"response", components: [
+			{name:"responseTitle",showing:false, content:Master.locale.get("API_RESPONSE","title"), classes:"title"},
+			{name:"response", showing:false, clasess:"response", components: [
 				// response result.
 				{name:"resbodytitle", showing:false, content:Master.locale.get("API_RESPONSE_BODY","title"), classes:"child-title"},
 				{name:"resbody", classes:"body", allowHtml: true},
@@ -37,8 +37,8 @@ enyo.kind({
 				{name:"resheader",allowHtml: true,  classes:"headers"}
 			]},
 
-			{content:Master.locale.get("API_EXAMPLES","title"), classes:"title"},
-			{name:"examples", clasess:"examples", components: [
+			{name:"exampleTitle", showing:false, content:Master.locale.get("API_EXAMPLES","title"), classes:"title"},
+			{name:"example", showing:false, clasess:"examples", components: [
 				{name:"postcommand", classes:"post-command", allowHtml: true},
 
 				{content:Master.locale.get("API_REQUEST_EXAMPLE","title"), classes:"child-title"},
@@ -74,51 +74,66 @@ enyo.kind({
 		}
 	}),
 	// show category detail information.
-	showCategoryDetailPage: function (viewModel, extraData) {
+	showApiDetailUI: function (viewModel, extraData) {
 		this.zLog("viewModel: ", viewModel, "extraData: " ,extraData);	
 		this.$.message.hide();
 		var details = viewModel.get("details") || {};
 		// description.
-		this.$.description.setContent(details.description || "");
-		var request = details.request || {};
-
-		// request headers
-		this.showApiInterfaceHeaders(request.headers);
-		// request parameters.
-		this.showApiInterfaceParams(request.params);
-
-		// request body
-		this.$.reqbody.setContent(request.body);
-		
-		//request payload.
-		if(request.payload) {
-			var payloadJson = hljs.highlight("js", request.payload).value;
-			this.$.reqpayload.setContent(payloadJson);
-			this.$.payloadtitle.show();
-			this.$.reqpayload.show();
+		if (details.description) {
+			this.$.description.setContent(details.description || "");
+			this.$.descTitle.show();
+			this.$.description.show();
 		}
+		// request block
+		if(details.request) {
+			this.$.requestTitle.show();
+			this.$.request.show();
+			var request = details.request;
+			// request headers
+			this.showApiInterfaceHeaders(request.headers);
+			// request parameters.
+			this.showApiInterfaceParams(request.params);
 
-		// response 
-		var response = details.response || {};
-		if (response.body) {
-			var responseJson = hljs.highlight("js", response.body).value;
-			// response body.
-			this.$.resbody.setContent(responseJson);
-			this.$.resbodytitle.show();
+			// request body
+			this.$.reqbody.setContent(request.body);
+			
+			//request payload.
+			if(request.payload) {
+				var payloadJson = hljs.highlight("js", request.payload).value;
+				this.$.reqpayload.setContent(payloadJson);
+				this.$.payloadtitle.show();
+				this.$.reqpayload.show();
+			}
 		}
-		// response parameters comments.
-		this.showResponseParameters(response.params);
-		//response headers.
-		this.$.resheader.setContent(response.headers);
+		if(details.response) {
+			this.$.responseTitle.show();
+			this.$.response.show();
+			// response 
+			var response = details.response || {};
+			if (response.body) {
+				var responseJson = hljs.highlight("js", response.body).value;
+				// response body.
+				this.$.resbody.setContent(responseJson);
+				this.$.resbodytitle.show();
+			}
+			// response parameters comments.
+			this.showResponseParameters(response.params);
+			//response headers.
+			this.$.resheader.setContent(response.headers);
+		}
+		if (details.examples) {
+			this.$.exampleTitle.show();
+			this.$.example.show();
 
-		// examples
-		var example = details.examples || {};
-		// example body.
-		this.$.postcommand.setContent(example.postCommand);
-		// example request.
-		this.$.examplereq.setContent(example.request);
-		// exmaple response,
-		this.$.exampleres.setContent(example.response);
+			// examples
+			var example = details.examples || {};
+			// example body.
+			this.$.postcommand.setContent(example.postCommand);
+			// example request.
+			this.$.examplereq.setContent(example.request);
+			// exmaple response,
+			this.$.exampleres.setContent(example.response);
+		}
 
 		// show questions and answers.
 		var questions  = details.questions;
@@ -127,8 +142,10 @@ enyo.kind({
 		this.$.detailcontainer.show();
 
 		//sdk
-		var sdk = details.sdk || {};
-		this.showSDKPanel(sdk, extraData);
+		var sdk = details.sdk;
+		if(sdk) {
+			this.showSDKPanel(sdk, extraData);
+		}
 	},
 	showSDKPanel: function (sdk, extraData) {
 		var tabItems = [];
@@ -152,7 +169,7 @@ enyo.kind({
  		return hash.join("/");
  	},
 	showQuestionAnswers: function (questions) {
-		if(questions.length) {
+		if(questions && questions.length) {
 			var components = [];
 			for (var i = 0; i < questions.length; i++) {
 				var q = questions[i];
@@ -182,7 +199,7 @@ enyo.kind({
 	 * @param  {array} headers the show api interface headers
 	 */	
 	showApiInterfaceHeaders: function (headers) {
-		if(headers.length) {
+		if(headers && headers.length) {
 			this.$.reqheader.createComponent({
 	            kind:'widgets.forms.TableRowItems', 
 	            keyField:"id",
@@ -206,7 +223,7 @@ enyo.kind({
 	// @params {array}
 	// show api interface parameters
 	showApiInterfaceParams: function (params) {
-		if(params.length) {
+		if(params && params.length) {
 			this.$.params.createComponent({
 	            kind:'widgets.forms.TableRowItems', 
 	            keyField:"id",
@@ -229,7 +246,7 @@ enyo.kind({
 	},
 	// help method for response parameters comments table.
 	showResponseParameters: function (params) {
-		if(params.length) {
+		if(params && params.length) {
 			this.$.resParams.createComponent({
 	            kind:'widgets.forms.TableRowItems', 
 	            keyField:"id",

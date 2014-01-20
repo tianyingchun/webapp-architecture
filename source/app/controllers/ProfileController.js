@@ -4,6 +4,9 @@ enyo.kind({
 	mixins:[
 		"Master.controllers.DockSupport"
 	],
+	handlers:{
+		"onCommitCategory":"addNewCategoryHandler"
+	},
 	// api list view
 	_contentProfileApiListKindView: "profile.ApiList",
 	// api add new view
@@ -127,5 +130,11 @@ enyo.kind({
 			// update the profule menu hightlight item.
 			this.highlightProfileMenuItem(data);
 		}
+	},
+	//@private add new category information 
+	addNewCategoryHandler: function (inSender, inEvent) {
+		this.zLog("new category data: ", inEvent);
+		
+		return true;
 	}
 });

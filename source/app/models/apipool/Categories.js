@@ -38,7 +38,7 @@ enyo.kind({
 		data = data && enyo.isArray(data) ? data : [];
 		var result = [];
 		// convert source data and saved into result.
-		this.categoryBasicInfoDTO(data, result);
+		this.categoryBasicInfoDTO(data, result, 0);
 		
 		this.zLog("conterted categories: ", result);
 		return result;
