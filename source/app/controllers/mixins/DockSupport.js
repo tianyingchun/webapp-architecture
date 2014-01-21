@@ -13,6 +13,8 @@ enyo.setPath("Master.controllers.DockSupport", {
 	 * 
 	 */
 	getAllCategories: function (extraData) {
+		// the collection model won't be cached in __global__ enyo.store.records object
+		// so we don't need to cache this model in current controller.
 		var apiCategories = new Master.models.apipool.Categories();
 		// view data.
 		var viewData = {

@@ -9,11 +9,14 @@
 		background:none;
 	}
 	.enyo-node {
+		img {
+			padding-right: 3px;
+		}
 		color: #008cdd;
 		font-weight: bold;
 		font-size: @font-normal * 1.1;
 		padding-left: 0px !important;
-		&> {
+		/*&> {
 			.enyo-node:before{
 				content:"▸";	
 				font-size: 1.1em;
@@ -25,16 +28,19 @@
 		}	
 		&.noexpand:before{
 			content:"";
-		}
+		}*/
 		& >div:hover{
 			cursor: pointer;
 		}
+	}
+	& > img:first-child{
+		display:none;
 	}
 	.item {
 		padding-left: 16px !important;
 		&>div{
 			font-weight: normal;
-		    width: 100%;
+		    // width: 100%;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
@@ -67,7 +73,7 @@
 	.enyo-node-box{
 		padding-left: 0px;
 	}
-	.enyo-node-client .enyo-node:before{
+	/*.enyo-node-client .enyo-node:before{
 		content:"";
-	}
+	}*/
 }

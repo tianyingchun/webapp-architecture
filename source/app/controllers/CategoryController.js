@@ -8,6 +8,13 @@ enyo.kind({
 	],
 	_contentCategoryDetailKindView:"category.Detail",
 
+	create: enyo.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			//cache categories model
+			this.categoryModel = new Master.models.apipool.CategoryItem();
+		};
+	}),
 	detail: function (key) {
 		this.zLog("category detail key: ", key);
 		this.showDockCategories({apiKey: key});
@@ -18,14 +25,13 @@ enyo.kind({
 	getCategoryDetailInfo: function (key) {
 		// show this view.
 		this.bindingViewToContent(this._contentCategoryDetailKindView, null , null);
-		var categoryModel = new Master.models.apipool.CategoryItem();
 		var viewData = {
 			action: "showCategoryDetailUI", 
 			data: {
 				key: key
 			}
 		};
-		categoryModel.getCategoryDetail(key, this.bindSafely("_showCategoryDetail", viewData));
+		this.categoryModel.getCategoryDetail(key, this.bindSafely("_showCategoryDetail", viewData));
 	},
 	_showCategoryDetail: function (viewData, viewModel) {
 		this.notifyView(this._contentCategoryDetailKindView, viewModel, viewData);

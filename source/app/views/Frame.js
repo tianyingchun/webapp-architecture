@@ -38,8 +38,8 @@ enyo.kind({
 						{name:"apiDetails"}
 					]}
 				]}
-			]},
-			{name:"apiSdk", classes:"sdk",offsetDistance:500, marginLeft:"81%", kind: "widgets.custom.TabControl"}
+			]}//, disabled api sdk function module now.
+			// {name:"apiSdk", classes:"sdk",offsetDistance:500, marginLeft:"81%", kind: "widgets.custom.TabControl"}
 		]},
 		{name:"footer", id:"footer", components: [
 			{classes:"footer-inner", components:[
@@ -139,15 +139,18 @@ enyo.kind({
 	},
 	// set sdk content for header, tab contents.
 	setSDKContent: function (tabItemsSource) {
-		var $sdk = this.$.apiSdk;
-		$sdk.set("itemSource", tabItemsSource);
-		$sdk.show();
+		// disabled this function module now.
+		// var $sdk = this.$.apiSdk;
+		// $sdk.set("itemSource", tabItemsSource);
+		// $sdk.show();
 	},
 	hideSDKPanel: function () {
-		this.$.apiSdk.hide();
+		// disabled this function module now
+		// this.$.apiSdk.hide();
 	},	
 	showSDKPanel: function () {
-		this.$.apiSdk.show();
+		// disabled this function module now
+		// this.$.apiSdk.show();
 	},
 	// go to application home page.
 	goHome: function () {

@@ -21,7 +21,7 @@ enyo.kind({
 	// we need to maually manager this object.
 	primaryKey:"apiKey", //default is "id"
 	// api detail default fields. it will be auto instanced.
-	defaults:{
+	attributes:{
 		apiId: "",
 		apiKey: "",
 		apiName: "",
@@ -38,6 +38,7 @@ enyo.kind({
 	 * @return {void}
 	 */
 	getApiDetail: function (key, fn) {
+		fn = fn || enyo.nop;
 		// first check if current model has cached in enyo.store instance, avoid create the same instance with the same primaryKey
 		// all enyo.Model instance will cached in enyo.store.
 		// and BTW we can also cache model instance in controller, make our model instance only create once in 

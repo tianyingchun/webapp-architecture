@@ -7,7 +7,7 @@ enyo.kind({
 	model: "Master.models.apipool.ApiItem",
 	apis: {
 		apiList: {
-			url: "api/list",
+			url: "/apis",
 			dto: "apiListItemDTO"
 		}
 	},

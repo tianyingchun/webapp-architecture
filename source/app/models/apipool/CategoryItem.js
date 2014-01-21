@@ -36,6 +36,9 @@ enyo.kind({
 		description:"",
 		childs: []
 	},
+	// define primary key.
+	primaryKey: "categoryKey",
+
 	//@override the to JSON, it will used to commit new data to server.
 	toJSON: function () {
 		var _data  = {
@@ -51,11 +54,17 @@ enyo.kind({
 	 * @return {void}
 	 */
 	getCategoryDetail: function (categoryKey, fn) {
-		this.fetch({
-			apiKey: "categoryInfo",
-			data: { key: categoryKey },
-			callback: fn
-		});
+		fn = fn || enyo.nop;
+		var exist = this.store.findLocal(this.kindName, {categoryKey: categoryKey});
+		if (exist) {
+			fn(exist);
+		} else {
+			this.fetch({
+				apiKey: "categoryInfo",
+				data: { key: categoryKey },
+				callback: fn
+			});
+		}
 	},
 	/**
 	 * Update category info

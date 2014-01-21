@@ -15,6 +15,7 @@ enyo.kind({
 	_contentProfileCategoryListKindView: "profile.CategoryList",
 	// category add new view.
 	_contentProfileCategoryAddNewKindView:"profile.CategoryNew",
+
 	/**
 	 * Action method for all paged api list.
 	 * @param  {number} page the page index

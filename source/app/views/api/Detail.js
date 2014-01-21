@@ -205,7 +205,7 @@ enyo.kind({
 	            keyField:"id",
 	            itemsSource: headers,
 	            showCheckbox: false,
-	            hideFieldItems: ["more"],
+	            hideFieldItems: ["more","_id"],
 	            captionText: [
 	            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
 	            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
@@ -229,7 +229,7 @@ enyo.kind({
 	            keyField:"id",
 	            itemsSource: params,
 	            showCheckbox: false,
-	            hideFieldItems: ["more"],
+	            hideFieldItems: ["more","_id"],
 	            captionText: [
 	            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
 	            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
@@ -252,7 +252,7 @@ enyo.kind({
 	            keyField:"id",
 	            itemsSource: params,
 	            showCheckbox: false,
-	            hideFieldItems: ["more"],
+	            hideFieldItems: ["more","_id"],
 	            captionText: [
 	            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
 	            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),

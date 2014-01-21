@@ -32,7 +32,7 @@ enyo.kind({
 		this.$.categoriesContainer.render();
 		// show categories, hide message.
 		this.$.message.hide();
-		this.$.dockTitle.show();
+		// this.$.dockTitle.show();
 		this.$.categoriesContainer.show();
 	}
 });
