@@ -37,13 +37,16 @@ enyo.kind({
 		childs: []
 	},
 	// define primary key.
-	primaryKey: "categoryKey",
+	// primaryKey: "categoryKey",
 
 	//@override the to JSON, it will used to commit new data to server.
 	toJSON: function () {
 		var _data  = {
 			key: this.get("categoryKey"),
-			name: this.get("categoryName")
+			name: this.get("categoryName"),
+			expanded:this.get("isExpanded"),
+			isDisplay: this.get("isDisplay"),
+			description: this.get("description")
 		};
 		return enyo.json.stringify(_data);
 	},
@@ -56,7 +59,9 @@ enyo.kind({
 	getCategoryDetail: function (categoryKey, fn) {
 		fn = fn || enyo.nop;
 		var exist = this.store.findLocal(this.kindName, {categoryKey: categoryKey});
-		if (exist) {
+		if(enyo.isArray(exist) && exist.length){
+			fn(exist[0]);
+		} else if(enyo.isObject(exist)){
 			fn(exist);
 		} else {
 			this.fetch({
@@ -98,7 +103,7 @@ enyo.kind({
 		var tempBasicResult = [], result = {};
 		this.categoryBasicInfoDTO(basic, tempBasicResult, 0);		
 		enyo.mixin(result, tempBasicResult[0]);
-		result.description = data.description;
+		result.description = basic[0].description;
 		this.zLog("converted data: ", result);
 		return result;
 	}

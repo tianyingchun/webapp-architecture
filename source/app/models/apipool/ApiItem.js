@@ -44,7 +44,9 @@ enyo.kind({
 		// and BTW we can also cache model instance in controller, make our model instance only create once in 
 		// the whole life cycle.
 		var record = this.store.findLocal(this.kindName, {apiKey:key});
-		if(record) {
+		if(enyo.isArray(record) && record.length) {
+			fn(record[0]);
+		} else if(enyo.isObject(record)) {
 			fn(record);
 		} else {
 			this.fetch({

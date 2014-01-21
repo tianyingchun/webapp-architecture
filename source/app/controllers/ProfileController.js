@@ -135,7 +135,28 @@ enyo.kind({
 	//@private add new category information 
 	addNewCategoryHandler: function (inSender, inEvent) {
 		this.zLog("new category data: ", inEvent);
-		
+		var data = inEvent.data;
+		var categoryItemModel = this.getCategoryItemModel();
+		categoryItemModel.addNewCategory(data, this.bindSafely("_addNewCategoryComplete"));
 		return true;
+	},
+	_addNewCategoryComplete: function (viewModel) {
+		this.zLog("viewModel: ", viewModel);
+		var _message = "添加分类成功！";
+		if(viewModel.restInfo.retCode!=1){
+			// show add new successful.
+			_message = viewModel.restInfo.retMessage;
+		}
+		Master.view.frame.showAlertDialog({
+			title: "添加分类",
+			message:_message
+		});
+	},
+	//@private get category item model.
+	getCategoryItemModel: function () {
+		if(!this.categoryItemModel ){
+			this.categoryItemModel = new Master.models.apipool.CategoryItem();
+		}
+		return this.categoryItemModel;
 	}
 });

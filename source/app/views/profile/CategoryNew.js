@@ -87,6 +87,6 @@ enyo.kind({
 			isDisplay: this.$.category_display.getValue(),
 			description: this.$.category_description.getEditorContent()
 		};
-		this.doCommitCategory(data);
+		this.doCommitCategory({data:data});
 	}
 });

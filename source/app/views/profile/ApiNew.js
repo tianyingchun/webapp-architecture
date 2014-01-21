@@ -6,6 +6,25 @@ enyo.kind({
 		{name: "container", classes:"api-container", components: [
 			{name:"form", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
 				{kind:"onyx.Groupbox", components: [
+					{kind: "onyx.GroupboxHeader", content: "API KEY"},
+					{classes:"form-item", components:[
+						{name:"api_key", allowEmpty:false, placeholder:"API KEY", kind:"widgets.forms.InputDecorator", tipMessage:"全局唯一，请一定输入不重复的KEY限英文字母", validation: {required:"必填字段！",hash:""}}
+					]}
+				]},
+				{kind:"onyx.Groupbox", components: [
+					{kind: "onyx.GroupboxHeader", content: "API名称"},
+					{classes:"form-item", components:[
+						{name:"api_name", allowEmpty:false, placeholder:"API名称", kind:"widgets.forms.InputDecorator", tipMessage:"API 名称必须填写！", validation: {required:"必填字段！"}}
+					]}
+				]},
+				{kind:"onyx.Groupbox", components: [
+					{kind: "onyx.GroupboxHeader", content: "概述"},
+					{classes:"form-item", components:[
+						{classes:"title", content:"API分类"},
+						{name:"api_categories", kind:"widgets.forms.DropdownListDecorator"}
+					]},
+				]},
+				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "概述"},
 					// api descriptons. text editor.
 					{name:"apiDescription", kind: "Master.TextEditor"}		
@@ -62,7 +81,6 @@ enyo.kind({
 				]}
 			]},
 			// {name:"testButton", kind:"onyx.Button",content:"TestButton", ontap: "testButtonTap"},
-			{name:"textEditor", kind: "Master.TextEditor"},
 		]}
 	],
 	receiveMessage: enyo.inherit(function(sup) {
@@ -89,7 +107,6 @@ enyo.kind({
 	},
 	showHtmlEditors: function () {
 		this.$.apiDescription.markItUp();
-		this.$.textEditor.markItUp();
 	},
 	formValidationSubmit: function (inSender, inEvent) {
 		var validationResult = inEvent;

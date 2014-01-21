@@ -66,10 +66,10 @@ enyo.kind({
 			location = "profile/api/add";
 			break;
 			case "edit":
-			location = "profile/api/edit/"+ currItem.apiId
+			location = "profile/api/edit/"+ currItem.apiKey
 			break;
 			case "remove":
-			location = "profile/api/remove/"+ currItem.apiId
+			location = "profile/api/remove/"+ currItem.apiKey
 			break;
 		}
 		if (location) {
