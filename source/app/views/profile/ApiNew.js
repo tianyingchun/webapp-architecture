@@ -21,7 +21,7 @@ enyo.kind({
 					]}
 				]},
 				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "概述"},
+					{kind: "onyx.GroupboxHeader", content: "API分类"},
 					{classes:"form-item", components:[
 						{classes:"title", content:"API分类"},
 						{name:"api_categories",key:"categoryId", defaultTitle:"--请选择API分类--", kind:"widgets.forms.DropdownListDecorator"}
@@ -36,8 +36,9 @@ enyo.kind({
 					{kind: "onyx.GroupboxHeader", content: "请求"},
 					{classes:"form-item", components:[
 						{classes:"title", content:"HTTP请求简要信息"},
-						{name:"requestBody", allowEmpty:false, placeholder:"input something", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写Http请求的BODY体内容!"}
+						{name:"requestBody", allowEmpty:false, placeholder:"HTTP请求简要信息", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写Http请求的BODY体内容!"}
 					]},
+					// request params.
 					{classes:"form-item", components:[
 						{classes:"title", content:"接口参数"},
 						{name:"requestParams", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
@@ -47,40 +48,74 @@ enyo.kind({
 							{key:"description", controlType:"textarea"},
 							{key:"more", controlType:"htmleditor"}
 						]}
-					]}			
+					]},
+					// request headers
+					{classes:"form-item", components:[
+						{classes:"title", content:"接口Headers"},
+						{name:"requestHeaders", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
+							{key:"name", controlType:"text"},
+							{key:"value", controlType:"text"},
+							{key:"isRequired", controlType:"checkbox"},
+							{key:"description", controlType:"textarea"},
+							{key:"more", controlType:"htmleditor"}
+						]}
+					]}		
 				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "响应"},
 					{classes:"form-item", components:[
-						{classes:"title", content:"API 描述"},
-						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+						{classes:"title", content:"HTTP响应简要信息"},
+						{name:"responseBody", allowEmpty:false, placeholder:"HTTP响应简要信息", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写Http响应的BODY体内容!"}
 					]},
+					// response params.
 					{classes:"form-item", components:[
-						{classes:"title", content:"API 描述"},
-						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
-					]}				
+						{classes:"title", content:"响应参数简介"},
+						{name:"responseParams", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
+							{key:"name", controlType:"text"},
+							{key:"value", controlType:"text"},
+							{key:"isRequired", controlType:"checkbox"},
+							{key:"description", controlType:"textarea"},
+							{key:"more", controlType:"htmleditor"}
+						]}
+					]},
+					// response headers
+					{classes:"form-item", components:[
+						{classes:"title", content:"响应Headers简介"},
+						{name:"responseHeaders", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
+							{key:"name", controlType:"text"},
+							{key:"value", controlType:"text"},
+							{key:"isRequired", controlType:"checkbox"},
+							{key:"description", controlType:"textarea"},
+							{key:"more", controlType:"htmleditor"}
+						]}
+					]}		
 				]},
 				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "示例"},
+					{kind: "onyx.GroupboxHeader", content: "测试示例"},
+					// post command
 					{classes:"form-item", components:[
-						{classes:"title", content:"API 描述"},
-						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+						{classes:"title", content:"POST 命令"},
+						{name:"example_post_body",allowEmpty:true, placeholder:"输入POST 测试的命令代码", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试的命令代码"}
 					]},
+					// exmaple post request string
 					{classes:"form-item", components:[
-						{classes:"title", content:"API 描述"},
-						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
+						{classes:"title", content:"POST 请求串"},
+						{name:"example_request", allowEmpty:true, placeholder:"输入POST 测试请求串", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试请求串"}
+					]},
+					// exmaple post response string
+					{classes:"form-item", components:[
+						{classes:"title", content:"POST 响应串"},
+						{name:"example_response", allowEmpty:true, placeholder:"输入POST 测试响应串", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试响应串"}
 					]}				
 				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "问答"},
-					{classes:"form-item", components:[
-						{classes:"title", content:"API 描述"},
-						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
-					]},
-					{classes:"form-item", components:[
-						{classes:"title", content:"API 描述"},
-						{allowEmpty:true, placeholder:"input something", kind:"widgets.forms.InputDecorator", tipMessage:"tipMessage", validation: {required:"", email:"邮件格式不正确！"}}
-					]}				
+					{classes:"form-item question-answers", components:[
+						{name:"question_answers", kind:"widgets.forms.EditableTable",headers:["问题","答案"], cells:[
+							{key:"question", controlType:"textarea"},
+							{key:"answer", controlType:"textarea"}
+						]}
+					]}		
 				]}
 			]},
 			// {name:"testButton", kind:"onyx.Button",content:"TestButton", ontap: "testButtonTap"},
