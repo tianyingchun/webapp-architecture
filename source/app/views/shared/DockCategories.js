@@ -6,20 +6,6 @@ enyo.kind({
 		{name:"dockTitle",showing:false, classes: "dock-title", content:Master.locale.get("API_CATALOG","title")},
 		{name: "categoriesContainer", showing: false}
 	],
-	receiveMessage: enyo.inherit(function(sup) {
-		return function (viewModel, viewData) {
-			sup.apply(this, arguments);
-			// do nothing now..
-			var viewAction  = viewData.action;
-			var extraData = viewData.data;
-			var viewActionFn = viewAction && this[viewAction];
-			if (viewActionFn) {
-				viewActionFn.call(this, viewModel, extraData);
-			} else {
-				this.zWarn("viewActionFn don't exist!");
-			}
-		}
-	}),
 	// show categories in left dock if we directly enter specific api page.
 	// e.g. http://localhost:8000/debug.html#node/bravo-a/java
 	showUICategories: function (viewModel, extraData) {

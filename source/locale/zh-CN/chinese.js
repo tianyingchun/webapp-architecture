@@ -30,7 +30,8 @@ enyo.singleton({
 		"API_RESPONSE_HEADERS": "响应头",
 		"API_RESPONSE_BODY": "响应结果",
 		"API_REQUEST_PARAMS":"接口参数",
-		"API_RESPONSE_PARAMS": "响应参数"
+		"API_RESPONSE_PARAMS": "响应参数",
+		"DIALOG_ALERT_ERROR":"出错了"
 	},
 	// navgator links.
 	nav: {

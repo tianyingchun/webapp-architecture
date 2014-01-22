@@ -5,6 +5,7 @@ enyo.kind({
 		"Master.controllers.DockSupport"
 	],
 	handlers:{
+		"onFetchApiAvailableCategories":"fetchApiAvailableCategories",
 		"onCommitCategory":"addNewCategoryHandler"
 	},
 	// api list view
@@ -88,6 +89,16 @@ enyo.kind({
 	_showCategoryListUI: function (viewData, viewModel) {
 		this.notifyView(this._contentProfileCategoryListKindView, viewModel, viewData);
 
+	},
+	fetchApiAvailableCategories: function(inSender, inEvent){
+		var categoryModel = new Master.models.apipool.Categories();
+		categoryModel.getApiCategories(this.bindSafely("_showAvailableCategories"));
+	},
+	// show available categories.
+	_showAvailableCategories: function (viewModel){
+		this.notifyView(this._contentProfileApiAddNewKindView,viewModel, {
+			action:"showAvalilableCategories" // defined in view.
+		});
 	},
 	/**
 	 * Add new category

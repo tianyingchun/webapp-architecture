@@ -2,6 +2,9 @@ enyo.kind({
 	name: "Master.views.profile.ApiNew",
 	kind: "Master.View",
 	classes: "api-new",
+	events:{
+		"onFetchApiAvailableCategories":""
+	},
 	components: [
 		{name: "container", classes:"api-container", components: [
 			{name:"form", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
@@ -21,7 +24,7 @@ enyo.kind({
 					{kind: "onyx.GroupboxHeader", content: "概述"},
 					{classes:"form-item", components:[
 						{classes:"title", content:"API分类"},
-						{name:"api_categories", kind:"widgets.forms.DropdownListDecorator"}
+						{name:"api_categories",key:"categoryId", defaultTitle:"--请选择API分类--", kind:"widgets.forms.DropdownListDecorator"}
 					]},
 				]},
 				{kind:"onyx.Groupbox", components: [
@@ -83,27 +86,32 @@ enyo.kind({
 			// {name:"testButton", kind:"onyx.Button",content:"TestButton", ontap: "testButtonTap"},
 		]}
 	],
-	receiveMessage: enyo.inherit(function(sup) {
-		return function (viewModel, viewData) {
-			sup.apply(this, arguments);
-			// do nothing now..
-			var viewAction  = viewData.action;
-			var extraData = viewData.data;
-			var viewActionFn = viewAction && this[viewAction];
-			if (viewActionFn) {
-				viewActionFn.call(this, viewModel, extraData);
-			} else {
-				this.zWarn("viewActionFn don't exist!:", viewAction);
-			}
-		}
-	}),
 	// show app new api ui interface.
 	showAddNewApiUI: function (viewModel){
 		// show html editors.
 		this.showHtmlEditors();
 		// show table row datas.
+		// loading categories dropdownlist.
+		this.fetchAvalilableCategories();
 		// 
+	},
+	fetchAvalilableCategories: function () {
+		this.$.api_categories.showSpinner();
 		// 
+		this.doFetchApiAvailableCategories();
+	},
+	showAvalilableCategories: function (viewModel) {
+		this.zLog("viewModel: ", viewModel);
+		var records = viewModel.records;
+		var _components = [];
+		for (var i = 0; i < records.length; i++) {
+			var record = records[i];
+			_components.push({
+				content: record.categoryName,
+				categoryId: record.categoryId
+			});
+		};
+		this.$.api_categories.set("menuItemComponents", _components);
 	},
 	showHtmlEditors: function () {
 		this.$.apiDescription.markItUp();
@@ -116,6 +124,8 @@ enyo.kind({
 			// do bisiness logics.
 			this.$.requestParams.getTableJSONResult();
 		}
+		var selectedCategory = this.$.api_categories.getSelectedItem();
+		this.zLog("selected category: ", selectedCategory);
 		// stop  bubble.
 		return true;
 	},

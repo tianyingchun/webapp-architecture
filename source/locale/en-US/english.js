@@ -30,7 +30,8 @@ enyo.singleton({
 		"API_RESPONSE_HEADERS": "Reponse Headers",
 		"API_RESPONSE_BODY": "Response Result",
 		"API_REQUEST_PARAMS":"API Arguments",
-		"API_RESPONSE_PARAMS": "Response Comments"
+		"API_RESPONSE_PARAMS": "Response Comments",
+		"DIALOG_ALERT_ERROR":"Alert Error"
 	},
 	nav: {
 		"HOME": "Home",
