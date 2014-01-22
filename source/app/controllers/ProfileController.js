@@ -6,7 +6,8 @@ enyo.kind({
 	],
 	handlers:{
 		"onFetchApiAvailableCategories":"fetchApiAvailableCategories",
-		"onCommitCategory":"addNewCategoryHandler"
+		"onCommitCategory":"addNewCategoryHandler",
+		"onSaveApiInformation":"saveNewApiHandler"
 	},
 	// api list view
 	_contentProfileApiListKindView: "profile.ApiList",
@@ -163,11 +164,34 @@ enyo.kind({
 			message:_message
 		});
 	},
+	saveNewApiHandler: function (inSender, inEvent) {
+		var _apiItemModel = this.getApiItemModel();
+		var apiData = inEvent.data;
+		_apiItemModel.addNewApi(apiData, this.bindSafely("_addNewApiComplete"));
+		return true;
+	},
+	_addNewApiComplete: function (viewModel) {
+		this.zLog("viewModel: ", viewModel);
+		var _message = "添加新API 成功！";
+		if(viewModel.restInfo.retCode!=1) {
+			_message = viewModel.restInfo.retMessage;
+		}
+		Master.view.frame.showAlertDialog({
+			title: "添加API",
+			message:_message
+		});
+	},
+	getApiItemModel: function (){
+		if(!this._apiItemModel) {
+			this._apiItemModel = new Master.models.apipool.ApiItem();
+		}
+		return this._apiItemModel;
+	},
 	//@private get category item model.
 	getCategoryItemModel: function () {
-		if(!this.categoryItemModel ){
-			this.categoryItemModel = new Master.models.apipool.CategoryItem();
+		if(!this._categoryItemModel ){
+			this._categoryItemModel = new Master.models.apipool.CategoryItem();
 		}
-		return this.categoryItemModel;
+		return this._categoryItemModel;
 	}
 });

@@ -3,7 +3,10 @@ enyo.kind({
 	kind: "Master.View",
 	classes: "api-new",
 	events:{
-		"onFetchApiAvailableCategories":""
+		// get all available categories.
+		"onFetchApiAvailableCategories":"",
+		// save api information to server.
+		"onSaveApiInformation":""
 	},
 	components: [
 		{name: "container", classes:"api-container", components: [
@@ -11,37 +14,37 @@ enyo.kind({
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "API KEY"},
 					{classes:"form-item", components:[
-						{name:"api_key", allowEmpty:false, placeholder:"API KEY", kind:"widgets.forms.InputDecorator", tipMessage:"全局唯一，请一定输入不重复的KEY限英文字母", validation: {required:"必填字段！",hash:""}}
+						{name:"api_key", placeholder:"API KEY", kind:"widgets.forms.InputDecorator", tipMessage:"全局唯一，请一定输入不重复的KEY限英文字母", validation: {required:"必填字段！",hash:""}}
 					]}
 				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "API名称"},
 					{classes:"form-item", components:[
-						{name:"api_name", allowEmpty:false, placeholder:"API名称", kind:"widgets.forms.InputDecorator", tipMessage:"API 名称必须填写！", validation: {required:"必填字段！"}}
+						{name:"api_name", placeholder:"API名称", kind:"widgets.forms.InputDecorator", tipMessage:"API 名称必须填写！", validation: {required:"必填字段！"}}
 					]}
 				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "API分类"},
 					{classes:"form-item", components:[
 						{classes:"title", content:"API分类"},
-						{name:"api_categories",key:"categoryId", defaultTitle:"--请选择API分类--", kind:"widgets.forms.DropdownListDecorator"}
+						{name:"api_categories",key:"categoryId", defaultTitle:"--请选择API分类--", required:true, tipMessage:"必须选择特定的分类", kind:"widgets.forms.DropdownListDecorator"}
 					]},
 				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "概述"},
 					// api descriptons. text editor.
-					{name:"apiDescription", kind: "Master.TextEditor"}		
+					{name:"api_description", kind: "Master.TextEditor"}		
 				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "请求"},
 					{classes:"form-item", components:[
 						{classes:"title", content:"HTTP请求简要信息"},
-						{name:"requestBody", allowEmpty:false, placeholder:"HTTP请求简要信息", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写Http请求的BODY体内容!"}
+						{name:"request_body", placeholder:"HTTP请求简要信息", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写Http请求的BODY体内容!"}
 					]},
 					// request params.
 					{classes:"form-item", components:[
 						{classes:"title", content:"接口参数"},
-						{name:"requestParams", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
+						{name:"request_params", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
 							{key:"name", controlType:"text"},
 							{key:"value", controlType:"text"},
 							{key:"isRequired", controlType:"checkbox"},
@@ -52,7 +55,7 @@ enyo.kind({
 					// request headers
 					{classes:"form-item", components:[
 						{classes:"title", content:"接口Headers"},
-						{name:"requestHeaders", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
+						{name:"request_headers", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
 							{key:"name", controlType:"text"},
 							{key:"value", controlType:"text"},
 							{key:"isRequired", controlType:"checkbox"},
@@ -65,12 +68,12 @@ enyo.kind({
 					{kind: "onyx.GroupboxHeader", content: "响应"},
 					{classes:"form-item", components:[
 						{classes:"title", content:"HTTP响应简要信息"},
-						{name:"responseBody", allowEmpty:false, placeholder:"HTTP响应简要信息", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写Http响应的BODY体内容!"}
+						{name:"response_body", placeholder:"HTTP响应简要信息", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写Http响应的BODY体内容!"}
 					]},
 					// response params.
 					{classes:"form-item", components:[
 						{classes:"title", content:"响应参数简介"},
-						{name:"responseParams", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
+						{name:"response_params", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
 							{key:"name", controlType:"text"},
 							{key:"value", controlType:"text"},
 							{key:"isRequired", controlType:"checkbox"},
@@ -81,7 +84,7 @@ enyo.kind({
 					// response headers
 					{classes:"form-item", components:[
 						{classes:"title", content:"响应Headers简介"},
-						{name:"responseHeaders", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
+						{name:"response_headers", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
 							{key:"name", controlType:"text"},
 							{key:"value", controlType:"text"},
 							{key:"isRequired", controlType:"checkbox"},
@@ -95,17 +98,17 @@ enyo.kind({
 					// post command
 					{classes:"form-item", components:[
 						{classes:"title", content:"POST 命令"},
-						{name:"example_post_body",allowEmpty:true, placeholder:"输入POST 测试的命令代码", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试的命令代码"}
+						{name:"example_post_body", placeholder:"输入POST 测试的命令代码", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试的命令代码"}
 					]},
 					// exmaple post request string
 					{classes:"form-item", components:[
 						{classes:"title", content:"POST 请求串"},
-						{name:"example_request", allowEmpty:true, placeholder:"输入POST 测试请求串", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试请求串"}
+						{name:"example_request", placeholder:"输入POST 测试请求串", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试请求串"}
 					]},
 					// exmaple post response string
 					{classes:"form-item", components:[
 						{classes:"title", content:"POST 响应串"},
-						{name:"example_response", allowEmpty:true, placeholder:"输入POST 测试响应串", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试响应串"}
+						{name:"example_response", placeholder:"输入POST 测试响应串", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试响应串"}
 					]}				
 				]},
 				{kind:"onyx.Groupbox", components: [
@@ -149,20 +152,45 @@ enyo.kind({
 		this.$.api_categories.set("menuItemComponents", _components);
 	},
 	showHtmlEditors: function () {
-		this.$.apiDescription.markItUp();
+		this.$.api_description.markItUp();
 	},
 	formValidationSubmit: function (inSender, inEvent) {
 		var validationResult = inEvent;
 		this.zLog("form validation result", validationResult);
 		// success/failed.
 		if (validationResult.status =="success") {
-			// do bisiness logics.
-			this.$.requestParams.getTableJSONResult();
+			var  apiDetail = this.readNewApiDetailInformation();
+			this.doSaveApiInformation({data: apiDetail});
 		}
-		var selectedCategory = this.$.api_categories.getSelectedItem();
-		this.zLog("selected category: ", selectedCategory);
 		// stop  bubble.
 		return true;
+	},
+	//@private for get prepared api detail information.
+	readNewApiDetailInformation: function () {
+		var _data = {};
+		// selecte category
+		var selectedCategory = this.$.api_categories.getSelectedItem();
+		_data._category = selectedCategory.categoryId; // api  category id.
+		_data.key = this.$.api_key.getValue();// api key
+		_data.name = this.$.api_name.getValue();// api name.
+		_data.description = this.$.api_description.getEditorContent();
+		_data.request = {
+			body: this.$.request_body.getValue(),
+			params: this.$.request_params.getTableJSONResult(),
+			headers: this.$.request_headers.getTableJSONResult()
+		};
+		_data.response = {
+			body: this.$.response_body.getValue(),
+			params: this.$.response_params.getTableJSONResult(),
+			headers: this.$.response_headers.getTableJSONResult()
+		};
+		_data.example = {
+			postCommand: this.$.example_post_body.getValue(),
+			request: this.$.example_request.getValue(),
+			response: this.$.example_response.getValue()
+		};
+		_data.questions = this.$.question_answers.getTableJSONResult()
+		return _data;
 	},
 	/*testButtonTap: function (inSender, inEvent) {
 		this.$.requestParams.setRowsDataSource([

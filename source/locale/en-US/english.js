@@ -79,7 +79,8 @@ enyo.singleton({
 		"ALLOWEMPTY":"",//该字段允许为空
 		"REQUIRED": "it's required field!",
 		"EMAIL": "email format is not correct!",
-		"HASH": "format incorrect the character only can be [a-z,A-Z,0-9,-_%]"
+		"HASH": "format incorrect the character only can be [a-z,A-Z,0-9,-_%]",
+		"DROPDOWNLIST":"please choose one item!"
 	},
 	// messages
 	message: {

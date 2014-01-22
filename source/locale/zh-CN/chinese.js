@@ -80,7 +80,8 @@ enyo.singleton({
 		"ALLOWEMPTY":"",//该字段允许为空
 		"REQUIRED": "必填字段!",
 		"EMAIL": "邮箱格式不正确!",
-		"HASH": "格式不正确只能为[a-z,A-Z,0-9,-_%]中的一个或者多个字符"
+		"HASH": "格式不正确只能为[a-z,A-Z,0-9,-_%]中的一个或者多个字符",
+		"DROPDOWNLIST":"请选择一个特定的元素!"
 	},
 	// messages
 	message: {

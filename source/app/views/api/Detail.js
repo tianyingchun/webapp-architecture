@@ -5,49 +5,50 @@ enyo.kind({
 	components:[
 		{name:"message",kind:"widgets.base.Spinner", message: Master.locale.get("LOAD_CATEGORY_DETAIL", "message")},
 		{name: "detailcontainer", showing: false, components: [
-			{name: "descTitle", showing: false, content:Master.locale.get("API_DESCRIPTION","title"), classes:"title"},
+			{name: "desc_title", showing: false, content:Master.locale.get("API_DESCRIPTION","title"), classes:"title"},
 			{name:"description",showing: false, allowHtml: true, classes:"description"},
 
-			{name: "requestTitle", showing:false, content:Master.locale.get("API_REQUEST","title"), classes:"title"},
+			{name: "request_title", showing:false, content:Master.locale.get("API_REQUEST","title"), classes:"title"},
 			{name:"request", showing:false, clasess:"request", components: [
 				// request body summary method. PUT /BucketName?sign=MBO:aCLCZtoFQg8I
 				{content:Master.locale.get("API_REQUEST","title"), classes:"child-title"},
-				{name:"reqbody", classes:"body", allowHtml: true},
+				{name:"request_body", classes:"body", allowHtml: true},
 				// request post payload. maybe json string.
-				{name:"payloadtitle", showing:false, content:Master.locale.get("API_REQUEST_PAYLOAD","title"), classes:"child-title"},
-				{name:"reqpayload", showing: false, classes:"payload", allowHtml: true},
+				{name:"request_payload_title", showing:false, content:Master.locale.get("API_REQUEST_PAYLOAD","title"), classes:"child-title"},
+				{name:"request_payload_body", showing: false, classes:"payload", allowHtml: true},
 				// request params comments table.
-				{name:"paramstitle",content:Master.locale.get("API_REQUEST_PARAMS","title"), classes:"child-title"},
-				{name: "params", classes:"parameters"},				
+				{name:"request_params_title",content:Master.locale.get("API_REQUEST_PARAMS","title"), classes:"child-title"},
+				{name: "request_params", classes:"parameters"},				
 				// request header comments table
-				{name:"reqHeaderTitle", content:Master.locale.get("API_REQUEST_HEADERS","title"), classes:"child-title"},
-				{name:"reqheader",classes:"headers"}
+				{name:"request_header_title", content:Master.locale.get("API_REQUEST_HEADERS","title"), classes:"child-title"},
+				{name:"request_headers",classes:"headers"}
 			]},
 
-			{name:"responseTitle",showing:false, content:Master.locale.get("API_RESPONSE","title"), classes:"title"},
+			{name:"response_title",showing:false, content:Master.locale.get("API_RESPONSE","title"), classes:"title"},
 			{name:"response", showing:false, clasess:"response", components: [
 				// response result.
-				{name:"resbodytitle", showing:false, content:Master.locale.get("API_RESPONSE_BODY","title"), classes:"child-title"},
-				{name:"resbody", classes:"body", allowHtml: true},
+				{name:"response_body_title", showing:false, content:Master.locale.get("API_RESPONSE_BODY","title"), classes:"child-title"},
+				{name:"response_body", classes:"body", allowHtml: true},
 				// reponse result params comments.
-				{name:"resParamsTitle", content:Master.locale.get("API_RESPONSE_PARAMS","title"), classes:"child-title"},
-				{name:"resParams", classes:"parameters"},
+				{name:"response_params_title", content:Master.locale.get("API_RESPONSE_PARAMS","title"), classes:"child-title"},
+				{name:"response_params", classes:"parameters"},
 
+				{name:"response_header_title", content:Master.locale.get("API_RESPONSE_HEADERS","title"), classes:"child-title"},
 				// response headers.
-				{name:"resheader",allowHtml: true,  classes:"headers"}
+				{name:"response_headers", classes:"headers"}
 			]},
 
-			{name:"exampleTitle", showing:false, content:Master.locale.get("API_EXAMPLES","title"), classes:"title"},
+			{name:"example_title", showing:false, content:Master.locale.get("API_EXAMPLES","title"), classes:"title"},
 			{name:"example", showing:false, clasess:"examples", components: [
 				{name:"postcommand", classes:"post-command", allowHtml: true},
 
-				{content:Master.locale.get("API_REQUEST_EXAMPLE","title"), classes:"child-title"},
-				{name:"examplereq", classes:"example-request", allowHtml: true},
+				{name:"example_request_title", content:Master.locale.get("API_REQUEST_EXAMPLE","title"), classes:"child-title"},
+				{name:"example_request", classes:"example-request", allowHtml: true},
 
-				{content:Master.locale.get("API_RESPONSE_EXAMPLE","title"), classes:"child-title"},
-				{name:"exampleres", classes:"example-response", allowHtml: true}
+				{name:"example_response_title",content:Master.locale.get("API_RESPONSE_EXAMPLE","title"), classes:"child-title"},
+				{name:"example_response", classes:"example-response", allowHtml: true}
 			]},		
-			{name:"qaTitle", content:Master.locale.get("API_QUESTIONS","title"), classes:"title qa-title"},
+			{name:"question_title", content:Master.locale.get("API_QUESTIONS","title"), classes:"title qa-title"},
 			{name: "questionAnswers", tag:"ul", classes:"question-answers"}
 		]}	
 	],
@@ -67,58 +68,94 @@ enyo.kind({
 		// description.
 		if (details.description) {
 			this.$.description.setContent(details.description || "");
-			this.$.descTitle.show();
+			this.$.desc_title.show();
 			this.$.description.show();
 		}
 		// request block
 		if(details.request) {
-			this.$.requestTitle.show();
+			this.$.request_title.show();
 			this.$.request.show();
 			var request = details.request;
-			// request headers
-			this.showApiInterfaceHeaders(request.headers);
-			// request parameters.
-			this.showApiInterfaceParams(request.params);
 
 			// request body
-			this.$.reqbody.setContent(request.body);
+			this.$.request_body.setContent(request.body);
 			
 			//request payload.
 			if(request.payload) {
 				var payloadJson = hljs.highlight("js", request.payload).value;
-				this.$.reqpayload.setContent(payloadJson);
-				this.$.payloadtitle.show();
-				this.$.reqpayload.show();
+				this.$.request_payload_body.setContent(payloadJson);
+				this.$.request_payload_title.show();
+				this.$.request_payload_body.show();
+			}
+
+			// request headers.
+			var _reqHeaders = request.headers;
+			if(_reqHeaders && _reqHeaders.length) {
+				// request headers
+				this.showApiInterfaceHeaders(this.$.request_headers, _reqHeaders);
+			} else {
+				this.$.request_header_title.hide();
+			}
+			// request params.
+			var _reqParams = request.params;
+			if(_reqParams && _reqParams.length){
+				// request parameters.
+				this.showApiInterfaceParams(this.$.request_params, _reqParams);
+			} else {
+				this.$.request_params_title.hide();
 			}
 		}
+		// response block.
 		if(details.response) {
-			this.$.responseTitle.show();
+			this.$.response_title.show();
 			this.$.response.show();
 			// response 
 			var response = details.response || {};
 			if (response.body) {
 				var responseJson = hljs.highlight("js", response.body).value;
 				// response body.
-				this.$.resbody.setContent(responseJson);
-				this.$.resbodytitle.show();
+				this.$.response_body.setContent(responseJson);
+				this.$.response_body_title.show();
 			}
-			// response parameters comments.
-			this.showResponseParameters(response.params);
-			//response headers.
-			this.$.resheader.setContent(response.headers);
+			// response parameters
+			var _resParams = response.params;
+			if(_resParams && _resParams.length) {
+				this.showApiInterfaceParams(this.$.response_params, _resParams);
+			} else {
+				this.$.response_params_title.hide();
+			}
+			var _resHeaders = response.headers;
+			if(_resHeaders &&　_resHeaders.length) {
+				this.showApiInterfaceHeaders(this.$.response_headers, _resHeaders);
+			} else {
+				this.$.response_header_title.hide();
+			}
 		}
-		if (details.examples) {
-			this.$.exampleTitle.show();
+		// example block
+		var example = details.example;
+		if (example) {
+			this.$.example_title.show();
 			this.$.example.show();
-
-			// examples
-			var example = details.examples || {};
-			// example body.
-			this.$.postcommand.setContent(example.postCommand);
-			// example request.
-			this.$.examplereq.setContent(example.request);
-			// exmaple response,
-			this.$.exampleres.setContent(example.response);
+			if (example.postCommand) {
+				// example body.
+				this.$.postcommand.setContent(example.postCommand);
+			} else {
+				this.$.postcommand.hide();
+			}
+			if(example.request) {
+				// example request.
+				this.$.example_request.setContent(example.request);
+			} else {
+				this.$.example_request_title.hide();
+				this.$.example_request.hide();
+			}
+			if (example.response) {
+				// exmaple response,
+				this.$.example_response.setContent(example.response);
+			} else {
+				this.$.example_response_title.hide();
+				this.$.example_response.hide();
+			}
 		}
 
 		// show questions and answers.
@@ -127,7 +164,7 @@ enyo.kind({
 		// show detail information.
 		this.$.detailcontainer.show();
 
-		//sdk
+		//sdk block.
 		var sdk = details.sdk;
 		if(sdk) {
 			this.showSDKPanel(sdk, extraData);
@@ -177,81 +214,50 @@ enyo.kind({
 			$qa.createClientComponents(components);
 			$qa.render();
 		} else {
-			this.$.qaTitle.hide();
+			this.$.question_title.hide();
 		}
 	},
 	/**
 	 * Show api interface headers.
 	 * @param  {array} headers the show api interface headers
 	 */	
-	showApiInterfaceHeaders: function (headers) {
-		if(headers && headers.length) {
-			this.$.reqheader.createComponent({
-	            kind:'widgets.forms.TableRowItems', 
-	            keyField:"id",
-	            itemsSource: headers,
-	            showCheckbox: false,
-	            hideFieldItems: ["more","_id"],
-	            captionText: [
-	            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
-	            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
-	            	Master.locale.get("TABLE_API_PARAMS_REQUIRED", "content"),
-	            	Master.locale.get("TABLE_API_PARAMS_DESC", "content")
-	            ],
-	            actions:[/*'Edit'*/],
-	            radioModel: true // support only one remove install device.
-	        });
-	        this.$.reqheader.render();
-		} else {
-			this.$.reqHeaderTitle.hide();
-		}
+	showApiInterfaceHeaders: function ($header,headers) {
+		$header.createComponent({
+            kind:'widgets.forms.TableRowItems', 
+            keyField:"id",
+            itemsSource: headers,
+            showCheckbox: false,
+            hideFieldItems: ["more","_id"],
+            captionText: [
+            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
+            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
+            	Master.locale.get("TABLE_API_PARAMS_REQUIRED", "content"),
+            	Master.locale.get("TABLE_API_PARAMS_DESC", "content")
+            ],
+            actions:[/*'Edit'*/],
+            radioModel: true // support only one remove install device.
+        });
+        $header.render(); 
 	},
 	// @params {array}
 	// show api interface parameters
-	showApiInterfaceParams: function (params) {
-		if(params && params.length) {
-			this.$.params.createComponent({
-	            kind:'widgets.forms.TableRowItems', 
-	            keyField:"id",
-	            itemsSource: params,
-	            showCheckbox: false,
-	            hideFieldItems: ["more","_id"],
-	            captionText: [
-	            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
-	            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
-	            	Master.locale.get("TABLE_API_PARAMS_REQUIRED", "content"),
-	            	Master.locale.get("TABLE_API_PARAMS_DESC", "content")
-	            ],
-	            actions:[/*'Edit'*/],
-	            radioModel: true // support only one remove install device.
-	        });
-	        this.$.params.render();
-		} else {
-			this.$.paramstitle.hide();
-		}
-	},
-	// help method for response parameters comments table.
-	showResponseParameters: function (params) {
-		if(params && params.length) {
-			this.$.resParams.createComponent({
-	            kind:'widgets.forms.TableRowItems', 
-	            keyField:"id",
-	            itemsSource: params,
-	            showCheckbox: false,
-	            hideFieldItems: ["more","_id"],
-	            captionText: [
-	            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
-	            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
-	            	Master.locale.get("TABLE_API_PARAMS_REQUIRED", "content"),
-	            	Master.locale.get("TABLE_API_PARAMS_DESC", "content")
-	            ],
-	            actions:[/*'Edit'*/],
-	            radioModel: true // support only one remove install device.
-	        });
-	        this.$.resParams.render();
-		} else {
-			this.$.resParamsTitle.hide();
-		}
+	showApiInterfaceParams: function ($param, params) { 
+		$param.createComponent({
+            kind:'widgets.forms.TableRowItems', 
+            keyField:"id",
+            itemsSource: params,
+            showCheckbox: false,
+            hideFieldItems: ["more","_id"],
+            captionText: [
+            	Master.locale.get("TABLE_API_PARAMS_NAME", "content"), 
+            	Master.locale.get("TABLE_API_PARAMS_VALUE", "content"),
+            	Master.locale.get("TABLE_API_PARAMS_REQUIRED", "content"),
+            	Master.locale.get("TABLE_API_PARAMS_DESC", "content")
+            ],
+            actions:[/*'Edit'*/],
+            radioModel: true // support only one remove install device.
+        });
+        $param.render();
 	},
 	tabCellTap: function (inSender, inEvent) {
 		var originator = inEvent.originator;

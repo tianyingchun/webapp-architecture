@@ -14,22 +14,24 @@ enyo.kind({
 				cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
 			},
 			dto: "apiDetailDTO"
+		},
+		// add new api.
+		addNewApi:{
+			url: "/api",
+			headers:{ Authorization: "" },
+			cache: false
 		}
 	},
 	// it will automatically append the url request if it has value.
 	// Note: the enyo.store is global memory model instance managerment
 	// we need to maually manager this object.
-	primaryKey:"apiKey", //default is "id"
+	// primaryKey:"apiKey", //default is "id"
 	// api detail default fields. it will be auto instanced.
 	attributes:{
 		apiId: "",
 		apiKey: "",
 		apiName: "",
 		details: {}
-	},
-	// default values for record schema.
-	defaults: {
-		details:{}
 	},
 	/**
 	 * Get current api details by api id.
@@ -55,6 +57,15 @@ enyo.kind({
 				callback: fn
 			});
 		}
+	},
+	//@public new api details.
+	addNewApi: function (apiInfo, fn){
+		this.commit({
+			apiKey: "addNewApi",
+			method: "POST",
+			data:  apiInfo,
+			callback: fn
+		});
 	},
 	/**
 	 * Get category item info, it should be contains all api list for this category.
