@@ -147,9 +147,6 @@
 /* Checkbox.css */
 .onyx-checkbox {
   cursor: pointer;
-  padding-left: 30px;
-  height: 20px;
-  width: 20px;
   background: url("../images/checkbox.png") no-repeat;
   /* reset for ? */
 
