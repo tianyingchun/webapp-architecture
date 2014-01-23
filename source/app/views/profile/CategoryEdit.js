@@ -2,6 +2,9 @@ enyo.kind({
 	name: "Master.views.profile.CategoryEdit",
 	kind: "Master.View",
 	classes: "category-edit",
+	events:{
+		"onCommitCategory":""// cutomized event to controller.
+	},
 	components: [
 		{name: "container", classes:"api-container", components: [
 			{name:"form", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
@@ -58,6 +61,28 @@ enyo.kind({
 			this.$.category_description.markItUp();
 		};
 	}),
+	formValidationSubmit: function (inSender, inEvent) {
+		var validationResult = inEvent;
+		this.zLog("form validation result", validationResult);
+		// success/failed.
+		if (validationResult.status =="success") {
+			this.updateCategoryInfo();
+		}
+		// stop  bubble.
+		return true;
+	},
+	updateCategoryInfo:function () {
+		var data = {
+			categoryId: this._categoryId,
+			categoryKey: this.$.category_key.getValue(),
+			categoryName: this.$.category_name.getValue(),
+			isExpanded: this.$.category_expanded.getValue(),
+			isDisplay: this.$.category_display.getValue(),
+			displayOrder: this.$.category_display_order.getValue(),
+			description: this.$.category_description.getEditorContent()
+		};
+		this.doCommitCategory({data:data, isNew: false});
+	},
 	// show loading message.
 	showLoading:function (message) {
 		this._uid_category_info = Master.view.frame.showSpinnerPopup({
@@ -67,6 +92,7 @@ enyo.kind({
 	// show category data.
 	showEditCategoryUI: function (viewModel) {
 		this.zLog("viewModel: ", viewModel);
+		this._categoryId = viewModel.get("categoryId");
 		this.$.category_key.setValue(viewModel.get("categoryKey"));
 		this.$.category_name.setValue(viewModel.get("categoryName"));
 		this.$.category_expanded.setValue(viewModel.get("isExpanded"));

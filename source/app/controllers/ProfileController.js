@@ -6,7 +6,8 @@ enyo.kind({
 	],
 	handlers:{
 		"onFetchApiAvailableCategories":"fetchApiAvailableCategories",
-		"onCommitCategory":"addNewCategoryHandler",
+		// add/update
+		"onCommitCategory":"saveCategoryInfoHandler",
 		"onSaveApiInformation":"saveNewApiHandler"
 	},
 	// defined constants here.
@@ -165,11 +166,16 @@ enyo.kind({
 		}
 	},
 	//@private add new category information 
-	addNewCategoryHandler: function (inSender, inEvent) {
-		this.zLog("new category data: ", inEvent);
+	saveCategoryInfoHandler: function (inSender, inEvent) {
+		this.zLog("saveCategoryInfo event: ", inEvent);
 		var data = inEvent.data;
+		var isNew = inEvent.isNew;
 		var categoryItemModel = this.getCategoryItemModel();
-		categoryItemModel.addNewCategory(data, this.bindSafely("_addNewCategoryComplete"));
+		if (isNew) {
+			categoryItemModel.addNewCategory(data, this.bindSafely("_addNewCategoryComplete"));
+		} else {
+			categoryItemModel.updateCategoryInfo(data, this.bindSafely("_updateCategoryComplete"));
+		}
 		return true;
 	},
 	_addNewCategoryComplete: function (viewModel) {
@@ -181,6 +187,18 @@ enyo.kind({
 		}
 		Master.view.frame.showAlertDialog({
 			title: "添加分类",
+			message:_message
+		});
+	},
+	_updateCategoryComplete: function (viewModel) {
+		this.zLog("viewModel: ", viewModel);
+		var _message = "更新分类成功！";
+		if(viewModel.restInfo.retCode!=1){
+			// show add new successful.
+			_message = viewModel.restInfo.retMessage;
+		}
+		Master.view.frame.showAlertDialog({
+			title: "更新分类",
 			message:_message
 		});
 	},

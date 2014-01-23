@@ -83,6 +83,7 @@ enyo.kind({
 		this.commit({
 			apiKey: "updateCategoryInfo",
 			method: "PUT",// 'POST','PUT'
+			url: "/category/"+category.categoryId,
 			callback: fn
 		});
 	},
