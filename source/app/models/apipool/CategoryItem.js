@@ -22,6 +22,11 @@ enyo.kind({
 			url: "/category",
 			cache: false,
 			dto: "categoryDetailDTO"
+		},
+		// destroy
+		destroyCategory:{
+			url:"/category",
+			cache: false
 		}
 	},
 	// for model, defined record schema.
@@ -94,6 +99,14 @@ enyo.kind({
 		this.commit({
 			apiKey: "updateCategoryInfo",
 			method: "POST",// 'POST'
+			callback: fn
+		});
+	},
+	// remove category 
+	removeCategory: function(categoryId, fn) {
+		this.destroy({
+			apiKey: "destroyCategory",
+			url: "/category/"+categoryId,
 			callback: fn
 		});
 	},

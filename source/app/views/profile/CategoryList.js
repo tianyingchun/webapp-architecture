@@ -2,6 +2,9 @@ enyo.kind({
 	name: "Master.views.profile.CategoryList",
 	kind: "Master.View",
 	classes: "category-list",
+	events:{
+		"onDeleteCategoryItem": ""
+	},
 	components: [
 		{name:"message",kind:"widgets.base.Spinner", message: Master.locale.get("LOAD_CATEGORIES", "message")},
 		{kind:"onyx.Groupbox", name:"listWrapper", showing:false, components: [
@@ -46,6 +49,16 @@ enyo.kind({
 		this.location("profile/category/add");
 		return true;
 	},
+	confirmCategoryItem: function (categoryId, categoryName) {
+		Master.view.frame.showConfirmDialog({
+			title: "确认",
+			message: "确认要删除分类'"+ categoryName+"'吗？",
+			success: this.bindSafely("deleteCategoryItem", categoryId)
+		});
+	},
+	deleteCategoryItem: function (categoryId) {
+		this.doDeleteCategoryItem(categoryId);
+	},
 	itemTap: function (inSender, inEvent) {
 		// this.zLog("originator: ", inEvent);
 		var originator = inEvent.originator;
@@ -60,7 +73,7 @@ enyo.kind({
 			location = "profile/category/edit/"+ currItem.categoryKey
 			break;
 			case "remove":
-			location = "profile/category/remove/"+ currItem.categoryKey
+			this.confirmCategoryItem(currItem.categoryId, currItem.categoryName);
 			break;
 		}
 		if (location) {

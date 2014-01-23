@@ -235,7 +235,7 @@ enyo.kind({
             failure:function(){}
      *    }
      */
-	showConfirmDialog: function (title, message) {
+	showConfirmDialog: function (config) {
 		var confirmDialog = new widgets.dialog.ConfirmDialog(config);
         confirmDialog.show();
 	}

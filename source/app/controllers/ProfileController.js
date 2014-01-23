@@ -8,7 +8,9 @@ enyo.kind({
 		"onFetchApiAvailableCategories":"fetchApiAvailableCategories",
 		// add/update
 		"onCommitCategory":"saveCategoryInfoHandler",
-		"onSaveApiInformation":"saveNewApiHandler"
+		"onSaveApiInformation":"saveNewApiHandler",
+		// delete category item.
+		"onDeleteCategoryItem": "deleteCategoryItem"
 	},
 	// defined constants here.
 	constants: {
@@ -64,10 +66,6 @@ enyo.kind({
 		this.zLog("apiId: ", apiId);
 		this.showProfileDockMenus({menuKey: "list"});
 	},
-	removeApi: function (apiId) {
-		this.zLog("apiId:", apiId);
-		this.showProfileDockMenus({menuKey: "list"});
-	},
 
 	showApiListUI: function (viewData, viewModel) {
 		this.notifyView(this.PROFILE_API_LIST, viewModel, viewData);
@@ -81,6 +79,10 @@ enyo.kind({
 		this.showProfileDockMenus({menuKey: "category_list"});
 		// binding view first.
 		this.bindingViewToContent(this.PROFILE_CATEGORY_LIST, null, null);
+		// fetch category list data.
+		this.fetchCategoryList();
+	},
+	fetchCategoryList: function () {
 		var categoryModel = new Master.models.apipool.Categories();
 		var viewData = {
 			action: "showCategoriesUI", // view action.
@@ -144,14 +146,13 @@ enyo.kind({
 			action: "showEditCategoryUI"
 		});
 	},
-	/**
-	 * remove specific cateogry
-	 * @param  {string} categoryId the category key.
-	 */
-	removeCategory: function (categoryId) {
-
+	// delete category item.
+	deleteCategoryItem: function (inSender, inEvent){
+		var categoryId = inEvent;
+		var categoryModel = this.getCategoryItemModel();
+		categoryModel.removeCategory(categoryId, this.bindSafely("_destroyCategoryComplete"));
+		return true;
 	},
-
 	// show profile dock menus.
 	showProfileDockMenus: function (data) {
 		// hide tabcontrol.
@@ -201,6 +202,19 @@ enyo.kind({
 			title: "更新分类",
 			message:_message
 		});
+	},
+	_destroyCategoryComplete: function (viewModel) {
+		this.zLog("viewModel: ", viewModel);
+		if(viewModel.restInfo.retCode == 1) {
+			// do refresh category list.
+			this.fetchCategoryList();
+		} else {
+			Master.view.frame.showAlertDialog({
+				title: "删除分类",
+				message:"删除分类失败, "+ viewModel.restInfo.retMessage
+			});
+			this.fetchCategoryList();
+		}
 	},
 	saveNewApiHandler: function (inSender, inEvent) {
 		var _apiItemModel = this.getApiItemModel();

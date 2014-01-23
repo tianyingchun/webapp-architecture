@@ -24,6 +24,7 @@
 						categoryId: item._id,
 						categoryKey: item.key,
 						categoryName: item.name,
+						displayOrder: item.displayOrder,
 						isExpanded: item.expanded || false,
 						isDisplay: typeof(item.isDisplay) == "undefined" ? true: item.isDisplay,
 						isCategoryNode: level == 1,
