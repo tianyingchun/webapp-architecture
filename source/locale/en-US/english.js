@@ -80,7 +80,8 @@ enyo.singleton({
 		"REQUIRED": "it's required field!",
 		"EMAIL": "email format is not correct!",
 		"HASH": "format incorrect the character only can be [a-z,A-Z,0-9,-_%]",
-		"DROPDOWNLIST":"please choose one item!"
+		"DROPDOWNLIST":"please choose one item!",
+		"NUMBER": "only number can be allowed"
 	},
 	// messages
 	message: {

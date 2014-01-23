@@ -2,11 +2,12 @@
 // so we only can use it in controllers.
 enyo.setPath("Master.controllers.DockSupport", {
 	name: "Master.controllers.DockSupport",
-
+	// Note. mixin properties/methods only as fields be mixin in host instance
+	// we don't have ablity defined "constants" like controllers.
 	// shared view kind name.
-	_dockCategoryViewKind: "shared.DockCategories",
+	DOCK_CATEGORY_KIND: "shared.DockCategories",
 	// share view kind name "dock profiles."
-	_dockProfileViewKind:  "shared.DockProfiles",
+	DOCK_PROFILE_KIND:  "shared.DockProfiles",
 	/**
 	 * Get all categories
 	 * @param inEvent must contain two parameters @viewAction, @viewkindName.
@@ -23,7 +24,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 		}
 		apiCategories.getApiCategories(enyo.bindSafely(this, "showApiCategories", viewData));
 		// binding view to left dock
-		this.bindingViewToDock(this._dockCategoryViewKind, null, null);
+		this.bindingViewToDock(this.DOCK_CATEGORY_KIND, null, null);
 	},
 	// the callback function of getAllCategories().
 	showApiCategories: function (viewData, viewModel) {
@@ -35,7 +36,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 			delete extraData.callback;
 		}
 		// show categories view kind.
-		var dockViewKind = this._dockCategoryViewKind; //Master.views.shared.DockCategories
+		var dockViewKind = this.DOCK_CATEGORY_KIND; //Master.views.shared.DockCategories
 		// notify view to update ui interface.
 		this.notifyView(dockViewKind, viewModel, viewData);
 	},
@@ -45,7 +46,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 		
 		var menuList = new Master.models.menu.MenuList();
 		// first binding view to dock.
-		this.bindingViewToDock(this._dockProfileViewKind, null,null);
+		this.bindingViewToDock(this.DOCK_PROFILE_KIND, null,null);
 		var viewData = {
 			action: "showProfileMenusUI",
 			data: extraData || {}
@@ -53,7 +54,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 		menuList.getMenus(enyo.bindSafely(this, "showProfileMenusUI", viewData));
 	},
 	showProfileMenusUI: function (viewData, viewModel) {
-		this.notifyView(this._dockProfileViewKind, viewModel, viewData);
+		this.notifyView(this.DOCK_PROFILE_KIND, viewModel, viewData);
 	},
 	/**
 	 * Hightight profile menu item,
@@ -65,7 +66,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 				action: "highlightProfileMenuItem",
 				data: data || {}
 			};
-			this.notifyView(this._dockProfileViewKind, {}, viewData);
+			this.notifyView(this.DOCK_PROFILE_KIND, {}, viewData);
 		}
 	}
 });

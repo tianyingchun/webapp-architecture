@@ -7,9 +7,11 @@ enyo.kind({
 	kind: "Master.Controller",
 	// set up default language for current api document.
 	defaultLanguage: Master.config.defaultAPILanguage,
-	// detial view kind name.
-	_detailViewKindName: "api.Detail",
 
+	constants:{
+		// detial view kind name.
+		API_DETAIL_PAGE: "api.Detail"
+	},
 	mixins:[
 		//Note we have bindinged view and controller mapping for leftdock view. so 
 		//if we need to render main content we need use event bubble to update.
@@ -39,14 +41,12 @@ enyo.kind({
 		this.saveUserApiLanguage(language);
 		// show left dock categories if not.
 		this.showDockCategories({apiKey: apiKey});
-
 		// fetch api details information here.
 		this.fetchApiDetailInfo(apiKey, language);
 	},
 	fetchApiDetailInfo: function (apiKey, language) {
 		// binding view,
-		this.bindingViewToContent(this._detailViewKindName, null, null);
-
+		this.bindingViewToContent(this.API_DETAIL_PAGE, null, null);
 		// view data.
 		var viewData = {
 			action: "showApiDetailUI", 
@@ -58,12 +58,10 @@ enyo.kind({
 		// use cached  model instance here avoid create multiple modle instance and cached within enyo.store __global__
 		// instance.
 		this.apiDetailModel.getApiDetail(apiKey, enyo.bindSafely(this, "_showApiDetailInfo", viewData));
-
-		// binding view.
 	},
 	_showApiDetailInfo: function (viewData, viewModel) {
 		// this.zLog("categoryDetail: ", viewData, viewModel);
-		this.notifyView(this._detailViewKindName, viewModel, viewData);
+		this.notifyView(this.API_DETAIL_PAGE, viewModel, viewData);
 	},
 	//@* public show categories on left dock
 	showDockCategories: function (extraData) {

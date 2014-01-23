@@ -11,19 +11,25 @@ enyo.kind({
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "分类KEY"},
 					{classes:"form-item", components:[
-						{name:"category_key", allowEmpty:false, placeholder:"分类KEY", kind:"widgets.forms.InputDecorator", tipMessage:"全局唯一，请一定输入不重复的KEY限英文字母", validation: {required:"必填字段！",hash:""}}
+						{name:"category_key", placeholder:"分类KEY", kind:"widgets.forms.InputDecorator", tipMessage:"全局唯一，请一定输入不重复的KEY限英文字母", validation: {required:"必填字段！",hash:""}}
 					]}
 				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "分类名称"},
 					{classes:"form-item", components:[
-						{name:"category_name", allowEmpty:false, placeholder:"分类名称", kind:"widgets.forms.InputDecorator", tipMessage:"分类名称必须填写！", validation: {required:"必填字段！"}}
+						{name:"category_name", placeholder:"分类名称", kind:"widgets.forms.InputDecorator", tipMessage:"分类名称必须填写！", validation: {required:"必填字段！"}}
 					]}
 				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "默认展开"},
 					{classes:"form-item", components:[
 						{name:"category_expanded", kind:"onyx.Checkbox"}
+					]}
+				]},
+				{kind:"onyx.Groupbox", components: [
+					{kind: "onyx.GroupboxHeader", content: "显示顺序"},
+					{classes:"form-item", components:[
+						{name:"category_display_order", type:"number", kind: "widgets.forms.InputDecorator", tipMessage: "填写分类排序，只能为数字值越大优先级越高", validation: {required:"请输入数字!", number:""}}
 					]}
 				]},
 				{kind:"onyx.Groupbox", components: [
@@ -71,6 +77,7 @@ enyo.kind({
 			categoryName: this.$.category_name.getValue(),
 			isExpanded: this.$.category_expanded.getValue(),
 			isDisplay: this.$.category_display.getValue(),
+			displayOrder: this.$.category_display_order.getValue(),
 			description: this.$.category_description.getEditorContent()
 		};
 		this.doCommitCategory({data:data});

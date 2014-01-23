@@ -6,8 +6,9 @@ enyo.kind({
 		//if we need to render main content we need use event bubble to update.
 		"Master.controllers.DockSupport"
 	],
-	_contentCategoryDetailKindView:"category.Detail",
-
+	constants: {
+		CATEGORY_DETAIL_PAGE:"category.Detail"
+	},
 	create: enyo.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);
@@ -24,7 +25,7 @@ enyo.kind({
 	},
 	getCategoryDetailInfo: function (key) {
 		// show this view.
-		this.bindingViewToContent(this._contentCategoryDetailKindView, null , null);
+		this.bindingViewToContent(this.CATEGORY_DETAIL_PAGE, null , null);
 		var viewData = {
 			action: "showCategoryDetailUI", 
 			data: {
@@ -34,7 +35,7 @@ enyo.kind({
 		this.categoryModel.getCategoryDetail(key, this.bindSafely("_showCategoryDetail", viewData));
 	},
 	_showCategoryDetail: function (viewData, viewModel) {
-		this.notifyView(this._contentCategoryDetailKindView, viewModel, viewData);
+		this.notifyView(this.CATEGORY_DETAIL_PAGE, viewModel, viewData);
 	},
 	//@* public show categories on left dock
 	showDockCategories: function (extraData) {

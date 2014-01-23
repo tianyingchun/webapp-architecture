@@ -40,7 +40,7 @@ enyo.kind({
 		this.$.categoryId.setContent(currItem.categoryId);
 		this.$.categoryName.setContent(currItem.categoryName);
 		this.$.categoryKey.setContent(currItem.categoryKey);
-		this.$.item.setShowing(currItem.isDisplay);
+		// this.$.item.setShowing(currItem.isDisplay);
 	},
 	addNewCategory: function (inSender,inEvent) {
 		this.location("profile/category/add");
@@ -57,10 +57,10 @@ enyo.kind({
 			location = "profile/category/add";
 			break;
 			case "edit":
-			location = "profile/category/edit/"+ currItem.categoryKey
+			location = "profile/category/edit/"+ currItem.categoryId
 			break;
 			case "remove":
-			location = "profile/category/remove/"+ currItem.categoryKey
+			location = "profile/category/remove/"+ currItem.categoryId
 			break;
 		}
 		if (location) {

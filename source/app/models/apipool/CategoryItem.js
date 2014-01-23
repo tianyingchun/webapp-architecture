@@ -32,6 +32,7 @@ enyo.kind({
 		categoryKey: "",
 		isExpanded: false,
 		isDisplay: true,
+		displayOrder: 0,
 		isCategoryNode: true,//
 		description:"",
 		childs: []
@@ -46,6 +47,7 @@ enyo.kind({
 			name: this.get("categoryName"),
 			expanded:this.get("isExpanded"),
 			isDisplay: this.get("isDisplay"),
+			displayOrder: this.get("displayOrder"),
 			description: this.get("description")
 		};
 		return enyo.json.stringify(_data);

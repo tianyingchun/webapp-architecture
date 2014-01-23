@@ -227,8 +227,14 @@ enyo.mixin(utility, {
 	    }
 	    return returnString;
 	},
-	
-
+	/**
+	 * For current router hash parameter format #/node/{params}/
+	 * @param  {string}  value the hash value
+	 */
+	isHashUrl: function (value) {
+		var regex = /^[a-zA-Z0-9-_%]+$/;
+		return regex.test(value);
+	},
     /**
      * 
      * @method trim

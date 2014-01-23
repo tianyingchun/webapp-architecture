@@ -12,8 +12,9 @@ enyo.kind({
 		// only for testing purpose for view dispatch event to corresponding controller and then bubble it to Master.view.frame
 		onGetAllCategories: "getAllCategoriesTest"
 	},
-	// detial view kind name.
-	_detailViewKindName: "home.Index",
+	constants: {
+		//
+	},
 	/**
 	 * Action method
 	 * @method 

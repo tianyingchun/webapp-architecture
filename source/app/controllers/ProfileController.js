@@ -9,15 +9,19 @@ enyo.kind({
 		"onCommitCategory":"addNewCategoryHandler",
 		"onSaveApiInformation":"saveNewApiHandler"
 	},
-	// api list view
-	_contentProfileApiListKindView: "profile.ApiList",
-	// api add new view
-	_contentProfileApiAddNewKindView: "profile.ApiNew",
-	// category list view
-	_contentProfileCategoryListKindView: "profile.CategoryList",
-	// category add new view.
-	_contentProfileCategoryAddNewKindView:"profile.CategoryNew",
-
+	// defined constants here.
+	constants: {
+		//  assign constants onto the current controller instance.
+		PROFILE_CATEGORY_EDIT:"profile.CategoryEdit",
+		// api list view
+		PROFILE_API_LIST: "profile.ApiList",
+		// api add new view
+		PROFILE_API_NEW: "profile.ApiNew",
+		// category list view
+		PROFILE_CATEGORY_LIST: "profile.CategoryList",
+		// category add new view.
+		PROFILE_CATEGORY_NEW:"profile.CategoryNew"
+	},
 	/**
 	 * Action method for all paged api list.
 	 * @param  {number} page the page index
@@ -25,7 +29,7 @@ enyo.kind({
 	apiList: function (page) {
 		this.zLog("api list current page: ", page);
 		this.showProfileDockMenus({menuKey: "api_list"});
-		this.bindingViewToContent(this._contentProfileApiListKindView, null, null);
+		this.bindingViewToContent(this.PROFILE_API_LIST, null, null);
 
 		// loading api list.
 		var apiList = new Master.models.apipool.ApiList();
@@ -45,13 +49,13 @@ enyo.kind({
 		this.zLog("add new");
 		// show profile.
 		this.showProfileDockMenus({menuKey: "api_list"});
-		this.bindingViewToContent(this._contentProfileApiAddNewKindView, null, null);
+		this.bindingViewToContent(this.PROFILE_API_NEW, null, null);
 		var viewModel = {
 			restInfo: {
 				retCode: 1
 			}
 		};
-		this.notifyView(this._contentProfileApiAddNewKindView, viewModel, {
+		this.notifyView(this.PROFILE_API_NEW, viewModel, {
 			action:"showAddNewApiUI"
 		});
 	},
@@ -65,7 +69,7 @@ enyo.kind({
 	},
 
 	showApiListUI: function (viewData, viewModel) {
-		this.notifyView(this._contentProfileApiListKindView, viewModel, viewData);
+		this.notifyView(this.PROFILE_API_LIST, viewModel, viewData);
 	},
 	/**
 	 * list all categories
@@ -75,7 +79,7 @@ enyo.kind({
 		this.zLog("category list current page: ", page);
 		this.showProfileDockMenus({menuKey: "category_list"});
 		// binding view first.
-		this.bindingViewToContent(this._contentProfileCategoryListKindView, null, null);
+		this.bindingViewToContent(this.PROFILE_CATEGORY_LIST, null, null);
 		var categoryModel = new Master.models.apipool.Categories();
 		var viewData = {
 			action: "showCategoriesUI", // view action.
@@ -88,7 +92,7 @@ enyo.kind({
 	},
 	//@private helper method for render view model into corresponding view.
 	_showCategoryListUI: function (viewData, viewModel) {
-		this.notifyView(this._contentProfileCategoryListKindView, viewModel, viewData);
+		this.notifyView(this.PROFILE_CATEGORY_LIST, viewModel, viewData);
 
 	},
 	fetchApiAvailableCategories: function(inSender, inEvent){
@@ -97,7 +101,7 @@ enyo.kind({
 	},
 	// show available categories.
 	_showAvailableCategories: function (viewModel){
-		this.notifyView(this._contentProfileApiAddNewKindView,viewModel, {
+		this.notifyView(this.PROFILE_API_NEW,viewModel, {
 			action:"showAvalilableCategories" // defined in view.
 		});
 	},
@@ -106,13 +110,13 @@ enyo.kind({
 	 */	
 	addNewCategory: function () {
 		this.showProfileDockMenus({menuKey: "category_list"});
-		this.bindingViewToContent(this._contentProfileCategoryAddNewKindView, null, null);
+		this.bindingViewToContent(this.PROFILE_CATEGORY_NEW, null, null);
 		var viewModel = {
 			restInfo: {
 				retCode: 1
 			}
 		};
-		this.notifyView(this._contentProfileCategoryAddNewKindView, viewModel, {
+		this.notifyView(this.PROFILE_CATEGORY_NEW, viewModel, {
 			action:"showAddNewCategoryUI"
 		});
 	},
@@ -121,7 +125,14 @@ enyo.kind({
 	 * @param  {string} categoryId the category key.
 	 */
 	editCategory: function (categoryId) {
-
+		this.zLog("categoryId: ", categoryId);
+		this.showProfileMenus({menuKey: "category_list"});
+		this.bindingViewToContent(this.PROFILE_CATEGORY_EDIT, null, null);
+		
+		// show edit cagtegory ui.
+		this.notifyView(this.PROFILE_CATEGORY_EDIT, null, {
+			action: "showEditCategoryUI"
+		});
 	},
 	/**
 	 * remove specific cateogry
