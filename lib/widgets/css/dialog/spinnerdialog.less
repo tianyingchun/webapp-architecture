@@ -1,5 +1,22 @@
 @import "./../variables.less";
 @import "./../mixins.less"; 
 .dialog-spinner{
-	
+	min-width: 100px;
+	height: 100px;
+	position: fixed;
+	top: 50%;
+	text-align: center;
+	margin-top: -50px;
+
+	.onyx-spinner.size-30{
+		background-size: 40px;
+		width: 40px;
+		height: 40px;
+	}
+	.message {
+		max-width: 150px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }

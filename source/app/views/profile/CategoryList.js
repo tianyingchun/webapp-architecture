@@ -57,10 +57,10 @@ enyo.kind({
 			location = "profile/category/add";
 			break;
 			case "edit":
-			location = "profile/category/edit/"+ currItem.categoryId
+			location = "profile/category/edit/"+ currItem.categoryKey
 			break;
 			case "remove":
-			location = "profile/category/remove/"+ currItem.categoryId
+			location = "profile/category/remove/"+ currItem.categoryKey
 			break;
 		}
 		if (location) {

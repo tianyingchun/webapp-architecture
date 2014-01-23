@@ -192,9 +192,22 @@ enyo.kind({
 	},
 	//@public show spinner dialog message.
 	//eg. { message:"", size:30}
+	//FIXME. we will consider put the _spinnerDialog implemetation into SpinnerDialog.js
 	showSpinnerPopup: function (config) {
-		var spinnerDialog = new widgets.dialog.SpinnerDialog(config);
-		spinnerDialog.show();
+		if(!this._spinnerDialog) {
+			this._spinnerDialog = new widgets.dialog.SpinnerDialog(config);
+		}
+		// return current message uid.
+		return this._spinnerDialog.show(config.message);
+	},
+	//* @public
+	hideSpinnerPopup: function (uid) {
+		if(this._spinnerDialog) {
+			// if true has desctoryed this spinner control.
+			if(this._spinnerDialog.hide(uid)) {
+				this._spinnerDialog = null;
+			}
+		}
 	},
 	 /**
      * Show alert dialog box
@@ -208,8 +221,8 @@ enyo.kind({
      */
 	showAlertDialog: function (config) {
 		var alertDialog = new widgets.dialog.AlertDialog(config);
-        alertDialog.show();
-	},
+        return alertDialog.show();
+	}, 
 	/**
      * Show confirm dialog 
      * @param {Object} config the confirm dialog configurations

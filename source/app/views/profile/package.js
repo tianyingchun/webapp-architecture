@@ -3,5 +3,6 @@ enyo.depends(
 	"ApiList.js",
 	"ApiNew.js",
 	"CategoryList.js",
-	"CategoryNew.js"
+	"CategoryNew.js",
+	"CategoryEdit.js"
 );

@@ -127,10 +127,19 @@ enyo.kind({
 	editCategory: function (categoryId) {
 		this.zLog("categoryId: ", categoryId);
 		this.showProfileMenus({menuKey: "category_list"});
+		// show edit category ui.
 		this.bindingViewToContent(this.PROFILE_CATEGORY_EDIT, null, null);
 		
+		// get category data.
+		var categoryItemModel = this.getCategoryItemModel();
+
+		// go to get
+		categoryItemModel.getCategoryDetail(categoryId, this.bindSafely("_showCategoryEditDetail"));
+		
+	},
+	_showCategoryEditDetail: function (viewModel) {
 		// show edit cagtegory ui.
-		this.notifyView(this.PROFILE_CATEGORY_EDIT, null, {
+		this.notifyView(this.PROFILE_CATEGORY_EDIT, viewModel, {
 			action: "showEditCategoryUI"
 		});
 	},
