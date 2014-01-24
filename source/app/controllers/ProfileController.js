@@ -8,18 +8,23 @@ enyo.kind({
 		"onFetchApiAvailableCategories":"fetchApiAvailableCategories",
 		// add/update
 		"onCommitCategory":"saveCategoryInfoHandler",
-		"onSaveApiInformation":"saveNewApiHandler",
+		"onSaveApiInformation":"saveApiInformationHandler",
 		// delete category item.
-		"onDeleteCategoryItem": "deleteCategoryItem"
+		"onDeleteCategoryItem": "deleteCategoryItem",
+		// desctroy api item.
+		"onDeleteApiItem":"deleteApiItem"
 	},
 	// defined constants here.
 	constants: {
 		//  assign constants onto the current controller instance.
-		PROFILE_CATEGORY_EDIT:"profile.CategoryEdit",
 		// api list view
 		PROFILE_API_LIST: "profile.ApiList",
 		// api add new view
 		PROFILE_API_NEW: "profile.ApiNew",
+		//api edit 
+		PROFILE_API_EDIT: "profile.ApiEdit",
+
+		PROFILE_CATEGORY_EDIT:"profile.CategoryEdit",
 		// category list view
 		PROFILE_CATEGORY_LIST: "profile.CategoryList",
 		// category add new view.
@@ -34,6 +39,10 @@ enyo.kind({
 		this.showProfileDockMenus({menuKey: "api_list"});
 		this.bindingViewToContent(this.PROFILE_API_LIST, null, null);
 
+		// fetch api list.
+		this.fetchApiList();
+	},
+	fetchApiList: function () {
 		// loading api list.
 		var apiList = new Master.models.apipool.ApiList();
 		var viewData = {
@@ -64,9 +73,22 @@ enyo.kind({
 	},
 	editApi:function(apiId) {
 		this.zLog("apiId: ", apiId);
-		this.showProfileDockMenus({menuKey: "list"});
+		this.showProfileDockMenus({menuKey: "api_list"});
+		this.bindingViewToContent(this.PROFILE_API_EDIT, null, null);
+		var spinner_uid = Master.view.frame.showSpinnerPopup({
+			message: "Loading Api detail..."
+		});
+		var apiItemModel = this.getApiItemModel();
+		apiItemModel.getApiDetail(apiId, this.bindSafely("_loadingExistApiDetail", spinner_uid));
 	},
-
+	_loadingExistApiDetail: function(spinner_uid, viewModel) {
+		this.notifyView(this.PROFILE_API_EDIT, viewModel,{
+			action: "loadingExistApiDetailUI",
+			data: {
+				spinner_uid: spinner_uid
+			}
+		});
+	},
 	showApiListUI: function (viewData, viewModel) {
 		this.notifyView(this.PROFILE_API_LIST, viewModel, viewData);
 	},
@@ -99,12 +121,14 @@ enyo.kind({
 
 	},
 	fetchApiAvailableCategories: function(inSender, inEvent){
+		var isEditModel = inEvent.editModel;
 		var categoryModel = new Master.models.apipool.Categories();
-		categoryModel.getApiCategories(this.bindSafely("_showAvailableCategories"));
+		categoryModel.getApiCategories(this.bindSafely("_showAvailableCategories", isEditModel));
 	},
 	// show available categories.
-	_showAvailableCategories: function (viewModel){
-		this.notifyView(this.PROFILE_API_NEW,viewModel, {
+	_showAvailableCategories: function (isEditModel, viewModel){
+		var _viewName = isEditModel ? this.PROFILE_API_EDIT:this.PROFILE_API_NEW;
+		this.notifyView(_viewName, viewModel, {
 			action:"showAvalilableCategories" // defined in view.
 		});
 	},
@@ -149,9 +173,26 @@ enyo.kind({
 	// delete category item.
 	deleteCategoryItem: function (inSender, inEvent){
 		var categoryId = inEvent;
-		var categoryModel = this.getCategoryItemModel();
+		var categoryModel = this.getCategoryItemModel(true);
 		categoryModel.removeCategory(categoryId, this.bindSafely("_destroyCategoryComplete"));
 		return true;
+	},
+	deleteApiItem: function (inSender, inEvent) {
+		var apiId = inEvent;
+		var apiItemModel = this.getApiItemModel(true);
+		apiItemModel.destroyApi(apiId, this.bindSafely("_destroyApiItemComplete"));
+		return true;
+	},
+	_destroyApiItemComplete: function (viewModel) {
+		if(viewModel.restInfo.retCode == 1) {
+			// do refresh category list.
+			this.fetchApiList();
+		} else {
+			Master.view.frame.showAlertDialog({
+				title: "删除分类",
+				message:"删除分类失败, "+ viewModel.restInfo.retMessage
+			});
+		}
 	},
 	// show profile dock menus.
 	showProfileDockMenus: function (data) {
@@ -213,14 +254,32 @@ enyo.kind({
 				title: "删除分类",
 				message:"删除分类失败, "+ viewModel.restInfo.retMessage
 			});
-			this.fetchCategoryList();
 		}
 	},
-	saveNewApiHandler: function (inSender, inEvent) {
+	saveApiInformationHandler: function (inSender, inEvent) {
 		var _apiItemModel = this.getApiItemModel();
 		var apiData = inEvent.data;
-		_apiItemModel.addNewApi(apiData, this.bindSafely("_addNewApiComplete"));
+		var _editModel = inEvent.editModel;
+		if(_editModel) {
+			_apiItemModel.updateApiInfo(apiData, this.bindSafely("_updateApiInfoComplete"));
+		} else {
+			_apiItemModel.addNewApi(apiData, this.bindSafely("_addNewApiComplete"));
+		}
 		return true;
+	},
+	_updateApiInfoComplete: function (viewModel) {
+		var _message = "修改API 信息成功!";
+		if(viewModel.restInfo.retCode!=1) {
+			_message = viewModel.restInfo.retMessage;
+		}
+		var _this = this;
+		Master.view.frame.showAlertDialog({
+			title: "修改API",
+			message:_message,
+			success:  function () {
+				//_this.locationAdminApilist();
+			}
+		});
 	},
 	_addNewApiComplete: function (viewModel) {
 		this.zLog("viewModel: ", viewModel);
@@ -233,15 +292,15 @@ enyo.kind({
 			message:_message
 		});
 	},
-	getApiItemModel: function (){
-		if(!this._apiItemModel) {
+	getApiItemModel: function (isNew){
+		if(isNew || !this._apiItemModel) {
 			this._apiItemModel = new Master.models.apipool.ApiItem();
 		}
 		return this._apiItemModel;
 	},
 	//@private get category item model.
-	getCategoryItemModel: function () {
-		if(!this._categoryItemModel ){
+	getCategoryItemModel: function (isNew) {
+		if(isNew || !this._categoryItemModel ){
 			this._categoryItemModel = new Master.models.apipool.CategoryItem();
 		}
 		return this._categoryItemModel;

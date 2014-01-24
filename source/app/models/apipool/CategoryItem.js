@@ -104,7 +104,7 @@ enyo.kind({
 	},
 	// remove category 
 	removeCategory: function(categoryId, fn) {
-		this.destroy({
+		this.delete({
 			apiKey: "destroyCategory",
 			url: "/category/"+categoryId,
 			callback: fn

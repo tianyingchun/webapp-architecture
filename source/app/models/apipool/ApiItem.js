@@ -18,7 +18,16 @@ enyo.kind({
 		// add new api.
 		addNewApi:{
 			url: "/api",
-			headers:{ Authorization: "" },
+			cache: false
+		},
+		// update api information.
+		updateApiInfo: {
+			url: "/api",
+			cache: false
+		},
+		// remove api 
+		destroyApi: {
+			url:"/api",
 			cache: false
 		}
 	},
@@ -45,18 +54,18 @@ enyo.kind({
 		// all enyo.Model instance will cached in enyo.store.
 		// and BTW we can also cache model instance in controller, make our model instance only create once in 
 		// the whole life cycle.
-		var record = this.store.findLocal(this.kindName, {apiKey:key});
-		if(enyo.isArray(record) && record.length) {
-			fn(record[0]);
-		} else if(enyo.isObject(record)) {
-			fn(record);
-		} else {
+		// var record = this.store.findLocal(this.kindName, {apiKey:key});
+		// if(enyo.isArray(record) && record.length) {
+		// 	fn(record[0]);
+		// } else if(enyo.isObject(record)) {
+		// 	fn(record);
+		// } else {
 			this.fetch({
 				apiKey: "apiDetail",
 				data: { key: key },
 				callback: fn
 			});
-		}
+		// }
 	},
 	//@public new api details.
 	addNewApi: function (apiInfo, fn){
@@ -66,6 +75,24 @@ enyo.kind({
 			data:  apiInfo,
 			callback: fn
 		});
+	},
+	//*@ public
+	updateApiInfo: function (apiInfo, fn) {
+		this.commit({
+			apiKey: "updateApiInfo",
+			url: "/api/"+apiInfo.apiId,
+			method: "PUT",
+			data: apiInfo,
+			callback: fn
+		})
+	},
+	//*@ destroy
+	destroyApi: function (apiId, fn) {
+		this.delete({
+			apiKey: "destroyApi",
+			url: "/api/"+apiId,
+			callback:fn
+		})
 	},
 	/**
 	 * Get category item info, it should be contains all api list for this category.

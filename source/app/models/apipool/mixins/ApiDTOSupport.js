@@ -15,7 +15,9 @@
 					var apiItem = {
 						apiId: item._id,
 						apiKey: item.key,
-						apiName: item.name
+						apiName: item.name,
+						categoryId: item._category,
+						isDisplay: typeof(item.isDisplay) == "undefined"? true : item.isDisplay
 					};
 					if(typeof(item.isDisplay) == "undefined" || item.isDisplay == true) {
 						apiItem.isDisplay = true;
@@ -46,7 +48,8 @@
 				var _response = details.response;
 				result.response = {
 					body:  _response && _response.body || "",
-					headers: _response && _response.headers || ""
+					params: _response && _response.params || [],
+					headers: _response && _response.headers || []
 				};
 				// examples
 				var _example = details.example;

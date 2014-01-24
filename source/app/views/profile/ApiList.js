@@ -2,6 +2,9 @@ enyo.kind({
 	name: "Master.views.profile.ApiList",
 	kind: "Master.View",
 	classes: "api-list",
+	events:{
+		onDeleteApiItem:""
+	},
 	components: [
 		{name:"message",kind:"widgets.base.Spinner", message: Master.locale.get("LOAD_API_LIST", "message")},
 		{kind:"onyx.Groupbox", name:"listWrapper", showing:false, components: [
@@ -41,6 +44,16 @@ enyo.kind({
 		this.location("profile/api/add");
 		return true;
 	},
+	confirmDeleteApiItem: function (apiId, apiName) {
+		Master.view.frame.showConfirmDialog({
+			title: "确认",
+			message: "确认要删除API'"+ apiName+"'吗？",
+			success: this.bindSafely("deleteApiItem", apiId)
+		});
+	},	
+	deleteApiItem: function (apiId) {
+		this.doDeleteApiItem(apiId);
+	},
 	itemTap: function (inSender, inEvent) {
 		// this.zLog("originator: ", inEvent);
 		var originator = inEvent.originator;
@@ -55,7 +68,7 @@ enyo.kind({
 			location = "profile/api/edit/"+ currItem.apiKey
 			break;
 			case "remove":
-			location = "profile/api/remove/"+ currItem.apiKey
+				this.confirmDeleteApiItem(currItem.apiId, currItem.apiName);
 			break;
 		}
 		if (location) {
