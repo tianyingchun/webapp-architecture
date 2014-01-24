@@ -12,7 +12,7 @@ enyo.kind({
 			{name:"request", showing:false, clasess:"request", components: [
 				// request body summary method. PUT /BucketName?sign=MBO:aCLCZtoFQg8I
 				{content:Master.locale.get("API_REQUEST","title"), classes:"child-title"},
-				{name:"request_body", classes:"body", allowHtml: true},
+				{name:"request_body", showing:false, classes:"body", allowHtml: true},
 				// request post payload. maybe json string.
 				{name:"request_payload_title", showing:false, content:Master.locale.get("API_REQUEST_PAYLOAD","title"), classes:"child-title"},
 				{name:"request_payload_body", showing: false, classes:"payload", allowHtml: true},
@@ -28,7 +28,7 @@ enyo.kind({
 			{name:"response", showing:false, clasess:"response", components: [
 				// response result.
 				{name:"response_body_title", showing:false, content:Master.locale.get("API_RESPONSE_BODY","title"), classes:"child-title"},
-				{name:"response_body", classes:"body", allowHtml: true},
+				{name:"response_body", showing:false, classes:"body", allowHtml: true},
 				// reponse result params comments.
 				{name:"response_params_title", content:Master.locale.get("API_RESPONSE_PARAMS","title"), classes:"child-title"},
 				{name:"response_params", classes:"parameters"},
@@ -72,13 +72,17 @@ enyo.kind({
 			this.$.description.show();
 		}
 		// request block
-		if(details.request) {
+		if(details.request && details.request.body 
+			|| details.request.headers.length || details.request.params.length) {
 			this.$.request_title.show();
 			this.$.request.show();
 			var request = details.request;
 
 			// request body
-			this.$.request_body.setContent(request.body);
+			if(request.body) {
+				this.$.request_body.setContent(request.body);
+				this.$.request_body.show();
+			}
 			
 			//request payload.
 			if(request.payload) {
@@ -106,7 +110,8 @@ enyo.kind({
 			}
 		}
 		// response block.
-		if(details.response) {
+		if(details.response && details.response.body 
+			|| details.response.headers.length || details.response.params.length) {
 			this.$.response_title.show();
 			this.$.response.show();
 			// response 
@@ -115,6 +120,7 @@ enyo.kind({
 				var responseJson = hljs.highlight("js", response.body).value;
 				// response body.
 				this.$.response_body.setContent(responseJson);
+				this.$.response_body.show();
 				this.$.response_body_title.show();
 			}
 			// response parameters
@@ -133,7 +139,7 @@ enyo.kind({
 		}
 		// example block
 		var example = details.example;
-		if (example) {
+		if (example && example.postCommand || example.request || example.response) {
 			this.$.example_title.show();
 			this.$.example.show();
 			if (example.postCommand) {
