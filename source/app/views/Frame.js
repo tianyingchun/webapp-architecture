@@ -11,23 +11,23 @@ enyo.kind({
 		{name:"header", id:"header", components: [
 			{ classes: "header-inner", components: [
 				{ classes:"logo", content: Master.locale.get("LOGO_TEXT","title"), ontap:"goHome" },
-				{ classes: "menu", components:[
-					{ classes:"item", components:[
-						{tag:"a", classes:"sign-in", attributes: { href:"/" }, content:Master.locale.get("SIGN_IN","menu")},
-						{tag: "span",classes:"seperator", content:"/"},						
-						{tag:"a", classes:"register", attributes: { href:"/" }, content:Master.locale.get("REGISTER","menu")}
-					]}
-				]},
+				// { classes: "menu", components:[
+				// 	{ classes:"item", components:[
+				// 		{tag:"a", classes:"sign-in", attributes: { href:"/" }, content:Master.locale.get("SIGN_IN","menu")},
+				// 		{tag: "span",classes:"seperator", content:"/"},						
+				// 		{tag:"a", classes:"register", attributes: { href:"/" }, content:Master.locale.get("REGISTER","menu")}
+				// 	]}
+				// ]},
 				{ classes:"top-nav", tag:"ul", components: [
 					{ tag:"li", classes:"nav-item", components: [
 						{ tag: "a", attributes: { href:"/" }, content: Master.locale.get("HOME", "nav")}
 					]},
 					{ tag:"li", classes:"nav-item", components: [
-						{ tag: "a", attributes: { href:"/" }, content: Master.locale.get("OFFICIAL_SITE", "nav")}
+						{ tag: "a", attributes: { target:"_blank", href:"http://www.pingan.com/" }, content: Master.locale.get("OFFICIAL_SITE", "nav")}
 					]}
 				]},
 				// search form
-				{kind: "widgets.forms.SearchForm"}
+				// {kind: "widgets.forms.SearchForm"}
 			]}
 		]},
 		{name:"page", id:"page", components: [
@@ -46,21 +46,18 @@ enyo.kind({
 				{ classes:"left-aside", components: [
 					{ classes:"aside-link", tag: "ul", components: [
 						{ tag:"li", classes:"link-item", components:[
-							{tag:"a", attributes: { href:"/" }, content:"平安"}
+							{tag:"a", attributes: { target:"_blank", href:"http://www.pingan.com/" }, content:"平安"}
 						]},
 						{ tag:"li", classes:"link-item", components:[
-							{tag:"a", attributes: { href:"/" }, content:"开发者"}
-						]},
-						{ tag:"li", classes:"link-item", components:[
-							{tag:"a", attributes: { href:"/" }, content:"1钱包"}
+							{tag:"a", attributes: { target:"_blank", href:"https://www.1qianbao.com/" }, content:"壹钱包"}
 						]}
 					]},
-					{classes:"copyright", content:"© 2013 pingan 使用前必读 | 京ICP证030173号"}
+					{classes:"copyright", content:"Copyright© 2013-2016 壹钱包版权所有"}
 				]},
 				{ classes: "right-aside", components: [
 					{classes:"our-service", components: [
 						{classes:"dev-feedback", content:"问题反馈"},					
-						{classes:"dev-mail", content:"dev_support@pingan.com.cn"},
+						// {classes:"dev-mail", content:"dev_support@pingan.com.cn"},
 						{classes:"dev-center", content:"开发者中心"}
 					]}
 				]}
