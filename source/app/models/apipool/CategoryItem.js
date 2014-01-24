@@ -87,6 +87,7 @@ enyo.kind({
 		this.setObject(category);
 		this.commit({
 			apiKey: "updateCategoryInfo",
+			headers: { Authorization: Master.config.defaultToken },
 			method: "PUT",// 'POST','PUT'
 			url: "/category/"+category.categoryId,
 			callback: fn
@@ -98,6 +99,7 @@ enyo.kind({
 		// force do post request.
 		this.commit({
 			apiKey: "updateCategoryInfo",
+			headers: { Authorization: Master.config.defaultToken },
 			method: "POST",// 'POST'
 			callback: fn
 		});
@@ -106,6 +108,7 @@ enyo.kind({
 	removeCategory: function(categoryId, fn) {
 		this.delete({
 			apiKey: "destroyCategory",
+			headers: { Authorization: Master.config.defaultToken },
 			url: "/category/"+categoryId,
 			callback: fn
 		});

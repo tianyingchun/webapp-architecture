@@ -13,6 +13,10 @@ enyo.singleton({
 	urlRoot:"http://localhost:3000/",
 	// set default language for apipool sdk.
 	defaultAPILanguage: "java",
+	// default token, we will remove this item in the next phase.
+	// HiU4GlEb8SVQVJtre58416bY1F234Ev2
+	defaultToken: "",
+
 	cacheBust: true, // ajax cache Bust.
 	// cache settings.
 	cache: {

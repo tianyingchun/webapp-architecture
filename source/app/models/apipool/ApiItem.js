@@ -71,6 +71,7 @@ enyo.kind({
 	addNewApi: function (apiInfo, fn){
 		this.commit({
 			apiKey: "addNewApi",
+			headers: { Authorization: Master.config.defaultToken},
 			method: "POST",
 			data:  apiInfo,
 			callback: fn
@@ -80,6 +81,7 @@ enyo.kind({
 	updateApiInfo: function (apiInfo, fn) {
 		this.commit({
 			apiKey: "updateApiInfo",
+			headers: { Authorization: Master.config.defaultToken},
 			url: "/api/"+apiInfo.apiId,
 			method: "PUT",
 			data: apiInfo,
@@ -91,6 +93,7 @@ enyo.kind({
 		this.delete({
 			apiKey: "destroyApi",
 			url: "/api/"+apiId,
+			headers: { Authorization: Master.config.defaultToken},
 			callback:fn
 		})
 	},
