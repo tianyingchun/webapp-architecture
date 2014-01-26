@@ -19,13 +19,17 @@ enyo.kind({
 		},
 		// update. add new.
 		updateCategoryInfo: {
-			url: "/category",
+			url: function () {
+				return "/category/"+this.get("categoryId");
+			},
 			cache: false,
 			dto: "categoryDetailDTO"
 		},
 		// destroy
 		destroyCategory:{
-			url:"/category",
+			url: function () {
+				return "/category/"+this.get("categoryId");
+			},
 			cache: false
 		}
 	},
@@ -87,9 +91,7 @@ enyo.kind({
 		this.setObject(category);
 		this.commit({
 			apiKey: "updateCategoryInfo",
-			headers: { Authorization: Master.config.defaultToken },
 			method: "PUT",// 'POST','PUT'
-			url: "/category/"+category.categoryId,
 			callback: fn
 		});
 	},
@@ -99,17 +101,15 @@ enyo.kind({
 		// force do post request.
 		this.commit({
 			apiKey: "updateCategoryInfo",
-			headers: { Authorization: Master.config.defaultToken },
 			method: "POST",// 'POST'
 			callback: fn
 		});
 	},
 	// remove category 
 	removeCategory: function(categoryId, fn) {
+		this.set("categoryId", categoryId);
 		this.destroy({
 			apiKey: "destroyCategory",
-			headers: { Authorization: Master.config.defaultToken },
-			url: "/category/"+categoryId,
 			callback: fn
 		});
 	},

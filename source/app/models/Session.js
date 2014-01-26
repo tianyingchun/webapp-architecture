@@ -31,5 +31,9 @@ enyo.kind({
 	 */
 	hasInitialized: function () {
 		return this._initialized;
+	},
+	//*@ public get current user session token.
+	getToken: function () {
+		return Master.config.defaultToken;
 	}
 });

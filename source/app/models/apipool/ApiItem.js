@@ -17,17 +17,23 @@ enyo.kind({
 		},
 		// add new api.
 		addNewApi:{
-			url: "/api",
+			url: function() {
+				return "/api/"+this.get("apiId");
+			},
 			cache: false
 		},
 		// update api information.
 		updateApiInfo: {
-			url: "/api",
+			url: function() {
+				return "/api/"+this.get("apiId");
+			},
 			cache: false
 		},
 		// remove api 
 		destroyApi: {
-			url:"/api",
+			url: function() {
+				return "/api/"+this.get("apiId");
+			},
 			cache: false
 		}
 	},
@@ -49,29 +55,17 @@ enyo.kind({
 	 * @return {void}
 	 */
 	getApiDetail: function (key, fn) {
-		fn = fn || enyo.nop;
-		// first check if current model has cached in enyo.store instance, avoid create the same instance with the same primaryKey
-		// all enyo.Model instance will cached in enyo.store.
-		// and BTW we can also cache model instance in controller, make our model instance only create once in 
-		// the whole life cycle.
-		// var record = this.store.findLocal(this.kindName, {apiKey:key});
-		// if(enyo.isArray(record) && record.length) {
-		// 	fn(record[0]);
-		// } else if(enyo.isObject(record)) {
-		// 	fn(record);
-		// } else {
-			this.fetch({
-				apiKey: "apiDetail",
-				data: { key: key },
-				callback: fn
-			});
-		// }
+		fn = fn || enyo.nop; 
+		this.fetch({
+			apiKey: "apiDetail",
+			data: { key: key },
+			callback: fn
+		}); 
 	},
 	//@public new api details.
 	addNewApi: function (apiInfo, fn){
 		this.commit({
-			apiKey: "addNewApi",
-			headers: { Authorization: Master.config.defaultToken},
+			apiKey: "addNewApi", 
 			method: "POST",
 			data:  apiInfo,
 			callback: fn
@@ -79,10 +73,9 @@ enyo.kind({
 	},
 	//*@ public
 	updateApiInfo: function (apiInfo, fn) {
+		this.set("apiId", apiInfo.apiId);
 		this.commit({
-			apiKey: "updateApiInfo",
-			headers: { Authorization: Master.config.defaultToken},
-			url: "/api/"+apiInfo.apiId,
+			apiKey: "updateApiInfo", 
 			method: "PUT",
 			data: apiInfo,
 			callback: fn
@@ -90,10 +83,9 @@ enyo.kind({
 	},
 	//*@ destroy
 	destroyApi: function (apiId, fn) {
+		this.set("apiId", apiId);
 		this.destroy({
 			apiKey: "destroyApi",
-			url: "/api/"+apiId,
-			headers: { Authorization: Master.config.defaultToken},
 			callback:fn
 		})
 	},
