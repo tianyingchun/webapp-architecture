@@ -90,7 +90,7 @@ enyo.kind({
 	},
 	//*@ destroy
 	destroyApi: function (apiId, fn) {
-		this.delete({
+		this.destroy({
 			apiKey: "destroyApi",
 			url: "/api/"+apiId,
 			headers: { Authorization: Master.config.defaultToken},

@@ -106,7 +106,7 @@ enyo.kind({
 	},
 	// remove category 
 	removeCategory: function(categoryId, fn) {
-		this.delete({
+		this.destroy({
 			apiKey: "destroyCategory",
 			headers: { Authorization: Master.config.defaultToken },
 			url: "/category/"+categoryId,
