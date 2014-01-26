@@ -69,18 +69,11 @@ enyo.kind({
 	 */
 	getCategoryDetail: function (categoryKey, fn) {
 		fn = fn || enyo.nop;
-		// var exist = this.store.findLocal(this.kindName, {categoryKey: categoryKey});
-		// if(enyo.isArray(exist) && exist.length){
-		// 	fn(exist[0]);
-		// } else if(enyo.isObject(exist)){
-		// 	fn(exist);
-		// } else {
 		this.fetch({
 			apiKey: "categoryInfo",
 			data: { key: categoryKey },
 			callback: fn
 		});
-		// }
 	},
 	/**
 	 * Update category info

@@ -206,8 +206,8 @@ enyo.kind({
 		var selectedCategory = this.$.api_categories.getSelectedItem();
 		_data._category = selectedCategory.categoryId; // api  category id.
 		_data.apiId = this._apiId;
-		_data.key = this.$.api_key.getValue();// api key
-		_data.name = this.$.api_name.getValue();// api name.
+		_data.apiKey = this.$.api_key.getValue();// api key
+		_data.apiName = this.$.api_name.getValue();// api name.
 		_data.description = this.$.api_description.getEditorContent();
 		_data.request = {
 			body: this.$.request_body.getValue(),

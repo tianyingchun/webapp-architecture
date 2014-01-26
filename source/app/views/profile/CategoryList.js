@@ -57,7 +57,7 @@ enyo.kind({
 		});
 	},
 	deleteCategoryItem: function (categoryId, categoryKey) {
-		this.doDeleteCategoryItem({categoryId: categoryId,categorykey:categoryKey});
+		this.doDeleteCategoryItem({categoryId: categoryId,categoryKey:categoryKey});
 	},
 	itemTap: function (inSender, inEvent) {
 		// this.zLog("originator: ", inEvent);

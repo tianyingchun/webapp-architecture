@@ -44,15 +44,15 @@ enyo.kind({
 		this.location("profile/api/add");
 		return true;
 	},
-	confirmDeleteApiItem: function (apiId, apiName) {
+	confirmDeleteApiItem: function (apiId, apiKey, apiName) {
 		Master.view.frame.showConfirmDialog({
 			title: "确认",
 			message: "确认要删除API'"+ apiName+"'吗？",
-			success: this.bindSafely("deleteApiItem", apiId)
+			success: this.bindSafely("deleteApiItem", apiId, apiKey)
 		});
 	},	
-	deleteApiItem: function (apiId) {
-		this.doDeleteApiItem(apiId);
+	deleteApiItem: function (apiId, apiKey) {
+		this.doDeleteApiItem({apiId: apiId, apiKey: apiKey});
 	},
 	itemTap: function (inSender, inEvent) {
 		// this.zLog("originator: ", inEvent);
@@ -68,7 +68,7 @@ enyo.kind({
 			location = "profile/api/edit/"+ currItem.apiKey
 			break;
 			case "remove":
-				this.confirmDeleteApiItem(currItem.apiId, currItem.apiName);
+				this.confirmDeleteApiItem(currItem.apiId, currItem.apiKey, currItem.apiName);
 			break;
 		}
 		if (location) {

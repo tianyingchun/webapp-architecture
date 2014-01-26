@@ -40,13 +40,23 @@ enyo.kind({
 	// it will automatically append the url request if it has value.
 	// Note: the enyo.store is global memory model instance managerment
 	// we need to maually manager this object.
-	primaryKey:"apiId", //default is "id"
+	primaryKey:"apiKey", //default is "id"
 	// api detail default fields. it will be auto instanced.
 	attributes:{
 		apiId: "",
 		apiKey: "",
 		apiName: "",
 		details: {}
+	},
+	//*@ private help method for preparing the submit data.
+	_getPostInfo: function (apiInfo) {
+		var _data = enyo.clone(apiInfo);
+		_data.key = _data.apiKey;
+		delete _data.apiKey;
+		_data.name = _data.apiName;
+		delete _data.apiName;
+
+		return enyo.json.stringify(_data);
 	},
 	/**
 	 * Get current api details by api id.
@@ -64,20 +74,21 @@ enyo.kind({
 	},
 	//@public new api details.
 	addNewApi: function (apiInfo, fn){
+		this.setObject(apiInfo);
 		this.commit({
 			apiKey: "addNewApi", 
 			method: "POST",
-			data:  apiInfo,
+			data: this._getPostInfo(apiInfo),
 			callback: fn
 		});
 	},
 	//*@ public
 	updateApiInfo: function (apiInfo, fn) {
-		this.set("apiId", apiInfo.apiId);
+		this.setObject(apiInfo);
 		this.commit({
 			apiKey: "updateApiInfo", 
 			method: "PUT",
-			data: apiInfo,
+			data: this._getPostInfo(apiInfo),
 			callback: fn
 		})
 	},

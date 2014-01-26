@@ -81,7 +81,7 @@ enyo.kind({
 			displayOrder: this.$.category_display_order.getValue(),
 			description: this.$.category_description.getEditorContent()
 		};
-		this.doCommitCategory({data:data, isNew: false});
+		this.doCommitCategory({data:data, isEditModel: true});
 	},
 	// show loading message.
 	showLoading:function (message) {

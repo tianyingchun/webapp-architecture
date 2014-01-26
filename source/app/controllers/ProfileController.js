@@ -71,15 +71,15 @@ enyo.kind({
 			action:"showAddNewApiUI"
 		});
 	},
-	editApi:function(apiId) {
-		this.zLog("apiId: ", apiId);
+	editApi:function(apiKey) {
+		this.zLog("apiKey: ", apiKey);
 		this.showProfileDockMenus({menuKey: "api_list"});
 		this.bindingViewToContent(this.PROFILE_API_EDIT, null, null);
 		var spinner_uid = Master.view.frame.showSpinnerPopup({
 			message: "Loading Api detail..."
 		});
-		var apiItemModel = this.getApiItemModel({apiId: apiId});
-		apiItemModel.getApiDetail(apiId, this.bindSafely("_loadingExistApiDetail", spinner_uid));
+		var apiItemModel = this.getApiItemModel({apiKey: apiKey});
+		apiItemModel.getApiDetail(apiKey, this.bindSafely("_loadingExistApiDetail", spinner_uid));
 	},
 	_loadingExistApiDetail: function(spinner_uid, viewModel) {
 		this.notifyView(this.PROFILE_API_EDIT, viewModel,{
@@ -176,8 +176,9 @@ enyo.kind({
 		return true;
 	},
 	deleteApiItem: function (inSender, inEvent) {
-		var apiId = inEvent;
-		var apiItemModel = this.getApiItemModel({apiId: apiId});
+		var apiId = inEvent.apiId;
+		var apiKey = inEvent.apiKey;
+		var apiItemModel = this.getApiItemModel({apiKey: apiKey});
 		apiItemModel.destroyApi(apiId, this.bindSafely("_destroyApiItemComplete"));
 		return true;
 	},
@@ -209,13 +210,16 @@ enyo.kind({
 	saveCategoryInfoHandler: function (inSender, inEvent) {
 		this.zLog("saveCategoryInfo event: ", inEvent);
 		var data = inEvent.data;
-		var isNew = inEvent.isNew;
+		var isEditModel = inEvent.isEditModel;
 		var categoryKey = data.categoryKey;
-		var categoryItemModel = this.getCategoryItemModel({categoryKey:categoryKey});
-		if (isNew) {
-			categoryItemModel.addNewCategory(data, this.bindSafely("_addNewCategoryComplete"));
-		} else {
+		// edit model.
+		if (isEditModel) {
+			var categoryItemModel = this.getCategoryItemModel({categoryKey:categoryKey});
 			categoryItemModel.updateCategoryInfo(data, this.bindSafely("_updateCategoryComplete"));
+		} else {
+			// Make sure tht new use the categoryKey=""
+			var categoryItemModel = this.getCategoryItemModel({categoryKey:""});
+			categoryItemModel.addNewCategory(data, this.bindSafely("_addNewCategoryComplete"));
 		}
 		return true;
 	},
@@ -258,10 +262,11 @@ enyo.kind({
 	saveApiInformationHandler: function (inSender, inEvent) {
 		var apiData = inEvent.data;
 		var _editModel = inEvent.editModel;
-		var _apiItemModel = this.getApiItemModel({apiId: apiData.apiId});
 		if(_editModel) {
+			var _apiItemModel = this.getApiItemModel({apiKey: apiData.apiKey});
 			_apiItemModel.updateApiInfo(apiData, this.bindSafely("_updateApiInfoComplete"));
 		} else {
+			var _apiItemModel = this.getApiItemModel({apiKey: ""});
 			_apiItemModel.addNewApi(apiData, this.bindSafely("_addNewApiComplete"));
 		}
 		return true;
