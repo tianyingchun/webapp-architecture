@@ -17,17 +17,17 @@ enyo.kind({
 		},
 		// add new api.
 		addNewApi:{
-			url: function() {
-				return "/api/"+this.get("apiId");
-			},
-			cache: false
+			url: "/api",
+			cache: false,
+			dto: "apiDetailDTO"
 		},
 		// update api information.
 		updateApiInfo: {
 			url: function() {
 				return "/api/"+this.get("apiId");
 			},
-			cache: false
+			cache: false,
+			dto: "apiDetailDTO"
 		},
 		// remove api 
 		destroyApi: {

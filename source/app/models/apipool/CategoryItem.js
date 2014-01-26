@@ -17,6 +17,11 @@ enyo.kind({
 			},
 			dto: "categoryDetailDTO"
 		},
+		addCategoryInfo: {
+			url: "/category",
+			cache: false,
+			dto: "categoryDetailDTO"
+		},
 		// update. add new.
 		updateCategoryInfo: {
 			url: function () {
@@ -93,7 +98,7 @@ enyo.kind({
 		this.setObject(category);
 		// force do post request.
 		this.commit({
-			apiKey: "updateCategoryInfo",
+			apiKey: "addCategoryInfo",
 			method: "POST",// 'POST'
 			callback: fn
 		});
