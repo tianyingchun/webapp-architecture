@@ -8,10 +8,6 @@ enyo.kind({
 	mixins:[
 		"Master.controllers.DockSupport"
 	],
-	handlers: {
-		// only for testing purpose for view dispatch event to corresponding controller and then bubble it to Master.view.frame
-		onGetAllCategories: "getAllCategoriesTest"
-	},
 	constants: {
 		//
 	},
@@ -20,7 +16,6 @@ enyo.kind({
 	 * @method 
 	 */
 	index: function () {
-		var test = 1;
 		// fetch all categories from server and show it on the left dock.
 		// force refresh categories shown on left dock.
 		this.getAllCategories({
@@ -39,9 +34,5 @@ enyo.kind({
  			this.locationCategoryItem(apiKey);
  		}
 		// binding view.
-	},
-	getAllCategoriesTest: function (inSender, inEvent) {
-		this.zLog("get all getAllCategories...", inEvent);
-		return true;
 	}
 });

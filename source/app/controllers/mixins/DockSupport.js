@@ -16,7 +16,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 	getAllCategories: function (extraData) {
 		// the collection model won't be cached in __global__ enyo.store.records object
 		// so we don't need to cache this model in current controller.
-		var apiCategories = new Master.models.apipool.Categories();
+		var apiCategories = this.getCollectionInstance("Master.models.apipool.Categories");
 		// view data.
 		var viewData = {
 			action: "showUICategories",
@@ -44,7 +44,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 	// for dock profiles left menu
 	showProfileMenus: function (extraData) {
 		
-		var menuList = new Master.models.menu.MenuList();
+		var menuList = this.getCollectionInstance("Master.models.menu.MenuList");
 		// first binding view to dock.
 		this.bindingViewToDock(this.DOCK_PROFILE_KIND, null,null);
 		var viewData = {

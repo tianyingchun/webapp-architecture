@@ -47,7 +47,7 @@ enyo.kind({
 		childs: []
 	},
 	// define primary key.
-	// primaryKey: "categoryKey",
+	primaryKey: "categoryKey",
 
 	//@override the to JSON, it will used to commit new data to server.
 	toJSON: function () {

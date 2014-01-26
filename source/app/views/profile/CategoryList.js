@@ -49,15 +49,15 @@ enyo.kind({
 		this.location("profile/category/add");
 		return true;
 	},
-	confirmCategoryItem: function (categoryId, categoryName) {
+	confirmCategoryItem: function (categoryId, categoryKey, categoryName) {
 		Master.view.frame.showConfirmDialog({
 			title: "确认",
 			message: "确认要删除分类'"+ categoryName+"'吗？",
-			success: this.bindSafely("deleteCategoryItem", categoryId)
+			success: this.bindSafely("deleteCategoryItem", categoryId, categoryKey)
 		});
 	},
-	deleteCategoryItem: function (categoryId) {
-		this.doDeleteCategoryItem(categoryId);
+	deleteCategoryItem: function (categoryId, categoryKey) {
+		this.doDeleteCategoryItem({categoryId: categoryId,categorykey:categoryKey});
 	},
 	itemTap: function (inSender, inEvent) {
 		// this.zLog("originator: ", inEvent);
@@ -73,7 +73,7 @@ enyo.kind({
 			location = "profile/category/edit/"+ currItem.categoryKey
 			break;
 			case "remove":
-			this.confirmCategoryItem(currItem.categoryId, currItem.categoryName);
+			this.confirmCategoryItem(currItem.categoryId, currItem.categoryKey, currItem.categoryName);
 			break;
 		}
 		if (location) {

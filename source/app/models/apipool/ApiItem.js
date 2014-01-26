@@ -40,7 +40,7 @@ enyo.kind({
 	// it will automatically append the url request if it has value.
 	// Note: the enyo.store is global memory model instance managerment
 	// we need to maually manager this object.
-	// primaryKey:"apiKey", //default is "id"
+	primaryKey:"apiId", //default is "id"
 	// api detail default fields. it will be auto instanced.
 	attributes:{
 		apiId: "",

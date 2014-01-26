@@ -9,13 +9,6 @@ enyo.kind({
 	constants: {
 		CATEGORY_DETAIL_PAGE:"category.Detail"
 	},
-	create: enyo.inherit(function (sup) {
-		return function () {
-			sup.apply(this, arguments);
-			//cache categories model
-			this.categoryModel = new Master.models.apipool.CategoryItem();
-		};
-	}),
 	detail: function (key) {
 		this.zLog("category detail key: ", key);
 		this.showDockCategories({apiKey: key});
@@ -32,7 +25,8 @@ enyo.kind({
 				key: key
 			}
 		};
-		this.categoryModel.getCategoryDetail(key, this.bindSafely("_showCategoryDetail", viewData));
+		var _categoryModel = this.getModelInstance("Master.models.apipool.CategoryItem", {categoryKey: key});
+		_categoryModel.getCategoryDetail(key, this.bindSafely("_showCategoryDetail", viewData));
 	},
 	_showCategoryDetail: function (viewData, viewModel) {
 		this.notifyView(this.CATEGORY_DETAIL_PAGE, viewModel, viewData);

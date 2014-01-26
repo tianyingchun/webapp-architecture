@@ -78,7 +78,7 @@ enyo.kind({
 		var spinner_uid = Master.view.frame.showSpinnerPopup({
 			message: "Loading Api detail..."
 		});
-		var apiItemModel = this.getApiItemModel();
+		var apiItemModel = this.getApiItemModel({apiId: apiId});
 		apiItemModel.getApiDetail(apiId, this.bindSafely("_loadingExistApiDetail", spinner_uid));
 	},
 	_loadingExistApiDetail: function(spinner_uid, viewModel) {
@@ -151,18 +151,15 @@ enyo.kind({
 	 * Edit exist category information
 	 * @param  {string} categoryId the category key.
 	 */
-	editCategory: function (categoryId) {
-		this.zLog("categoryId: ", categoryId);
+	editCategory: function (categoryKey) {
+		this.zLog("categoryKey: ", categoryKey);
 		this.showProfileMenus({menuKey: "category_list"});
 		// show edit category ui.
 		this.bindingViewToContent(this.PROFILE_CATEGORY_EDIT, null, null);
-		
 		// get category data.
-		var categoryItemModel = this.getCategoryItemModel();
-
+		var categoryItemModel = this.getCategoryItemModel({categoryKey: categoryKey});
 		// go to get
-		categoryItemModel.getCategoryDetail(categoryId, this.bindSafely("_showCategoryEditDetail"));
-		
+		categoryItemModel.getCategoryDetail(categoryKey, this.bindSafely("_showCategoryEditDetail"));
 	},
 	_showCategoryEditDetail: function (viewModel) {
 		// show edit cagtegory ui.
@@ -172,14 +169,15 @@ enyo.kind({
 	},
 	// delete category item.
 	deleteCategoryItem: function (inSender, inEvent){
-		var categoryId = inEvent;
-		var categoryModel = this.getCategoryItemModel(true);
+		var categoryId = inEvent.categoryId;
+		var categoryKey = inEvent.categoryKey;
+		var categoryModel = this.getCategoryItemModel({categoryKey: categoryKey});
 		categoryModel.removeCategory(categoryId, this.bindSafely("_destroyCategoryComplete"));
 		return true;
 	},
 	deleteApiItem: function (inSender, inEvent) {
 		var apiId = inEvent;
-		var apiItemModel = this.getApiItemModel(true);
+		var apiItemModel = this.getApiItemModel({apiId: apiId});
 		apiItemModel.destroyApi(apiId, this.bindSafely("_destroyApiItemComplete"));
 		return true;
 	},
@@ -212,7 +210,8 @@ enyo.kind({
 		this.zLog("saveCategoryInfo event: ", inEvent);
 		var data = inEvent.data;
 		var isNew = inEvent.isNew;
-		var categoryItemModel = this.getCategoryItemModel();
+		var categoryKey = data.categoryKey;
+		var categoryItemModel = this.getCategoryItemModel({categoryKey:categoryKey});
 		if (isNew) {
 			categoryItemModel.addNewCategory(data, this.bindSafely("_addNewCategoryComplete"));
 		} else {
@@ -257,9 +256,9 @@ enyo.kind({
 		}
 	},
 	saveApiInformationHandler: function (inSender, inEvent) {
-		var _apiItemModel = this.getApiItemModel();
 		var apiData = inEvent.data;
 		var _editModel = inEvent.editModel;
+		var _apiItemModel = this.getApiItemModel({apiId: apiData.apiId});
 		if(_editModel) {
 			_apiItemModel.updateApiInfo(apiData, this.bindSafely("_updateApiInfoComplete"));
 		} else {
@@ -292,17 +291,11 @@ enyo.kind({
 			message:_message
 		});
 	},
-	getApiItemModel: function (isNew){
-		if(isNew || !this._apiItemModel) {
-			this._apiItemModel = new Master.models.apipool.ApiItem();
-		}
-		return this._apiItemModel;
+	getApiItemModel: function (opts){
+		return this.getModelInstance("Master.models.apipool.ApiItem", opts);
 	},
 	//@private get category item model.
-	getCategoryItemModel: function (isNew) {
-		if(isNew || !this._categoryItemModel ){
-			this._categoryItemModel = new Master.models.apipool.CategoryItem();
-		}
-		return this._categoryItemModel;
+	getCategoryItemModel: function (opts) {
+		return this.getModelInstance("Master.models.apipool.CategoryItem", opts);
 	}
 });
