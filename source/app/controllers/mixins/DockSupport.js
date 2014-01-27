@@ -22,7 +22,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 			action: "showUICategories",
 			data: extraData || {}
 		}
-		apiCategories.getApiCategories(enyo.bindSafely(this, "showApiCategories", viewData));
+		apiCategories.getApiCategories(this.bind("showApiCategories", viewData));
 		// binding view to left dock
 		this.bindingViewToDock(this.DOCK_CATEGORY_KIND, null, null);
 	},
@@ -51,7 +51,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 			action: "showProfileMenusUI",
 			data: extraData || {}
 		};
-		menuList.getMenus(enyo.bindSafely(this, "showProfileMenusUI", viewData));
+		menuList.getMenus(this.bind("showProfileMenusUI", viewData));
 	},
 	showProfileMenusUI: function (viewData, viewModel) {
 		this.notifyView(this.DOCK_PROFILE_KIND, viewModel, viewData);

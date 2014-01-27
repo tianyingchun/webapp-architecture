@@ -17,13 +17,6 @@ enyo.kind({
 		//if we need to render main content we need use event bubble to update.
 		"Master.controllers.DockSupport"
 	],
-	create: enyo.inherit(function (sup) {
-		return function () {
-			sup.apply(this, arguments);
-			// cache api detail model in the whole controller lifecycle.
-			this.apiDetailModel = new Master.models.apipool.ApiItem();
-		};
-	}),
 	// default action :/node/api
 	index: function (apiKey){
 		this.zLog("apiKey: ", apiKey);
@@ -56,8 +49,8 @@ enyo.kind({
 			}
 		};
 		// use cached  model instance here avoid create multiple modle instance and cached within enyo.store __global__
-		// instance.
-		this.apiDetailModel.getApiDetail(apiKey, enyo.bindSafely(this, "_showApiDetailInfo", viewData));
+		var apiItemModel = this.getModelInstance("Master.models.apipool.ApiItem",{apiKey: apiKey});
+		apiItemModel.getApiDetail(apiKey, this.bind("_showApiDetailInfo", viewData));
 	},
 	_showApiDetailInfo: function (viewData, viewModel) {
 		// this.zLog("categoryDetail: ", viewData, viewModel);

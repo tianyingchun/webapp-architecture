@@ -44,7 +44,7 @@ enyo.kind({
 	},
 	fetchApiList: function () {
 		// loading api list.
-		var apiList = new Master.models.apipool.ApiList();
+		var apiListModel = this.getCollectionInstance("Master.models.apipool.ApiList");
 		var viewData = {
 			action: "showApiListUI",
 			data: {page: page || 1}
@@ -52,7 +52,7 @@ enyo.kind({
 		if (isNaN(page)) {
 			viewData.data.page = 1;
 		}
-		apiList.getApiList(enyo.bindSafely(this, "showApiListUI", viewData));
+		apiListModel.getApiList(this.bind("showApiListUI", viewData));
 	},
 	/**
 	 * Action methods add new api information
@@ -79,7 +79,7 @@ enyo.kind({
 			message: "Loading Api detail..."
 		});
 		var apiItemModel = this.getApiItemModel({apiKey: apiKey});
-		apiItemModel.getApiDetail(apiKey, this.bindSafely("_loadingExistApiDetail", spinner_uid));
+		apiItemModel.getApiDetail(apiKey, this.bind("_loadingExistApiDetail", spinner_uid));
 	},
 	_loadingExistApiDetail: function(spinner_uid, viewModel) {
 		this.notifyView(this.PROFILE_API_EDIT, viewModel,{
@@ -105,7 +105,7 @@ enyo.kind({
 		this.fetchCategoryList();
 	},
 	fetchCategoryList: function () {
-		var categoryModel = new Master.models.apipool.Categories();
+		var categoryModel = this.getCollectionInstance("Master.models.apipool.Categories");
 		var viewData = {
 			action: "showCategoriesUI", // view action.
 			data: {page: page || 1}
@@ -113,7 +113,7 @@ enyo.kind({
 		if (isNaN(page)) {
 			viewData.data.page = 1;
 		}
-		categoryModel.getApiCategories(this.bindSafely("_showCategoryListUI", viewData));
+		categoryModel.getApiCategories(this.bind("_showCategoryListUI", viewData));
 	},
 	//@private helper method for render view model into corresponding view.
 	_showCategoryListUI: function (viewData, viewModel) {
@@ -122,8 +122,8 @@ enyo.kind({
 	},
 	fetchApiAvailableCategories: function(inSender, inEvent){
 		var isEditModel = inEvent.editModel;
-		var categoryModel = new Master.models.apipool.Categories();
-		categoryModel.getApiCategories(this.bindSafely("_showAvailableCategories", isEditModel));
+		var categoryModel = this.getCollectionInstance("Master.models.apipool.Categories");
+		categoryModel.getApiCategories(this.bind("_showAvailableCategories", isEditModel));
 	},
 	// show available categories.
 	_showAvailableCategories: function (isEditModel, viewModel){
@@ -159,7 +159,7 @@ enyo.kind({
 		// get category data.
 		var categoryItemModel = this.getCategoryItemModel({categoryKey: categoryKey});
 		// go to get
-		categoryItemModel.getCategoryDetail(categoryKey, this.bindSafely("_showCategoryEditDetail"));
+		categoryItemModel.getCategoryDetail(categoryKey, this.bind("_showCategoryEditDetail"));
 	},
 	_showCategoryEditDetail: function (viewModel) {
 		// show edit cagtegory ui.
@@ -172,14 +172,14 @@ enyo.kind({
 		var categoryId = inEvent.categoryId;
 		var categoryKey = inEvent.categoryKey;
 		var categoryModel = this.getCategoryItemModel({categoryKey: categoryKey});
-		categoryModel.removeCategory(categoryId, this.bindSafely("_destroyCategoryComplete"));
+		categoryModel.removeCategory(categoryId, this.bind("_destroyCategoryComplete"));
 		return true;
 	},
 	deleteApiItem: function (inSender, inEvent) {
 		var apiId = inEvent.apiId;
 		var apiKey = inEvent.apiKey;
 		var apiItemModel = this.getApiItemModel({apiKey: apiKey});
-		apiItemModel.destroyApi(apiId, this.bindSafely("_destroyApiItemComplete"));
+		apiItemModel.destroyApi(apiId, this.bind("_destroyApiItemComplete"));
 		return true;
 	},
 	_destroyApiItemComplete: function (viewModel) {
@@ -215,11 +215,11 @@ enyo.kind({
 		// edit model.
 		if (isEditModel) {
 			var categoryItemModel = this.getCategoryItemModel({categoryKey:categoryKey});
-			categoryItemModel.updateCategoryInfo(data, this.bindSafely("_updateCategoryComplete"));
+			categoryItemModel.updateCategoryInfo(data, this.bind("_updateCategoryComplete"));
 		} else {
 			// Make sure tht new use the categoryKey=""
 			var categoryItemModel = this.getCategoryItemModel({categoryKey:""});
-			categoryItemModel.addNewCategory(data, this.bindSafely("_addNewCategoryComplete"));
+			categoryItemModel.addNewCategory(data, this.bind("_addNewCategoryComplete"));
 		}
 		return true;
 	},
@@ -264,10 +264,10 @@ enyo.kind({
 		var _editModel = inEvent.editModel;
 		if(_editModel) {
 			var _apiItemModel = this.getApiItemModel({apiKey: apiData.apiKey});
-			_apiItemModel.updateApiInfo(apiData, this.bindSafely("_updateApiInfoComplete"));
+			_apiItemModel.updateApiInfo(apiData, this.bind("_updateApiInfoComplete"));
 		} else {
 			var _apiItemModel = this.getApiItemModel({apiKey: ""});
-			_apiItemModel.addNewApi(apiData, this.bindSafely("_addNewApiComplete"));
+			_apiItemModel.addNewApi(apiData, this.bind("_addNewApiComplete"));
 		}
 		return true;
 	},

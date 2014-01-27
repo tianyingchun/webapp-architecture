@@ -26,7 +26,7 @@ enyo.kind({
 			}
 		};
 		var _categoryModel = this.getModelInstance("Master.models.apipool.CategoryItem", {categoryKey: key});
-		_categoryModel.getCategoryDetail(key, this.bindSafely("_showCategoryDetail", viewData));
+		_categoryModel.getCategoryDetail(key, this.bind("_showCategoryDetail", viewData));
 	},
 	_showCategoryDetail: function (viewData, viewModel) {
 		this.notifyView(this.CATEGORY_DETAIL_PAGE, viewModel, viewData);

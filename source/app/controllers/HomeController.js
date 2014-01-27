@@ -19,7 +19,7 @@ enyo.kind({
 		// fetch all categories from server and show it on the left dock.
 		// force refresh categories shown on left dock.
 		this.getAllCategories({
-			callback: enyo.bindSafely(this, "fetchCategoryDetailInfo")
+			callback: this.bind("fetchCategoryDetailInfo")
 		});
 	},
 
