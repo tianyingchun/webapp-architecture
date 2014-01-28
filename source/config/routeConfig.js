@@ -29,6 +29,8 @@
 		{ path: "profile/category/add", controller: "ProfileController", action:"addNewCategory"},
 		{ path: "profile/category/edit/:id", controller: "ProfileController", action:"editCategory"},
 
+		// user oauth login resolve token.
+		{ path: "token/oauth", controller: "TokenController", action: "resolveToken"}
 		/**
 		 * dynamic router: controller action -> show().
 		 * 1.match #product/1/  ->show (page:1, id:"");

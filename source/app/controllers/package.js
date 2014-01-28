@@ -3,5 +3,6 @@ enyo.depends(
 	"HomeController.js",
 	"ApiController.js",
 	"CategoryController.js",
-	"ProfileController.js"
+	"ProfileController.js",
+	"TokenController.js"
 );
