@@ -11,16 +11,25 @@ enyo.kind({
 	components: [
 		{name: "container", classes:"api-container", components: [
 			{name:"form", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
+				// API KEY.
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "API KEY"},
 					{classes:"form-item", components:[
 						{name:"api_key", placeholder:"API KEY", kind:"widgets.forms.InputDecorator", tipMessage:"全局唯一，请一定输入不重复的KEY限英文字母", validation: {required:"必填字段！",hash:""}}
 					]}
 				]},
+				// API NAME
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "API名称"},
 					{classes:"form-item", components:[
 						{name:"api_name", placeholder:"API名称", kind:"widgets.forms.InputDecorator", tipMessage:"API 名称必须填写！", validation: {required:"必填字段！"}}
+					]}
+				]},
+				// API DisplayOrder.
+				{kind:"onyx.Groupbox", components: [
+					{kind: "onyx.GroupboxHeader", content: "API排序"},
+					{classes:"form-item", components:[
+						{name:"api_display_order", placeholder:"API名称", type:"number", kind:"widgets.forms.InputDecorator", tipMessage:"填写分类排序，只能为数字值越大优先级越高!", validation: {required:"请输入数字!", number:""}}
 					]}
 				]},
 				{kind:"onyx.Groupbox", components: [
@@ -175,6 +184,8 @@ enyo.kind({
 		this._apiId = viewModel.get("apiId");
 		this.$.api_key.setValue(viewModel.get("apiKey"));
 		this.$.api_name.setValue(viewModel.get('apiName'));
+		this.$.api_display_order.setValue(viewModel.get("displayOrder")||0);
+
 		var detail = viewModel.get("details");
 		this.$.api_description.setEditorContent(detail.description);
 		// request.
@@ -208,6 +219,8 @@ enyo.kind({
 		_data.apiId = this._apiId;
 		_data.apiKey = this.$.api_key.getValue();// api key
 		_data.apiName = this.$.api_name.getValue();// api name.
+		// displayOrder.
+		_data.displayOrder = this.$.api_display_order.getValue();
 		_data.description = this.$.api_description.getEditorContent();
 		_data.request = {
 			body: this.$.request_body.getValue(),

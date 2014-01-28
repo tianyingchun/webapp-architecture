@@ -23,6 +23,13 @@ enyo.kind({
 						{name:"api_name", placeholder:"API名称", kind:"widgets.forms.InputDecorator", tipMessage:"API 名称必须填写！", validation: {required:"必填字段！"}}
 					]}
 				]},
+				// API DisplayOrder.
+				{kind:"onyx.Groupbox", components: [
+					{kind: "onyx.GroupboxHeader", content: "API排序"},
+					{classes:"form-item", components:[
+						{name:"api_display_order", value:0, placeholder:"API名称", type:"number", kind:"widgets.forms.InputDecorator", tipMessage:"填写分类排序，只能为数字值越大优先级越高!", validation: {required:"请输入数字!", number:""}}
+					]}
+				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "API分类"},
 					{classes:"form-item", components:[
@@ -173,6 +180,8 @@ enyo.kind({
 		_data._category = selectedCategory.categoryId; // api  category id.
 		_data.apiKey = this.$.api_key.getValue();// api key
 		_data.apiName = this.$.api_name.getValue();// api name.
+		// displayOrder.
+		_data.displayOrder = this.$.api_display_order.getValue();
 		_data.description = this.$.api_description.getEditorContent();
 		_data.request = {
 			body: this.$.request_body.getValue(),
@@ -192,13 +201,6 @@ enyo.kind({
 		_data.questions = this.$.question_answers.getTableJSONResult()
 		return _data;
 	},
-	/*testButtonTap: function (inSender, inEvent) {
-		this.$.requestParams.setRowsDataSource([
-			{name:"test name", value:"test value", isRequired:true, description:"test description", more:"<html>00</html>"},
-			{name:"test name1", value:"test value1", isRequired:true, description:"test description1", more:"<html>111</html>"}
-		]);
-		return true;
-	},*/
 	// button handler for creating new api
 	addNewApi: function (inSender, inEvent) {
 		var editorText = this.$.textEditor.getEditorContent();

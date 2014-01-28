@@ -1,0 +1,40 @@
+@import "./../variables.less";
+@import "./../mixins.less"; 
+.dialog-iframe{
+	min-width: 300px;
+	position: fixed;
+	top: 50%;
+	padding: 10px;
+	// margin-top: -60px;	
+	&.login-dialog {
+		width: 495px;
+		height: 420px;
+		// margin-top: -200px;
+	}
+	.widget-dialog-header{
+		padding-bottom: 10px;
+		position: relative;
+		overflow:hidden;
+		.header-title{
+			float: left;
+			padding-left: 2px;
+		}
+		.close{
+			position: absolute;
+			right: 10px;
+			top: 0px;
+		}
+	}
+	.widget-dialog-body{
+		padding: 0;
+	}
+	.widget-dialog-body{
+		override:hidden;
+	}
+	iframe{
+		overflow: hidden;
+		crolling : 'no';
+		width: 470px;
+		height: 340px;
+	}
+}

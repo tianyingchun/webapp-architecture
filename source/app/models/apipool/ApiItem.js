@@ -46,6 +46,7 @@ enyo.kind({
 		apiId: "",
 		apiKey: "",
 		apiName: "",
+		displayOrder:0,
 		details: {}
 	},
 	//*@ private help method for preparing the submit data.

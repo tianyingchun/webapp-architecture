@@ -24,6 +24,18 @@ enyo.singleton({
 		enabled: true,
 		cacheStrategy: "websql" //localstorage, websql
 	},
+	oauth: {
+		// 1qianbao oauth login url.
+		loginUrl: "https://test-www.1qianbao.com/pinganfuweb/auth",
+		response_type: "code",
+		client_secret:"1c36f95226034d7eb0085ce326e5c93b",
+		client_id:"900000000105",
+		scope: "user", //user:balance
+		// our self callback url used to receive oauth login token.
+		callbackUrl: "debug.html#token/oauth"
+	},
+	
+
 	// #endregion properties.
 	// -------------------------------------------------------------------
 	// #region methods.

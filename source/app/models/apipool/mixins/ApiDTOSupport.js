@@ -16,6 +16,7 @@
 						apiId: item._id,
 						apiKey: item.key,
 						apiName: item.name,
+						displayOrder: item.displayOrder,
 						categoryId: item._category,
 						isDisplay: typeof(item.isDisplay) == "undefined"? true : item.isDisplay
 					};

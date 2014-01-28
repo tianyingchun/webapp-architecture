@@ -11,13 +11,13 @@ enyo.kind({
 		{name:"header", id:"header", components: [
 			{ classes: "header-inner", components: [
 				{ classes:"logo", content: Master.locale.get("LOGO_TEXT","title"), ontap:"goHome" },
-				// { classes: "menu", components:[
-				// 	{ classes:"item", components:[
-				// 		{tag:"a", classes:"sign-in", attributes: { href:"/" }, content:Master.locale.get("SIGN_IN","menu")},
-				// 		{tag: "span",classes:"seperator", content:"/"},						
-				// 		{tag:"a", classes:"register", attributes: { href:"/" }, content:Master.locale.get("REGISTER","menu")}
-				// 	]}
-				// ]},
+				{ classes: "menu", components:[
+					{ classes:"item", components:[
+						{name:"signin", ontap:"showLoginPopup", tag:"span", classes:"sign-in", content:Master.locale.get("SIGN_IN","menu")},
+						{tag: "span",classes:"seperator", content:"/"},						
+						{tag:"span", classes:"register",content:Master.locale.get("REGISTER","menu")}
+					]}
+				]},
 				{ classes:"top-nav", tag:"ul", components: [
 					{ tag:"li", classes:"nav-item", components: [
 						{ tag: "a", attributes: { href:"/" }, content: Master.locale.get("HOME", "nav")}
@@ -153,6 +153,16 @@ enyo.kind({
 	goHome: function () {
 		this.home();
 		return true;
+	},
+	showLoginPopup: function (inSender, inEvent) {
+		this.zLog("show login popup");
+		inEvent.preventDefault();
+		var iframeDialog = new widgets.dialog.IframeDialog({
+			classes:"login-dialog",
+			title: "用户登陆",
+			src: utility.getOauthLoginUrl()
+		});
+		iframeDialog.show();
 	},
 	/**
 	 * Check if current dock cotnains any valid categories contents.

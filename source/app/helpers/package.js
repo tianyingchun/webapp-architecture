@@ -1,4 +1,5 @@
 enyo.depends(
 	"utility.js",
-	"utilityValidation.js"
+	"utilityValidation.js",
+	"utilityApps.js"
 );

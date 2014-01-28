@@ -29,7 +29,7 @@ enyo.kind({
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "显示顺序"},
 					{classes:"form-item", components:[
-						{name:"category_display_order", type:"number", kind: "widgets.forms.InputDecorator", tipMessage: "填写分类排序，只能为数字值越大优先级越高", validation: {required:"请输入数字!", number:""}}
+						{name:"category_display_order", value:0, type:"number", kind: "widgets.forms.InputDecorator", tipMessage: "填写分类排序，只能为数字值越大优先级越高", validation: {required:"请输入数字!", number:""}}
 					]}
 				]},
 				{kind:"onyx.Groupbox", components: [
@@ -52,9 +52,6 @@ enyo.kind({
 	showAddNewCategoryUI: function (viewModel){
 		// show html editors.
 		this.showHtmlEditors();
-		// show table row datas.
-		// 
-		// 
 	},
 	showHtmlEditors: function () {
 		this.$.category_description.markItUp();
