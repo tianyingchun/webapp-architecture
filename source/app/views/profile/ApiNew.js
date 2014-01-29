@@ -14,7 +14,7 @@ enyo.kind({
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "API KEY"},
 					{classes:"form-item", components:[
-						{name:"api_key", placeholder:"API KEY", kind:"widgets.forms.InputDecorator", tipMessage:"全局唯一，请一定输入不重复的KEY限英文字母", validation: {required:"必填字段！",hash:""}}
+						{name:"api_key", placeholder:"API KEY", ajax:"checkifKeyExist", kind:"widgets.forms.InputDecorator", tipMessage:"全局唯一，请一定输入不重复的KEY限英文字母", validation: {required:"必填字段！",hash:""}}
 					]}
 				]},
 				{kind:"onyx.Groupbox", components: [
@@ -201,15 +201,16 @@ enyo.kind({
 		_data.questions = this.$.question_answers.getTableJSONResult()
 		return _data;
 	},
-	// button handler for creating new api
-	addNewApi: function (inSender, inEvent) {
-		var editorText = this.$.textEditor.getEditorContent();
-		this.zLog("add new text:", editorText);
-		this.$.form.submit();
-		return true;
-	},
-	resetNewApi: function (inSender, inEvent) {
-		this.zLog("reset text:", inEvent);
-		return true;
-	}
+	checkifKeyExist: function (value, callback) {
+		this.zLog(value, callback);
+		// now for testing..
+		setTimeout(function () {
+			if(callback) {
+				callback({
+					status: "failed",
+					message: "the user name has been exist!"
+				});
+			}
+		},1000);
+	}	
 });
