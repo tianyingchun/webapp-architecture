@@ -93,6 +93,65 @@
         text-align: left;
     }
     </style>
+    <script type="text/javascript">
+        function adjustPosition() {
+            var $layer = document.querySelector("#layer");
+            var halfWidth = $layer.clientWidth;
+            var halfHeight = $layer.clientHeight;
+            $layer.style.marginLeft = - (halfWidth / 2)+"px";
+            $layer.style.marginTop = - (halfHeight / 2)+"px";
+        }
+        function getPropFromJSON(prop, JSONString){
+            // Obviously this regex will only match Keys that have
+            // String Values.
+            var exp = new RegExp("\""+prop+"\"\:[^\,\}]*");
+            return JSONString.match(exp)[0].replace("\""+prop+"\":","");    
+        }
+        function convertUrlParamsToJson(search) {
+            var obj = {}; 
+            search.replace(/([^=&]+)=([^&]*)/g, function(m, key, value) {
+                obj[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+            return obj;
+        }
+        var EventUtil = {
+            listen: function(inListener, inEventName, inHandler) {
+                inHandler = inHandler ||  function () {};
+                if (inListener.addEventListener) {
+                    this.listen = function(inListener, inEventName, inHandler) {
+                        inListener.addEventListener(inEventName, inHandler, false);
+                    };
+                } else {
+                    //console.log("IE8 COMPAT: using 'attachEvent'");
+                    this.listen = function(inListener, inEvent, inHandler) {
+                        inListener.attachEvent("on" + inEvent, function(e) {
+                            e.target = e.srcElement;
+                            if (!e.preventDefault) {
+                                e.preventDefault = function () {
+                                    try {
+                                        this.returnValue = false;
+                                    }
+                                    catch(e) {
+                                        // do nothing
+                                    }
+                                }
+                            }
+                            return inHandler(e);
+                        });
+                    };
+                }
+                this.listen(inListener, inEventName, inHandler);
+            }
+        }
+        EventUtil.listen(window, "load", function (e) {
+            adjustPosition();
+            // analysis message token information.
+            var tokenJSON = convertUrlParamsToJson(location.search.substring(1));
+            // Post this message to parant window.
+            parent.postMessage(tokenJSON, "*");
+            console.log("tokenJSON", tokenJSON);
+        });
+    </script>
 </head>
 
 <body>
@@ -107,13 +166,5 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-       var $layer = document.querySelector("#layer");
-       var halfWidth = $layer.clientWidth;
-       var halfHeight = $layer.clientHeight;
-       $layer.style.marginLeft = - (halfWidth / 2)+"px";
-       $layer.style.marginTop = - (halfHeight / 2)+"px";
-    </script>
 </body>
-
 </html>

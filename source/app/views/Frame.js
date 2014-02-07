@@ -157,12 +157,8 @@ enyo.kind({
 	showLoginPopup: function (inSender, inEvent) {
 		this.zLog("show login popup");
 		inEvent.preventDefault();
-		var iframeDialog = new widgets.dialog.IframeDialog({
-			classes:"login-dialog",
-			title: "用户登陆",
-			src: utility.getOauthLoginUrl()
-		});
-		iframeDialog.show();
+		var loginDialog = new widgets.dialog.LoginDialog();
+		loginDialog.show();
 	},
 	/**
 	 * Check if current dock cotnains any valid categories contents.
