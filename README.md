@@ -10,7 +10,8 @@ Refer to the [Wiki](https://github.com/enyojs/enyo/wiki/Bootplate) for how to ge
 
 - The project folder structures
 
-```project structure folder
+```
+project structure folder
  	webapp-architecture
 	├── assets  (the external static resource assets)
 	│   └── favicon.ico
