@@ -1,0 +1,37 @@
+@import "../../mixins/utility.less";
+@import "../../mixins/vendor.less";
+
+#footer{
+	background-color:#fc3;
+	.footer-inner{
+		.center-block();
+		.size(500px, 60px);
+		padding-top: 10px;	
+		font-size: 0.9em;
+	}
+	li{
+		float:left;
+		list-style-type: none;
+		margin: 0 10px;
+		&:first-child{
+			margin-left: 0;
+		}
+	}
+	a{
+		color: #3a3a3a;
+		text-decoration: none;
+		&:hover{
+			text-decoration: underline;
+			color:#000;
+		}
+	}
+	.aside-link{
+		margin: 0;
+		overflow: hidden;
+	}
+	.copyright{
+		margin-top: 10px;
+		color: #3a3a3a;
+		text-align: center;
+	}
+}

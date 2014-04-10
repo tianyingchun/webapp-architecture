@@ -1,4 +1,4 @@
-body {
+/*body {
 	background:#EEE url(images/body.png) repeat-x;
 	font: 13px "Trebuchet MS", Arial, Verdana;
 	padding:20px;
@@ -6,7 +6,7 @@ body {
 a {
 	text-decoration:none;
 	color:#3C769D;
-}
+}*/
 h1 a,
 p em a {
 	display:block;

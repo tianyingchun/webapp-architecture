@@ -1,0 +1,6 @@
+/*!
+ *  http://www.bootcss.com/p/preboot/#mixins-clearfix
+ *  preboot basic less mixin libaray
+**//*!
+ * 特定厂商的mixin（Vendor mixins）
+ */#page{overflow:hidden}.container-two{float:left;clear:left;width:100%;overflow:hidden;position:relative;background:#fff}.container-one{clear:left;float:left;width:100%;position:relative;background:#fff689}.coldock-wrapper{float:left;width:300px;margin-left:-100%;position:relative;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;background-color:#fff;border-right:.25em solid #add65c;overflow:hidden;padding:.75em 1em}.colmain-wrapper{float:left;min-height:1px;width:100%;position:relative;overflow:hidden}.colmain-wrapper .col-main{margin-left:300px}

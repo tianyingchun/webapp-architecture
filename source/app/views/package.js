@@ -1,4 +1,5 @@
 enyo.depends(
+	"controls/",
 	"mixins/",
 	"shared/",
 	"home/",

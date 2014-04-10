@@ -1,0 +1,60 @@
+/*!
+ *  http://www.bootcss.com/p/preboot/#mixins-clearfix
+ *  preboot basic less mixin libaray
+**/
+
+/* Clearfix 
+  * Forget adding class="clearfix" to any element and instead add the .clearfix() mixin where appropriate
+ */
+ .clearfix() {
+    &:before, &:after {
+        content:" ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+/* Horizontal centering  
+ * Quickly center any element within its parent. Requires width or max-width to be set.
+ */
+ .center-block() {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Sizing helpers*/
+ .size(@width, @height) {
+    width: @width;
+    height: @height;
+}
+.square(@size) {
+    .size(@size, @size);
+}
+// Truncating text
+// Easily truncate text with an ellipsis with a single mixin. Requires element to be block or inline-block level.
+.text-truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+// Retina images
+// Specify two image paths and the @1x image dimensions, and Preboot will provide an @2x media query. If you have many images to serve, consider writing your retina image CSS manually in a single media query.
+
+.retina-image(@file-1x, @file-2x, @width-1x, @height-1x) {
+  background-image: url("@{file-1x}");
+  @media
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (   min--moz-device-pixel-ratio: 2),
+  only screen and (     -o-min-device-pixel-ratio: 2/1),
+  only screen and (        min-device-pixel-ratio: 2),
+  only screen and (                min-resolution: 192dpi),
+  only screen and (                min-resolution: 2dppx) {
+    background-image: url("@{file-2x}");
+    background-size: @width-1x @height-1x;
+  }
+}
+
+
+
+

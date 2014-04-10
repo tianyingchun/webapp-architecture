@@ -1,5 +1,5 @@
 {
 	"packagejs": "./package.js",
-	"assets": ["default/images"],
+	"assets": ["bootstrap/images","bootstrap/font"],
 	"libs": []
 }

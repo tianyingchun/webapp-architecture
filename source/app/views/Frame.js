@@ -9,59 +9,32 @@ enyo.kind({
 	classes:"frame",
 	components:[
 		{name:"header", id:"header", components: [
-			{ classes: "header-inner", components: [
-				{ classes:"logo", content: Master.locale.get("LOGO_TEXT","title"), ontap:"goHome" },
-				{ classes: "menu", components:[
-					{ classes:"item", components:[
-						{name:"signin", ontap:"showLoginPopup", tag:"span", classes:"sign-in", content:Master.locale.get("SIGN_IN","menu")},
-						{tag: "span",classes:"seperator", content:"/"},						
-						{tag:"span", classes:"register",content:Master.locale.get("REGISTER","menu")}
-					]}
-				]},
-				{ classes:"top-nav", tag:"ul", components: [
-					{ tag:"li", classes:"nav-item", components: [
-						{ tag: "a", attributes: { href:"/" }, content: Master.locale.get("HOME", "nav")}
-					]},
-					{ tag:"li", classes:"nav-item", components: [
-						{ tag: "a", attributes: { target:"_blank", href:"http://www.pingan.com/" }, content: Master.locale.get("OFFICIAL_SITE", "nav")}
-					]}
-				]},
-				// search form
-				// {kind: "widgets.forms.SearchForm"}
-			]}
+			{ kind:"Master.views.controls.HeaderLink"},
+			{ kind:"Master.views.controls.HeaderMenu"}
 		]},
 		{name:"page", id:"page", components: [
 			{name: "main", classes: "page-inner", components: [
-				{name:"coldock", classes:"col-dock"},
-				{name:"colmain", classes:"col-main", components: [
-					{name:"colWrapper", classes:"col-wrapper", components: [
-						{name:"apiDetails"}
+				{classes: "container-two",components: [
+					{classes: "container-one", components: [
+						{classes:"colmain-wrapper", components: [
+							{name:"colmain", classes:"col-main", components: [
+								{name:"breadtitle", classes:"bread-title", content:"文档中心"},
+								{name:"colWrapper", classes:"col-wrapper", components: [
+									{name:"apiDetails"}
+								]}
+							]}
+						]},
+						{classes:"coldock-wrapper", components: [
+							{kind: "widgets.forms.SearchForm"},
+							{name:"coldock", classes:"col-dock"}
+						]}
 					]}
 				]}
 			]}//, disabled api sdk function module now.
 			// {name:"apiSdk", classes:"sdk",offsetDistance:500, marginLeft:"81%", kind: "widgets.custom.TabControl"}
 		]},
 		{name:"footer", id:"footer", components: [
-			{classes:"footer-inner", components:[
-				{ classes:"left-aside", components: [
-					{ classes:"aside-link", tag: "ul", components: [
-						{ tag:"li", classes:"link-item", components:[
-							{tag:"a", attributes: { target:"_blank", href:"http://www.pingan.com/" }, content:"平安"}
-						]},
-						{ tag:"li", classes:"link-item", components:[
-							{tag:"a", attributes: { target:"_blank", href:"https://www.1qianbao.com/" }, content:"壹钱包"}
-						]}
-					]},
-					{classes:"copyright", content:"Copyright© 2013-2016 壹钱包版权所有"}
-				]},
-				{ classes: "right-aside", components: [
-					{classes:"our-service", components: [
-						{classes:"dev-feedback", content:"问题反馈"},					
-						// {classes:"dev-mail", content:"dev_support@pingan.com.cn"},
-						{classes:"dev-center", content:"开发者中心"}
-					]}
-				]}
-			]}
+			 {kind: "Master.views.controls.FooterLink"}
 		]}
 	],
 	handlers: {
