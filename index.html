@@ -19,10 +19,12 @@
 </head>
 
 <body class="enyo-unselectable">
-    <div id="ie_msg" style='color:#525151; width: 600px;  display:none; margin:100px auto;'>
-        <p><strong>Warning</strong>:  Our application don't support ie broswer (version
-            <=8) <br />Please use ie9+, or download modern browswer e.g. chrome, safari
-        </p>
+    <div id="ie_warning" style="display:none;">
+        <div class="hero-unit">
+          <h1>Sorry, Friend!</h1>
+          <p>Our doc broswer application don't support IE6,7,8 please use now popular modern broswer, try it.</p>
+          <p><a href="http://www.google.com/chrome/" class="btn btn-primary btn-large">Download Chrome</a></p>
+        </div>
     </div>
     <script>
     enyo.ready(function() {
@@ -31,12 +33,12 @@
             platform.platformName.toLowerCase() == "ie" &&
             platform.ie <= 8
         ) {
-            document.getElementById("ie_msg").style.display = "block";
+            document.getElementById("ie_warning").style.display = "block";
         } else {
-            if (!Master.Application) {
-                alert('No application build found, redirecting to debug.html.');
-                location = 'debug.html';
-            }
+            // if (!Master.Application) {
+            //     alert('No application build found, redirecting to debug.html.');
+            //     location = 'debug.html';
+            // }
             new Master.Application({
                 name: Master.config.appName,
                 logLevel: 10
