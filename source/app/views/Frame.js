@@ -16,13 +16,21 @@ enyo.kind({
 			{name: "main", classes: "page-inner", components: [
 				{name:"twoColumnLayout", kind:"widgets.layout.TwoColumnDivision", 
 					leftDock: [
-						{name:"breadtitle", classes:"bread-title", content:"文档中心"}, 
+						{name:"breadtitle", classes:"bread-title", components: [
+							{tag:"h3", content:"文档中心"}
+						]}, 
 						{name:"coldock",classes:"coldock-inner"}
 					], 
 					rightContent: [
 						{name:"colmain", classes:"col-main", components: [
-							{kind: "widgets.forms.SearchForm"},
-								{name:"colWrapper", classes:"col-wrapper", components: [
+							{classes:"content-header", components: [
+								{classes:"input-append",components: [
+									{kind:"enyo.Input", type:"text",classes:"span2 search-query", placeholder:"Search here..."},
+									{kind:"enyo.Button", classes:"btn icon-search"}
+
+								]}
+							]},
+							{name:"colWrapper", classes:"col-wrapper", components: [
 								{name:"apiDetails"}
 							]}
 						]}
