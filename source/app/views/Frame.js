@@ -57,7 +57,6 @@ enyo.kind({
 		return function () {
 			sup.apply(this, arguments);
 			// set minimal height for page body.
-			console.error(111)
 			this.reflowPageLayout();
 		};
 	}),
