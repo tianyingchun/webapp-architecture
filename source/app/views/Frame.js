@@ -14,36 +14,37 @@ enyo.kind({
 		]},
 		{name:"page", id:"page", components: [
 			{name: "main", classes: "page-inner", components: [
-				{classes: "container-two",components: [
-					{classes: "container-one", components: [
-						{classes:"colmain-wrapper", components: [
-							{name:"colmain", classes:"col-main", components: [
-								{name:"breadtitle", classes:"bread-title", content:"文档中心"},
-								{name:"colWrapper", classes:"col-wrapper", components: [
-									{name:"apiDetails"}
-								]}
-							]}
-						]},
-						{classes:"coldock-wrapper", components: [
+				{name:"twoColumnLayout", kind:"widgets.layout.TwoColumnDivision", 
+					leftDock: [
+						{name:"breadtitle", classes:"bread-title", content:"文档中心"}, 
+						{name:"coldock",classes:"coldock-inner"}
+					], 
+					rightContent: [
+						{name:"colmain", classes:"col-main", components: [
 							{kind: "widgets.forms.SearchForm"},
-							{name:"coldock", classes:"col-dock"}
+								{name:"colWrapper", classes:"col-wrapper", components: [
+								{name:"apiDetails"}
+							]}
 						]}
-					]}
-				]}
-			]}//, disabled api sdk function module now.
-			// {name:"apiSdk", classes:"sdk",offsetDistance:500, marginLeft:"81%", kind: "widgets.custom.TabControl"}
+					],
+					config: {
+						leftDock: "coldock",
+						rightContent: "apiDetails"
+					}
+				}
+			]}
 		]},
 		{name:"footer", id:"footer", components: [
 			 {kind: "Master.views.controls.FooterLink"}
 		]}
 	],
 	handlers: {
-		onGetAllCategories: "getAllCategoriesTest",
-		onTransitionStep: "sdkTransactionStep"
+		onContainerRendered: "onTwoColumnLayoutRendered"
 	},
-	getAllCategoriesTest: function (inSender, inEvent) {
-		this.zLog("get all categories testing...", inEvent);
-	},	
+	// capture render eventfor TwoColumnDivision layout control changed.
+	onTwoColumnLayoutRendered: function (inSender, inEvent) { 
+		this.reflowPageLayout(inEvent.height || 0);	
+	},
 	create: enyo.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);
@@ -56,6 +57,7 @@ enyo.kind({
 		return function () {
 			sup.apply(this, arguments);
 			// set minimal height for page body.
+			console.error(111)
 			this.reflowPageLayout();
 		};
 	}),
@@ -69,15 +71,11 @@ enyo.kind({
 		};
 	}),
 	// fresh the page body container layout
-	reflowPageLayout: function () {
-		var minimalHeight = this.calMinimalPageheight();
-		// var pageBodyHeight = this.$.page.getBounds().height;
-		var dockHeight = this.$.coldock.getBounds().height;
-		var dockContent = this.$.colmain.getBounds().height;
-		// this.zError(pageBodyHeight,dockHeight,dockContent);
-		var currHeight = Math.max(minimalHeight/*, pageBodyHeight*/, dockHeight, dockContent); 
+	reflowPageLayout: function (height) {
+		var minimalHeight = this.calMinimalPageheight(); 
+		var currHeight = Math.max(minimalHeight, height); 
 		this.$.page.applyStyle("min-height", currHeight+"px");
-	    this.$.coldock.applyStyle("min-height", currHeight +"px");
+		this.$.twoColumnLayout.updateStyles({height:currHeight +"px"});
 	},
 	//For pc browser model we calculate the minimal height. 
 	calMinimalPageheight: function () {
@@ -96,31 +94,10 @@ enyo.kind({
 	 */
 	setMainContent: function (viewConfig) {
 		this.zLog("viewConfig: ", viewConfig);
-		var $main = this.$.apiDetails;
-		$main.destroyClientControls();
-		$main.createClientComponents([viewConfig]);
-		$main.render();
+		this.$.twoColumnLayout.setMainContent([viewConfig]);
 	},
 	setDockContent: function (viewConfig) {
-		var $dock = this.$.coldock;
-		$dock.destroyClientControls();
-		$dock.createClientComponents([viewConfig]);
-		$dock.render();
-	},
-	// set sdk content for header, tab contents.
-	setSDKContent: function (tabItemsSource) {
-		// disabled this function module now.
-		// var $sdk = this.$.apiSdk;
-		// $sdk.set("itemSource", tabItemsSource);
-		// $sdk.show();
-	},
-	hideSDKPanel: function () {
-		// disabled this function module now
-		// this.$.apiSdk.hide();
-	},	
-	showSDKPanel: function () {
-		// disabled this function module now
-		// this.$.apiSdk.show();
+		this.$.twoColumnLayout.setDockContent([viewConfig]);
 	},
 	// go to application home page.
 	goHome: function () {
@@ -138,27 +115,18 @@ enyo.kind({
 	 * @return {Boolean} [description]
 	 */
 	hasCategoryContentsIndock: function () {
-		var $dock = this.$.coldock;
-		var $dockControls = $dock.getControls();
+		var $dockControls = this.$.twoColumnLayout.getDockControls();
 		if ($dockControls.length && $dockControls[0].kindName == "Master.views.shared.DockCategories") {
 			return true;
 		}
 		return false;
 	},
 	hasProfileContentInDock: function () {
-		var $dock = this.$.coldock;
-		var $dockControls = $dock.getControls();
+		var $dockControls = this.$.twoColumnLayout.getDockControls();
 		if ($dockControls.length && $dockControls[0].kindName == "Master.views.shared.DockProfiles") {
 			return true;
 		}
 		return false;	
-	},
-	sdkTransactionStep: function (inSender, inEvent) {
-		var fraction = inEvent.fraction;
-		var slideshown = inEvent.slideshown;
-
-		// this.zLog("sdk animation params: ", fraction, slideshown);
-		return true;
 	},
 	showNormalDialog: function (title, htmlContent) {
 		var normalDialog = new widgets.dialog.NormalDialog();

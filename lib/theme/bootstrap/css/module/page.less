@@ -3,41 +3,67 @@
  // page module styles 
 #page {
     overflow:hidden;
+    clear:both;
+}
+.page-inner{
+	overflow:hidden;
+}
+.container-three {
+	clear: left;
+	float: left;
+	width: 100%;
+	overflow: hidden;
+	background: red;
 }
 .container-two {
-    float:left;
     clear: left;
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    background: #fff;
+	float: left;
+	width: 100%;
+	left: 300px;
+	position: relative;
+	background: blue;
 }
 .container-one {
-    clear: left;
     float: left;
-    width: 100%;
-    position: relative;
-    background: #fff;
+	width: 100%;
+	position: relative;
+	left: 8px;
+	background: yellow;
 }
-.coldock-wrapper {
-    float: left;
-    width: 300px;
-    margin-left: -100%;
-    position: relative;
-    overflow: hidden;
+.coldock-wrapper { 
     .box-sizing(border-box);
-    background-color: white;
-    border-right: 0.25em solid #dadada;
-    overflow: hidden;
-    padding: 0.75em 1em;
+    padding: .75em;
+    float: left;
+	width: 300px; /* fixed value for left dock */
+	position: relative;
+	left: -300px;
+	margin-left: -8px;
+	overflow: hidden; 
+}
+.coldrag-handler{
+	float: left;
+	width: 8px;
+	position: relative;
+	left: -300px;
+	height: 400px;
+	cursor:col-resize;
+	overflow: hidden;
+	.box-shadow(inset 0 1px 2px #e4e4e4);
+	border: 1px solid #C0C0C0;
+	border-top: 0;
+	border-bottom: 0;
+	background: url(../../images/handle-v.png) 3px 50% no-repeat;
 }
 .colmain-wrapper {
     float: left;
-    min-height: 1px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    .col-main {
-        margin-left: 300px;
-    }
+	position: absolute;
+    .box-sizing(border-box);
+	/*left: -300px;*/
+	overflow: hidden;
+	overflow-x: scroll;
+	.col-main, >div{
+		padding: 0 10px;
+        min-width: 1000px; /* adjust this value to set content min-width, it will give x-scroller */
+        position:relative;
+	}
 }
