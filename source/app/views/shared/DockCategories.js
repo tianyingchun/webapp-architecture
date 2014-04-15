@@ -2,7 +2,7 @@ enyo.kind({
 	name: "Master.views.shared.DockCategories",
 	kind: "Master.View",
 	components:[
-		{name:"message",kind:"widgets.base.Spinner",size:25, message: Master.locale.get("LOAD_CATEGORIES", "message")},
+		{name:"message", kind:"widgets.base.Spinner",size:25, message: Master.locale.get("LOAD_CATEGORIES", "message")},
 		{name:"dockTitle",showing:false, classes: "dock-title", content:Master.locale.get("API_CATALOG","title")},
 		{name: "categoriesContainer", showing: false}
 	],

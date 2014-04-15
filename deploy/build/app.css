@@ -2130,7 +2130,7 @@ Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine
 
 /* lib/widgets/css/base/spinner.css */
 
-.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.spinner{padding-left:5%;padding-top:5%;height:40px;line-height:30px}.spinner .image{background:url('../lib/widgets/images/spinner_grey_40.gif') no-repeat 0 0;background-size:30px;width:30px;height:30px;float:left}.spinner .image.size-25{font-size:.8em;background-size:25px}.spinner .image.size-30{font-size:.9em;background-size:30px}.spinner .message{padding-left:5px;float:left}.spinner .message.size-25{font-size:.8em}.spinner .message.size-30{font-size:.9em}
+.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.spinner{height:40px;line-height:30px}.spinner .message{padding-left:5px;float:left}.spinner .message.size-25{font-size:1.1em}.spinner .message.size-30{font-size:1.2em}
 
 /* lib/widgets/css/base/spinnerblock.css */
 
@@ -8428,7 +8428,7 @@ a.badge:focus {
  *  preboot basic less mixin libaray
 **//*!
  * 特定厂商的mixin（Vendor mixins）
- */.bread-title{border-bottom:1px solid #bbb;padding-left:10px}.bread-title h3{margin:5px 0;padding-left:35px}.coldock-inner{padding:0 .75em .75em}.col-main .content-header{height:50px;position:relative;border-bottom:1px solid #bbb}.col-main .content-header .input-append{float:right;margin-top:10px;margin-right:25px}.col-main .content-header .input-append input{border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-left-radius:0;width:300px}.col-main .content-header .input-append button{padding-top:7px;padding-bottom:7px}.col-main .col-wrapper{padding:10px}
+ */.bread-title{border-bottom:1px solid #bbb;padding-left:10px}.bread-title h3{margin:5px 0;padding-left:35px}.coldock-inner{padding:.75em}.col-main .content-header{height:50px;position:relative;border-bottom:1px solid #bbb}.col-main .content-header .input-append{float:right;margin-top:10px;margin-right:25px}.col-main .content-header .input-append input{border-top-right-radius:0;border-bottom-right-radius:0;border-bottom-left-radius:0;border-top-left-radius:0;width:300px}.col-main .content-header .input-append button{padding-top:7px;padding-bottom:7px}.col-main .col-wrapper{padding:10px}
 
 /* lib/theme/bootstrap/css/module/footer.css */
 
