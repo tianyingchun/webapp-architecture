@@ -22,18 +22,15 @@ enyo.kind({
 						{name:"coldock",classes:"coldock-inner"}
 					], 
 					rightContent: [
-						{name:"colmain", classes:"col-main", components: [
-							{classes:"content-header", components: [
-								{classes:"input-append",components: [
-									{kind:"enyo.Input", type:"text",classes:"span2 search-query", placeholder:"Search here..."},
-									{kind:"enyo.Button", classes:"btn icon-search"}
-
-								]}
-							]},
-							{name:"colWrapper", classes:"col-wrapper", components: [
-								{name:"apiDetails"}
+						{classes:"content-header", components: [
+							{classes:"input-append",components: [
+								{kind:"enyo.Input", type:"text",classes:"span2 search-query", placeholder:"Search here..."},
+								{kind:"enyo.Button", classes:"btn icon-search", content:"搜索"}
 							]}
-						]}
+						]},
+						{name:"colWrapper", classes:"col-wrapper", components: [
+							{name:"apiDetails"}
+						]} 
 					],
 					config: {
 						leftDock: "coldock",

@@ -27,6 +27,7 @@
     float: left;
 	width: 300px; /* fixed value for left dock */
 	position: relative;
+	z-index: 110;
 	left: -300px;
 	margin-left: -8px;
 	overflow: hidden; 
@@ -35,6 +36,7 @@
 	float: left;
 	width: 8px;
 	position: relative;
+	z-index: 100;
 	left: -300px;
 	height: 400px;
 	cursor:col-resize;
@@ -43,9 +45,10 @@
 	border: 1px solid #C0C0C0;
 	border-top: 0;
 	border-bottom: 0;
-	background: url(../../images/handle-v.png) 3px 50% no-repeat;
+	background: #fff url(../../images/handle-v.png) 3px 50% no-repeat;
 }
 .colmain-wrapper {
+	z-index: 90;
 	position: absolute;
     .box-sizing(border-box);
 	/*left: -300px;*/
