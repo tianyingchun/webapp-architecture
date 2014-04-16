@@ -44,11 +44,17 @@ enyo.kind({
 		]}
 	],
 	handlers: {
-		onContainerRendered: "onTwoColumnLayoutRendered"
+		onContainerRendered: "twoColumnLayoutRenderedHandler",
+		onAccordionViewChanged: "accordionViewChangedHandler"
 	},
 	// capture render eventfor TwoColumnDivision layout control changed.
-	onTwoColumnLayoutRendered: function (inSender, inEvent) { 
+	twoColumnLayoutRenderedHandler: function (inSender, inEvent) { 
 		this.reflowPageLayout(inEvent.height || 0);	
+		return true;
+	},
+	accordionViewChangedHandler: function(inSender, inEvent) {
+		this.$.twoColumnLayout.reflowPageLayout();
+		return true;
 	},
 	create: enyo.inherit(function (sup) {
 		return function () {
@@ -76,6 +82,7 @@ enyo.kind({
 	}),
 	// fresh the page body container layout
 	reflowPageLayout: function (height) {
+		height = height||0;
 		var minimalHeight = this.calMinimalPageheight(); 
 		var currHeight = Math.max(minimalHeight, height); 
 		this.$.page.applyStyle("min-height", currHeight+"px");
