@@ -1,5 +1,6 @@
 @import "./../variables.less";
 @import "./../mixins.less"; 
+@dockDefautWidth :260px;
 .widgets-layout-twocolumn{
 	overflow: hidden;
 }
@@ -14,7 +15,7 @@
     clear: left;
 	float: left;
 	width: 100%;
-	left: 300px;
+	left: @dockDefautWidth;
 	position: relative;
 	background: #fff; /*blue*/
 }
@@ -28,10 +29,10 @@
 .coldock-wrapper { 
     .box-sizing(border-box);
     float: left;
-	width: 300px; /* fixed value for left dock */
+	width: @dockDefautWidth; /* fixed value for left dock */
 	position: relative;
 	z-index: 110;
-	left: -300px;
+	left: -@dockDefautWidth;
 	margin-left: -8px;
 	overflow: hidden; 
 }
@@ -40,7 +41,7 @@
 	width: 8px;
 	position: relative;
 	z-index: 100;
-	left: -300px;
+	left: -@dockDefautWidth;
 	height: 400px;
 	cursor:col-resize;
 	overflow: hidden;

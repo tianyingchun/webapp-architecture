@@ -13,10 +13,11 @@ enyo.kind({
 		this.destroyClientControls();
 		var records = viewModel.records;
 		var categoryKey = extraData && extraData.apiKey;
-
+		categoryKey = location.hash;
+		
 		this.$.categoriesContainer.createClientComponents([
 			{ kind: "widgets.menus.Accordion", itemNameField:"categoryName",
-				itemKeyField:"categoryKey", selectedKey:categoryKey, source: records
+				itemKeyField:"categoryKey", currentHash:categoryKey, source: records
 			}
 		]);
 		this.$.categoriesContainer.render();
