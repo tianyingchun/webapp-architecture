@@ -9,7 +9,7 @@ enyo.kind({
 	constants: {
 		CATEGORY_DETAIL_PAGE:"category.Detail"
 	},
-	detail: function (key) {
+	detail: function (key) { 
 		this.zLog("category detail key: ", key);
 		this.showDockCategories({apiKey: key});
 		// show category detail information.

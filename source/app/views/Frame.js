@@ -63,7 +63,6 @@ enyo.kind({
 			this.addClass(this.getPlatformType());
 		};
 	}),
-	
 	rendered: enyo.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);

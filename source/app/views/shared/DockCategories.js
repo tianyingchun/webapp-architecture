@@ -14,7 +14,11 @@ enyo.kind({
 		var records = viewModel.records;
 		var categoryKey = extraData && extraData.apiKey;
 
-		this.$.categoriesContainer.createClientComponents([{ kind: "widgets.menus.Accordion", itemNameField:"categoryName",itemKeyField:"categoryKey", selectedKey:categoryKey, source: records}]);
+		this.$.categoriesContainer.createClientComponents([
+			{ kind: "widgets.menus.Accordion", itemNameField:"categoryName",
+				itemKeyField:"categoryKey", selectedKey:categoryKey, source: records
+			}
+		]);
 		this.$.categoriesContainer.render();
 		// show categories, hide message.
 		this.$.message.hide();

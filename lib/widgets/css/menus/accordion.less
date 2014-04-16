@@ -2,19 +2,74 @@
 @import "./../mixins.less"; 
 
 .widget-accordion{
-	li{
+	padding: 0;
+	margin: 0;
+	.box-shadow(0 6px 12px rgba(0,0,0,.175)); 
+	.border-radius(6px);
+	ul {
+		margin: 0;
+	}
+	li {
 		list-style-type: none;
 	}
-	.header-item-highlight{
-
+	li [class^="icon-"] {
+		display: inline-block;
+		width: 1.25em;
+		text-align: center;
+	}
+	a{
+		display: block;
+		margin: 0;
+		padding: 8px 14px;
+		border-top: 1px solid #fff;
+		text-decoration: none;
+		color: #363636;
+		&:hover{
+			text-decoration: none;
+			color: #000;
+		}
 	}
 	.accordion-item{
-
+		&:first-child > a {
+			.border-top-radius(6px);
+		}
+		&:last-child > a {
+			.border-bottom-radius(6px);
+			 
+		}
+			
 	}
+
 	.accordion-content{
 		overflow: hidden;
+		.box-shadow(inset 0 1px 2px rgba(0,0,0,0.1));
+		li {
+			a{
+				height: 35px;
+				line-height: 35px;
+				margin: 0 ;
+				padding: 0 0 0 30px;
+				border-top: 0;
+				&:hover{
+					color: #262626;
+					background-color: #f5f5f5;
+				}
+			}
+		}
 	}
 	.accordion-header{
-
+		background-color:#428bca;
+		color: #fff;
+		&:hover{
+			color: #fff;
+		}
 	}
+	.header-item-highlight{ 
+		 
+		i.icon-caret-right:before {
+			content: "\f0d7";
+		} 
+		
+	}
+
 }
