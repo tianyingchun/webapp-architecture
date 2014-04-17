@@ -11,7 +11,8 @@ enyo.singleton({
 		"SIGN_IN":"Log in",
 		"REGISTER":"Register",
 		"API_LIST": "API List",
-		"CATEGORY_LIST":"API Categories"
+		"CATEGORY_LIST":"API Categories",
+		"PERSONAL_INFO":"Personal Center"
 	},
 	// titles
 	title: {

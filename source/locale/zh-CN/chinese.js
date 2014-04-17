@@ -10,8 +10,9 @@ enyo.singleton({
 	menu: {
 		"SIGN_IN":"登陆",
 		"REGISTER":"注册",
-		"API_LIST": "API列表",
-		"CATEGORY_LIST":"API分类列表"
+		"API_LIST": "文档列表管理",
+		"CATEGORY_LIST":"文档分类管理",
+		"PERSONAL_INFO":"个人信息管理"
 	},
 	// titles
 	title: {

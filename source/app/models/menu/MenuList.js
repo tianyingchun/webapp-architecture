@@ -8,7 +8,7 @@ enyo.kind({
 		var itemModel = new Master.models.menu.MenuItem({
 			name:  Master.locale.get("API_LIST","menu"),
 			key: "api_list", // menu item key.
-			customClass: "api-list",
+			customClass: "icon-list-ul",
 			hash: "profile/api/list"
 		});
 		this.add(itemModel);
@@ -16,18 +16,19 @@ enyo.kind({
 		var itemModel = new Master.models.menu.MenuItem({
 			name:  Master.locale.get("CATEGORY_LIST","menu"),
 			key: "category_list", // menu item key.
-			customClass: "api-list",
+			customClass: "icon-list-ol",
 			hash: "profile/category/list"
 		});
 		this.add(itemModel);
 
-		var placeHolderMenu = new Master.models.menu.MenuItem({
-			name:  "临时占位",
+		var personalInfo = new Master.models.menu.MenuItem({
+			name: Master.locale.get("PERSONAL_INFO","menu"),
 			key: "other", // menu item key.
-			customClass: "api-list",
+			customClass: "icon-user",
 			hash: "profile/api/list"
 		});
-		this.add(placeHolderMenu);
+		this.add(personalInfo);
+		
 		if(callback) {
 			callback(this);
 		}

@@ -6,7 +6,10 @@ enyo.kind({
 		{name:"message",kind:"widgets.base.Spinner",size:25, message: Master.locale.get("LOAD_PORFILE_MENUS", "message")},
 		// {classes: "dock-title", content:Master.locale.get("API_CATALOG","title")},
 		{name: "list", kind:"List", multiSelect: false, ontap:"menuItemTap", onSetupItem:"menuSetUpItem", showing: false, components: [
-			{ name:"menuItem", classes: "list-item", content:""}
+			{ name:"listitem", classes: "list-item", components: [
+				{ name:"menuItemIcon", tag:"i"},
+				{ name:"menuItem", tag:"span", content:""}
+			]}
 		]}
 	],
 	showProfileMenusUI: function (viewModel, data) {
@@ -23,14 +26,14 @@ enyo.kind({
 		var index = inEvent.index;
 		var currItem = this.menuItems[index];
 		this.$.menuItem.setContent(currItem.get("name"));
-		this.$.menuItem.addClass(currItem.get("customClass"));
 		var isSelected = this.selectedKey == currItem.get("key");
-		this.$.menuItem.addRemoveClass("selected", isSelected);
+		this.$.menuItemIcon.setAttribute("class", currItem.get("customClass"));
+		this.$.listitem.addRemoveClass("selected", isSelected);
 	},
 	/**
 	 * Highlight profil menu item.
 	 * @param  {object} viewModel null
-	 * @param  {object} data      the menu item data
+	 * @param  {object} data, the menu item data
 	 */
 	highlightProfileMenuItem: function (viewModel, data) {
 		this.zLog("data:", data);
