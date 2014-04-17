@@ -1,0 +1,6 @@
+/*!
+ *  http://www.bootcss.com/p/preboot/#mixins-clearfix
+ *  preboot basic less mixin libaray
+**//*!
+ * 特定厂商的mixin（Vendor mixins）
+ */.list-wrapper i[class*="icon-"]{width:1.25em;text-align:center;display:inline-block}.list-wrapper .list-header{background-color:#f2f2f2;background-image:-moz-linear-gradient(top, #fff, #f2f2f2);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#f2f2f2));background-image:-webkit-linear-gradient(top, #fff, #f2f2f2);background-image:-o-linear-gradient(top, #fff, #f2f2f2);background-image:linear-gradient(to bottom, #fff, #f2f2f2);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);height:30px;line-height:30px;padding:2px 5px;overflow:hidden}.list-wrapper .list-header .btn{float:right}.list-wrapper .list-title{float:left}.list-wrapper .list-inner{border-color:#bbb}.list-wrapper .list-item{list-style:none;display:table;margin:0;padding:0;clear:both;overflow:hidden;border-bottom:1px solid #e8e8e8;padding:10px 5px;background:#fff}.list-wrapper .list-item li{padding:0;float:left;margin:0 10px}
