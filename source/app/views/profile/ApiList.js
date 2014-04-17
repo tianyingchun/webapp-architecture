@@ -18,15 +18,13 @@ enyo.kind({
 					{tag:"span",content:"添加"}
 				]}
 			]},
-			{name:"docList", kind:"widgets.lists.PagedList",fields: ['apiId','apiName','apiKey']}
+			{name:"docList", kind:"widgets.lists.PagedList",rowKeyField:"apiKey",fields: ['apiId','apiName','apiKey']}
 		]}
 	],
 	showApiListUI: function (viewModel, data){
 		this.zLog("viewModel: ", viewModel,"data: ", data);
 		this.cachedAPIList = viewModel.records;
 		this.$.docList.set("source",this.cachedAPIList);
-		// this.$.apiList.setCount(this.cachedAPIList.length);
-		// this.$.apiList.reset();
 		this.$.message.hide();
 		this.$.listWrapper.show();
 	},
