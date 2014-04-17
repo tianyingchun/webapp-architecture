@@ -149,13 +149,13 @@ enyo.kind({
 	animate: function() {
 		this.stop();
 		// time tracking
-		var t0 = enyo.now(), t = 0;
+		var t0 = enyo.perfNow(), t = 0;
 		// delta tracking
 		var x0, y0;
 		// animation handler
 		var fn = this.bindSafely(function() {
 			// wall-clock time
-			var t1 = enyo.now();
+			var t1 = enyo.perfNow();
 			// schedule next frame
 			this.job = enyo.requestAnimationFrame(fn);
 			// delta from last wall clock time
@@ -181,8 +181,9 @@ enyo.kind({
 				//this.log(this.y, y0);
 				this.scroll();
 			} else if (!this.dragging) {
-				this.stop(true);
+				this.stop();
 				this.scroll();
+				this.doScrollStop();
 			}
 			y0 = this.y;
 			x0 = this.x;
@@ -192,8 +193,8 @@ enyo.kind({
 	//* @protected
 	start: function() {
 		if (!this.job) {
-			this.animate();
 			this.doScrollStart();
+			this.animate();
 		}
 	},
 	stop: function(inFireEvent) {
@@ -265,10 +266,19 @@ enyo.kind({
 		this.start();
 	},
 	mousewheel: function(e) {
-		var dy = this.vertical ? e.wheelDeltaY || e.wheelDelta: 0;
+		var dy = this.vertical ? e.wheelDeltaY || (!e.wheelDeltaX ? e.wheelDelta : 0) : 0,
+			dx = this.horizontal ? e.wheelDeltaX : 0,
+			shouldScroll = false;
 		if ((dy > 0 && this.y < this.topBoundary) || (dy < 0 && this.y > this.bottomBoundary)) {
-			this.stop(true);
 			this.y = this.y0 = this.y0 + dy;
+			shouldScroll = true;
+		}
+		if ((dx > 0 && this.x < this.leftBoundary) || (dx < 0 && this.x > this.rightBoundary)) {
+			this.x = this.x0 = this.x0 + dx;
+			shouldScroll = true;
+		}
+		if (shouldScroll) {
+			this.stop(true);
 			this.start();
 			return true;
 		}

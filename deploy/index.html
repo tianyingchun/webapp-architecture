@@ -35,10 +35,7 @@
         ) {
             document.getElementById("ie_warning").style.display = "block";
         } else {
-            // if (!Master.Application) {
-            //     alert('No application build found, redirecting to debug.html.');
-            //     location = 'debug.html';
-            // }
+            // if (undefined === window.enyo) location = "debug.html";  
             new Master.Application({
                 name: Master.config.appName,
                 logLevel: 10

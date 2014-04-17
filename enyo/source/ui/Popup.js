@@ -33,7 +33,9 @@ enyo.kind({
 		centered: false,
 		//* Set to true to be able to show transition on the style modifications otherwise
 		//* the transition is invisible (visibility: hidden)
-		showTransitions: false
+		showTransitions: false,
+		//* Set to true to stop preventDefault from being called on captured events
+		allowDefault: false
 	},
 	//* @protected
 	showing: false,
@@ -168,7 +170,8 @@ enyo.kind({
 			// 'initial' values are necessary to override positioning rules in the CSS
 			this.addStyles('left: ' + (p.left !== null ? p.left + 'px' : 'initial') + '; right: ' + (p.right !== null ? p.right + 'px' : 'initial') + '; top: ' + (p.top !== null ? p.top + 'px' : 'initial') + '; bottom: ' + (p.bottom !== null ? p.bottom + 'px' : 'initial') + ';');
 		} else if (this.centered) {
-			this.addStyles( "top: " + Math.max( ( ( d.height - b.height ) / 2 ), 0 ) + "px; left: " + Math.max( ( ( d.width - b.width ) / 2 ), 0 ) + "px;" );
+			var o = this.getInstanceOwner().getBounds();
+			this.addStyles( "top: " + Math.max( ( ( o.height - b.height ) / 2 ), 0 ) + "px; left: " + Math.max( ( ( o.width - b.width ) / 2 ), 0 ) + "px;" );
 		}
 	},
 	showingChanged: enyo.inherit(function (sup) {
@@ -216,7 +219,7 @@ enyo.kind({
 		this.downEvent = inEvent;
 
 		// prevent focus from shifting outside the popup when modal.
-		if (this.modal) {
+		if (this.modal && !this.allowDefault) {
 			inEvent.preventDefault();
 		}
 		return this.modal;

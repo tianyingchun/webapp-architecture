@@ -87,7 +87,9 @@ enyo.kind({
 	//*@public
 	handlers: {
 		//* Controls will call a user-provided _tap_ method when tapped upon.
-		ontap: "tap"
+		ontap: "tap",
+		//* The waterfall event when the showing property is modified
+		onShowingChanged: "showingChangedHandler"
 	},
 	//*@protected
 	_isView: true,
@@ -199,7 +201,7 @@ enyo.kind({
 	//* @public
 	/**
 		Returns the DOM node representing the control.
-		If the control is not currently rendered, returns null.
+		If the control is not currently rendered, returns a falsy value (null or false).
 
 		If _hasNode()_ returns a value, the _node_ property will be valid and
 		can be checked directly.
@@ -399,12 +401,21 @@ enyo.kind({
 	/**
 		Adds CSS styles to the set of styles assigned to this object.
 
-		_inCssText_ is a string containing CSS styles in text format.
+		_inCss_ is either a string containing CSS styles in text format,
+		or an object containing style names as keys and style values as property values
 
-			this.$.box.addStyles("background-color: red; padding: 4px;");
+		A. this.$.box.addStyles("background-color: red; padding: 4px;");
+		is same as
+		B. this.$.box.addStyles({"background-color": "red", "padding": "4px"});
 	*/
-	addStyles: function(inCssText) {
-		enyo.Control.cssTextToDomStyles(inCssText, this.domStyles);
+	addStyles: function(inCss) {
+		if (enyo.isObject(inCss)) {
+			for (var key in inCss) {
+				this.domStyles[key] = inCss[key];
+			}
+		} else {
+			enyo.Control.cssTextToDomStyles(inCss, this.domStyles);
+		}
 		this.domStylesChanged();
 	},
 	/**
@@ -634,27 +645,22 @@ enyo.kind({
 		}
 		this.domStylesChanged();
 	},
+	/**
+		Returns an object describing the absolute position on the screen, relative to the top
+		left point on the screen.  This function takes into account account absolute/relative 
+		offsetParent positioning, scroll position, and CSS transforms (currently translateX, 
+		translateY, and matrix3d). 
+
+			{left: ..., top: ..., bottom: ..., right: ..., width: ..., height: ...}
+
+		Values returned are only valid if _hasNode()_ is truthy.
+		If there's no DOM node for the object, this returns a bounds structure with
+		_undefined_ as the value of all fields.
+	*/
 	getAbsoluteBounds: function() {
-		var l = 0,
-			t = 0,
-			n = this.hasNode(),
-			w = n ? n.offsetWidth : 0,
-			h = n ? n.offsetHeight : 0;
-
-		while(n) {
-			l += n.offsetLeft - (n.offsetParent ? n.offsetParent.scrollLeft : 0);
-			t += n.offsetTop  - (n.offsetParent ? n.offsetParent.scrollTop	: 0);
-			n = n.offsetParent;
-		}
-
-		return {
-			top		: t,
-			left	: l,
-			bottom	: document.body.offsetHeight - t - h,
-			right   : document.body.offsetWidth  - l - w,
-			height	: h,
-			width	: w
-		};
+		var n = this.node || this.hasNode();
+		var b = enyo.dom.getAbsoluteBounds(n);
+		return b || {left: undefined, top: undefined, width: undefined, height: undefined, bottom: undefined, right: undefined};
 	},
 	/**
 		Retrieve any _style_ currently applied to a given _control_ exactly as it is parsed by
@@ -734,7 +740,7 @@ enyo.kind({
 		// control tree a second time (to set it later).
 		// The contract is that insertion in DOM will happen synchronously
 		// to generateHtml() and before anybody should be calling hasNode().
-		this.generated = true;
+		this.set("generated", true);
 		// because we just generated our html we can set this flag to false
 		this._needsRender = false;
 		return h;
@@ -838,7 +844,7 @@ enyo.kind({
 			this.teardownChildren();
 		}
 		this.node = null;
-		this.generated = false;
+		this.set("generated", false);
 	},
 	teardownChildren: function() {
 		for (var i=0, c; (c=this.children[i]); i++) {
@@ -849,7 +855,7 @@ enyo.kind({
 		this.teardownRender();
 		this.node = document.createElement(this.tag);
 		this.addNodeToParent();
-		this.generated = true;
+		this.set("generated", true);
 	},
 	renderDom: function() {
 		this.renderAttributes();
@@ -923,29 +929,57 @@ enyo.kind({
 			this.applyStyle("display", "none");
 		}
 	},
-	showingChanged: function() {
+	showingChanged: function(was) {
 		this.syncDisplayToShowing();
+		this.sendShowingChangedEvent(was);
+	},
+	/**
+		Waterfalls the "onShowingChanged" event of the current control
+	*/
+	sendShowingChangedEvent: function(was) {
+		var waterfall = (was === true || was === false)
+			, parent = this.parent;
+		// make sure that we don't trigger the waterfall when this method
+		// is arbitrarily called during _create_ and it should only matter
+		// that it changed if our parent's are all showing as well
+		if (waterfall && (parent? parent.getAbsoluteShowing(true): true)) {
+			this.waterfall("onShowingChanged", {originator: this, showing: this.getShowing()});
+		}
+
 	},
 	getShowing: function() {
-		// 'showing' specifically means domStyles.display !== 'none'.
-		// 'showing' does not imply the node is actually visible or even rendered in DOM,
-		// it simply reflects this state of this specific property as a convenience.
-		this.showing = (this.domStyles.display != "none");
 		return this.showing;
 	},
-	//* Returns true if this and all parents are showing.
-	getAbsoluteShowing: function() {
-		var b = this.getBounds();
+	/**
+		Returns true if this and all parents are showing. If the optional
+		_ignoreBounds_ boolean parameter is `true` it will not force a layout
+		by retrieving computed bounds and rely on the return from _getShowing()_
+		exclusively.
+	*/
+	getAbsoluteShowing: function(ignoreBounds) {
+		var b;
+		if (!ignoreBounds) {
+			b = this.getBounds();
+		}
 
-		if(this.getShowing() === false || (b.height === 0 && b.width === 0)) {
+		if (!this.generated || this.destroyed || !this.getShowing() || (b && b.height === 0 && b.width === 0)) {
 			return false;
 		}
 
-		if(this.parent && this.parent.getAbsoluteShowing) {
-			return this.parent.getAbsoluteShowing();
+		if (this.parent && this.parent.getAbsoluteShowing && (this.parentNode !== enyo.floatingLayer.hasNode())) {
+			return this.parent.getAbsoluteShowing(ignoreBounds);
 		} else {
 			return true;
 		}
+	},
+	/**
+		Handles the _onshowingchanged_ event that is waterfalled by controls
+		when their _showing_ value is modified. If the control is not showing
+		itself already it will not continue the waterfall. Overload this method
+		for additional handling of this event.
+	*/
+	showingChangedHandler: function (inSender, inEvent) {
+		return inSender === this? false: !this.getShowing();
 	},
 	//
 	//
@@ -977,11 +1011,20 @@ enyo.kind({
 
 		return false;
 	},
-	
+
 	//* Removes control from enyo.roots
 	removeFromRoots: function() {
 		if (this._isRoot) {
 			enyo.remove(this, enyo.roots);
+		}
+	},
+	/**
+		Sets the control's directionality based on its content.
+	*/
+	detectTextDirectionality: function() {
+		if (this.content && this.content.length) {
+			this.rtl = enyo.isRtl(this.content);
+			this.applyStyle("direction", this.rtl ? "rtl" : "ltr");
 		}
 	},
 

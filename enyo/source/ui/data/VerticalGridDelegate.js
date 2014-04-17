@@ -19,7 +19,7 @@
 			// now if we already have a length then that implies we have a controller
 			// and that we have data to render at this point, otherwise we don't
 			// want to do any more initialization
-			if (list.length) { this.reset(list); }
+			if (list.collection && list.collection.length) { this.reset(list); }
 		},
 		/**
 			Reset the page with the added class update to the list.
@@ -142,10 +142,10 @@
 					// the column
 					co = i % cc;
 					c.addStyles(
-						"top: "    + (s  + (r  * (h+s))) + "px; " +
-						"left: "   + (s  + (co * (w+s))) + "px; " +
-						"width: "  + (w) +                 "px; " +
-						"height: " + (h) +                 "px"
+						"top: "    + Math.round(s  + (r  * (h+s))) + "px; " +
+						(list.rtl ? "right: " : "left: ") + Math.round(s  + (co * (w+s))) + "px; " +
+						"width: "  + Math.round(w) +                 "px; " +
+						"height: " + Math.round(h) +                 "px"
 					);
 					// check if we need to increment the row
 					if ((i+1) % cc === 0) { ++r; }
