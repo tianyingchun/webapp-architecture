@@ -29,12 +29,12 @@ enyo.kind({
 							]}
 						]},
 						{name:"colWrapper", classes:"col-wrapper", components: [
-							{name:"apiDetails"}
+							{name:"mainContent"}
 						]} 
 					],
 					config: {
 						leftDock: "coldock",
-						rightContent: "apiDetails"
+						rightContent: "mainContent"
 					}
 				}
 			]}
