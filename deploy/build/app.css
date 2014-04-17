@@ -2144,7 +2144,7 @@ Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine
 
 /* lib/widgets/css/dialog/confirmdialog.css */
 
-.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.dialog-confirm{min-width:300px;max-width:400px;position:fixed;top:50%;margin-top:-60px}.dialog-confirm .widget-dialog-footer{text-align:center}
+.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.dialog-confirm{min-width:300px;max-width:400px;position:fixed !important;top:50% !important;left:50% !important;margin-top:-60px}.dialog-confirm .widget-dialog-footer{text-align:center}
 
 /* lib/widgets/css/dialog/spinnerdialog.css */
 
@@ -8399,7 +8399,7 @@ a.badge:focus {
  *  preboot basic less mixin libaray
 **//*!
  * 特定厂商的mixin（Vendor mixins）
- */body{font-size:14px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif,"Microsoft YaHei",SimHei}body .enyo-fit{position:relative !important}#header li{list-style-type:none}
+ */body{font-size:14px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif,"Microsoft YaHei",SimHei}.frame.enyo-fit{position:relative !important}#header li{list-style-type:none}
 
 /* lib/theme/bootstrap/css/module/header.css */
 
