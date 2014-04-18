@@ -18,7 +18,11 @@ enyo.kind({
 					{tag:"span",content:"添加"}
 				]}
 			]},
-			{name:"docList", kind:"widgets.lists.PagedList",rowKeyField:"apiKey",fields: ['apiId','apiName','apiKey']}
+			{	name:"docList", kind:"widgets.lists.PagedList",
+				rowKeyField:"apiKey",
+				fields: ['apiId','apiName','apiKey'],
+				header: ['文档ID','文档名称','文档Hash','操作']
+			}
 		]}
 	],
 	showApiListUI: function (viewModel, data){

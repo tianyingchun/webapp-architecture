@@ -18,7 +18,11 @@ enyo.kind({
 					{tag:"span",content:"添加"}
 				]}
 			]},
-			{name:"categoryList", kind:"widgets.lists.PagedList",rowKeyField:"categoryKey", fields: ['categoryId','categoryName','categoryKey']} 
+			{   name:"categoryList", kind:"widgets.lists.PagedList",
+				rowKeyField:"categoryKey", 
+				fields: ['categoryId','categoryName','categoryKey'],
+				header: ["分类ID","分类名称","分类Hash","操作"]
+			} 
 		]}
 	],
 	/**
