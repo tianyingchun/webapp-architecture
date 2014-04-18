@@ -12,7 +12,7 @@ enyo.kind({
 		{name:"message",kind:"widgets.base.Spinner", message: Master.locale.get("LOAD_API_LIST", "message")},
 		{kind:"onyx.Groupbox", name:"listWrapper", showing:false, components: [
 			{classes:"list-header", components:[
-				{content:"API列表", classes:"list-title"},
+				{content:"文档列表", classes:"list-title"},
 				{tag:"a", classes:"btn",ontap:"addNewApi", components:[
 					{tag:"i", classes:"icon-plus"},
 					{tag:"span",content:"添加"}
@@ -28,6 +28,8 @@ enyo.kind({
 	showApiListUI: function (viewModel, data){
 		this.zLog("viewModel: ", viewModel,"data: ", data);
 		this.cachedAPIList = viewModel.records;
+		// update doc table list page uri
+		this.$.docList.set("pagerUri","#profile/api/list");
 		this.$.docList.set("source",this.cachedAPIList);
 		this.$.message.hide();
 		this.$.listWrapper.show();
