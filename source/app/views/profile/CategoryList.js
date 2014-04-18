@@ -24,7 +24,7 @@ enyo.kind({
 				header: ["分类ID","分类名称","分类Hash","操作"]
 			} 
 		]}
-	],
+],
 	/**
 	 * Show categories
 	 */
@@ -33,6 +33,7 @@ enyo.kind({
 		// categories source converter.
 		var _records = viewModel.records;
 		this.cachedCategoryList = _records;
+		this.$.categoryList.set("pagerUri","#profile/category/list");
 		this.$.categoryList.set("source",this.cachedCategoryList);
 		this.$.message.hide();
 		this.$.listWrapper.show();
