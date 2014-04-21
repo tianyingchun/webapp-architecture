@@ -17,7 +17,7 @@
 }
 .markItUp  {
 	/*width: 665px;*/
-	/*width: 100%;*/
+	width: 99%;
 	/*margin:5px 0 5px 0;*/
 	border:5px solid #F5F5F5;	
 }
@@ -29,7 +29,8 @@
 }
 .markItUpEditor {
 	font:12px 'Courier New', Courier, monospace;
-	padding:5px 5px 5px 35px;
+	/*padding:5px 5px 5px 35px;*/
+	padding: 0px;
 	border:3px solid #3C769D;
 	width:643px;
 	height:320px;
@@ -136,7 +137,7 @@
 }
 /***************************************************************************************/
 .html .markItUpEditor {
-	width: 100%;
+	width: 99.5%;
 	background-image:url(images/bg-editor-html.png);
 }
 .markdown .markItUpEditor {
