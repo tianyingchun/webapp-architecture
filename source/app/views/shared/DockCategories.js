@@ -17,7 +17,7 @@ enyo.kind({
 		
 		this.$.categoriesContainer.createClientComponents([
 			{ kind: "widgets.menus.Accordion", itemNameField:"categoryName",
-				itemKeyField:"categoryKey", selectedKey:categoryKey, source: records
+				itemKeyField:"categoryKey", linkConverterFn:this.hashConverterFn, selectedKey:categoryKey, source: records
 			}
 		]);
 		this.$.categoriesContainer.render();
@@ -25,5 +25,15 @@ enyo.kind({
 		this.$.message.hide();
 		// this.$.dockTitle.show();
 		this.$.categoriesContainer.show();
+	},
+	//*@ private hash converter.
+	hashConverterFn: function(item) {
+		var loc = "#";
+		if(item && item.isCategoryNode) {
+			loc = "#c/"+item[this.itemKeyField];
+		} else {
+			loc = "#node/"+item[this.itemKeyField];
+		}
+		return loc;
 	}
 });
