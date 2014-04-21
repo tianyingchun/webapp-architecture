@@ -23,6 +23,9 @@ enyo.kind({
 					], 
 					rightContent: [
 						{classes:"content-header", components: [
+							{classes:"content-title", components: [
+								{name:"contentTitle", tag:"h4"}
+							]},
 							{classes:"input-append",components: [
 								{kind:"enyo.Input", type:"text",classes:"span2 search-query", placeholder:"Search here..."},
 								{kind:"enyo.Button", classes:"btn icon-search", content:"搜索"}
@@ -108,6 +111,12 @@ enyo.kind({
 	},
 	setDockContent: function (viewConfig) {
 		this.$.twoColumnLayout.setDockContent([viewConfig]);
+	},
+	setDockContentTitle: function (title) {
+		var $control = this.$.twoColumnLayout.findControlByName("contentTitle");
+		if($control ){
+			$control.setContent(title);
+		}
 	},
 	// go to application home page.
 	goHome: function () {

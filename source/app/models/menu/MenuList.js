@@ -4,14 +4,6 @@ enyo.kind({
 	model: "Master.models.menu.MenuItem",
 	// get all menus.
 	getMenus: function (callback) {
-		// for api managerment
-		var itemModel = new Master.models.menu.MenuItem({
-			name:  Master.locale.get("API_LIST","menu"),
-			key: "api_list", // menu item key.
-			customClass: "icon-list-ul",
-			hash: "profile/api/list"
-		});
-		this.add(itemModel);
 		// for category managerment.
 		var itemModel = new Master.models.menu.MenuItem({
 			name:  Master.locale.get("CATEGORY_LIST","menu"),
@@ -21,6 +13,16 @@ enyo.kind({
 		});
 		this.add(itemModel);
 
+		// for api managerment
+		var itemModel = new Master.models.menu.MenuItem({
+			name:  Master.locale.get("API_LIST","menu"),
+			key: "api_list", // menu item key.
+			customClass: "icon-list-ul",
+			hash: "profile/api/list"
+		});
+		this.add(itemModel);
+	
+		// for personal center.
 		var personalInfo = new Master.models.menu.MenuItem({
 			name: Master.locale.get("PERSONAL_INFO","menu"),
 			key: "other", // menu item key.

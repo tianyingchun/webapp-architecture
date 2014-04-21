@@ -7,7 +7,7 @@ enyo.kind({
 	},
 	components: [
 		{name: "container", classes:"api-container", components: [
-			{name:"form", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
+			{name:"form", onValidationComplete:"formValidationSubmit",submitButtonStyles:"btn btn-primary",submitButtonText:"确认添加", kind:"widgets.forms.FormDecorator", components: [
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "分类KEY"},
 					{classes:"form-item", components:[
@@ -48,6 +48,12 @@ enyo.kind({
 			]}
 		]}
 	],
+	create: enyo.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			Master.view.frame.setDockContentTitle("添加分类信息");
+		};
+	}),
 	// show app new api ui interface.
 	showAddNewCategoryUI: function (viewModel){
 		// show html editors.

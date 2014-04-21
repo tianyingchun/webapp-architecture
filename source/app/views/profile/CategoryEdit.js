@@ -52,6 +52,7 @@ enyo.kind({
 		return function () {
 			sup.apply(this, arguments);
 			this.showLoading("Loading...");
+			Master.view.frame.setDockContentTitle("编辑分类信息")
 		};
 	}),
 	rendered: enyo.inherit(function (sup) {
