@@ -207,7 +207,7 @@ enyo.kind({
 		setTimeout(function () {
 			if(callback) {
 				callback({
-					status: "failed",
+					status: "success",
 					message: "the user name has been exist!"
 				});
 			}

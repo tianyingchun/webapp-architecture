@@ -43,9 +43,13 @@
 		}
 		&:last-child > a {
 			.border-bottom-radius(@accordionRadius);
-			 
+			 &.has-childs{
+				.border-bottom-radius(0);
+			 }
+			 &.has-childs.collapsed{
+				.border-bottom-radius(@accordionRadius);
+			 }
 		}
-			
 	}
 
 	.accordion-content{
@@ -78,10 +82,12 @@
 		}
 
 	}
-	.header-item-highlight{ 
-		 
+	i.icon-caret-right:before {
+		content: "\f0d7";
+	} 
+	.collapsed{ 
 		i.icon-caret-right:before {
-			content: "\f0d7";
+			content: "\f0da";
 		} 
 		
 	}

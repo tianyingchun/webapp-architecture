@@ -78,7 +78,7 @@ enyo.kind({
 				break;
 			case "remove":
 				var currItem = this.findRowItemData(key);
-				this.confirmCategoryItem(currItem.apiId, currItem.apiKey, currItem.apiName);
+				this.confirmCategoryItem(currItem.categoryId, currItem.categoryKey, currItem.categoryName);
 				break; 
 		}
 		if (location) {
