@@ -1,22 +1,35 @@
-@import "./../variables.less";
-@import "./../mixins.less"; 
+@import "./../mixins/utility.less";
+@import "./../mixins/vendor.less";
+@font-size: .7em;
 .form-controls{
 	.onyx-groupbox {
 		margin-top: 10px;
 		overflow: hidden;
 	}
 	.onyx-groupbox-header{
-		background-color: #DFDDDD;
 		color: #303030;
+		background:none;
+    	#gradient > .vertical(#fff, #f2f2f2);
+    	border: 1px solid #bbb;
 	}
 	.onyx-groupbox > *{
 		border-color: #d1d1d1;
 	}
 	.form-item {
 		clear:both;
-		font-size: @font-medium;
+		font-size: @font-size;
 		padding: 5px 10px;
 		overflow: hidden;
+		.onyx-input-decorator{
+				border: 0;
+				background-color: none;
+				box-shadow: none;
+			&.onyx-focused{
+				border: 0;
+				background-color: none;
+				box-shadow: none;
+			}
+		}
 		.title {
 			float: left;
 			height: 35px;
@@ -39,20 +52,20 @@
 				min-width: 250px;
 			}
 			.onyx-input-decorator > input{
-				font-size: @font-medium;
+				font-size: @font-size;
 				width:100%;
 			}
 		}
 		.onyx-checkbox {
 			background-size: 20px 80px;
-			background-position: 0 0;
+			background-position: 10px 0;
 			padding-left: 30px;
 			height: 20px;
 			width: 20px;
 		}
 		.onyx-checkbox[checked]
 		{
-			background-position: 0 -20px;
+			background-position: 10px -20px;
 		}
 		// widget form textarea
 		.widget-forms-textarea{

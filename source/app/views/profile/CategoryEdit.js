@@ -7,7 +7,7 @@ enyo.kind({
 	},
 	components: [
 		{name: "container", classes:"api-container", components: [
-			{name:"form", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
+			{name:"form", submitButtonStyles:"btn btn-primary",submitButtonText:"保存更改", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "分类KEY"},
 					{classes:"form-item", components:[
@@ -86,6 +86,7 @@ enyo.kind({
 	// show loading message.
 	showLoading:function (message) {
 		this._uid_category_info = Master.view.frame.showSpinnerPopup({
+			classes:"white",
 			message: message
 		});
 	},

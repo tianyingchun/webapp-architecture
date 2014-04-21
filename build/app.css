@@ -1866,7 +1866,7 @@ p em a {
 	border:3px solid #3C769D;
 	width:643px;
 	height:320px;
-	background:#FFF url('../lib/markitup/skins/markitup/images/bg-editor.png') no-repeat;
+	background:#FFF url('../lib/markitup/skins/markitup/images/bg-editor.png') repeat-x;
 	clear:both;
 	line-height:18px;
 	overflow:auto;
@@ -2148,7 +2148,12 @@ Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine
 
 /* lib/widgets/css/dialog/spinnerdialog.css */
 
-.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.dialog-spinner{min-width:100px;height:100px;position:fixed;top:50%;text-align:center;margin-top:-50px}.dialog-spinner .onyx-spinner.size-30{background-size:40px;width:40px;height:40px}.dialog-spinner .message{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/*!
+ *  http://www.bootcss.com/p/preboot/#mixins-clearfix
+ *  preboot basic less mixin libaray
+**//*!
+ * 特定厂商的mixin（Vendor mixins）
+ */.dialog-spinner{min-width:100px;position:fixed !important;top:50% !important;left:50% !important;text-align:center;margin-top:-50px}.dialog-spinner.white{background-color:#d4d0d0;background-image:-moz-linear-gradient(top, #fff, #d4d0d0);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#d4d0d0));background-image:-webkit-linear-gradient(top, #fff, #d4d0d0);background-image:-o-linear-gradient(top, #fff, #d4d0d0);background-image:linear-gradient(to bottom, #fff, #d4d0d0);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffd4d0d0', GradientType=0);color:#000}.dialog-spinner.white .onyx-spinner{background:url('../lib/widgets/images/spinner-light.gif') no-repeat 5px 0;background-size:65% auto;width:60px;height:40px}.dialog-spinner .onyx-spinner.size-30{background-size:40px;width:40px;height:40px}.dialog-spinner .message{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* lib/widgets/css/dialog/normaldialog.css */
 
@@ -2176,7 +2181,12 @@ Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine
 
 /* lib/widgets/css/forms/formitem.css */
 
-.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.form-controls .onyx-groupbox{margin-top:10px;overflow:hidden}.form-controls .onyx-groupbox-header{background-color:#dfdddd;color:#303030}.form-controls .onyx-groupbox>*{border-color:#d1d1d1}.form-controls .form-item{clear:both;font-size:.7em;padding:5px 10px;overflow:hidden}.form-controls .form-item .title{float:left;height:35px;line-height:35px;margin-right:10px;width:150px;text-align:right;padding-right:10px}.form-controls .form-item .editable-table{clear:both;width:100%}.form-controls .form-item .widget-forms-input{float:left}.form-controls .form-item .widget-forms-input .onyx-input-decorator{float:left;padding:4px 8px 8px 8px;min-width:250px}.form-controls .form-item .widget-forms-input .onyx-input-decorator>input{font-size:.7em;width:100%}.form-controls .form-item .onyx-checkbox{background-size:20px 80px;background-position:0 0;padding-left:30px;height:20px;width:20px}.form-controls .form-item .onyx-checkbox[checked]{background-position:0 -20px}.form-controls .form-item .widget-forms-textarea{float:left}.form-controls .form-item .widget-forms-textarea .onyx-input-decorator{float:left;padding:4px 8px 8px 8px;min-width:250px}.form-controls .form-item .widget-forms-textarea .onyx-input-decorator>input{font-size:.7em;width:100%}.form-controls .form-item .widget-forms-textarea .onyx-textarea{width:300px;height:50px}.form-controls .form-item .tip-message{float:left;height:35px;line-height:35px;margin-right:10px;width:150px;text-align:right;padding-right:10px;width:auto;margin-left:10px;text-align:left}.form-controls .form-item .tip-message.failed{color:#f00}.form-controls .form-item .tip-message.success{min-width:50px;background:url('../lib/widgets/images/right-icon.png') no-repeat 0 4px;background-size:20px}.form-controls .form-item .tip-message.ajax{padding-left:20px;background:url('../lib/widgets/images/spinner_grey_40.gif') no-repeat 0 7px;background-size:14px}.button-wrapper{margin:10px 0}
+/*!
+ *  http://www.bootcss.com/p/preboot/#mixins-clearfix
+ *  preboot basic less mixin libaray
+**//*!
+ * 特定厂商的mixin（Vendor mixins）
+ */.form-controls .onyx-groupbox{margin-top:10px;overflow:hidden}.form-controls .onyx-groupbox-header{color:#303030;background:none;background-color:#f2f2f2;background-image:-moz-linear-gradient(top, #fff, #f2f2f2);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#f2f2f2));background-image:-webkit-linear-gradient(top, #fff, #f2f2f2);background-image:-o-linear-gradient(top, #fff, #f2f2f2);background-image:linear-gradient(to bottom, #fff, #f2f2f2);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);border:1px solid #bbb}.form-controls .onyx-groupbox>*{border-color:#d1d1d1}.form-controls .form-item{clear:both;font-size:.7em;padding:5px 10px;overflow:hidden}.form-controls .form-item .onyx-input-decorator{border:0;background-color:none;box-shadow:none}.form-controls .form-item .onyx-input-decorator.onyx-focused{border:0;background-color:none;box-shadow:none}.form-controls .form-item .title{float:left;height:35px;line-height:35px;margin-right:10px;width:150px;text-align:right;padding-right:10px}.form-controls .form-item .editable-table{clear:both;width:100%}.form-controls .form-item .widget-forms-input{float:left}.form-controls .form-item .widget-forms-input .onyx-input-decorator{float:left;padding:4px 8px 8px 8px;min-width:250px}.form-controls .form-item .widget-forms-input .onyx-input-decorator>input{font-size:.7em;width:100%}.form-controls .form-item .onyx-checkbox{background-size:20px 80px;background-position:10px 0;padding-left:30px;height:20px;width:20px}.form-controls .form-item .onyx-checkbox[checked]{background-position:10px -20px}.form-controls .form-item .widget-forms-textarea{float:left}.form-controls .form-item .widget-forms-textarea .onyx-input-decorator{float:left;padding:4px 8px 8px 8px;min-width:250px}.form-controls .form-item .widget-forms-textarea .onyx-input-decorator>input{font-size:.7em;width:100%}.form-controls .form-item .widget-forms-textarea .onyx-textarea{width:300px;height:50px}.form-controls .form-item .tip-message{float:left;height:35px;line-height:35px;margin-right:10px;width:150px;text-align:right;padding-right:10px;width:auto;margin-left:10px;text-align:left}.form-controls .form-item .tip-message.failed{color:#f00}.form-controls .form-item .tip-message.success{min-width:50px;background:url('../lib/widgets/images/right-icon.png') no-repeat 0 4px;background-size:20px}.form-controls .form-item .tip-message.ajax{padding-left:20px;background:url('../lib/widgets/images/spinner_grey_40.gif') no-repeat 0 7px;background-size:14px}.button-wrapper{margin:10px 0}
 
 /* lib/widgets/css/forms/editabletable.css */
 
@@ -2188,7 +2198,7 @@ Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine
 
 /* lib/widgets/css/lists/pager.css */
 
-.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.pagination{list-style:none;display:block;overflow:hidden;padding:0 5px 5px 0;margin:0}.pagination li{list-style:none;padding:0;margin:0;float:left}.light-theme{-webkit-box-shadow:0 1px 2px rgba(0,0,0,0);-moz-box-shadow:0 1px 2px rgba(0,0,0,0);box-shadow:0 1px 2px rgba(0,0,0,0)}.light-theme a,.light-theme span{float:left;color:#666;font-size:14px;line-height:24px;font-weight:normal;text-align:center;border:1px solid #bbb;min-width:14px;padding:0 7px;margin:0 5px 0 0;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,0.2);background:#efefef;background:-moz-linear-gradient(top, #fff 0, #efefef 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(100%, #efefef));background:-webkit-linear-gradient(top, #fff 0, #efefef 100%);background:-o-linear-gradient(top, #fff 0, #efefef 100%);background:-ms-linear-gradient(top, #fff 0, #efefef 100%);background:linear-gradient(top, #fff 0, #efefef 100%)}.light-theme a:hover{text-decoration:none;background:#fcfcfc}.light-theme .current{background:#666 !important;color:#fff !important;border-color:#444;box-shadow:0 1px 0 #fff,0 0 2px rgba(0,0,0,0.3) inset;cursor:default}.light-theme .ellipse{background:none;border:none;border-radius:0;box-shadow:none;font-weight:bold;cursor:default}
+.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.pagination{list-style:none;display:block;overflow:hidden;padding:0 5px 5px 0;margin:0}.pagination li{list-style:none;padding:0;margin:0;float:left}.light-theme{-webkit-box-shadow:0 1px 2px rgba(0,0,0,0) !important;-moz-box-shadow:0 1px 2px rgba(0,0,0,0) !important;box-shadow:0 1px 2px rgba(0,0,0,0) !important}.light-theme a,.light-theme span{float:left;color:#666;font-size:14px;line-height:24px;font-weight:normal;text-align:center;border:1px solid #bbb;min-width:14px;padding:0 7px;margin:0 5px 0 0;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,0.2);background:#efefef;background:-moz-linear-gradient(top, #fff 0, #efefef 100%);background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(100%, #efefef));background:-webkit-linear-gradient(top, #fff 0, #efefef 100%);background:-o-linear-gradient(top, #fff 0, #efefef 100%);background:-ms-linear-gradient(top, #fff 0, #efefef 100%);background:linear-gradient(top, #fff 0, #efefef 100%)}.light-theme a:hover{text-decoration:none;background:#fcfcfc}.light-theme .current{background:#666 !important;color:#fff !important;border-color:#444;box-shadow:0 1px 0 #fff,0 0 2px rgba(0,0,0,0.3) inset;cursor:default}.light-theme .ellipse{background:none;border:none;border-radius:0;box-shadow:none;font-weight:bold;cursor:default}
 
 /* lib/widgets/css/lists/pagedlist.css */
 
@@ -8458,3 +8468,12 @@ a.badge:focus {
 **//*!
  * 特定厂商的mixin（Vendor mixins）
  */.list-wrapper i[class*="icon-"]{width:1.25em;text-align:center;display:inline-block}.list-wrapper .list-header{background-color:#f2f2f2;background-image:-moz-linear-gradient(top, #fff, #f2f2f2);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#f2f2f2));background-image:-webkit-linear-gradient(top, #fff, #f2f2f2);background-image:-o-linear-gradient(top, #fff, #f2f2f2);background-image:linear-gradient(to bottom, #fff, #f2f2f2);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);height:30px;line-height:30px;padding:2px 5px;overflow:hidden}.list-wrapper .list-header .btn{float:right}.list-wrapper .list-title{float:left}.list-wrapper .list-inner{border-color:#bbb}.list-wrapper .list-item{list-style:none;display:table;margin:0;padding:0;clear:both;overflow:hidden;border-bottom:1px solid #e8e8e8;padding:10px 5px;background:#fff}.list-wrapper .list-item li{padding:0;float:left;margin:0 10px}.list-wrapper .pagedlist-content{border-top:none;border-left:none;border-right:none}.list-wrapper .pagedlist-pager{width:600px;margin:10px auto}
+
+/* lib/theme/bootstrap/css/module/form.css */
+
+/*!
+ *  http://www.bootcss.com/p/preboot/#mixins-clearfix
+ *  preboot basic less mixin libaray
+**//*!
+ * 特定厂商的mixin（Vendor mixins）
+ */.category-edit .submit-button{width:200px}.category-edit .reset-button{display:none}

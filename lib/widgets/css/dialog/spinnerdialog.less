@@ -1,13 +1,24 @@
-@import "./../variables.less";
-@import "./../mixins.less"; 
+@import "./../mixins/utility.less";
+@import "./../mixins/vendor.less";
 .dialog-spinner{
 	min-width: 100px;
-	height: 100px;
-	position: fixed;
-	top: 50%;
+	// height: 100px;
+	position: fixed !important;
+	top: 50% !important;
+	left: 50% !important;
 	text-align: center;
 	margin-top: -50px;
-
+	// white spinner dialog color.
+	&.white{
+		#gradient > .vertical(#fff, #D4D0D0);
+		color: #000;
+		.onyx-spinner{
+			background: url("../../images/spinner-light.gif") no-repeat 5px 0;
+			background-size: 65% auto;
+			width: 60px;
+			height: 40px;
+		}
+	}
 	.onyx-spinner.size-30{
 		background-size: 40px;
 		width: 40px;

@@ -1,1 +1,6 @@
-.small-icons{background:url(../../images/small-icons.png) no-repeat}.dialog-spinner{min-width:100px;height:100px;position:fixed;top:50%;text-align:center;margin-top:-50px}.dialog-spinner .onyx-spinner.size-30{background-size:40px;width:40px;height:40px}.dialog-spinner .message{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/*!
+ *  http://www.bootcss.com/p/preboot/#mixins-clearfix
+ *  preboot basic less mixin libaray
+**//*!
+ * 特定厂商的mixin（Vendor mixins）
+ */.dialog-spinner{min-width:100px;position:fixed !important;top:50% !important;left:50% !important;text-align:center;margin-top:-50px}.dialog-spinner.white{background-color:#d4d0d0;background-image:-moz-linear-gradient(top, #fff, #d4d0d0);background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#d4d0d0));background-image:-webkit-linear-gradient(top, #fff, #d4d0d0);background-image:-o-linear-gradient(top, #fff, #d4d0d0);background-image:linear-gradient(to bottom, #fff, #d4d0d0);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffd4d0d0', GradientType=0);color:#000}.dialog-spinner.white .onyx-spinner{background:url("../../images/spinner-light.gif") no-repeat 5px 0;background-size:65% auto;width:60px;height:40px}.dialog-spinner .onyx-spinner.size-30{background-size:40px;width:40px;height:40px}.dialog-spinner .message{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
