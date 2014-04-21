@@ -41,6 +41,14 @@ enyo.kind({
 		this.categoryBasicInfoDTO(data, result, 0);
 		
 		this.zLog("conterted categories: ", result);
+		this.sortCategories(result);
 		return result;
+	},
+	sortCategories: function (categories) {
+		if(enyo.isArray(categories)){
+			categories.sort(function (a, b) {
+				return a.displayOrder > b.displayOrder;
+			});
+		}
 	}
 });	

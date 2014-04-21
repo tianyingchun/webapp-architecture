@@ -10,7 +10,7 @@ enyo.kind({
 	},
 	components: [
 		{name: "container", classes:"api-container", components: [
-			{name:"form", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
+			{name:"form", submitButtonStyles:"btn btn-primary",submitButtonText:"确认修改", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
 				// API KEY.
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "API KEY"},

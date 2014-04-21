@@ -25,6 +25,14 @@ enyo.kind({
 		// convert source data and saved into result.
 		this.apiBasicInfoDTO(data, result);
 		this.zLog("conterted api basic info list: ", result);
+		this.sortApis(result);
 		return result;
+	},
+	sortApis: function (apis) {
+		if(enyo.isArray(apis)){
+			apis.sort(function (a, b) {
+				return a.displayOrder > b.displayOrder;
+			});
+		}
 	}
 });

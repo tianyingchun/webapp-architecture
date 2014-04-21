@@ -56,7 +56,10 @@ enyo.kind({
 		return true;
 	},
 	accordionViewChangedHandler: function(inSender, inEvent) {
-		this.$.twoColumnLayout.reflowPageLayout();
+		var self = this;
+		setTimeout(function () {// move exec time to next time slice
+			self.$.twoColumnLayout.reflowPageLayout();
+		},1)
 		return true;
 	},
 	create: enyo.inherit(function (sup) {
