@@ -11,34 +11,33 @@ enyo.kind({
 	components: [
 		{name: "container", classes:"api-container", components: [
 			{name:"form", submitButtonStyles:"btn btn-primary",submitButtonText:"确认修改", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
-				// API KEY.
 				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "API KEY"},
+					{kind: "onyx.GroupboxHeader", content: "文档基本信息"},
 					{classes:"form-item", components:[
-						{name:"api_key", placeholder:"API KEY", kind:"widgets.forms.InputDecorator", tipMessage:"全局唯一，请一定输入不重复的KEY限英文字母", validation: {required:"必填字段！",hash:""}}
-					]}
-				]},
-				// API NAME
-				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "API名称"},
-					{classes:"form-item", components:[
-						{name:"api_name", placeholder:"API名称", kind:"widgets.forms.InputDecorator", tipMessage:"API 名称必须填写！", validation: {required:"必填字段！"}}
-					]}
-				]},
-				// API DisplayOrder.
-				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "API排序"},
-					{classes:"form-item", components:[
-						{name:"api_display_order", placeholder:"API名称", type:"number", kind:"widgets.forms.InputDecorator", tipMessage:"填写分类排序，只能为数字值越大优先级越高!", validation: {required:"请输入数字!", number:""}}
-					]}
-				]},
-				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "API分类"},
-					{classes:"form-item", components:[
-						{classes:"title", content:"API分类"},
-						{name:"api_categories",key:"categoryId", defaultTitle:"--请选择API分类--", required:true, tipMessage:"必须选择特定的分类", kind:"widgets.forms.DropdownListDecorator"}
+						{ classes:"title", content:"文档 KEY"},
+						{ name:"api_key", placeholder:"文档 KEY", ajax:"checkifKeyExist", kind:"widgets.forms.InputDecorator", tipMessage:"全局唯一，请一定输入不重复的KEY限英文字母", validation: {required:"必填字段！",hash:""}}
 					]},
-				]},
+					// document name.
+					{classes:"form-item", components:[
+						{ classes:"title", content:"文档名称"},
+						{ name:"api_name", placeholder:"API名称", kind:"widgets.forms.InputDecorator", tipMessage:"文档名称必须填写！", validation: {required:"必填字段！"}}
+					]},
+					// document display order.
+					{classes:"form-item", components:[
+						{ classes:"title", content:"文档排序"},
+						{name:"api_display_order", value:0, placeholder:"API名称", type:"number", kind:"widgets.forms.InputDecorator", tipMessage:"填写分类排序，数字值越小显示越靠前!", validation: {required:"请输入数字!", number:""}}
+					]},
+					// indicates document if need display
+					{classes:"form-item", components:[
+						{ classes:"title", content:"是否显示"},
+						{name:"api_is_display", kind:"onyx.Checkbox"}
+					]},
+					// which categorye document belongs to .
+					{classes:"form-item", components:[
+						{ classes:"title", content:"文档分类"},
+						{name:"api_categories",key:"categoryId", defaultTitle:"--请选择API分类--", required:true, tipMessage:"必须选择特定的分类", kind:"widgets.forms.DropdownListDecorator"}
+					]}
+				]}, 
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "概述"},
 					// api descriptons. text editor.
@@ -185,7 +184,8 @@ enyo.kind({
 		this.$.api_key.setValue(viewModel.get("apiKey"));
 		this.$.api_name.setValue(viewModel.get('apiName'));
 		this.$.api_display_order.setValue(viewModel.get("displayOrder")||0);
-
+		this.$.api_is_display.setValue(viewModel.get("isDisplay") || 0);
+		
 		var detail = viewModel.get("details");
 		this.$.api_description.setEditorContent(detail.description);
 		// request.
@@ -222,6 +222,7 @@ enyo.kind({
 		// displayOrder.
 		_data.displayOrder = this.$.api_display_order.getValue();
 		_data.description = this.$.api_description.getEditorContent();
+		_data.isDisplay = this.$.api_is_display.getValue();
 		_data.request = {
 			body: this.$.request_body.getValue(),
 			params: this.$.request_params.getTableJSONResult(),

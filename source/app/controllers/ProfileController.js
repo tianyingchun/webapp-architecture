@@ -76,7 +76,8 @@ enyo.kind({
 		this.showProfileDockMenus({menuKey: "api_list"});
 		this.bindingViewToContent(this.PROFILE_API_EDIT, null, null);
 		var spinner_uid = Master.view.frame.showSpinnerPopup({
-			message: "Loading Api detail..."
+			message: "Loading...",
+			classes:"white"
 		});
 		var apiItemModel = this.getApiItemModel({apiKey: apiKey});
 		apiItemModel.getApiDetail(apiKey, this.bind("_loadingExistApiDetail", spinner_uid));

@@ -139,6 +139,7 @@
 .html .markItUpEditor {
 	width: 99.5%;
 	background-image:url(images/bg-editor-html.png);
+	background: #f0f0f0;
 }
 .markdown .markItUpEditor {
 	background-image:url(images/bg-editor-markdown.png);

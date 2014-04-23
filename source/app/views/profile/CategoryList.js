@@ -20,8 +20,8 @@ enyo.kind({
 			]},
 			{   name:"categoryList", kind:"widgets.lists.PagedList",
 				rowKeyField:"categoryKey", 
-				fields: ['categoryId','categoryName','categoryKey'],
-				header: ["分类ID","分类名称","分类Hash","操作"]
+				fields: ['categoryId','categoryName','categoryKey','displayOrder','isDisplay'],
+				header: ["分类ID","分类名称","分类Hash","优先级","是否显示","操作"]
 			} 
 		]}
 ],
