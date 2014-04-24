@@ -8,6 +8,14 @@
 		.border-radius(4px);
 		.section-header{
 			overflow: hidden;
+			margin-bottom: 5px;
+			height: 35px;
+			padding: 5px 0;
+			background-color: #f5f5f5;
+			.section-title{
+				padding: 5px;
+				margin: 0;
+			}
 		}
 		.remove-btn {
 			margin-bottom: 10px;
@@ -17,6 +25,10 @@
 			float:left;
 			margin-left: 0;
 			padding-top: 5px;
+			.section-title {
+				display:inline-block;
+				margin: 0 5px;
+			}
 		}
 		.customized-controls{
 			float:left;
@@ -50,5 +62,35 @@
 			float: left;
 			margin-left: 10px;
 		}
+	}
+
+
+	// section table
+	.section-table {
+		border: 1px solid #ccc;
+		width: 100%;
+		td{
+			border: 1px solid  #ccc;
+			padding: 5px;
+			text-align: center;
+			input {
+				width: auto;
+				margin: 0;
+			}
+		}
+		tr:nth-child(odd) {
+			background-color: #fafcfc;
+		}
+		.header-row{
+			td {
+				background-color: #ebf3fa;
+				font-weight: bold;
+				font-size: 1.2em;
+			}
+		}
+	}
+	// section link List
+	.section-linklist{
+
 	}
 }

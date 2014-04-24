@@ -29,10 +29,7 @@
     <script>
     enyo.ready(function() {
         var platform = enyo.platform;
-        if (platform &&
-            platform.platformName.toLowerCase() == "ie" &&
-            platform.ie <= 8
-        ) {
+        if (platform && platform.platformName.toLowerCase() == "ie" && platform.ie < 8) {
             document.getElementById("ie_warning").style.display = "block";
         } else {
             // if (undefined === window.enyo) location = "debug.html";  

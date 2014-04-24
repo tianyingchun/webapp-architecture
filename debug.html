@@ -31,10 +31,7 @@
     enyo.ready(function() {
     	//don't support ie8
         var platform = enyo.platform;
-        if (platform &&
-            platform.platformName.toLowerCase() == "ie" &&
-            platform.ie <= 8
-        ) {
+        if (platform && platform.platformName.toLowerCase() == "ie" && platform.ie < 8) {
             document.getElementById("ie_warning").style.display = "block";
         } else {
             new Master.Application({
