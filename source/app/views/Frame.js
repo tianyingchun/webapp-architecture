@@ -56,11 +56,15 @@ enyo.kind({
 		return true;
 	},
 	accordionViewChangedHandler: function(inSender, inEvent) {
+		this.notifyTwoColumnLayoutReflow();
+		return true;
+	},
+	//*@public
+	notifyTwoColumnLayoutReflow: function () {
 		var self = this;
 		setTimeout(function () {// move exec time to next time slice
 			self.$.twoColumnLayout.reflowPageLayout();
-		},1)
-		return true;
+		},1);
 	},
 	create: enyo.inherit(function (sup) {
 		return function () {
