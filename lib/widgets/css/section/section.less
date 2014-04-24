@@ -1,6 +1,11 @@
 @import "./../mixins/utility.less";
 @import "./../mixins/vendor.less";
 .widgets-section {
+	.widgets-dropdownlist {
+		button {
+			margin-top: 0;
+		}
+	}
 	.section-item {
 		border: 1px solid #bbb;
 		padding: 10px 5px;
@@ -34,20 +39,20 @@
 			float:left;
 			margin-left: 10px;
 			height: 40px;
-			background: #f0f0f0;
+			// background: #f0f0f0;
 			padding: 0 5px;
 			.border-radius(4px);
-			span.table, input.table{
+			span.table, input.table, span.link-list, input.link-list{
 				float:left;
 				width: 50px;
 				display: block;
 			}
-			span.table{
+			span.table, span.link-list{
 				height: 40px;
 				padding: 0 5px;
 				line-height: 40px;
 			}
-			input.table {
+			input.table, input.link-list {
 				margin-top: 5px;
 			}
 		}
@@ -88,11 +93,31 @@
 				background-color: #ebf3fa;
 				font-weight: bold;
 				font-size: 1.2em;
+				input {
+					font-weight: bold;
+				}
 			}
 		}
 	}
 	// section link List
 	.section-linklist{
-
+		padding: 0 10px;
+		.link-item{
+			line-height: 30px;
+			font-size: 1.3em;
+			a {
+				display:inline-block;
+				width: 40%;
+				color: #08c;
+				&:hover{
+					text-decoration: underline;
+				}
+			}
+			span {
+				display:inline-block;
+				font-weight: bold;
+				width: 40%;
+			}
+		}
 	}
 }
