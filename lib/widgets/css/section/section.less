@@ -6,15 +6,45 @@
 		padding: 10px 5px;
 		margin-top: 10px;
 		.border-radius(4px);
+		.section-header{
+			overflow: hidden;
+		}
 		.remove-btn {
 			margin-bottom: 10px;
 			margin-left: 10px;
 		}		
+		.basic-controls {
+			float:left;
+			margin-left: 0;
+			padding-top: 5px;
+		}
+		.customized-controls{
+			float:left;
+			margin-left: 10px;
+			height: 40px;
+			background: #f0f0f0;
+			padding: 0 5px;
+			.border-radius(4px);
+			span.table, input.table{
+				float:left;
+				width: 50px;
+				display: block;
+			}
+			span.table{
+				height: 40px;
+				padding: 0 5px;
+				line-height: 40px;
+			}
+			input.table {
+				margin-top: 5px;
+			}
+		}
 	}
 	.action-panel{
 		padding-top: 20px;
 		.addnewsection{
 			float:left;
+			margin-left: 10px;
 		}
 		.widgets-dropdownlist{
 			float: left;
