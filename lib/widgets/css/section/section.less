@@ -104,19 +104,54 @@
 		padding: 0 10px;
 		.link-item{
 			line-height: 30px;
+			margin: 5px 0;
 			font-size: 1.3em;
-			a {
-				display:inline-block;
+			overflow: hidden;
+			.left {
+				float:left;
 				width: 40%;
-				color: #08c;
+				height: 30px;
+				line-height: 30px;
+			}
+			.right {
+				float: right;
+				width: 40%;
+				height: 30px;
+				line-height: 30px;
+			}
+			a {
+				font-size: 1.1em;
+				color: #3C769D;
 				&:hover{
 					text-decoration: underline;
 				}
+				 
 			}
-			span {
+			span{
+				border-radius: 2px 2px 2px 2px;
+				width: 70px;
+				height: 20px;
 				display:inline-block;
+				color: #fff;
+				&.https{
+					background: url(../../images/icon-https.png) no-repeat 5px 5px ;
+					background-size: 40px;
+				}
+				&.http{
+					background: url(../../images/icon-http.png) no-repeat 0 0 ;
+					background-size: 40px;
+				}
+			}
+			span.desc {
+				color: #000;
 				font-weight: bold;
-				width: 40%;
+				width: 100%;
+			}
+			.widgets-dropdownlist, input {
+				float:left;
+			}
+			input {
+				margin: 0 5px;
 			}
 		}
 	}
