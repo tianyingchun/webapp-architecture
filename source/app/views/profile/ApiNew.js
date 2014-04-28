@@ -50,12 +50,11 @@ enyo.kind({
 					{kind: "onyx.GroupboxHeader", content: "片段(Section)管理"},
 					{classes:"form-item", components:[
 						{name:"testSections", ontap:"testSectionManagerHandler", kind:"onyx.Button",content:"test"},
-						{name:"sectionManager", kind: "widgets.section.SectionManager", model:"model"}
+						{name:"sectionManager", kind: "widgets.section.SectionManager", model:"edit"}
 						
 					]}
 				]}
-			]},
-			// {name:"testButton", kind:"onyx.Button",content:"TestButton", ontap: "testButtonTap"},
+			]}
 		]}
 	],
 	// show app new api ui interface.
