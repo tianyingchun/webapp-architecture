@@ -10,7 +10,8 @@ enyo.kind({
 				{ name:"menuItemIcon", tag:"i"},
 				{ name:"menuItem", tag:"span", content:""}
 			]}
-		]}
+		]},
+		{kind:"widgets.menus.TreeMenu", onItemClick:"treeNodeClick", onItemExpandChanged:"treeNodeExpandChanged"}
 	],
 	showProfileMenusUI: function (viewModel, data) {
 		this.zLog("viewModel", viewModel, "data: ", data);
@@ -49,6 +50,17 @@ enyo.kind({
 		} else {
 			this.zError("dock menu item tap: item data don't exit!");
 		}
+		return true;
+	},
+
+	// for tree node 
+	// 
+	treeNodeClick: function (inSender, inEvent) {
+		this.zLog(inEvent);
+		return true;
+	},
+	treeNodeExpandChanged: function (inSender, inEvent) {
+		this.zLog(inEvent);
 		return true;
 	}
 });
