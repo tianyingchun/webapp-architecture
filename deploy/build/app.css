@@ -2180,7 +2180,7 @@ Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine
 
 /* lib/widgets/css/dialog/normaldialog.css */
 
-.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.widget-dialog.dialog-normal{width:500px;min-height:200px;-webkit-box-shadow:0 5px 15px rgba(0,0,0,0.5);box-shadow:0 5px 15px rgba(0,0,0,0.5);background-color:#fff;border:1px solid #999;border:1px solid rgba(0,0,0,0.2);border-radius:6px;outline:0;-webkit-box-shadow:0 3px 9px rgba(0,0,0,0.5);box-shadow:0 3px 9px rgba(0,0,0,0.5);background-clip:padding-box}.widget-dialog.dialog-normal .widget-dialog-header{padding-bottom:30px}.widget-dialog.dialog-normal .header-title{float:left;margin-right:40px}.widget-dialog.dialog-normal .close{position:absolute;right:5px;font-size:21px;font-weight:bold;line-height:1;color:#000;text-shadow:0 1px 0 #fff;background:transparent;border:0;-webkit-appearance:none;padding:0;opacity:.2}.widget-dialog.dialog-normal .close:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.5}
+.small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.widget-dialog.dialog-normal{width:500px;min-height:200px;position:fixed;top:50% !important;left:50% !important;-webkit-box-shadow:0 5px 15px rgba(0,0,0,0.5);box-shadow:0 5px 15px rgba(0,0,0,0.5);background-color:#fff;border:1px solid #999;border:1px solid rgba(0,0,0,0.2);border-radius:6px;outline:0;-webkit-box-shadow:0 3px 9px rgba(0,0,0,0.5);box-shadow:0 3px 9px rgba(0,0,0,0.5);background-clip:padding-box}.widget-dialog.dialog-normal .widget-dialog-header{padding-bottom:15px}.widget-dialog.dialog-normal .header-title{float:left;margin-right:40px}.widget-dialog.dialog-normal .close{position:absolute;right:5px;font-size:21px;font-weight:bold;line-height:1;color:#000;text-shadow:0 1px 0 #fff;background:transparent;border:0;-webkit-appearance:none;padding:0;opacity:.2}.widget-dialog.dialog-normal .close:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.5}
 
 /* lib/widgets/css/dialog/htmleditor.css */
 
@@ -2189,6 +2189,15 @@ Docco style used in http://jashkenas.github.com/docco/ converted by Simon Madine
 /* lib/widgets/css/dialog/iframedialog.css */
 
 .small-icons{background:url('../lib/widgets/images/small-icons.png') no-repeat}.dialog-iframe{min-width:300px;position:fixed;top:50%;padding:10px}.dialog-iframe.login-dialog{width:495px;height:420px}.dialog-iframe .widget-dialog-header{padding-bottom:10px;position:relative;overflow:hidden}.dialog-iframe .widget-dialog-header .header-title{float:left;padding-left:2px}.dialog-iframe .widget-dialog-header .close{position:absolute;right:10px;top:0}.dialog-iframe .widget-dialog-body{padding:0}.dialog-iframe .widget-dialog-body{override:hidden}.dialog-iframe iframe{overflow:hidden;crolling:'no';width:470px;height:340px}
+
+/* lib/widgets/css/dialog/treenodedialog.css */
+
+/*!
+ *  http://www.bootcss.com/p/preboot/#mixins-clearfix
+ *  preboot basic less mixin libaray
+**//*!
+ * 特定厂商的mixin（Vendor mixins）
+ */.dialog-treenodedialog{width:500px;min-height:200px;position:fixed;top:50% !important;left:50% !important;-webkit-box-shadow:0 5px 15px rgba(0,0,0,0.5);box-shadow:0 5px 15px rgba(0,0,0,0.5);background-color:#fff;border:1px solid #999;border:1px solid rgba(0,0,0,0.2);border-radius:6px;outline:0;-webkit-box-shadow:0 3px 9px rgba(0,0,0,0.5);box-shadow:0 3px 9px rgba(0,0,0,0.5);background-clip:padding-box}.dialog-treenodedialog .widget-dialog-header{padding-bottom:15px}.dialog-treenodedialog .header-title{float:left;margin-right:40px}.dialog-treenodedialog .close{position:absolute;right:5px;font-size:21px;font-weight:bold;line-height:1;color:#000;text-shadow:0 1px 0 #fff;background:transparent;border:0;-webkit-appearance:none;padding:0;opacity:.2}.dialog-treenodedialog .close:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.5}.dialog-treenodedialog .widget-dialog-body{height:220px;padding:0;border:1px solid #e5e5e5;border-top:0}.dialog-treenodedialog .onyx-button{padding:3px 13px}
 
 /* lib/widgets/css/custom/tabcontrol.css */
 

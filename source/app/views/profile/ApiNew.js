@@ -9,7 +9,9 @@ enyo.kind({
 		"onSaveApiInformation":""
 	},
 	handlers:{
-		"onSectionChanged":"sectionManagerViewChangeHandler"
+		"onSectionChanged":"sectionManagerViewChangeHandler",
+		"onItemClick":"treeNodeClick",
+		"onItemExpandChanged":"treeNodeExpandChanged"
 	},
 	components: [
 		{name: "container", classes:"api-container", components: [
@@ -38,6 +40,7 @@ enyo.kind({
 					// which categorye document belongs to .
 					{classes:"form-item", components:[
 						{ classes:"title", content:"文档分类"},
+						{kind:"enyo.Button", content:"Show Categories", ontap:"showCategoryTreeDialog"},
 						{name:"api_categories",key:"categoryId", defaultTitle:"--请选择API分类--", required:true, tipMessage:"必须选择特定的分类", kind:"widgets.forms.DropdownListDecorator"}
 					]}
 				]}, 
@@ -167,5 +170,28 @@ enyo.kind({
 	sectionManagerViewChangeHandler: function (inSender, inEvent) {
 		Master.view.frame.notifyTwoColumnLayoutReflow();
 		return true;
-	}	
+	},
+	/**
+	 * For dialog tree node components.
+	 */
+	showCategoryTreeDialog: function (inSender, inEvent) {
+		var treeDialog = new widgets.dialog.TreeNodeDialog({
+			style:"width: 500px; height: 300px;",title:"请选择所属分类",
+			success: this.bindSafely("treeDialogConfirm")
+		});
+		treeDialog.show();
+		return true;
+	},
+	treeDialogConfirm: function (inEvent) {
+		this.zLog(inEvent);
+	},
+	treeNodeClick: function (inSender, inEvent) {
+		this.zLog(inEvent);
+		return true;
+	},
+	treeNodeExpandChanged: function (inSender, inEvent) {
+		this.zLog(inEvent);
+
+		return true;
+	}
 });

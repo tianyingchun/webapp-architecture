@@ -1,7 +1,6 @@
-@import "./../variables.less";
-@import "./../mixins.less"; 
-// dialog widgets
-.widget-dialog.dialog-normal{
+@import "./../mixins/utility.less";
+@import "./../mixins/vendor.less";
+.dialog-treenodedialog {
 	width: 500px;
 	min-height: 200px;
 	position: fixed;
@@ -43,5 +42,14 @@
 			cursor: pointer;
 			opacity: .5;
 		}
+	}
+	.widget-dialog-body{
+		height: 220px;
+		padding: 0;
+		border: 1px solid #e5e5e5;
+		border-top: 0;
+	}
+	.onyx-button{
+		padding: 3px 13px;
 	}
 }
