@@ -201,9 +201,6 @@ enyo.kind({
 		Master.view.frame.addClass("profile");
 		if (!Master.view.frame.hasProfileContentInDock()) {
 			this.showProfileMenus(data);
-		} else {
-			// update the profule menu hightlight item.
-			this.highlightProfileMenuItem(data);
 		}
 	},
 	//@private add new category information 

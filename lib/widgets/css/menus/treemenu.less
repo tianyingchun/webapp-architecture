@@ -1,0 +1,16 @@
+@import "./../variables.less";
+@import "./../mixins.less"; 
+.widget-treemenu {
+	overflow: hidden;
+	padding: 5px 0;
+	> div.enyo-node {
+		margin-top: -30px;
+		padding-left: 0 !important;
+	}
+	.enyo-node.selected{
+		background-color: #f5f5f5;
+		&.expanded{
+			background-color:transparent;
+		}
+	}
+}

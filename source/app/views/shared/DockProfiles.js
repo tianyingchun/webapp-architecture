@@ -4,63 +4,80 @@ enyo.kind({
 	classes: "dock-profile-meus",
 	components:[
 		{name:"message",kind:"widgets.base.Spinner",size:25, message: Master.locale.get("LOAD_PORFILE_MENUS", "message")},
-		// {classes: "dock-title", content:Master.locale.get("API_CATALOG","title")},
-		{name: "list", kind:"List", multiSelect: false, ontap:"menuItemTap", onSetupItem:"menuSetUpItem", showing: false, components: [
-			{ name:"listitem", classes: "list-item", components: [
-				{ name:"menuItemIcon", tag:"i"},
-				{ name:"menuItem", tag:"span", content:""}
-			]}
-		]},
-		{kind:"widgets.menus.TreeMenu", onItemClick:"treeNodeClick", onItemExpandChanged:"treeNodeExpandChanged"}
+		{kind:"widgets.menus.TreeMenu", onItemClick:"treeNodeClick", onItemExpandChanged:"treeNodeExpandChanged"},
+		{kind: "Selection", name:"selection", onSelect: "select", onDeselect: "deselect"},
+		{name: "list", classes:"menus-container", showing: false}
 	],
 	showProfileMenusUI: function (viewModel, data) {
 		this.zLog("viewModel", viewModel, "data: ", data);
 		// save current menu  items.
 		this.menuItems = viewModel.records;	
 		this.selectedKey = data.menuKey;
-		this.$.list.setCount(this.menuItems.length);
-		this.$.list.reset();
+		var menuComponents = this.prepareMenus();
+		this.$.list.destroyClientControls();
+		this.$.list.createClientComponents(menuComponents);
+		this.$.list.render();
+		this.highlightMenuItem();
 		this.$.message.hide();
 		this.$.list.show();
 	},
-	menuSetUpItem: function (inSender, inEvent) {
-		var index = inEvent.index;
-		var currItem = this.menuItems[index];
-		this.$.menuItem.setContent(currItem.get("name"));
-		var isSelected = this.selectedKey == currItem.get("key");
-		this.$.menuItemIcon.setAttribute("class", currItem.get("customClass"));
-		this.$.listitem.addRemoveClass("selected", isSelected);
+	prepareMenus:function () {
+		var menus = [];
+		for (var i = 0; i < this.menuItems.length; i++) {
+			var menuItem = this.menuItems[i];
+			var isSelected = this.selectedKey == menuItem.get("key");
+			menus.push({ontap:"menuItemTap",  classes: isSelected?"list-item selected":"list-item", hash: menuItem.get("hash"), components: [
+				{ tag:"i" ,hash: menuItem.get("hash"), classes: menuItem.get("customClass")},
+				{ tag:"span", hash: menuItem.get("hash"),content: menuItem.get("name")}
+			]});
+		};
+		return menus;
 	},
-	/**
-	 * Highlight profil menu item.
-	 * @param  {object} viewModel null
-	 * @param  {object} data, the menu item data
-	 */
-	highlightProfileMenuItem: function (viewModel, data) {
-		this.zLog("data:", data);
-		this.selectedKey = data.menuKey;
-		this.$.list.reset();
+	highlightMenuItem: function () {
+		var $controls = this.$.list.getControls();
+		for (var i = 0; i < $controls.length; i++) {
+			var $menuItem = $controls[i];
+			if ($menuItem.hasClass("selected")) {
+				this.$.selection.select($menuItem.id, $menuItem);
+				break;
+			}
+		};
 	},
 	menuItemTap: function (inSender, inEvent) {
-		var index = inEvent.index;
-		var currItem = this.menuItems[index];
-		if (currItem) {
-			var hash = currItem.get("hash");
+		if (inSender) {
+			var hash = inSender.get("hash"); 
+			this.$.selection.select(inSender.id, inSender);
 			this.location(hash);
 		} else {
 			this.zError("dock menu item tap: item data don't exit!");
 		}
 		return true;
 	},
-
+	select: function(inSender, inEvent) {
+		var node = inEvent.data;
+		if (node) {
+			node.addClass("selected");	
+		}
+		return true;
+	},
+	deselect: function(inSender, inEvent) {
+		var node = inEvent.data;
+		if (node) {
+			node.removeClass("selected");
+		}
+		return true;
+	},
 	// for tree node 
 	// 
 	treeNodeClick: function (inSender, inEvent) {
-		this.zLog(inEvent);
+		var loc = inEvent.get("hash");
+		this.zLog(loc);
+		this.location(loc);
 		return true;
 	},
 	treeNodeExpandChanged: function (inSender, inEvent) {
-		this.zLog(inEvent);
+		// the timeout should > node.css enyo-animate 0.2s+enyo.Node._collapse() settimeout. ==225 minisecond.
+		Master.view.frame.notifyTwoColumnLayoutReflow(250);
 		return true;
 	}
 });

@@ -60,11 +60,12 @@ enyo.kind({
 		return true;
 	},
 	//*@public
-	notifyTwoColumnLayoutReflow: function () {
+	notifyTwoColumnLayoutReflow: function (timeout) {
+		timeout = timeout || 1;
 		var self = this;
 		setTimeout(function () {// move exec time to next time slice
 			self.$.twoColumnLayout.reflowPageLayout();
-		},1);
+		},timeout);
 	},
 	create: enyo.inherit(function (sup) {
 		return function () {
