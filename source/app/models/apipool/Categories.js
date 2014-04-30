@@ -40,7 +40,7 @@ enyo.kind({
 		// convert source data and saved into result.
 		this.categoryBasicInfoDTO(data, result, 0);
 		
-		this.zLog("conterted categories: ", result);
+		this.zLog("converted categories: ", result);
 		this.sortCategories(result);
 		return result;
 	},

@@ -40,8 +40,7 @@ enyo.kind({
 					// which categorye document belongs to .
 					{classes:"form-item", components:[
 						{ classes:"title", content:"文档分类"},
-						{kind:"enyo.Button", content:"Show Categories", ontap:"showCategoryTreeDialog"},
-						{name:"api_categories",key:"categoryId", defaultTitle:"--请选择API分类--", required:true, tipMessage:"必须选择特定的分类", kind:"widgets.forms.DropdownListDecorator"}
+						{kind:"enyo.Button", content:"--请选择API分类--", ontap:"showCategoryTreeDialog"},
 					]}
 				]}, 
 				{kind:"onyx.Groupbox", components: [
@@ -65,28 +64,8 @@ enyo.kind({
 		// show html editors.
 		this.showHtmlEditors();
 		// show table row datas.
-		// loading categories dropdownlist.
-		this.fetchAvalilableCategories();
 		// initialize setion managers.
 		this.initSectionManager();
-	},
-	fetchAvalilableCategories: function () {
-		this.$.api_categories.showSpinner();
-		// 
-		this.doFetchApiAvailableCategories();
-	},
-	showAvalilableCategories: function (viewModel) {
-		this.zLog("viewModel: ", viewModel);
-		var records = viewModel.records;
-		var _components = [];
-		for (var i = 0; i < records.length; i++) {
-			var record = records[i];
-			_components.push({
-				content: record.categoryName,
-				categoryId: record.categoryId
-			});
-		};
-		this.$.api_categories.set("menuItemComponents", _components);
 	},
 	showHtmlEditors: function () {
 		this.$.api_description.markItUp();
@@ -175,34 +154,32 @@ enyo.kind({
 	 * For dialog tree node components.
 	 */
 	showCategoryTreeDialog: function (inSender, inEvent) {
-		var treeDialog = new widgets.dialog.TreeNodeDialog({
+		this.treeDialog = new widgets.dialog.TreeNodeDialog({
 			style:"width: 500px; height: 300px;",title:"请选择所属分类",
 			childNodeKey:"childs",
-			selectedItemKey:"key",
-			selectedItemValue:"6-1",
-			success: this.bindSafely("treeDialogConfirm")
+			selectedItemKey:"categoryKey",
+			selectedItemValue:"brief_intro",
+			success: this.bindSafely("treeDialogConfirm"),
+			itemConverter: this._treeNodeConverter
 		});
-		var source = [
-			{key:"1", content: "Alpha", hash:"#profile/api/list", childs: [
-				{key:"2",hash:"#profile/api/list", content: "Bravo-Alpha"},
-				{key:"3",hash:"#profile/api/list", content: "Bravo-Bravo"},
-				{key:"4",hash:"#profile/api/list", content: "Bravo-Charlie"}
-			]},
-			{ key:"5",content: "Bravo",hash:"#profile/api/list", childs: [
-				{key:"6",hash:"#profile/api/list", content: "Bravo-Alpha", childs: [
-					{key:"6-1",hash:"#profile/api/list", content: "Bravo-Alpha child 1"},
-					{key:"6-2",hash:"#profile/api/list", content: "Bravo-Alpha child 2"}
-				]},
-				{key:"7",hash:"#profile/api/list", content: "Bravo-Bravo"},
-				{key:"8",hash:"#profile/api/list", content: "Bravo-Charlie"}
-			]}
-		];
-		treeDialog.show();
-		// simulate the fetch tree nodes data from remote server.
-		setTimeout(function () {
-			treeDialog.set("source", source);
-		},2000);
+		
+		this.treeDialog.show();
+		// goto fetch availble categories tree.
+		this.doFetchApiAvailableCategories();
+		
 		return true;
+	},
+	showAvalilableCategories: function (viewModel) {
+		this.zLog("viewModel: ", viewModel);
+		var records = viewModel.records; 
+		// simulate the fetch tree nodes data from remote server.
+		this.treeDialog && this.treeDialog.set("source", records);
+	},
+	//*@private each tree node category item date converter.
+	_treeNodeConverter: function (item) {
+		return {
+			hash: item.categoryKey, content: item.categoryName
+		};
 	},
 	treeDialogConfirm: function (inEvent) {
 		this.zLog(inEvent);
