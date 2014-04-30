@@ -40,7 +40,7 @@ enyo.kind({
 					// which categorye document belongs to .
 					{classes:"form-item", components:[
 						{ classes:"title", content:"文档分类"},
-						{kind:"enyo.Button", content:"--请选择API分类--", ontap:"showCategoryTreeDialog"},
+						{ name:"showCategoryDialogBtn", kind:"enyo.Button", content:"--请选择API分类--", ontap:"showCategoryTreeDialog"},
 					]}
 				]}, 
 				{kind:"onyx.Groupbox", components: [
@@ -158,7 +158,7 @@ enyo.kind({
 			style:"width: 500px; height: 300px;",title:"请选择所属分类",
 			childNodeKey:"childs",
 			selectedItemKey:"categoryKey",
-			selectedItemValue:"brief_intro",
+			selectedItemValue:this.__selectedCategoryKey,
 			success: this.bindSafely("treeDialogConfirm"),
 			itemConverter: this._treeNodeConverter
 		});
@@ -178,11 +178,14 @@ enyo.kind({
 	//*@private each tree node category item date converter.
 	_treeNodeConverter: function (item) {
 		return {
-			hash: item.categoryKey, content: item.categoryName
+			categoryKey: item.categoryKey, content: item.categoryName
 		};
 	},
 	treeDialogConfirm: function (inEvent) {
-		this.zLog(inEvent);
+		var selectedNode = inEvent.selectedNode;
+		this.$.showCategoryDialogBtn.setContent(selectedNode.get("content"));
+		this.__selectedCategoryKey = selectedNode.get("categoryKey");
+		this.zLog("new api category unique key: ", this.__selectedCategoryKey);
 	},
 	treeNodeClick: function (inSender, inEvent) {
 		this.zLog(inEvent);
