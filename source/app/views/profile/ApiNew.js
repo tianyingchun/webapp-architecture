@@ -177,9 +177,28 @@ enyo.kind({
 	showCategoryTreeDialog: function (inSender, inEvent) {
 		var treeDialog = new widgets.dialog.TreeNodeDialog({
 			style:"width: 500px; height: 300px;",title:"请选择所属分类",
+			childNodeKey:"childs",
+			selectedItemKey:"key",
+			selectedItemValue:"7",
 			success: this.bindSafely("treeDialogConfirm")
 		});
+		var source = [
+			{key:"1", content: "Alpha", hash:"#profile/api/list", childs: [
+				{key:"2",hash:"#profile/api/list", content: "Bravo-Alpha"},
+				{key:"3",hash:"#profile/api/list", content: "Bravo-Bravo"},
+				{key:"4",hash:"#profile/api/list", content: "Bravo-Charlie"}
+			]},
+			{ key:"5",content: "Bravo",hash:"#profile/api/list", childs: [
+				{key:"6",hash:"#profile/api/list", content: "Bravo-Alpha"},
+				{key:"7",hash:"#profile/api/list", content: "Bravo-Bravo"},
+				{key:"8",hash:"#profile/api/list", content: "Bravo-Charlie"}
+			]}
+		];
 		treeDialog.show();
+		// simulate the fetch tree nodes data from remote server.
+		setTimeout(function () {
+			treeDialog.set("source", source);
+		},2000);
 		return true;
 	},
 	treeDialogConfirm: function (inEvent) {

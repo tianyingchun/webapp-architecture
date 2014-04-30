@@ -4,12 +4,15 @@ enyo.kind({
 	classes: "dock-profile-meus",
 	components:[
 		{name:"message",kind:"widgets.base.Spinner",size:25, message: Master.locale.get("LOAD_PORFILE_MENUS", "message")},
-		{kind:"widgets.menus.TreeMenu", onItemClick:"treeNodeClick", onItemExpandChanged:"treeNodeExpandChanged"},
+		{name:"treeMenu",childNodeKey:"components",selectedItemKey:"key", selectedItemValue:"7",kind:"widgets.menus.TreeMenu", onItemClick:"treeNodeClick", onItemExpandChanged:"treeNodeExpandChanged"},
 		{kind: "Selection", name:"selection", onSelect: "select", onDeselect: "deselect"},
 		{name: "list", classes:"menus-container", showing: false}
 	],
 	showProfileMenusUI: function (viewModel, data) {
 		this.zLog("viewModel", viewModel, "data: ", data);
+		// show dock edit categories tree nodes.
+		this.showCategoryTree();
+
 		// save current menu  items.
 		this.menuItems = viewModel.records;	
 		this.selectedKey = data.menuKey;
@@ -20,6 +23,21 @@ enyo.kind({
 		this.highlightMenuItem();
 		this.$.message.hide();
 		this.$.list.show();
+	},
+	showCategoryTree: function () {
+		var categories = [
+			{key:"1", content: "Alpha", hash:"#profile/api/list", components: [
+				{key:"2",hash:"#profile/api/list", content: "Bravo-Alpha"},
+				{key:"3",hash:"#profile/api/list", content: "Bravo-Bravo"},
+				{key:"4",hash:"#profile/api/list", content: "Bravo-Charlie"}
+			]},
+			{ key:"5",content: "Bravo",hash:"#profile/api/list", components: [
+				{key:"6",hash:"#profile/api/list", content: "Bravo-Alpha"},
+				{key:"7",hash:"#profile/api/list", content: "Bravo-Bravo"},
+				{key:"8",hash:"#profile/api/list", content: "Bravo-Charlie"}
+			]}
+		];
+		this.$.treeMenu.set("source", categories);
 	},
 	prepareMenus:function () {
 		var menus = [];
