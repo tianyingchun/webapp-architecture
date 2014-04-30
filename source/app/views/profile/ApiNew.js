@@ -179,7 +179,7 @@ enyo.kind({
 			style:"width: 500px; height: 300px;",title:"请选择所属分类",
 			childNodeKey:"childs",
 			selectedItemKey:"key",
-			selectedItemValue:"7",
+			selectedItemValue:"6-1",
 			success: this.bindSafely("treeDialogConfirm")
 		});
 		var source = [
@@ -189,7 +189,10 @@ enyo.kind({
 				{key:"4",hash:"#profile/api/list", content: "Bravo-Charlie"}
 			]},
 			{ key:"5",content: "Bravo",hash:"#profile/api/list", childs: [
-				{key:"6",hash:"#profile/api/list", content: "Bravo-Alpha"},
+				{key:"6",hash:"#profile/api/list", content: "Bravo-Alpha", childs: [
+					{key:"6-1",hash:"#profile/api/list", content: "Bravo-Alpha child 1"},
+					{key:"6-2",hash:"#profile/api/list", content: "Bravo-Alpha child 2"}
+				]},
 				{key:"7",hash:"#profile/api/list", content: "Bravo-Bravo"},
 				{key:"8",hash:"#profile/api/list", content: "Bravo-Charlie"}
 			]}
