@@ -40,7 +40,7 @@ enyo.kind({
 					// which categorye document belongs to .
 					{classes:"form-item", components:[
 						{ classes:"title", content:"文档分类"},
-						{ name:"showCategoryDialogBtn", kind:"enyo.Button", content:"--请选择API分类--", ontap:"showCategoryTreeDialog"},
+						{ name:"showCategoryDialogBtn", kind:"enyo.Button", classes:"btn", content:"--请选择API分类--", ontap:"showCategoryTreeDialog"},
 					]}
 				]}, 
 				{kind:"onyx.Groupbox", components: [
