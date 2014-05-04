@@ -1,0 +1,65 @@
+@import "./../mixins/utility.less";
+@import "./../mixins/vendor.less";
+.normal-login-dialog {
+	width: 500px;
+	min-height: 200px;
+	padding: 2px;
+	position: fixed;
+	top: 50% !important;// 
+	left: 50% !important;
+	-webkit-box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+	box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+	background-color: #fff;
+	border: 1px solid #999;
+	border: 1px solid rgba(0,0,0,0.2);
+	border-radius: 6px;
+	outline: 0;
+	-webkit-box-shadow: 0 3px 9px rgba(0,0,0,0.5);
+	box-shadow: 0 3px 9px rgba(0,0,0,0.5);
+	background-clip: padding-box;
+	.widget-dialog-body{
+		padding: 0;
+	}
+	.widget-dialog-header {
+		display:none;
+	}
+	.header-title{
+		float:left;
+		margin-right: 40px;
+	}
+	.body{
+		height: 200px;
+	}
+	.widget-dialog-footer{
+		text-align: right;
+		padding-bottom: 5px;
+		background-color: #f0f0f0;
+		border-top: 1px solid #ccc;
+		.btn {
+			border-top: 0;
+		}
+		.cancel {
+			margin-right: 20px;
+		}
+	}
+	.close {
+		position: absolute;
+		right: 5px;
+		font-size: 21px;
+		font-weight: bold;
+		line-height: 1;
+		color: #000;
+		text-shadow: 0 1px 0 #fff;
+		background: transparent;
+		border: 0;
+		-webkit-appearance: none;
+		padding: 0;
+		opacity:.2;
+		&:hover{
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+			opacity: .5;
+		}
+	}
+}

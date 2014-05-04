@@ -1,0 +1,21 @@
+@import "./../mixins/utility.less";
+@import "./../mixins/vendor.less";
+.simple-tabs{
+	.header-container {
+		padding: 10px 0;
+		text-align: center;
+		background-color: #f0f0f0;
+		border-bottom: 1px solid #ccc;
+		width: 100%;
+	}
+	.tab-content{
+		height: 200px;
+		width: 100%;
+	}
+	.content-item{
+		display: none;
+		&.active {
+			display:block;
+		}
+	}
+}
