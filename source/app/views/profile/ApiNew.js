@@ -10,8 +10,8 @@ enyo.kind({
 	},
 	handlers:{
 		"onSectionChanged":"sectionManagerViewChangeHandler",
-		"onItemClick":"treeNodeClick",
-		"onItemExpandChanged":"treeNodeExpandChanged"
+		"onTreeNodeClick":"treeNodeClick",
+		"onTreeNodeExpandChanged":"treeNodeExpandChanged"
 	},
 	components: [
 		{name: "container", classes:"api-container", components: [
@@ -52,23 +52,23 @@ enyo.kind({
 					{kind: "onyx.GroupboxHeader", content: "片段(Section)管理"},
 					{classes:"form-item", components:[
 						{name:"testSections", ontap:"testSectionManagerHandler", kind:"onyx.Button",content:"test"},
-						{name:"sectionManager", kind: "widgets.section.SectionManager", model:"view"}
+						{name:"sectionManager", kind: "widgets.section.SectionManager", model:"edit"}
 						
 					]}
 				]}
 			]}
 		]}
 	],
+	rendered: enyo.inherit(function (sup) {
+		return function () {
+			sup.apply(this, arguments);
+			this.$.api_description.markItUp();
+		};
+	}),
 	// show app new api ui interface.
 	showAddNewApiUI: function (viewModel){
-		// show html editors.
-		this.showHtmlEditors();
-		// show table row datas.
 		// initialize setion managers.
 		this.initSectionManager();
-	},
-	showHtmlEditors: function () {
-		this.$.api_description.markItUp();
 	},
 	formValidationSubmit: function (inSender, inEvent) {
 		var validationResult = inEvent;
@@ -160,7 +160,8 @@ enyo.kind({
 			selectedItemKey:"categoryKey",
 			selectedItemValue:this.__selectedCategoryKey,
 			success: this.bindSafely("treeDialogConfirm"),
-			itemConverter: this._treeNodeConverter
+			itemConverter: this._treeNodeConverter,
+			bubbleTarget: this
 		});
 		
 		this.treeDialog.show();

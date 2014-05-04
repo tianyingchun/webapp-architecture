@@ -8,6 +8,11 @@ enyo.kind({
 		// save api information to server.
 		"onSaveApiInformation":""
 	},
+	handlers:{
+		"onSectionChanged":"sectionManagerViewChangeHandler",
+		"onTreeNodeClick":"treeNodeClick",
+		"onTreeNodeExpandChanged":"treeNodeExpandChanged"
+	},
 	components: [
 		{name: "container", classes:"api-container", components: [
 			{name:"form", submitButtonStyles:"btn btn-primary",submitButtonText:"确认修改", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
@@ -35,101 +40,23 @@ enyo.kind({
 					// which categorye document belongs to .
 					{classes:"form-item", components:[
 						{ classes:"title", content:"文档分类"},
-						{name:"api_categories",key:"categoryId", defaultTitle:"--请选择API分类--", required:true, tipMessage:"必须选择特定的分类", kind:"widgets.forms.DropdownListDecorator"}
+						{ name:"showCategoryDialogBtn", kind:"enyo.Button", classes:"btn", content:"--请选择API分类--", ontap:"showCategoryTreeDialog"},
 					]}
 				]}, 
 				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "概述"},
+					{kind: "onyx.GroupboxHeader", content: "文档概述"},
 					// api descriptons. text editor.
 					{name:"api_description", kind: "Master.TextEditor"}		
 				]},
 				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "请求"},
+					{kind: "onyx.GroupboxHeader", content: "片段(Section)管理"},
 					{classes:"form-item", components:[
-						{classes:"title", content:"HTTP请求简要信息"},
-						{name:"request_body", placeholder:"HTTP请求简要信息", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写Http请求的BODY体内容!"}
-					]},
-					// request params.
-					{classes:"form-item", components:[
-						{classes:"title", content:"接口参数"},
-						{name:"request_params", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
-							{key:"name", controlType:"text"},
-							{key:"value", controlType:"text"},
-							{key:"isRequired", controlType:"checkbox"},
-							{key:"description", controlType:"textarea"},
-							{key:"more", controlType:"htmleditor"}
-						]}
-					]},
-					// request headers
-					{classes:"form-item", components:[
-						{classes:"title", content:"接口Headers"},
-						{name:"request_headers", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
-							{key:"name", controlType:"text"},
-							{key:"value", controlType:"text"},
-							{key:"isRequired", controlType:"checkbox"},
-							{key:"description", controlType:"textarea"},
-							{key:"more", controlType:"htmleditor"}
-						]}
-					]}		
-				]},
-				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "响应"},
-					{classes:"form-item", components:[
-						{classes:"title", content:"HTTP响应简要信息"},
-						{name:"response_body", placeholder:"HTTP响应简要信息", kind:"widgets.forms.TextAreaDecorator", tipMessage:"请填写Http响应的BODY体内容!"}
-					]},
-					// response params.
-					{classes:"form-item", components:[
-						{classes:"title", content:"响应参数简介"},
-						{name:"response_params", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
-							{key:"name", controlType:"text"},
-							{key:"value", controlType:"text"},
-							{key:"isRequired", controlType:"checkbox"},
-							{key:"description", controlType:"textarea"},
-							{key:"more", controlType:"htmleditor"}
-						]}
-					]},
-					// response headers
-					{classes:"form-item", components:[
-						{classes:"title", content:"响应Headers简介"},
-						{name:"response_headers", kind:"widgets.forms.EditableTable",headers:["字段","取值","必填","描述","更多"], cells:[
-							{key:"name", controlType:"text"},
-							{key:"value", controlType:"text"},
-							{key:"isRequired", controlType:"checkbox"},
-							{key:"description", controlType:"textarea"},
-							{key:"more", controlType:"htmleditor"}
-						]}
-					]}		
-				]},
-				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "测试示例"},
-					// post command
-					{classes:"form-item", components:[
-						{classes:"title", content:"POST 命令"},
-						{name:"example_post_body", placeholder:"输入POST 测试的命令代码", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试的命令代码"}
-					]},
-					// exmaple post request string
-					{classes:"form-item", components:[
-						{classes:"title", content:"POST 请求串"},
-						{name:"example_request", placeholder:"输入POST 测试请求串", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试请求串"}
-					]},
-					// exmaple post response string
-					{classes:"form-item", components:[
-						{classes:"title", content:"POST 响应串"},
-						{name:"example_response", placeholder:"输入POST 测试响应串", kind:"widgets.forms.InputDecorator", tipMessage:"输入POST 测试响应串"}
-					]}				
-				]},
-				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "问答"},
-					{classes:"form-item question-answers", components:[
-						{name:"question_answers", kind:"widgets.forms.EditableTable",headers:["问题","答案"], cells:[
-							{key:"question", controlType:"textarea"},
-							{key:"answer", controlType:"textarea"}
-						]}
-					]}		
+						{name:"testSections", ontap:"testSectionManagerHandler", kind:"onyx.Button",content:"test"},
+						{name:"sectionManager", kind: "widgets.section.SectionManager", model:"edit"}
+						
+					]}
 				]}
-			]},
-			// {name:"testButton", kind:"onyx.Button",content:"TestButton", ontap: "testButtonTap"},
+			]}
 		]}
 	],
 	rendered: enyo.inherit(function (sup) {
@@ -140,32 +67,7 @@ enyo.kind({
 	}),
 	loadingExistApiDetailUI: function (viewModel, data){
 		this.writeApiDetailInformation(viewModel, data.spinner_uid);
-		// loading categories dropdownlist.
-		this.fetchAvalilableCategories();
-	},
-	fetchAvalilableCategories: function () {
-		this.$.api_categories.showSpinner();
-		this.doFetchApiAvailableCategories({editModel:true});
-	},
-	showAvalilableCategories: function (viewModel) {
-		this.zLog("viewModel: ", viewModel);
-		var records = viewModel.records;
-		var _components = [];
-		for (var i = 0; i < records.length; i++) {
-			var record = records[i];
-			var _item = {
-				content: record.categoryName,
-				categoryId: record.categoryId
-			};
-			if(this._categoryId == record.categoryId) {
-				_item.selected = true;
-			}
-			_components.push(_item);
-		};
-		this.$.api_categories.set("menuItemComponents", _components);
-	},
-	showHtmlEditors: function () {
-		this.$.api_description.markItUp();
+		this.initSectionManager();
 	},
 	formValidationSubmit: function (inSender, inEvent) {
 		var validationResult = inEvent;
@@ -188,25 +90,7 @@ enyo.kind({
 		
 		var detail = viewModel.get("details");
 		this.$.api_description.setEditorContent(detail.description);
-		// request.
-		var request  = detail.request;
-		this.$.request_body.setValue(request.body);
-		this.$.request_params.set("rowsDataSource", request.params);
-		this.$.request_headers.set("rowsDataSource", request.headers);
-		// response
-		var response = detail.response;
-		this.$.response_body.setValue(response.body);
-		this.$.response_params.set("rowsDataSource", response.params);
-		this.$.response_headers.set("rowsDataSource", response.headers);
-
-		//example
-		var example = detail.example;
-		this.$.example_post_body.setValue(example.postCommand||"");
-		this.$.example_request.setValue(example.request||"");
-		this.$.example_response.setValue(example.response||"");
-
-		var questions = detail.questions;
-		this.$.question_answers.set("rowsDataSource", questions);
+		 
 		// hide loading spinner.
 		Master.view.frame.hideSpinnerPopup(spinner_uid);
 	},
@@ -240,5 +124,77 @@ enyo.kind({
 		};
 		_data.questions = this.$.question_answers.getTableJSONResult()
 		return _data;
+	},
+	initSectionManager: function () {
+		// for testing purpose.
+		this.$.sectionManager.set("sections", [
+			{controlName:"textEditor", sectionTitle:"text edit demo title111", source:'test data html code it is html string<pre><code  class ="lang-json">[{"title":"apples","count":[12000,20000],"description":{"text":"...","sensitive":false}},{"title":"oranges","count":[17500,null],"description":{"text":"...","sensitive":false}}]</code></pre>'},
+			{controlName:"table", sectionTitle:"table section title", source:[
+				["Header","header1","header2","header3","header4"],
+		 		["10","11","12","13","<a href='#'>14 download link</a>"],
+		 		["20","21","22","23","24"]
+			]},
+			{controlName:"linkList", sectionTitle:"link list title", source:[
+				{href:"http://www.1qianbao.com", target:"_blank", linkIcon: "https", text:"alipay.micropay.order.direct.pay",  description:"单笔直接支付"},
+				{href:"http://www.1qianbao.com", target:"_self", linkIcon: "http", text:"alipay.micropay.order.freezepayurl.get", description:"查询冻结金支付地址"},
+				{href:"http://www.1qianbao.com", target:"_blank", linkIcon: "https", text:"alipay.micropay.order.confirmpayurl.get",  description:"查询单笔有密支付地址"},
+				{href:"http://www.1qianbao.com", target:"_self", linkIcon: "http", text:"alipay.micropay.order.get", description:"查询冻结订单详情"}
+			]}
+		]);
+	},
+	testSectionManagerHandler: function () {
+		var result = this.$.sectionManager.getResult();
+		this.zLog(result);
+		return true;
+	},
+	sectionManagerViewChangeHandler: function (inSender, inEvent) {
+		Master.view.frame.notifyTwoColumnLayoutReflow();
+		return true;
+	},
+	/**
+	 * For dialog tree node components.
+	 */
+	showCategoryTreeDialog: function (inSender, inEvent) {
+		this.treeDialog = new widgets.dialog.TreeNodeDialog({
+			style:"width: 500px; height: 300px;",title:"请选择所属分类",
+			childNodeKey:"childs",
+			selectedItemKey:"categoryKey",
+			selectedItemValue:this.__selectedCategoryKey,
+			success: this.bindSafely("treeDialogConfirm"),
+			itemConverter: this._treeNodeConverter,
+			bubbleTarget: this
+		});
+		
+		this.treeDialog.show();
+		// goto fetch availble categories tree.
+		this.doFetchApiAvailableCategories({editModel:true});
+		return true;
+	},
+	showAvalilableCategories: function (viewModel) {
+		this.zLog("viewModel: ", viewModel);
+		var records = viewModel.records; 
+		// simulate the fetch tree nodes data from remote server.
+		this.treeDialog && this.treeDialog.set("source", records);
+	},
+	//*@private each tree node category item date converter.
+	_treeNodeConverter: function (item) {
+		return {
+			categoryKey: item.categoryKey, content: item.categoryName
+		};
+	},
+	treeDialogConfirm: function (inEvent) {
+		var selectedNode = inEvent.selectedNode;
+		this.$.showCategoryDialogBtn.setContent(selectedNode.get("content"));
+		this.__selectedCategoryKey = selectedNode.get("categoryKey");
+		this.zLog("new api category unique key: ", this.__selectedCategoryKey);
+	},
+	treeNodeClick: function (inSender, inEvent) {
+		this.zLog(inEvent);
+		return true;
+	},
+	treeNodeExpandChanged: function (inSender, inEvent) {
+		this.zLog(inEvent);
+
+		return true;
 	}
 });
