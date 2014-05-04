@@ -30,7 +30,14 @@
 	.body{
 		height: 200px;
 	}
+	.close{
+		position: absolute;
+		top: 10px !important;
+		z-index: 10;
+		right: 10px !important;
+	}
 	.widget-dialog-footer{
+		display: none;
 		text-align: right;
 		padding-bottom: 5px;
 		background-color: #f0f0f0;
@@ -62,4 +69,25 @@
 			opacity: .5;
 		}
 	}
+	.submit-button{
+		margin-left: 85px;
+		width: 220px;
+	}
+	.reset-button{
+		display: none;
+	}
+	.form-controls {
+		.form-item {
+			border: 0;
+			border-bottom: 1px solid #f0f0f0;
+			.title {
+				width: 60px;
+				margin-right: 0;
+			}
+			.onyx-input {
+				width: 200px !important;
+			} 
+		}
+	}
+
 }
