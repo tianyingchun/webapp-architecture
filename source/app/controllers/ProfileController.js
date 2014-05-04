@@ -122,13 +122,24 @@ enyo.kind({
 
 	},
 	fetchApiAvailableCategories: function(inSender, inEvent){
-		var isEditModel = inEvent.editModel;
+		var config = {
+			viewPage: inEvent.viewPage,
+			editModel: inEvent.editModel
+		};
 		var categoryModel = this.getCollectionInstance("Master.models.apipool.Categories");
-		categoryModel.getApiCategories(this.bind("_showAvailableCategories", isEditModel));
+		categoryModel.getApiCategories(this.bind("_showAvailableCategories", config));
 	},
 	// show available categories.
-	_showAvailableCategories: function (isEditModel, viewModel){
+	_showAvailableCategories: function (config, viewModel){
+		// indicates if it's edit api/category model.
+		var isEditModel = config.editModel;
+		// indicates current view page is category view, or api view.
+		var viewPage = config.viewPage;
+
 		var _viewName = isEditModel ? this.PROFILE_API_EDIT:this.PROFILE_API_NEW;
+		if (viewPage == "category") {
+			_viewName = isEditModel ? this.PROFILE_CATEGORY_EDIT:this.PROFILE_CATEGORY_NEW;
+		}
 		this.notifyView(_viewName, viewModel, {
 			action:"showAvalilableCategories" // defined in view.
 		});

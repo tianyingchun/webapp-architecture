@@ -167,7 +167,11 @@ enyo.kind({
 		
 		this.treeDialog.show();
 		// goto fetch availble categories tree.
-		this.doFetchApiAvailableCategories({editModel:true});
+		var config = {
+			viewPage: "api",
+			editModel: true
+		};
+		this.doFetchApiAvailableCategories(config);
 		return true;
 	},
 	showAvalilableCategories: function (viewModel) {
