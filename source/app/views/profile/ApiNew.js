@@ -34,8 +34,13 @@ enyo.kind({
 					]},
 					// indicates document if need display
 					{classes:"form-item", components:[
+						{ classes:"title", content:"是否展开"},
+						{name:"api_is_expanded", kind:"onyx.Checkbox"}
+					]},
+					// indicates document if need display
+					{classes:"form-item", components:[
 						{ classes:"title", content:"是否显示"},
-						{name:"api_is_display", kind:"onyx.Checkbox"}
+						{name:"api_is_display", kind:"onyx.Checkbox", checked: true}
 					]},
 					// which categorye document belongs to .
 					{classes:"form-item", components:[
@@ -85,31 +90,14 @@ enyo.kind({
 	readNewApiDetailInformation: function () {
 		var _data = {};
 		// selecte category
-		var selectedCategory = this.$.api_categories.getSelectedItem();
-		_data._category = selectedCategory.categoryId; // api  category id.
-		_data.apiKey = this.$.api_key.getValue();// api key
-		_data.apiName = this.$.api_name.getValue();// api name.
-		// displayOrder.
-		_data.displayOrder = this.$.api_display_order.getValue();
+		_data.key = this.$.api_key.getValue();
+		_data.name = this.$.api_name.getValue();
+		_data.expaned = this.$.api_is_expanded.getValue();
 		_data.isDisplay = this.$.api_is_display.getValue();
-
+		_data.displayOrder = this.$.api_display_order.getValue();
 		_data.description = this.$.api_description.getEditorContent();
-		_data.request = {
-			body: this.$.request_body.getValue(),
-			params: this.$.request_params.getTableJSONResult(),
-			headers: this.$.request_headers.getTableJSONResult()
-		};
-		_data.response = {
-			body: this.$.response_body.getValue(),
-			params: this.$.response_params.getTableJSONResult(),
-			headers: this.$.response_headers.getTableJSONResult()
-		};
-		_data.example = {
-			postCommand: this.$.example_post_body.getValue(),
-			request: this.$.example_request.getValue(),
-			response: this.$.example_response.getValue()
-		};
-		_data.questions = this.$.question_answers.getTableJSONResult()
+		_data.parentId = this.__selectedCategoryKey || 0;
+
 		return _data;
 	},
 	checkifKeyExist: function (value, callback) {
@@ -156,8 +144,8 @@ enyo.kind({
 	showCategoryTreeDialog: function (inSender, inEvent) {
 		this.treeDialog = new widgets.dialog.TreeNodeDialog({
 			style:"width: 500px; height: 300px;",title:"请选择所属分类",
-			childNodeKey:"childs",
-			selectedItemKey:"categoryKey",
+			childNodeKey:"children",
+			selectedItemKey:"_id",
 			selectedItemValue:this.__selectedCategoryKey,
 			success: this.bindSafely("treeDialogConfirm"),
 			itemConverter: this._treeNodeConverter,
@@ -183,13 +171,13 @@ enyo.kind({
 	//*@private each tree node category item date converter.
 	_treeNodeConverter: function (item) {
 		return {
-			categoryKey: item.categoryKey, content: item.categoryName
+			_id: item.id, content: item.name//// 不能用id.因为ENYO 里面组件查找是通过ID 来的容易照成冲突 非常重要。 所以在使用组建的时候一定不能用Id
 		};
 	},
 	treeDialogConfirm: function (inEvent) {
 		var selectedNode = inEvent.selectedNode;
 		this.$.showCategoryDialogBtn.setContent(selectedNode.get("content"));
-		this.__selectedCategoryKey = selectedNode.get("categoryKey");
+		this.__selectedCategoryKey = selectedNode.get("_id") || 0;
 		this.zLog("new api category unique key: ", this.__selectedCategoryKey);
 	},
 	treeNodeClick: function (inSender, inEvent) {

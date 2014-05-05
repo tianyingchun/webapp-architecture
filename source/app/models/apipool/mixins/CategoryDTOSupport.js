@@ -21,19 +21,18 @@
 				for (var i = 0; i < source.length; i++) {
 					var item = source[i];
 					var convertItem = {
-						categoryId: item._id,
-						categoryKey: item.key,
-						categoryName: item.name,
+						id: item._id,// 不能用id.因为ENYO 里面组件查找是通过ID 来的容易照成冲突 非常重要。 所以在使用组建的时候一定不能用Id
+						key: item.key,
+						name: item.name,
 						displayOrder: item.displayOrder,
-						isExpanded: item.expanded || false,
+						expanded: item.expanded || false,
 						isDisplay: typeof(item.isDisplay) == "undefined" ? true: item.isDisplay,
-						isCategoryNode: level == 1,
-						childs: []
+						children: []
 					};
 					result.push(convertItem);
 					// loop child source.
-					if (item.apis && item.apis.length) {
-						this.categoryBasicInfoDTO(item.apis, convertItem.childs, item.level);
+					if (item.children && item.children.length) {
+						this.categoryBasicInfoDTO(item.children, convertItem.children, item.level);
 					}
 				};
 			}

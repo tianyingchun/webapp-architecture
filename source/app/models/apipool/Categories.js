@@ -8,7 +8,7 @@ enyo.kind({
 	// api configrations for api categories.
 	apis: {
 		allcategories: {
-			url: "/categories",
+			url: "/apis",
 			// cache: {
 			// 	enabled: true,
 			// 	cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
@@ -24,9 +24,13 @@ enyo.kind({
 	 * @param  {function} fn the callback function for api doc categories.
 	 * @return {void}
 	 */
-	getApiCategories: function (fn) {
+	getApiCategories: function (fn, level) {
+		level = level || 20;
 		this.fetch({
 			apiKey: "allcategories",
+			url: function () {
+				return "/apis/"+level;
+			},
 			callback: fn
 		});
 	},

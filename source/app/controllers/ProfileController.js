@@ -124,7 +124,8 @@ enyo.kind({
 	fetchApiAvailableCategories: function(inSender, inEvent){
 		var config = {
 			viewPage: inEvent.viewPage,
-			editModel: inEvent.editModel
+			editModel: inEvent.editModel,
+			viewKind:  inEvent.viewKind
 		};
 		var categoryModel = this.getCollectionInstance("Master.models.apipool.Categories");
 		categoryModel.getApiCategories(this.bind("_showAvailableCategories", config));
@@ -135,10 +136,15 @@ enyo.kind({
 		var isEditModel = config.editModel;
 		// indicates current view page is category view, or api view.
 		var viewPage = config.viewPage;
-
-		var _viewName = isEditModel ? this.PROFILE_API_EDIT:this.PROFILE_API_NEW;
-		if (viewPage == "category") {
-			_viewName = isEditModel ? this.PROFILE_CATEGORY_EDIT:this.PROFILE_CATEGORY_NEW;
+		// customized view kind.
+		var viewKind = config.viewKind;
+		if (!viewKind) { 
+			var _viewName = isEditModel ? this.PROFILE_API_EDIT:this.PROFILE_API_NEW;
+			if (viewPage == "category") {
+				_viewName = isEditModel ? this.PROFILE_CATEGORY_EDIT:this.PROFILE_CATEGORY_NEW;
+			}
+		} else {
+			_viewName = viewKind;
 		}
 		this.notifyView(_viewName, viewModel, {
 			action:"showAvalilableCategories" // defined in view.
@@ -271,7 +277,7 @@ enyo.kind({
 		var apiData = inEvent.data;
 		var _editModel = inEvent.editModel;
 		if(_editModel) {
-			var _apiItemModel = this.getApiItemModel({apiKey: apiData.apiKey});
+			var _apiItemModel = this.getApiItemModel({apiKey: apiData.key});
 			_apiItemModel.updateApiInfo(apiData, this.bind("_updateApiInfoComplete"));
 		} else {
 			var _apiItemModel = this.getApiItemModel({apiKey: ""});

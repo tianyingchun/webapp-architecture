@@ -15,7 +15,7 @@ enyo.singleton({
 	defaultAPILanguage: "java",
 	// default token, we will remove this item in the next phase.
 	// HiU4GlEb8SVQVJtre58416bY1F234Ev2
-	defaultToken: "",
+	defaultToken: "HiU4GlEb8SVQVJtre58416bY1F234Ev2",
 
 	cacheBust: true, // ajax cache Bust.
 	// cache settings.

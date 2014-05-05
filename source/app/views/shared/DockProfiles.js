@@ -2,9 +2,16 @@ enyo.kind({
 	name: "Master.views.shared.DockProfiles",
 	kind: "Master.View",
 	classes: "dock-profile-meus",
+	events: {
+		"onFetchApiAvailableCategories":""
+	},
+	handlers:{
+		"onItemClick":"_treeNodeClick",
+		"onItemExpandChanged":"_treeNodeExpandChanged"
+	},
 	components:[
 		{name:"message",kind:"widgets.base.Spinner",size:25, message: Master.locale.get("LOAD_PORFILE_MENUS", "message")},
-		{name:"treeMenu",childNodeKey:"components",selectedItemKey:"key", selectedItemValue:"7",kind:"widgets.menus.TreeMenu", onItemClick:"treeNodeClick", onItemExpandChanged:"treeNodeExpandChanged"},
+		{name:"treeMenu",childNodeKey:"children",selectedItemKey:"hash", kind:"widgets.menus.TreeMenu"},
 		{kind: "Selection", name:"selection", onSelect: "select", onDeselect: "deselect"},
 		{name: "list", classes:"menus-container", showing: false}
 	],
@@ -25,19 +32,27 @@ enyo.kind({
 		this.$.list.show();
 	},
 	showCategoryTree: function () {
-		var categories = [
-			{key:"1", content: "Alpha", hash:"#profile/api/list", components: [
-				{key:"2",hash:"#profile/api/list", content: "Bravo-Alpha"},
-				{key:"3",hash:"#profile/api/list", content: "Bravo-Bravo"},
-				{key:"4",hash:"#profile/api/list", content: "Bravo-Charlie"}
-			]},
-			{ key:"5",content: "Bravo",hash:"#profile/api/list", components: [
-				{key:"6",hash:"#profile/api/list", content: "Bravo-Alpha"},
-				{key:"7",hash:"#profile/api/list", content: "Bravo-Bravo"},
-				{key:"8",hash:"#profile/api/list", content: "Bravo-Charlie"}
-			]}
-		];
-		this.$.treeMenu.set("source", categories);
+		var config = {
+			viewPage: "api",
+			editModel: false,
+			viewKind:"shared.DockProfiles" //
+		};
+		this.doFetchApiAvailableCategories(config);
+	},
+	showAvalilableCategories: function (viewModel) {
+		this.zLog("viewModel: ", viewModel);
+		var records = viewModel.records;
+		this.$.treeMenu.set("itemConverter", this._treeItemConverter)
+		this.$.treeMenu.set("selectedItemValue", window.location.hash);
+		this.$.treeMenu.set("source", records);
+	},
+	_treeItemConverter: function (item) {
+		return {
+			//_id: item.id,// 不能用id.因为ENYO 里面组件查找是通过ID 来的容易照成冲突 非常重要。 所以在使用组建的时候一定不能用Id
+			content: item.name,
+			expaned: item.expaned,
+			hash: "#profile/node/"+item.key
+		};
 	},
 	prepareMenus:function () {
 		var menus = [];
@@ -87,13 +102,13 @@ enyo.kind({
 	},
 	// for tree node 
 	// 
-	treeNodeClick: function (inSender, inEvent) {
+	_treeNodeClick: function (inSender, inEvent) {
 		var loc = inEvent.get("hash");
 		this.zLog(loc);
 		this.location(loc);
 		return true;
 	},
-	treeNodeExpandChanged: function (inSender, inEvent) {
+	_treeNodeExpandChanged: function (inSender, inEvent) {
 		// the timeout should > node.css enyo-animate 0.2s+enyo.Node._collapse() settimeout. ==225 minisecond.
 		Master.view.frame.notifyTwoColumnLayoutReflow(250);
 		return true;

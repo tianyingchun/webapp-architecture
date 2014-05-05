@@ -40,23 +40,23 @@ enyo.kind({
 	// it will automatically append the url request if it has value.
 	// Note: the enyo.store is global memory model instance managerment
 	// we need to maually manager this object.
-	primaryKey:"apiKey", //default is "id"
+	primaryKey:"key", //default is "id"
 	// api detail default fields. it will be auto instanced.
 	attributes:{
-		apiId: "",
-		apiKey: "",
-		apiName: "",
+		id: "",
+		key: "",
+		name: "",
 		displayOrder:0,
 		isDisplay: true,
-		details: {}
+		expanded: false
 	},
 	//*@ private help method for preparing the submit data.
 	_getPostInfo: function (apiInfo) {
 		var _data = enyo.clone(apiInfo);
-		_data.key = _data.apiKey;
-		delete _data.apiKey;
-		_data.name = _data.apiName;
-		delete _data.apiName;
+		// _data.key = _data.apiKey;
+		// delete _data.apiKey;
+		// _data.name = _data.apiName;
+		// delete _data.apiName;
 
 		return enyo.json.stringify(_data);
 	},
@@ -96,7 +96,7 @@ enyo.kind({
 	},
 	//*@ destroy
 	destroyApi: function (apiId, fn) {
-		this.set("apiId", apiId);
+		this.set("id", apiId);
 		this.destroy({
 			apiKey: "destroyApi",
 			callback:fn
@@ -110,7 +110,6 @@ enyo.kind({
 		var tempBasicResult = [], result = {};
 		this.apiBasicInfoDTO(basic, tempBasicResult);		
 		enyo.mixin(result, tempBasicResult[0]);
-		result.details = this.apiDetailInfoDTO(basic[0]);
 		this.zLog("converted data: ", result);
 		return result;
 	}
