@@ -79,26 +79,64 @@
 			.onyx-textarea{
 				width: 300px;
 				height: 50px;
+				background-color: #ffffff;
+				border: 1px solid #cccccc;
+				-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+				-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+				box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+				-webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+				-moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+				-o-transition: border linear 0.2s, box-shadow linear 0.2s;
+				transition: border linear 0.2s, box-shadow linear 0.2s;
+				font-size: .7em;
+				padding-left: 5px;
+				&:focus{
+					border-color: rgba(82, 168, 236, 0.8);
+					outline: 0;
+					outline: thin dotted \9;
+					-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+					-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+					box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+				}
 			}
 		}
-		.tip-message{
+		.message {
 			float:left;
-			.title;
-			width: auto;
-			margin-left:10px;
-			text-align: left;
 			&.failed {
-				color: red;
+				color: red; 
 			}
 			&.success{
-				min-width: 50px;
-				background: url(../../images/right-icon.png) no-repeat 0 10px;
-				background-size: 14px;
+				color: #51a351;
+				.tip-message{
+					display:none;
+				}
 			}
-			&.ajax{
+			.icon-ok {
+				float: left;
+				height: 35px;
+				line-height: 35px;
+				float:left;
+			}
+			.icon-remove{
+				.icon-ok;
+			}
+			.icon-spin{
+				.icon-ok;
+			}
+			.ajax{
+				.failed;
+				color: #000;
 				padding-left: 20px;
 				background: url(../../images/spinner_grey_40.gif) no-repeat 0 7px;
 				background-size: 14px;
+			}
+			.tip-message{
+				float:left;
+				width: auto;
+				height: 35px;
+				line-height: 35px;
+				margin-left:10px;
+				text-align: left; 
 			}
 		}
 	}
