@@ -107,7 +107,7 @@ enyo.kind({
 		// selecte category
 		_data.key = this.$.api_key.getValue();
 		_data.name = this.$.api_name.getValue();
-		_data.expaned = this.$.api_is_expanded.getValue();
+		_data.expanded = this.$.api_is_expanded.getValue();
 		_data.isDisplay = this.$.api_is_display.getValue();
 		_data.displayOrder = this.$.api_display_order.getValue();
 		_data.description = this.$.api_description.getEditorContent();
@@ -117,6 +117,18 @@ enyo.kind({
 		_data.section = this.$.sectionManager.getResult() || [];
 
 		return _data;
+	},
+	checkifKeyExist: function (value, callback) {
+		this.zLog(value, callback);
+		// now for testing..
+		setTimeout(function () {
+			if(callback) {
+				callback({
+					status: "success",
+					message: "the user name has been exist!"
+				});
+			}
+		},1000);
 	},
 	initSectionManager: function (section) {
 		// section  = [

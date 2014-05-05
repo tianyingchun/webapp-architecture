@@ -115,20 +115,20 @@ enyo.kind({
 	},
 	initSectionManager: function () {
 		// for testing purpose.
-		this.$.sectionManager.set("sections", [
-			{controlName:"textEditor", sectionTitle:"text edit demo title111", source:'test data html code it is html string<pre><code  class ="lang-json">[{"title":"apples","count":[12000,20000],"description":{"text":"...","sensitive":false}},{"title":"oranges","count":[17500,null],"description":{"text":"...","sensitive":false}}]</code></pre>'},
-			{controlName:"table", sectionTitle:"table section title", source:[
-				["Header","header1","header2","header3","header4"],
-		 		["10","11","12","13","<a href='#'>14 download link</a>"],
-		 		["20","21","22","23","24"]
-			]},
-			{controlName:"linkList", sectionTitle:"link list title", source:[
-				{href:"http://www.1qianbao.com", target:"_blank", linkIcon: "https", text:"alipay.micropay.order.direct.pay",  description:"单笔直接支付"},
-				{href:"http://www.1qianbao.com", target:"_self", linkIcon: "http", text:"alipay.micropay.order.freezepayurl.get", description:"查询冻结金支付地址"},
-				{href:"http://www.1qianbao.com", target:"_blank", linkIcon: "https", text:"alipay.micropay.order.confirmpayurl.get",  description:"查询单笔有密支付地址"},
-				{href:"http://www.1qianbao.com", target:"_self", linkIcon: "http", text:"alipay.micropay.order.get", description:"查询冻结订单详情"}
-			]}
-		]);
+		// this.$.sectionManager.set("sections", [
+		// 	{controlName:"textEditor", sectionTitle:"text edit demo title111", source:'test data html code it is html string<pre><code  class ="lang-json">[{"title":"apples","count":[12000,20000],"description":{"text":"...","sensitive":false}},{"title":"oranges","count":[17500,null],"description":{"text":"...","sensitive":false}}]</code></pre>'},
+		// 	{controlName:"table", sectionTitle:"table section title", source:[
+		// 		["Header","header1","header2","header3","header4"],
+		//  		["10","11","12","13","<a href='#'>14 download link</a>"],
+		//  		["20","21","22","23","24"]
+		// 	]},
+		// 	{controlName:"linkList", sectionTitle:"link list title", source:[
+		// 		{href:"http://www.1qianbao.com", target:"_blank", linkIcon: "https", text:"alipay.micropay.order.direct.pay",  description:"单笔直接支付"},
+		// 		{href:"http://www.1qianbao.com", target:"_self", linkIcon: "http", text:"alipay.micropay.order.freezepayurl.get", description:"查询冻结金支付地址"},
+		// 		{href:"http://www.1qianbao.com", target:"_blank", linkIcon: "https", text:"alipay.micropay.order.confirmpayurl.get",  description:"查询单笔有密支付地址"},
+		// 		{href:"http://www.1qianbao.com", target:"_self", linkIcon: "http", text:"alipay.micropay.order.get", description:"查询冻结订单详情"}
+		// 	]}
+		// ]);
 	},
 	testSectionManagerHandler: function () {
 		var result = this.$.sectionManager.getResult();

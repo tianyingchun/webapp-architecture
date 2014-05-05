@@ -17,6 +17,7 @@
 						key: item.key,
 						name: item.name,
 						displayOrder: item.displayOrder,
+						expanded: item.expanded,
 						parentId: item.parentId,
 						isDisplay: item.isDisplay,
 						parent: item.parent,
