@@ -32,7 +32,7 @@ enyo.kind({
 						{ classes:"title", content:"文档排序"},
 						{name:"api_display_order", value:0, placeholder:"API名称", type:"number", kind:"widgets.forms.InputDecorator", tipMessage:"填写分类排序，数字值越小显示越靠前!", validation: {required:"请输入数字!", number:""}}
 					]},
-					// indicates document if need display
+					// indicates document if need expanded
 					{classes:"form-item", components:[
 						{ classes:"title", content:"是否展开"},
 						{name:"api_is_expanded", kind:"onyx.Checkbox"}
@@ -97,7 +97,8 @@ enyo.kind({
 		_data.displayOrder = this.$.api_display_order.getValue();
 		_data.description = this.$.api_description.getEditorContent();
 		_data.parentId = this.__selectedCategoryKey || 0;
-
+		// section controls.
+		_data.section = this.$.sectionManager.getResult();
 		return _data;
 	},
 	checkifKeyExist: function (value, callback) {

@@ -19,6 +19,8 @@
 						displayOrder: item.displayOrder,
 						parentId: item.parentId,
 						isDisplay: item.isDisplay,
+						parent: item.parent,
+						section: item.section,
 						description: item.description
 					};
 					result.push(apiItem);

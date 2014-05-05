@@ -32,6 +32,11 @@ enyo.kind({
 						{ classes:"title", content:"文档排序"},
 						{name:"api_display_order", value:0, placeholder:"API名称", type:"number", kind:"widgets.forms.InputDecorator", tipMessage:"填写分类排序，数字值越小显示越靠前!", validation: {required:"请输入数字!", number:""}}
 					]},
+					// indicates document if need expanded
+					{classes:"form-item", components:[
+						{ classes:"title", content:"是否展开"},
+						{name:"api_is_expanded", kind:"onyx.Checkbox"}
+					]},
 					// indicates document if need display
 					{classes:"form-item", components:[
 						{ classes:"title", content:"是否显示"},
@@ -51,9 +56,7 @@ enyo.kind({
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "片段(Section)管理"},
 					{classes:"form-item", components:[
-						{name:"testSections", ontap:"testSectionManagerHandler", kind:"onyx.Button",content:"test"},
 						{name:"sectionManager", kind: "widgets.section.SectionManager", model:"edit"}
-						
 					]}
 				]}
 			]}
@@ -67,7 +70,7 @@ enyo.kind({
 	}),
 	loadingExistApiDetailUI: function (viewModel, data){
 		this.writeApiDetailInformation(viewModel, data.spinner_uid);
-		this.initSectionManager();
+		this.initSectionManager(viewModel.get("section"));
 	},
 	formValidationSubmit: function (inSender, inEvent) {
 		var validationResult = inEvent;
@@ -81,16 +84,20 @@ enyo.kind({
 		return true;
 	},
 	writeApiDetailInformation: function (viewModel,spinner_uid) {
-		this._categoryId = viewModel.get("categoryId");
-		this._apiId = viewModel.get("apiId");
-		this.$.api_key.setValue(viewModel.get("apiKey"));
-		this.$.api_name.setValue(viewModel.get('apiName'));
+		// current selected key.
+		this.__selectedCategoryKey = viewModel.get("parentId");
+		this._id = viewModel.get("id");
+		this.$.api_key.setValue(viewModel.get("key"));
+		this.$.api_name.setValue(viewModel.get('name'));
 		this.$.api_display_order.setValue(viewModel.get("displayOrder")||0);
+		this.$.api_is_expanded.setValue(viewModel.get("expanded")|| 0);
 		this.$.api_is_display.setValue(viewModel.get("isDisplay") || 0);
-		
-		var detail = viewModel.get("details");
-		this.$.api_description.setEditorContent(detail.description);
-		 
+		this.$.api_description.setEditorContent(viewModel.get("description"));
+		var parent = viewModel.get("parent") || {};
+		if (parent.name) {
+			this.$.showCategoryDialogBtn.setContent(parent.name);
+		}
+
 		// hide loading spinner.
 		Master.view.frame.hideSpinnerPopup(spinner_uid);
 	},
@@ -98,54 +105,36 @@ enyo.kind({
 	readApiDetailInformation: function () {
 		var _data = {};
 		// selecte category
-		var selectedCategory = this.$.api_categories.getSelectedItem();
-		_data._category = selectedCategory.categoryId; // api  category id.
-		_data.apiId = this._apiId;
-		_data.apiKey = this.$.api_key.getValue();// api key
-		_data.apiName = this.$.api_name.getValue();// api name.
-		// displayOrder.
+		_data.key = this.$.api_key.getValue();
+		_data.name = this.$.api_name.getValue();
+		_data.expaned = this.$.api_is_expanded.getValue();
+		_data.isDisplay = this.$.api_is_display.getValue();
 		_data.displayOrder = this.$.api_display_order.getValue();
 		_data.description = this.$.api_description.getEditorContent();
-		_data.isDisplay = this.$.api_is_display.getValue();
-		_data.request = {
-			body: this.$.request_body.getValue(),
-			params: this.$.request_params.getTableJSONResult(),
-			headers: this.$.request_headers.getTableJSONResult()
-		};
-		_data.response = {
-			body: this.$.response_body.getValue(),
-			params: this.$.response_params.getTableJSONResult(),
-			headers: this.$.response_headers.getTableJSONResult()
-		};
-		_data.example = {
-			postCommand: this.$.example_post_body.getValue(),
-			request: this.$.example_request.getValue(),
-			response: this.$.example_response.getValue()
-		};
-		_data.questions = this.$.question_answers.getTableJSONResult()
+		_data.parentId = this.__selectedCategoryKey || 0;
+		_data.id = this._id;
+		// sections  array.
+		_data.section = this.$.sectionManager.getResult() || [];
+
 		return _data;
 	},
-	initSectionManager: function () {
+	initSectionManager: function (section) {
+		// section  = [
+		// 	{controlName:"textEditor", sectionTitle:"text edit demo title111", source:'test data html code it is html string<pre><code  class ="lang-json">[{"title":"apples","count":[12000,20000],"description":{"text":"...","sensitive":false}},{"title":"oranges","count":[17500,null],"description":{"text":"...","sensitive":false}}]</code></pre>'},
+		// 	{controlName:"table", sectionTitle:"table section title", source:[
+		// 		["Header","header1","header2","header3","header4"],
+		//  		["10","11","12","13","<a href='#'>14 download link</a>"],
+		//  		["20","21","22","23","24"]
+		// 	]},
+		// 	{controlName:"linkList", sectionTitle:"link list title", source:[
+		// 		{href:"http://www.1qianbao.com", target:"_blank", linkIcon: "https", text:"alipay.micropay.order.direct.pay",  description:"单笔直接支付"},
+		// 		{href:"http://www.1qianbao.com", target:"_self", linkIcon: "http", text:"alipay.micropay.order.freezepayurl.get", description:"查询冻结金支付地址"},
+		// 		{href:"http://www.1qianbao.com", target:"_blank", linkIcon: "https", text:"alipay.micropay.order.confirmpayurl.get",  description:"查询单笔有密支付地址"},
+		// 		{href:"http://www.1qianbao.com", target:"_self", linkIcon: "http", text:"alipay.micropay.order.get", description:"查询冻结订单详情"}
+		// 	]}
+		// ];
 		// for testing purpose.
-		this.$.sectionManager.set("sections", [
-			{controlName:"textEditor", sectionTitle:"text edit demo title111", source:'test data html code it is html string<pre><code  class ="lang-json">[{"title":"apples","count":[12000,20000],"description":{"text":"...","sensitive":false}},{"title":"oranges","count":[17500,null],"description":{"text":"...","sensitive":false}}]</code></pre>'},
-			{controlName:"table", sectionTitle:"table section title", source:[
-				["Header","header1","header2","header3","header4"],
-		 		["10","11","12","13","<a href='#'>14 download link</a>"],
-		 		["20","21","22","23","24"]
-			]},
-			{controlName:"linkList", sectionTitle:"link list title", source:[
-				{href:"http://www.1qianbao.com", target:"_blank", linkIcon: "https", text:"alipay.micropay.order.direct.pay",  description:"单笔直接支付"},
-				{href:"http://www.1qianbao.com", target:"_self", linkIcon: "http", text:"alipay.micropay.order.freezepayurl.get", description:"查询冻结金支付地址"},
-				{href:"http://www.1qianbao.com", target:"_blank", linkIcon: "https", text:"alipay.micropay.order.confirmpayurl.get",  description:"查询单笔有密支付地址"},
-				{href:"http://www.1qianbao.com", target:"_self", linkIcon: "http", text:"alipay.micropay.order.get", description:"查询冻结订单详情"}
-			]}
-		]);
-	},
-	testSectionManagerHandler: function () {
-		var result = this.$.sectionManager.getResult();
-		this.zLog(result);
-		return true;
+		this.$.sectionManager.set("sections", section||[]);
 	},
 	sectionManagerViewChangeHandler: function (inSender, inEvent) {
 		Master.view.frame.notifyTwoColumnLayoutReflow();
@@ -157,9 +146,9 @@ enyo.kind({
 	showCategoryTreeDialog: function (inSender, inEvent) {
 		this.treeDialog = new widgets.dialog.TreeNodeDialog({
 			style:"width: 500px; height: 300px;",title:"请选择所属分类",
-			childNodeKey:"childs",
-			selectedItemKey:"categoryKey",
-			selectedItemValue:this.__selectedCategoryKey,
+			childNodeKey:"children",
+			selectedItemKey:"_id",
+			selectedItemValue:this.__selectedCategoryKey,// current unique key.
 			success: this.bindSafely("treeDialogConfirm"),
 			itemConverter: this._treeNodeConverter,
 			bubbleTarget: this
@@ -183,13 +172,13 @@ enyo.kind({
 	//*@private each tree node category item date converter.
 	_treeNodeConverter: function (item) {
 		return {
-			categoryKey: item.categoryKey, content: item.categoryName
+			_id: item.id, content: item.name//// 不能用id.因为ENYO 里面组件查找是通过ID 来的容易照成冲突 非常重要。 所以在使用组建的时候一定不能用Id
 		};
 	},
 	treeDialogConfirm: function (inEvent) {
 		var selectedNode = inEvent.selectedNode;
 		this.$.showCategoryDialogBtn.setContent(selectedNode.get("content"));
-		this.__selectedCategoryKey = selectedNode.get("categoryKey");
+		this.__selectedCategoryKey = selectedNode.get("_id");
 		this.zLog("new api category unique key: ", this.__selectedCategoryKey);
 	},
 	treeNodeClick: function (inSender, inEvent) {

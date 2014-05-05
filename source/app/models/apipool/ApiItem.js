@@ -6,12 +6,25 @@ enyo.kind({
 	],
 	// api configrations for specific category item.
 	apis: {
-		apiDetail:{
-			url: "/api/query",
-			headers: { Authorization: "" }, 
+		//for user page
+		apiDetailByKey:{
+			url: function () {
+				return "/api/key/"+this.get("key");
+			},
 			cache: {
 				enabled: true,
 				cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
+			},
+			dto: "apiDetailDTO"
+		},
+		// for admin page.
+		apiDetailById: {
+			url: function () {
+				return "/api/id/"+this.get("id");
+			},
+			cache: {
+				enabled: true,
+				cacheTime: 10 * 60 * 1000
 			},
 			dto: "apiDetailDTO"
 		},
@@ -24,7 +37,7 @@ enyo.kind({
 		// update api information.
 		updateApiInfo: {
 			url: function() {
-				return "/api/"+this.get("apiId");
+				return "/api/"+this.get("id");
 			},
 			cache: false,
 			dto: "apiDetailDTO"
@@ -32,7 +45,7 @@ enyo.kind({
 		// remove api 
 		destroyApi: {
 			url: function() {
-				return "/api/"+this.get("apiId");
+				return "/api/"+this.get("id");
 			},
 			cache: false
 		}
@@ -40,14 +53,18 @@ enyo.kind({
 	// it will automatically append the url request if it has value.
 	// Note: the enyo.store is global memory model instance managerment
 	// we need to maually manager this object.
-	primaryKey:"key", //default is "id"
+	primaryKey:"id", //default is "id"
 	// api detail default fields. it will be auto instanced.
 	attributes:{
-		id: "",
+		id: "", // global unique, don't use key as primary key because in profile page we can edit the key.
 		key: "",
 		name: "",
+		parentId:"0",
+		parent: null,
 		displayOrder:0,
 		isDisplay: true,
+		description:"",
+		section: [],
 		expanded: false
 	},
 	//*@ private help method for preparing the submit data.
@@ -66,11 +83,19 @@ enyo.kind({
 	 * @param  {function} fn the callback function for api detail information.
 	 * @return {void}
 	 */
-	getApiDetail: function (key, fn) {
+	getApiDetailByKey: function (key, fn) {
 		fn = fn || enyo.nop; 
+		this.set("key", key);
 		this.fetch({
-			apiKey: "apiDetail",
-			data: { key: key },
+			apiKey: "apiDetailByKey",
+			callback: fn
+		}); 
+	},
+	getApiDetailById: function (id, fn) {
+		fn = fn || enyo.nop; 
+		this.set("id", id);
+		this.fetch({
+			apiKey: "apiDetailById",
 			callback: fn
 		}); 
 	},

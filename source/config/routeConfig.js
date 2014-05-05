@@ -9,6 +9,13 @@
 	enyo.setPath("Master.config.routeConfig",[
 		// Homecontroller  default:true indicates current route is default .
 		// Note: router config has order priority.
+
+		// { path: "profile/login", controller: "ProfileController", "login"},
+		{ path: "profile/node/list/:id/:page", controller: "ProfileController", action:"apiPagedList"},
+		{ path: "profile/node/list/:id", controller: "ProfileController", action:"apiList"},
+		{ path: "profile/node/:id", controller: "ProfileController", action:"editApi"},
+		{ path: "profile/node/new", controller: "ProfileController", action:"addNewApi"},
+
 		// static router.
 		{ path: "home/index", default:true, controller: "HomeController", action: "index"},
 		// api show router config.
@@ -18,11 +25,6 @@
 
 
 
-		// { path: "profile/login", controller: "ProfileController", "login"},
-		{ path: "profile/api/list/:page", controller: "ProfileController", action:"apiList"},
-		{ path: "profile/api/list", controller: "ProfileController", action:"apiList"},
-		{ path: "profile/api/add", controller: "ProfileController", action:"addNewApi"},
-		{ path: "profile/api/edit/:id", controller: "ProfileController", action:"editApi"},
 		// categories managerment.
 		{ path: "profile/category/list/:page", controller: "ProfileController", action:"categoryList"},
 		{ path: "profile/category/list", controller: "ProfileController", action:"categoryList"},
