@@ -65,7 +65,8 @@ enyo.kind({
 		isDisplay: true,
 		description:"",
 		section: [],
-		expanded: false
+		expanded: false,
+		children: []
 	},
 	//*@ private help method for preparing the submit data.
 	_getPostInfo: function (apiInfo) {

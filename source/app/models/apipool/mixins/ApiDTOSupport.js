@@ -17,14 +17,19 @@
 						key: item.key,
 						name: item.name,
 						displayOrder: item.displayOrder,
-						expanded: item.expanded,
+						expanded: item.expanded || false,
 						parentId: item.parentId,
 						isDisplay: item.isDisplay,
 						parent: item.parent,
 						section: item.section,
-						description: item.description
+						description: item.description,
+						children: []
 					};
 					result.push(apiItem);
+					// loop child source.
+					if (item.children && item.children.length) {
+						this.apiBasicInfoDTO(item.children, apiItem.children);
+					}
 				};
 			}
 		}

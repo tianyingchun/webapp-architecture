@@ -3,4 +3,4 @@
  *  preboot basic less mixin libaray
 **//*!
  * 特定厂商的mixin（Vendor mixins）
- */.simple-tabs .header-container{padding:10px 0;text-align:center;background-color:#f0f0f0;border-bottom:1px solid #ccc;width:100%}.simple-tabs .tab-content{height:200px;width:100%}.simple-tabs .content-item{display:none}.simple-tabs .content-item.active{display:block}
+ */.simple-tabs .header-container{padding:10px 0;text-align:center;background-color:#f0f0f0;border-bottom:1px solid #ccc;width:100%}.simple-tabs .tab-content{min-height:200px;width:100%}.simple-tabs .content-item{display:none}.simple-tabs .content-item.active{display:block}

@@ -34,20 +34,20 @@ enyo.kind({
 	 * Action method for all paged api list.
 	 * @param  {number} page the page index
 	 */
-	apiList: function (key) {
-		this.zLog("api list current page: ",key);
+	apiList: function (apiId) {
+		this.zLog("api children list of current api id: ",apiId);
 		this.showProfileDockMenus({menuKey: "api_list"});
 		this.bindingViewToContent(this.PROFILE_API_LIST, null, null);
 
 		// fetch api list.
-		this.fetchApiList();
+		this.fetchApiList(apiId);
 	},
-	apiPagedList: function (key, page) {
-		this.zLog("api paged list: key, page,", key, page);
+	apiPagedList: function (apiId, page) {
+		this.zLog("api paged list: apiId, page,", apiId, page);
+
 	},
-	fetchApiList: function () {
+	fetchApiList: function (apiId, page) {
 		// loading api list.
-		var apiListModel = this.getCollectionInstance("Master.models.apipool.ApiList");
 		var viewData = {
 			action: "showApiListUI",
 			data: {page: page || 1}
@@ -55,7 +55,9 @@ enyo.kind({
 		if (isNaN(page)) {
 			viewData.data.page = 1;
 		}
-		apiListModel.getApiList(this.bind("showApiListUI", viewData));
+		var apiItemModel = this.getApiItemModel({id: apiId});
+		apiItemModel.getApiDetailById(apiId, this.bind("showApiListUI", viewData));
+
 	},
 	/**
 	 * Action methods add new api information
