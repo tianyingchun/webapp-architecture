@@ -9,7 +9,8 @@ enyo.kind({
 		"Master.controllers.DockSupport"
 	],
 	constants: {
-		//
+		// detial view kind name.
+		API_DETAIL_PAGE: "api.Detail"
 	},
 	/**
 	 * Action method
@@ -19,20 +20,13 @@ enyo.kind({
 		// fetch all categories from server and show it on the left dock.
 		// force refresh categories shown on left dock.
 		this.getUserAllCategories({
-			callback: this.bind("fetchCategoryDetailInfo")
+			callback: this.bind("fetchDefaultApiDetailInfo")
 		});
 	},
-
-	fetchCategoryDetailInfo: function (viewModel) {
+	fetchDefaultApiDetailInfo: function (viewModel) {
  		var apiDetail = viewModel.records[0] || null;
- 		if (apiDetail) {
- 			// now directly redirect to first api detail page.
- 			this.zLog("apiDetail: ", apiDetail);
- 			var apiKey = apiDetail.key;
- 			
- 			// now just redirect to first category item.
- 			this.locationCategoryItem(apiKey);
- 		}
-		// binding view.
+
+		// binding view direct.
+		this.bindingViewToContent(this.API_DETAIL_PAGE, apiDetail, null);
 	}
 });

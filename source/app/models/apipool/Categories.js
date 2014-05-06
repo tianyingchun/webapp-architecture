@@ -4,6 +4,7 @@ enyo.kind({
 	mixins:[
 		"Master.models.CategoryDTOSupport"
 	],
+	model: "Master.models.apipool.ApiItem",
 	// api configrations for api categories.
 	apis: {
 		allcategories: {

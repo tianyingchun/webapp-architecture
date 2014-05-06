@@ -7,7 +7,6 @@ enyo.kind({
 	handlers:{
 		"onFetchApiAvailableCategories":"fetchApiAvailableCategories",
 		// add/update
-		"onCommitCategory":"saveCategoryInfoHandler",
 		"onSaveApiInformation":"saveApiInformationHandler",
 		// desctroy api item.
 		"onDeleteApiItem":"deleteApiItem"
@@ -143,10 +142,7 @@ enyo.kind({
 		// customized view kind.
 		var viewKind = config.viewKind;
 		if (!viewKind) { 
-			var _viewName = isEditModel ? this.PROFILE_API_EDIT:this.PROFILE_API_NEW;
-			if (viewPage == "category") {
-				_viewName = isEditModel ? this.PROFILE_CATEGORY_EDIT:this.PROFILE_CATEGORY_NEW;
-			}
+			var _viewName = isEditModel ? this.PROFILE_API_EDIT:this.PROFILE_API_NEW; 
 		} else {
 			_viewName = viewKind;
 		}
@@ -154,49 +150,7 @@ enyo.kind({
 			action:"showAvalilableCategories" // defined in view.
 		});
 	},
-	/**
-	 * Add new category
-	 */	
-	addNewCategory: function () {
-		this.showProfileDockMenus({menuKey: "category_list"});
-		this.bindingViewToContent(this.PROFILE_CATEGORY_NEW, null, null);
-		var viewModel = {
-			restInfo: {
-				retCode: 1
-			}
-		};
-		this.notifyView(this.PROFILE_CATEGORY_NEW, viewModel, {
-			action:"showAddNewCategoryUI"
-		});
-	},
-	/**
-	 * Edit exist category information
-	 * @param  {string} categoryId the category key.
-	 */
-	editCategory: function (categoryKey) {
-		this.zLog("categoryKey: ", categoryKey);
-		this.showProfileMenus({menuKey: "category_list"});
-		// show edit category ui.
-		this.bindingViewToContent(this.PROFILE_CATEGORY_EDIT, null, null);
-		// get category data.
-		var categoryItemModel = this.getCategoryItemModel({categoryKey: categoryKey});
-		// go to get
-		categoryItemModel.getCategoryDetail(categoryKey, this.bind("_showCategoryEditDetail"));
-	},
-	_showCategoryEditDetail: function (viewModel) {
-		// show edit cagtegory ui.
-		this.notifyView(this.PROFILE_CATEGORY_EDIT, viewModel, {
-			action: "showEditCategoryUI"
-		});
-	},
-	// delete category item.
-	deleteCategoryItem: function (inSender, inEvent){
-		var categoryId = inEvent.categoryId;
-		var categoryKey = inEvent.categoryKey;
-		var categoryModel = this.getCategoryItemModel({categoryKey: categoryKey});
-		categoryModel.removeCategory(categoryId, this.bind("_destroyCategoryComplete"));
-		return true;
-	},
+	  
 	deleteApiItem: function (inSender, inEvent) {
 		var apiId = inEvent.id;
 		var apiKey = inEvent.key;
@@ -223,59 +177,6 @@ enyo.kind({
 		Master.view.frame.addClass("profile");
 		if (!Master.view.frame.hasProfileContentInDock()) {
 			this.showProfileMenus(data);
-		}
-	},
-	//@private add new category information 
-	saveCategoryInfoHandler: function (inSender, inEvent) {
-		this.zLog("saveCategoryInfo event: ", inEvent);
-		var data = inEvent.data;
-		var isEditModel = inEvent.isEditModel;
-		var categoryKey = data.categoryKey;
-		// edit model.
-		if (isEditModel) {
-			var categoryItemModel = this.getCategoryItemModel({categoryKey:categoryKey});
-			categoryItemModel.updateCategoryInfo(data, this.bind("_updateCategoryComplete"));
-		} else {
-			// Make sure tht new use the categoryKey=""
-			var categoryItemModel = this.getCategoryItemModel({categoryKey:""});
-			categoryItemModel.addNewCategory(data, this.bind("_addNewCategoryComplete"));
-		}
-		return true;
-	},
-	_addNewCategoryComplete: function (viewModel) {
-		this.zLog("viewModel: ", viewModel);
-		var _message = "添加分类成功！";
-		if(viewModel.restInfo.retCode!=1){
-			// show add new successful.
-			_message = viewModel.restInfo.retMessage;
-		}
-		Master.view.frame.showAlertDialog({
-			title: "添加分类",
-			message:_message
-		});
-	},
-	_updateCategoryComplete: function (viewModel) {
-		this.zLog("viewModel: ", viewModel);
-		var _message = "更新分类成功！";
-		if(viewModel.restInfo.retCode!=1){
-			// show add new successful.
-			_message = viewModel.restInfo.retMessage;
-		}
-		Master.view.frame.showAlertDialog({
-			title: "更新分类",
-			message:_message
-		});
-	},
-	_destroyCategoryComplete: function (viewModel) {
-		this.zLog("viewModel: ", viewModel);
-		if(viewModel.restInfo.retCode == 1) {
-			// do refresh category list.
-			this.fetchCategoryList();
-		} else {
-			Master.view.frame.showAlertDialog({
-				title: "删除分类",
-				message:"删除分类失败, "+ viewModel.restInfo.retMessage
-			});
 		}
 	},
 	saveApiInformationHandler: function (inSender, inEvent) {
@@ -317,9 +218,5 @@ enyo.kind({
 	},
 	getApiItemModel: function (opts){
 		return this.getModelInstance("Master.models.apipool.ApiItem", opts);
-	},
-	//@private get category item model.
-	getCategoryItemModel: function (opts) {
-		return this.getModelInstance("Master.models.apipool.CategoryItem", opts);
 	}
 });

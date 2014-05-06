@@ -18,7 +18,7 @@
 		{ path: "profile", controller: "ProfileController", action:"addNewApi"},
 
 		// static router.
-		{ path: "home/index", default:true, controller: "HomeController", action: "index"},
+		{ path: "home", default:true, controller: "HomeController", action: "index"},
 		// api show router config.
 		{ path: "node/:key", controller: "ApiController", action: "detail"},
 		
