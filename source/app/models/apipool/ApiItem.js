@@ -86,11 +86,29 @@ enyo.kind({
 	 */
 	getApiDetailByKey: function (key, fn) {
 		fn = fn || enyo.nop; 
+		// cause of the primary key is "id", so for user api detail page , we getModelInstance pass parameter is {id:""}
+		// so need to manualy clear exist data while re-fetch data.
+		this._clearExitData();
 		this.set("key", key);
 		this.fetch({
 			apiKey: "apiDetailByKey",
 			callback: fn
 		}); 
+	},
+	_clearExitData: function () {
+		this.attributes = {
+			id: "", // global unique, don't use key as primary key because in profile page we can edit the key.
+			key: "",
+			name: "",
+			parentId:"0",
+			parent: null,
+			displayOrder:0,
+			isDisplay: true,
+			description:"",
+			section: [],
+			expanded: false,
+			children: []
+		};
 	},
 	getApiDetailById: function (id, fn) {
 		fn = fn || enyo.nop; 

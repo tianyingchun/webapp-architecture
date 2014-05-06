@@ -20,8 +20,8 @@
 						expanded: item.expanded || false,
 						parentId: item.parentId,
 						isDisplay: item.isDisplay,
-						parent: item.parent,
-						section: item.section,
+						parent: item.parent || null,
+						section: item.section || [],
 						description: item.description,
 						children: []
 					};

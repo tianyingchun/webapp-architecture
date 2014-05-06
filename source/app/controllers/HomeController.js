@@ -18,7 +18,7 @@ enyo.kind({
 	index: function () {
 		// fetch all categories from server and show it on the left dock.
 		// force refresh categories shown on left dock.
-		this.getAllCategories({
+		this.getUserAllCategories({
 			callback: this.bind("fetchCategoryDetailInfo")
 		});
 	},
@@ -28,7 +28,7 @@ enyo.kind({
  		if (apiDetail) {
  			// now directly redirect to first api detail page.
  			this.zLog("apiDetail: ", apiDetail);
- 			var apiKey = apiDetail.categoryKey;
+ 			var apiKey = apiDetail.key;
  			
  			// now just redirect to first category item.
  			this.locationCategoryItem(apiKey);

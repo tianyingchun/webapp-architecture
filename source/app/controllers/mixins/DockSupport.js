@@ -9,25 +9,25 @@ enyo.setPath("Master.controllers.DockSupport", {
 	// share view kind name "dock profiles."
 	DOCK_PROFILE_KIND:  "shared.DockProfiles",
 	/**
-	 * Get all categories
+	 * Get all categories for users.
 	 * @param inEvent must contain two parameters @viewAction, @viewkindName.
 	 * 
 	 */
-	getAllCategories: function (extraData) {
+	getUserAllCategories: function (extraData) {
 		// the collection model won't be cached in __global__ enyo.store.records object
 		// so we don't need to cache this model in current controller.
 		var apiCategories = this.getCollectionInstance("Master.models.apipool.Categories");
+		this.bindingViewToDock(this.DOCK_CATEGORY_KIND, null, null);
 		// view data.
 		var viewData = {
 			action: "showUICategories",
 			data: extraData || {}
 		}
-		apiCategories.getApiCategories(this.bind("showApiCategories", viewData));
+		apiCategories.getApiCategories(this.bind("showUserApiCategories", viewData), 2);
 		// binding view to left dock
-		this.bindingViewToDock(this.DOCK_CATEGORY_KIND, null, null);
 	},
 	// the callback function of getAllCategories().
-	showApiCategories: function (viewData, viewModel) {
+	showUserApiCategories: function (viewData, viewModel) {
 		this.zLog("response: viewModel: ", viewModel,"viewData:", viewData);
 		// check the callback fn
 		var extraData = viewData && viewData.data;

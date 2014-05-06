@@ -9,8 +9,6 @@ enyo.kind({
 		// add/update
 		"onCommitCategory":"saveCategoryInfoHandler",
 		"onSaveApiInformation":"saveApiInformationHandler",
-		// delete category item.
-		"onDeleteCategoryItem": "deleteCategoryItem",
 		// desctroy api item.
 		"onDeleteApiItem":"deleteApiItem"
 	},

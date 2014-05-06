@@ -19,18 +19,8 @@
 		// static router.
 		{ path: "home/index", default:true, controller: "HomeController", action: "index"},
 		// api show router config.
-		{ path: "node/:api/:language", controller: "ApiController", action: "detail"},
-		{ path: "node/:api", controller: "ApiController", action: "index"},
-		{ path: "c/:api", controller: "CategoryController", action: "detail"},
-
-
-
-		// categories managerment.
-		{ path: "profile/category/list/:page", controller: "ProfileController", action:"categoryList"},
-		{ path: "profile/category/list", controller: "ProfileController", action:"categoryList"},
-		{ path: "profile/category/add", controller: "ProfileController", action:"addNewCategory"},
-		{ path: "profile/category/edit/:id", controller: "ProfileController", action:"editCategory"},
-
+		{ path: "node/:key", controller: "ApiController", action: "detail"},
+		
 		// user oauth login resolve token.
 		{ path: "token/oauth", controller: "TokenController", action: "resolveToken"}
 		/**

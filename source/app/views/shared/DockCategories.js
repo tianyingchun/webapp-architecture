@@ -9,15 +9,15 @@ enyo.kind({
 	// show categories in left dock if we directly enter specific api page.
 	// e.g. http://localhost:8000/debug.html#node/bravo-a/java
 	showUICategories: function (viewModel, extraData) {
-		this.zLog("show categories view model: ", viewModel);
+		this.zLog("show user categories view model: ", viewModel, extraData);
 		this.destroyClientControls();
 		var records = viewModel.records;
-		var categoryKey = extraData && extraData.apiKey;
-		categoryKey = location.hash;
+		// var categoryKey = extraData && extraData.apiKey;
+		currentNodeKey = location.hash;
 		
 		this.$.categoriesContainer.createClientComponents([
-			{ kind: "widgets.menus.Accordion", itemNameField:"categoryName",
-				itemKeyField:"categoryKey", linkConverterFn:this.hashConverterFn, selectedKey:categoryKey, source: records
+			{ kind: "widgets.menus.Accordion", itemNameField:"name",itemChildField:"children",
+				itemKeyField:"key", linkConverterFn:this.hashConverterFn, selectedKey:currentNodeKey, source: records
 			}
 		]);
 		this.$.categoriesContainer.render();
@@ -29,11 +29,7 @@ enyo.kind({
 	//*@ private hash converter.
 	hashConverterFn: function(item) {
 		var loc = "#";
-		if(item && item.isCategoryNode) {
-			loc = "#c/"+item[this.itemKeyField];
-		} else {
-			loc = "#node/"+item[this.itemKeyField];
-		}
+		loc = "#node/"+item["key"];
 		return loc;
 	}
 });

@@ -27,30 +27,28 @@ enyo.kind({
 	 * Action: node,
 	 * mapping: { path: "node/:api/:language", controller: "ApiController", action: "detail"}
 	 */
-	detail: function (apiKey, language) {
-		this.zLog("apiKey: ", apiKey, " ,language:", language);
-		language = language || this.defaultLanguage;
+	detail: function (apiKey) {
+		this.zLog("apiKey: ", apiKey);
 		//save current user selected language.
-		this.saveUserApiLanguage(language);
+		// this.saveUserApiLanguage(language);
 		// show left dock categories if not.
 		this.showDockCategories({apiKey: apiKey});
 		// fetch api details information here.
-		this.fetchApiDetailInfo(apiKey, language);
+		this.fetchApiDetailInfo(apiKey);
 	},
-	fetchApiDetailInfo: function (apiKey, language) {
+	fetchApiDetailInfo: function (apiKey) {
 		// binding view,
 		this.bindingViewToContent(this.API_DETAIL_PAGE, null, null);
 		// view data.
 		var viewData = {
 			action: "showApiDetailUI", 
 			data: {
-				apiKey: apiKey,
-				language: language
+				apiKey: apiKey
 			}
 		};
 		// use cached  model instance here avoid create multiple modle instance and cached within enyo.store __global__
-		var apiItemModel = this.getModelInstance("Master.models.apipool.ApiItem",{apiKey: apiKey});
-		apiItemModel.getApiDetail(apiKey, this.bind("_showApiDetailInfo", viewData));
+		var apiItemModel = this.getModelInstance("Master.models.apipool.ApiItem",{id: ""});
+		apiItemModel.getApiDetailByKey(apiKey, this.bind("_showApiDetailInfo", viewData));
 	},
 	_showApiDetailInfo: function (viewData, viewModel) {
 		// this.zLog("categoryDetail: ", viewData, viewModel);
@@ -61,7 +59,7 @@ enyo.kind({
 		
 		if (!Master.view.frame.hasCategoryContentsIndock()) {
 			// maybe async fetch data here.
-			this.getAllCategories(extraData);
+			this.getUserAllCategories(extraData);
 		}
 	}
 });
