@@ -202,14 +202,15 @@ enyo.kind({
 	deleteApiItem: function (inSender, inEvent) {
 		var apiId = inEvent.id;
 		var apiKey = inEvent.key;
+		var parentId = inEvent.parentId;
 		var apiItemModel = this.getApiItemModel({id: apiId});
-		apiItemModel.destroyApi(apiId, this.bind("_destroyApiItemComplete"));
+		apiItemModel.destroyApi(apiId, this.bind("_destroyApiItemComplete", parentId));
 		return true;
 	},
-	_destroyApiItemComplete: function (viewModel) {
+	_destroyApiItemComplete: function (parentId, viewModel) {
 		if(viewModel.restInfo.retCode == 1) {
 			// do refresh category list.
-			this.fetchApiList();
+			this.fetchApiList(parentId);
 		} else {
 			Master.view.frame.showAlertDialog({
 				title: "删除分类",
