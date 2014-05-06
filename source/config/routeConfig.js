@@ -15,6 +15,7 @@
 		{ path: "profile/node/list/:id", controller: "ProfileController", action:"apiList"},
 		{ path: "profile/node/:id", controller: "ProfileController", action:"editApi"},
 		{ path: "profile/node/new", controller: "ProfileController", action:"addNewApi"},
+		{ path: "profile", controller: "ProfileController", action:"addNewApi"},
 
 		// static router.
 		{ path: "home/index", default:true, controller: "HomeController", action: "index"},
