@@ -48,7 +48,10 @@ enyo.kind({
 		this.zLog("viewModel: ", viewModel);
 		var records = viewModel.records;
 		this.$.treeMenu.set("itemConverter", this._treeItemConverter)
-		this.$.treeMenu.set("selectedItemValue", window.location.hash);
+		// check if current user has selected tree node item. keep it if have. otherwise use window.location(refresh page)
+		var currHash = this.__userJustSelectedHash || window.location.hash;
+
+		this.$.treeMenu.set("selectedItemValue", currHash);
 		this.$.treeMenu.set("source", records);
 	},
 	_treeItemConverter: function (item) {
@@ -109,6 +112,8 @@ enyo.kind({
 	// 
 	_treeNodeClick: function (inSender, inEvent) {
 		var loc = inEvent.get("hash");
+		// save user selected hash value.
+		this.__userJustSelectedHash = loc;
 		this.zLog(loc);
 		this.location(loc);
 		return true;
