@@ -57,7 +57,7 @@ enyo.kind({
 		this.zLog("add new"); 
 
 		// show profile.
-		this.showProfileDockMenus({menuKey: "api_list"});
+		this.showProfileDockMenus({menuKey: "api_new"});
 		this.bindingViewToContent(this.PROFILE_API_NEW, null, null);
 		var viewModel = {
 			restInfo: {
@@ -70,7 +70,7 @@ enyo.kind({
 	},
 	editApi:function(apiId) {	
 		this.zLog("apiId: ", apiId);
-		this.showProfileDockMenus({menuKey: "api_list"});
+		this.showProfileDockMenus({menuKey: "api_edit"});
 		this.bindingViewToContent(this.PROFILE_API_EDIT, null, null);
 		var spinner_uid = Master.view.frame.showSpinnerPopup({
 			message: "Loading...",
@@ -89,35 +89,7 @@ enyo.kind({
 	},
 	showApiListUI: function (viewData, viewModel) {
 		this.notifyView(this.PROFILE_API_LIST, viewModel, viewData);
-	},
-	/**
-	 * list all categories
-	 * @param  {number} page the current category list page
-	 */
-	categoryList: function (page) {
-		this.zLog("category list current page: ", page);
-		this.showProfileDockMenus({menuKey: "category_list"});
-		// binding view first.
-		this.bindingViewToContent(this.PROFILE_CATEGORY_LIST, null, null);
-		// fetch category list data.
-		this.fetchCategoryList();
-	},
-	fetchCategoryList: function () {
-		var categoryModel = this.getCollectionInstance("Master.models.apipool.Categories");
-		var viewData = {
-			action: "showCategoriesUI", // view action.
-			data: {page: page || 1}
-		};
-		if (isNaN(page)) {
-			viewData.data.page = 1;
-		}
-		categoryModel.getApiCategories(this.bind("_showCategoryListUI", viewData));
-	},
-	//@private helper method for render view model into corresponding view.
-	_showCategoryListUI: function (viewData, viewModel) {
-		this.notifyView(this.PROFILE_CATEGORY_LIST, viewModel, viewData);
-
-	},
+	}, 
 	deleteApiItem: function (inSender, inEvent) {
 		var apiId = inEvent.id;
 		var apiKey = inEvent.key;
