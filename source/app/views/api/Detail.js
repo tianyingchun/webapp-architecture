@@ -2,6 +2,9 @@ enyo.kind({
 	name: "Master.views.api.Detail",
 	kind: "Master.View",
 	classes:"api-details",
+	handlers: {
+		ontap:"srollToControl"
+	},
 	components:[
 		{name:"message",kind:"widgets.base.Spinner", message: Master.locale.get("LOAD_CATEGORY_DETAIL", "message")},
 		{name: "detailcontainer", showing: false, components: [
@@ -40,10 +43,16 @@ enyo.kind({
 			var _components = [];
 			for (var i = 0; i < sections.length; i++) {
 				var section = sections[i];
-				_components.push({tag:"span", content: section.sectionTitle});
+				_components.push({tag:"span", sectionIndex:i, action:"scrollTo", content: section.sectionTitle});
 			};
 			this.$.sectionSummary.createClientComponents(_components);
 			this.$.sectionSummary.render();
+		}
+	},
+	srollToControl: function (inSender, inEvent) {
+		var $originator = inEvent.originator;
+		if ($originator.action == "scrollTo") {
+			this.$.sectionManager.srollTo($originator.sectionIndex);
 		}
 	},
 	initSectionManager: function(section) {
