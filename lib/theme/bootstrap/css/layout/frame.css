@@ -3,4 +3,4 @@
  *  preboot basic less mixin libaray
 **//*!
  * 特定厂商的mixin（Vendor mixins）
- */body{font-size:14px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif,"Microsoft YaHei",SimHei}.frame.enyo-fit{position:relative !important}#header li{list-style-type:none}
+ */body{font-size:14px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif,"Microsoft YaHei",SimHei}body.enyo-unselectable{cursor:default;-ms-user-select:initial;-webkit-user-select:initial;-moz-user-select:initial;user-select:initial}.frame.enyo-fit{position:relative !important}#header li{list-style-type:none}

@@ -31,7 +31,7 @@ enyo.kind({
 	sortApis: function (apis) {
 		if(enyo.isArray(apis)){
 			apis.sort(function (a, b) {
-				return a.displayOrder > b.displayOrder;
+				return a.displayOrder - b.displayOrder;
 			});
 		}
 	}

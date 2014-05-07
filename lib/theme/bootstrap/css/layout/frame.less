@@ -4,6 +4,13 @@
 body{
 	font-size: 14px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif,"Microsoft YaHei",SimHei;
+    &.enyo-unselectable{
+    	cursor: default;
+		-ms-user-select: initial;
+		-webkit-user-select: initial;
+		-moz-user-select: initial;
+		user-select: initial;
+    }
 }
 .frame.enyo-fit {
     position: relative !important;

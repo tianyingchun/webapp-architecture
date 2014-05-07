@@ -2,9 +2,6 @@ enyo.kind({
 	name: "Master.views.api.Detail",
 	kind: "Master.View",
 	classes:"api-details",
-	mixins:[
-		"Master.ClassSupport"
-	],
 	components:[
 		{name:"message",kind:"widgets.base.Spinner", message: Master.locale.get("LOAD_CATEGORY_DETAIL", "message")},
 		{name: "detailcontainer", showing: false, components: [
