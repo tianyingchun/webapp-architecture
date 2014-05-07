@@ -29,9 +29,16 @@
 		border-top: 1px solid #fff;
 		text-decoration: none;
 		color: #363636;
+		outline: 0;
+		&:link,&:visited {
+			outline: 0;
+			color: #363636;
+			text-decoration: none;
+		}
 		&:hover{
 			text-decoration: none;
 			color: #000;
+			outline: 0;
 		}
 		&.selected{
 			border-right: 1px solid #000;
@@ -71,6 +78,11 @@
 	.accordion-header{
 		background-color:#428bca;
 		color: #fff;
+		&:link,&:visited {
+			outline: 0;
+			color: #fff;
+			text-decoration: none;
+		}
 		&:hover{
 			color: #fff;
 		}

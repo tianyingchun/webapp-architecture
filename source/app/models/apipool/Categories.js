@@ -44,14 +44,15 @@ enyo.kind({
 		// convert source data and saved into result.
 		this.categoryBasicInfoDTO(data, result, 0);
 		
-		this.zLog("converted categories: ", result);
 		this.sortCategories(result);
+		this.zLog("converted categories: ", result);
+		
 		return result;
 	},
 	sortCategories: function (categories) {
 		if(enyo.isArray(categories)){
 			categories.sort(function (a, b) {
-				return a.displayOrder > b.displayOrder;
+				return a.displayOrder - b.displayOrder; // compitible for ie, chrome firefox.
 			});
 		}
 	}
