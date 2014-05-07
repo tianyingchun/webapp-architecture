@@ -11,6 +11,7 @@ enyo.kind({
 	},
 	components:[
 		{name:"message",kind:"widgets.base.Spinner",size:25, message: Master.locale.get("LOAD_PORFILE_MENUS", "message")},
+		{kind: "Signals", onTreeMenuUpdated: "treeMenuUpdated"},
 		{name:"treeMenu",childNodeKey:"children",selectedItemKey:"hash", kind:"widgets.menus.TreeMenu"},
 		{kind: "Selection", name:"selection", onSelect: "select", onDeselect: "deselect"},
 		{name: "list", classes:"menus-container", showing: false}
@@ -30,6 +31,10 @@ enyo.kind({
 		this.highlightMenuItem();
 		this.$.message.hide();
 		this.$.list.show();
+	},
+	treeMenuUpdated: function (inSender, inEvent) {
+		//deal with enyo.Signals.send("onTreeMenuUpdated", inEvent);
+		this.showCategoryTree();
 	},
 	showCategoryTree: function () {
 		var config = {

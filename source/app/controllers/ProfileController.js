@@ -128,12 +128,14 @@ enyo.kind({
 	},
 	_destroyApiItemComplete: function (parentId, viewModel) {
 		if(viewModel.restInfo.retCode == 1) {
+			// notify update dock profiles category tree.
+			enyo.Signals.send("onTreeMenuUpdated");
 			// do refresh category list.
 			this.fetchApiList(parentId);
 		} else {
 			Master.view.frame.showAlertDialog({
-				title: "删除分类",
-				message:"删除分类失败, "+ viewModel.restInfo.retMessage
+				title: "删除API",
+				message:"删除API失败, "+ viewModel.restInfo.retMessage
 			});
 		}
 	},
@@ -162,6 +164,8 @@ enyo.kind({
 		var _message = "修改API 信息成功!";
 		if(viewModel.restInfo.retCode!=1) {
 			_message = viewModel.restInfo.retMessage;
+		} else {
+			enyo.Signals.send("onTreeMenuUpdated");
 		}
 		var _this = this;
 		Master.view.frame.showAlertDialog({
@@ -177,6 +181,8 @@ enyo.kind({
 		var _message = "添加新API 成功！";
 		if(viewModel.restInfo.retCode!=1) {
 			_message = viewModel.restInfo.retMessage;
+		} else {
+			enyo.Signals.send("onTreeMenuUpdated");
 		}
 		Master.view.frame.showAlertDialog({
 			title: "添加API",
