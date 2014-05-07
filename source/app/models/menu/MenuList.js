@@ -25,9 +25,9 @@ enyo.kind({
 		// for personal center.
 		var personalInfo = new Master.models.menu.MenuItem({
 			name: Master.locale.get("PERSONAL_INFO","menu"),
-			key: "other", // menu item key.
+			key: "user-info", // menu item key.
 			customClass: "icon-user",
-			hash: "profile/api/list"
+			hash: "profile"
 		});
 		this.add(personalInfo);
 		

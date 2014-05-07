@@ -2,10 +2,10 @@ enyo.kind({
 	name: "Master.controllers.ProfileController",
 	kind: "Master.Controller",
 	mixins:[
-		"Master.controllers.DockSupport"
+		"Master.controllers.DockSupport",
+		"Master.controllers.CategoryTreeSupport"
 	],
 	handlers:{
-		"onFetchApiAvailableCategories":"fetchApiAvailableCategories",
 		// add/update
 		"onSaveApiInformation":"saveApiInformationHandler",
 		// desctroy api item.
@@ -19,13 +19,7 @@ enyo.kind({
 		// api add new view
 		PROFILE_API_NEW: "profile.ApiNew",
 		//api edit 
-		PROFILE_API_EDIT: "profile.ApiEdit",
-
-		PROFILE_CATEGORY_EDIT:"profile.CategoryEdit",
-		// category list view
-		PROFILE_CATEGORY_LIST: "profile.CategoryList",
-		// category add new view.
-		PROFILE_CATEGORY_NEW:"profile.CategoryNew"
+		PROFILE_API_EDIT: "profile.ApiEdit"
 	},
 	/**
 	 * Action method for all paged api list.
@@ -124,33 +118,6 @@ enyo.kind({
 		this.notifyView(this.PROFILE_CATEGORY_LIST, viewModel, viewData);
 
 	},
-	fetchApiAvailableCategories: function(inSender, inEvent){
-		var config = {
-			viewPage: inEvent.viewPage,
-			editModel: inEvent.editModel,
-			viewKind:  inEvent.viewKind
-		};
-		var categoryModel = this.getCollectionInstance("Master.models.apipool.Categories");
-		categoryModel.getApiCategories(this.bind("_showAvailableCategories", config));
-	},
-	// show available categories.
-	_showAvailableCategories: function (config, viewModel){
-		// indicates if it's edit api/category model.
-		var isEditModel = config.editModel;
-		// indicates current view page is category view, or api view.
-		var viewPage = config.viewPage;
-		// customized view kind.
-		var viewKind = config.viewKind;
-		if (!viewKind) { 
-			var _viewName = isEditModel ? this.PROFILE_API_EDIT:this.PROFILE_API_NEW; 
-		} else {
-			_viewName = viewKind;
-		}
-		this.notifyView(_viewName, viewModel, {
-			action:"showAvalilableCategories" // defined in view.
-		});
-	},
-	  
 	deleteApiItem: function (inSender, inEvent) {
 		var apiId = inEvent.id;
 		var apiKey = inEvent.key;

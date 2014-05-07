@@ -1,3 +1,4 @@
 enyo.depends(
-	"DockSupport.js"
+	"DockSupport.js",
+	"CategoryTreeSupport.js"
 );

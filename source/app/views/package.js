@@ -4,6 +4,7 @@ enyo.depends(
 	"shared/",
 	"home/",
 	"api/",
+	"user/",
 	"profile/",
 	"Frame.js"
 );

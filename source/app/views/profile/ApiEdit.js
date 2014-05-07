@@ -19,6 +19,7 @@ enyo.kind({
 		// goto fetch availble categories tree.
 		var config = {
 			viewPage: "api",
+			viewKind: "profile.ApiEdit",
 			editModel: true
 		};
 		this.bubble("onFetchApiAvailableCategories", config);

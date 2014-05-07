@@ -157,6 +157,7 @@ enyo.kind({
 		// goto fetch availble categories tree.
 		var config = {
 			viewPage: "api",
+			viewKind: "profile.ApiNew",
 			editModel: false
 		};
 		this.doFetchApiAvailableCategories(config);
