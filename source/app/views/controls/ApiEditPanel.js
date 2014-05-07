@@ -52,6 +52,7 @@ enyo.kind({
 					{classes:"form-item", components:[
 						{ classes:"title", content:"文档分类"},
 						{ name:"showCategoryDialogBtn", kind:"enyo.Button", classes:"btn", content:"--默认根节点--", ontap:"showCategoryTreeDialog"},
+						{ name:"treeSelectMsg", content:"", tag:"span", style:"color: red;"}
 					]}
 				]}, 
 				{kind:"onyx.Groupbox", components: [
@@ -90,7 +91,11 @@ enyo.kind({
 		// success/failed.
 		if (validationResult.status =="success") {
 			var  apiDetail = this.readApiDetailInformation();
-			this.doSaveApiInformation({data: apiDetail, editModel: true});
+			if (this.$.treeSelectMsg.getContent()==="") {
+				this.doSaveApiInformation({data: apiDetail, editModel: true});
+			} else {
+				Master.view.frame.showAlertDialog({title:"更新文档", message:"不能选择自身节点!"});
+			}
 		}
 		// stop  bubble.
 		return true;
@@ -194,8 +199,17 @@ enyo.kind({
 	},
 	treeDialogConfirm: function (inEvent) {
 		var selectedNode = inEvent.selectedNode;
-		this.$.showCategoryDialogBtn.setContent(selectedNode.get("content"));
-		this.__selectedCategoryKey = selectedNode.get("_id");
+		var selectedParentId = selectedNode.get("_id");
+		// avoid choose self node as parentId.
+		if (selectedParentId != this._id) {
+			this.$.treeSelectMsg.hide();
+			this.$.treeSelectMsg.setContent("");
+			this.$.showCategoryDialogBtn.setContent(selectedNode.get("content"));
+			this.__selectedCategoryKey = selectedParentId;
+		} else {
+			this.$.treeSelectMsg.setContent("不能选择当前节点!");
+			this.$.treeSelectMsg.show();
+		}
 		this.zLog("new api category unique key: ", this.__selectedCategoryKey);
 	},
 	treeNodeClick: function (inSender, inEvent) {
