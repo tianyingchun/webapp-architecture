@@ -2,7 +2,7 @@ enyo.depends(
 	"controls/",
 	"mixins/",
 	"shared/",
-	"home/",
+	// "home/",
 	"api/",
 	"user/",
 	"profile/",

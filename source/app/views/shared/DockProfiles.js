@@ -16,6 +16,11 @@ enyo.kind({
 		{kind: "Selection", name:"selection", onSelect: "select", onDeselect: "deselect"},
 		{name: "list", classes:"menus-container", showing: false}
 	],
+	//*@override before view render or re-render phase.
+	viewReady: function (){
+		this.$.message.show();
+		this.$.list.hide();
+	},
 	showProfileMenusUI: function (viewModel, data) {
 		this.zLog("viewModel", viewModel, "data: ", data);
 		// show dock edit categories tree nodes.

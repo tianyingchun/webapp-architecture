@@ -3,7 +3,6 @@ enyo.kind({
 	kind: "Master.View",
 	components:[
 		{name:"message", kind:"widgets.base.Spinner",size:25, message: Master.locale.get("LOAD_CATEGORIES", "message")},
-		{name:"dockTitle",showing:false, classes: "dock-title", content:Master.locale.get("API_CATALOG","title")},
 		{name: "categoriesContainer", showing: false}
 	],
 	// show categories in left dock if we directly enter specific api page.
@@ -25,6 +24,11 @@ enyo.kind({
 		this.$.message.hide();
 		// this.$.dockTitle.show();
 		this.$.categoriesContainer.show();
+	},
+	//*@override before view render or re-render phase.
+	viewReady: function () {
+		this.$.message.show();
+		this.$.categoriesContainer.hide();
 	},
 	//*@ private hash converter.
 	hashConverterFn: function(item) {

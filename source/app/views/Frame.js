@@ -48,11 +48,16 @@ enyo.kind({
 	],
 	handlers: {
 		onContainerRendered: "twoColumnLayoutRenderedHandler",
-		onAccordionViewChanged: "accordionViewChangedHandler"
+		onAccordionViewChanged: "accordionViewChangedHandler",
+		onViewUpdated: "viewUpdatedHandler"
 	},
 	// capture render eventfor TwoColumnDivision layout control changed.
 	twoColumnLayoutRenderedHandler: function (inSender, inEvent) { 
 		this.reflowPageLayout(inEvent.height || 0);	
+		return true;
+	},
+	viewUpdatedHandler: function (inSender, inEvent) {
+		this.notifyTwoColumnLayoutReflow();
 		return true;
 	},
 	accordionViewChangedHandler: function(inSender, inEvent) {

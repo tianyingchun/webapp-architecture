@@ -18,6 +18,9 @@ enyo.kind({
 			// this.doGetAllCategories({name:'xxxtest'});
 		};	
 	}),
+	viewReady: function (){
+		
+	},
 	// show category detail page.
 	showCategoryDetailPage: function (viewModel, viewData) {
 

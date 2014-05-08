@@ -70,6 +70,10 @@ enyo.kind({
 			this.$.api_description.markItUp();
 		};
 	}),
+	//*@override before view render or re-render phase.
+	viewReady: function (){
+		 // do nothing...
+	},
 	// show app new api ui interface.
 	showAddNewApiUI: function (viewModel){
 		// initialize setion managers.

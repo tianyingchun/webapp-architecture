@@ -25,8 +25,12 @@ enyo.kind({
 	},
 	fetchDefaultApiDetailInfo: function (viewModel) {
  		var apiDetail = viewModel.records[0] || null;
-
+ 		var apiModel = new Master.models.apipool.ApiItem();
+		apiModel.setObject(apiDetail);
+		var viewData = {
+			action: "showApiDetailUI"
+		};
 		// binding view direct.
-		this.bindingViewToContent(this.API_DETAIL_PAGE, apiDetail, null);
+		this.bindingViewToContent(this.API_DETAIL_PAGE, apiModel, viewData);
 	}
 });

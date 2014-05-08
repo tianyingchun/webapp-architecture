@@ -16,16 +16,12 @@ enyo.kind({
 			{ name:"sectionManager", kind: "widgets.section.SectionManager", model:"view"}
 		]}	
 	],
-	create: enyo.inherit(function (sup) {
-		return function () {
-			sup.apply(this, arguments);
-			if (this.viewModel) {
-				var apiModel = new Master.models.apipool.ApiItem();
-				apiModel.setObject(this.viewModel);
-				this.showApiDetailUI(apiModel);
-			}
-		};
-	}),
+	//*@override before view render or re-render phase.
+	viewReady: function (){
+		this.$.message.show();
+		this.$.detailcontainer.hide();
+		this.$.sectionSummary.destroyClientControls();
+	},
 	// show category detail information.
 	showApiDetailUI: function (viewModel, extraData) {
 		this.zLog("viewModel: ", viewModel, "extraData: " ,extraData);	

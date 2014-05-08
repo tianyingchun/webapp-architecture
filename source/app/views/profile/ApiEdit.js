@@ -10,6 +10,10 @@ enyo.kind({
 	components: [
 		{name:"editPanel", kind: "Master.views.controls.ApiEditPanel"}
 	],
+	//*@override before view render or re-render phase.
+	viewReady: function (){
+		 // do nothing...
+	},
 	loadingExistApiDetailUI: function (viewModel, data){
 		this.$.editPanel.set("viewModel", viewModel);
 		// hide loading spinner.

@@ -28,6 +28,11 @@ enyo.kind({
 			this.init();
 		};
 	}),
+	//*@override before view render or re-render phase.
+	viewReady: function (){
+		 this.$.message.show();
+		 this.$.simpletab.hide();
+	},
 	init: function () {
 		// initialize
 		var $simpleTab = this.$.simpletab;
