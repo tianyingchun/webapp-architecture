@@ -101,8 +101,7 @@ enyo.kind({
 		return true;
 	},
 	writeApiDetailInformation: function (viewModel) {
-		// current selected key.
-		this.__selectedCategoryKey = viewModel.get("parentId") || 0;
+		this.zLog(viewModel);
 		this._id = viewModel.get("id");
 		this.$.api_key.setValue(viewModel.get("key"));
 		this.$.api_name.setValue(viewModel.get('name'));
@@ -110,7 +109,13 @@ enyo.kind({
 		this.$.api_is_expanded.setValue(viewModel.get("expanded")|| 0);
 		this.$.api_is_display.setValue(viewModel.get("isDisplay") || 0);
 		this.$.api_description.setEditorContent(viewModel.get("description"));
-		var parent = viewModel.get("parent") || {};
+		// parentId: 0  level: -1 indecate the root level.
+		var parent = viewModel.get("parent") || { parentId:"0", level: -1 };
+		// current selected key.
+		this.__selectedCategoryKey = viewModel.get("parentId") || 0;
+		// current target level is parentNode level.
+		this.__targetLevel = viewModel.get("targetLevel");
+
 		if (parent.name) {
 			this.$.showCategoryDialogBtn.setContent(parent.name);
 		}
@@ -126,6 +131,9 @@ enyo.kind({
 		_data.displayOrder = this.$.api_display_order.getValue();
 		_data.description = this.$.api_description.getEditorContent();
 		_data.parentId = this.__selectedCategoryKey || 0;
+		// because tree root node targetLevel equals undefined.
+		_data.targetLevel = typeof this.__targetLevel ==="undefined"? -1: this.__targetLevel;
+		_data.targetId = _data.parentId;
 		_data.id = this._id;
 		// sections  array.
 		_data.section = this.$.sectionManager.getResult() || [];
@@ -194,21 +202,24 @@ enyo.kind({
 	//*@private each tree node category item date converter.
 	_treeNodeConverter: function (item) {
 		return {
-			_id: item.id, content: item.name//// 不能用id.因为ENYO 里面组件查找是通过ID 来的容易照成冲突 非常重要。 所以在使用组建的时候一定不能用Id
+			_id: item.id, level: item.level, content: item.name//// 不能用id.因为ENYO 里面组件查找是通过ID 来的容易照成冲突 非常重要。 所以在使用组建的时候一定不能用Id
 		};
 	},
 	treeDialogConfirm: function (inEvent) {
 		var selectedNode = inEvent.selectedNode;
-		var selectedParentId = selectedNode.get("_id");
-		// avoid choose self node as parentId.
-		if (selectedParentId != this._id) {
-			this.$.treeSelectMsg.hide();
-			this.$.treeSelectMsg.setContent("");
-			this.$.showCategoryDialogBtn.setContent(selectedNode.get("content"));
-			this.__selectedCategoryKey = selectedParentId;
-		} else {
-			this.$.treeSelectMsg.setContent("不能选择当前节点!");
-			this.$.treeSelectMsg.show();
+		if (selectedNode) {
+			var selectedParentId = selectedNode.get("_id") || 0;
+			// avoid choose self node as parentId.
+			if (selectedParentId != this._id) {
+				this.$.treeSelectMsg.hide();
+				this.$.treeSelectMsg.setContent("");
+				this.$.showCategoryDialogBtn.setContent(selectedNode.get("content"));
+				this.__selectedCategoryKey = selectedParentId;
+				this.__targetLevel = selectedNode.get("level");
+			} else {
+				this.$.treeSelectMsg.setContent("不能选择当前节点!");
+				this.$.treeSelectMsg.show();
+			}
 		}
 		this.zLog("new api category unique key: ", this.__selectedCategoryKey);
 	},

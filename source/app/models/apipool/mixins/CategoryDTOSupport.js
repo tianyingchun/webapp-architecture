@@ -14,8 +14,7 @@
 		 * @param  {array} target the target array used to save converted data
 		 * @return {void}  
 		 */
-		categoryBasicInfoDTO: function (source, target,level) {
-			level++;
+		categoryBasicInfoDTO: function (source, target) {
 			var result = target || [];
 			if (enyo.isArray(source)){
 				for (var i = 0; i < source.length; i++) {
@@ -27,16 +26,22 @@
 						displayOrder: item.displayOrder,
 						expanded: item.expanded || false,
 						parentId: item.parentId,
+						targetId: item.parentId,
+						targetLevel: -1,
+						level: item.level,
 						isDisplay: item.isDisplay,
 						parent: item.parent || null,
 						section: item.section || [],
 						description: item.description,
 						children: []
 					};
+					if(convertItem.parent !== null) {
+						convertItem.targetLevel = convertItem.parent.level;
+					}
 					result.push(convertItem);
 					// loop child source.
 					if (item.children && item.children.length) {
-						this.categoryBasicInfoDTO(item.children, convertItem.children, item.level);
+						this.categoryBasicInfoDTO(item.children, convertItem.children);
 					}
 				};
 			}

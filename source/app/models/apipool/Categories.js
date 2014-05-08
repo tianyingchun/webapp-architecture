@@ -29,7 +29,7 @@ enyo.kind({
 		this.fetch({
 			apiKey: "allcategories",
 			url: function () {
-				return "/apis/"+level;
+				return "/apis/0/"+level;
 			},
 			callback: fn
 		});
@@ -42,7 +42,7 @@ enyo.kind({
 		data = data && enyo.isArray(data) ? data : [];
 		var result = [];
 		// convert source data and saved into result.
-		this.categoryBasicInfoDTO(data, result, 0);
+		this.categoryBasicInfoDTO(data, result);
 		
 		this.sortCategories(result);
 		this.zLog("converted categories: ", result);

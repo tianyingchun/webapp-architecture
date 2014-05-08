@@ -19,12 +19,18 @@
 						displayOrder: item.displayOrder,
 						expanded: item.expanded || false,
 						parentId: item.parentId,
+						targetId:  item.parentId,
+						level: item.level,
+						targetLevel: -1,
 						isDisplay: item.isDisplay,
 						parent: item.parent || null,
 						section: item.section || [],
 						description: item.description,
 						children: []
 					};
+					if(apiItem.parent !== null) {
+						apiItem.targetLevel = apiItem.parent.level;
+					}
 					result.push(apiItem);
 					// loop child source.
 					if (item.children && item.children.length) {
