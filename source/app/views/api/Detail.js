@@ -10,7 +10,7 @@ enyo.kind({
 		{name: "detailcontainer", showing: false, components: [
 			{ name:"nodeInfo", classes:"api-basic-info", components: [
 				{name:"apiTitle", tag:"h4", classes:"api-title"},
-				{name:"apiDesc",  classes:"api-desc"},
+				{name:"apiDesc", allowHtml:true, classes:"api-desc"},
 				{name:"sectionSummary", showing: false, classes:"section-summary"}
 			]},
 			{ name:"sectionManager", kind: "widgets.section.SectionManager", model:"view"}
@@ -30,7 +30,7 @@ enyo.kind({
 	showApiDetailUI: function (viewModel, extraData) {
 		this.zLog("viewModel: ", viewModel, "extraData: " ,extraData);	
 		this.$.apiTitle.setContent(viewModel.get("name"));
-		this.$.apiDesc.setContent(viewModel.get("description"));
+		this.$.apiDesc.setContent(utility.stripRiskHtmlCode(viewModel.get("description")));
 		var sections = viewModel.get("section");
 		this.showSectionSummary(sections);
 		this.initSectionManager(sections);

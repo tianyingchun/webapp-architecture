@@ -213,18 +213,29 @@
         }
 
     };
-	var _utility = {
-		formatFileSize: function(size) {
+	var _utility = {};
+    // mixin Encoder to utility.
+    enyo.mixin(_utility, Encoder);
+    // extend utility.
+    enyo.mixin(_utility, {
+        formatFileSize: function(size) {
             var sizeUnit = ["Byte", "KB", "MB", "GB"];
             for (var index = 0; size > 1024; index++){
                 size = (size / 1024).toFixed(2);
             }
 
             return size.toLocaleString() + " " + sizeUnit[index];
+        },
+        // strip html code. 
+        // 1. remove<script>...</script> 
+        stripRiskHtmlCode: function (content) {
+            var scriptTag = /<([\/|\s]*script\s*)>/g; 
+            content = content.replace(scriptTag, function (match){
+                return utility.htmlEncode(match);
+            });
+            return content;
         }
-	};
-    // mixin Encoder to utility.
-    enyo.mixin(_utility, Encoder);
+    });
 
 	win.utility = _utility;
 })(window);
