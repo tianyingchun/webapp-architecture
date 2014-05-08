@@ -2,11 +2,13 @@
 @import "./../mixins/vendor.less";
 .widgets-section {
 	pre{
-		padding: 5px;
+		padding: 0;
 		border-radius: 0;
 	}
 	.hljs {
 		padding: 1em;
+		background-color: #FCFCFC;
+		font-size: 12px;
 	}
 	.widgets-dropdownlist {
 		button {
@@ -15,7 +17,7 @@
 	}
 	.section-item {
 		border: 1px solid #bbb;
-		padding: 10px 5px;
+		padding: 5px;
 		margin-top: 20px;
 		.border-radius(4px);
 		.section-header{
@@ -63,6 +65,20 @@
 				margin-top: 5px;
 			}
 		}
+	}
+	// section widget texteditor
+	.widget-section-texteditor{
+		.section-content{
+			padding-top: 10px;
+		}
+	}
+	// section widget table
+	.widget-section-table{
+		 
+	}
+	// section widget linklist
+	.widget-section-linklist{
+		 
 	}
 	.action-panel{
 		padding-top: 20px;
