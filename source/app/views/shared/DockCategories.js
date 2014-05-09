@@ -23,8 +23,12 @@ enyo.kind({
 		this.$.categoriesContainer.destroyClientControls();
 		
 		this.$.categoriesContainer.createClientComponents([
-			{ kind: "widgets.menus.Accordion", itemNameField:"name",itemChildField:"children",
-				itemKeyField:"key", linkConverterFn:this.hashConverterFn, selectedKey:currentNodeKey, source: records
+			{ 	kind: "widgets.menus.Accordion", 
+				itemNameField:"name",
+				itemChildField:"children",
+				itemExpendedField:"expanded",
+				itemKeyField:"key", linkConverterFn:this.hashConverterFn, 
+				selectedKey:currentNodeKey, source: records
 			}
 		]);
 		this.$.categoriesContainer.render();
