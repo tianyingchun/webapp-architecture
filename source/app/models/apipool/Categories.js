@@ -24,12 +24,13 @@ enyo.kind({
 	 * @param  {function} fn the callback function for api doc categories.
 	 * @return {void}
 	 */
-	getApiCategories: function (fn, level) {
-		level = level || 20;
+	getApiCategories: function (fn, fromLevel, toLevel) {
+		fromLevel = fromLevel || 0;
+		toLevel = toLevel || 20;
 		this.fetch({
 			apiKey: "allcategories",
 			url: function () {
-				return "/apis/0/"+level;
+				return "/apis/"+fromLevel+"/"+toLevel;
 			},
 			callback: fn
 		});

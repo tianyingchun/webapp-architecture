@@ -110,12 +110,10 @@ enyo.kind({
 		this.$.api_is_display.setValue(viewModel.get("isDisplay") || 0);
 		this.$.api_description.setEditorContent(viewModel.get("description"));
 		// parentId: 0  level: -1 indecate the root level.
-		var parent = viewModel.get("parent") || { parentId:"0", level: -1 };
+		var parent = viewModel.get("parent") || { parentId:"0"};
 		// current selected key.
 		this.__selectedCategoryKey = viewModel.get("parentId") || 0;
-		// current target level is parentNode level.
-		this.__targetLevel = viewModel.get("targetLevel");
-
+		 
 		if (parent.name) {
 			this.$.showCategoryDialogBtn.setContent(parent.name);
 		}
@@ -131,8 +129,6 @@ enyo.kind({
 		_data.displayOrder = this.$.api_display_order.getValue();
 		_data.description = this.$.api_description.getEditorContent();
 		_data.parentId = this.__selectedCategoryKey || 0;
-		// because tree root node targetLevel equals undefined.
-		_data.targetLevel = typeof this.__targetLevel ==="undefined"? -1: this.__targetLevel;
 		_data.targetId = _data.parentId;
 		_data.id = this._id;
 		// sections  array.
@@ -202,7 +198,7 @@ enyo.kind({
 	//*@private each tree node category item date converter.
 	_treeNodeConverter: function (item) {
 		return {
-			_id: item.id, level: item.level, content: item.name//// 不能用id.因为ENYO 里面组件查找是通过ID 来的容易照成冲突 非常重要。 所以在使用组建的时候一定不能用Id
+			_id: item.id, content: item.name//// 不能用id.因为ENYO 里面组件查找是通过ID 来的容易照成冲突 非常重要。 所以在使用组建的时候一定不能用Id
 		};
 	},
 	treeDialogConfirm: function (inEvent) {
@@ -215,7 +211,6 @@ enyo.kind({
 				this.$.treeSelectMsg.setContent("");
 				this.$.showCategoryDialogBtn.setContent(selectedNode.get("content"));
 				this.__selectedCategoryKey = selectedParentId;
-				this.__targetLevel = selectedNode.get("level");
 			} else {
 				this.$.treeSelectMsg.setContent("不能选择当前节点!");
 				this.$.treeSelectMsg.show();

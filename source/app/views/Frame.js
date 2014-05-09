@@ -75,8 +75,8 @@ enyo.kind({
 	create: enyo.inherit(function (sup) {
 		return function () {
 			sup.apply(this, arguments);
-			// apply the global classes to frame.
-			this.addClass(this.getPlatformType());
+			// do some intialize 
+			this.init();
 		};
 	}),
 	rendered: enyo.inherit(function (sup) {
@@ -86,6 +86,12 @@ enyo.kind({
 			this.reflowPageLayout();
 		};
 	}),
+	init: function () {
+		// apply the global classes to frame.
+		this.addClass(this.getPlatformType());
+		// save current dock categories default config.
+		this.__dockCategoriesConfig = { fromLevel: 0, toLevel: 1 };
+	},
 	// override reflow workflow.
 	reflow: enyo.inherit(function (sup){
 		return function () {
@@ -159,6 +165,15 @@ enyo.kind({
 			return true;
 		}
 		return false;	
+	},
+	// get all config parameters for current displayed categories menu in left dock.
+	getCurrentCategoryDockConfig: function () {
+		return this.__dockCategoriesConfig;
+	},
+	// save lasted loaded dock categories level configurations.
+	setCurrentCategoryDockConfig: function (levelConfig) {
+		this.__dockCategoriesConfig = levelConfig
+		this.zLog("latest level config: ", levelConfig);
 	},
 	showNormalDialog: function (title, htmlContent) {
 		var normalDialog = new widgets.dialog.NormalDialog();

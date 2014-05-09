@@ -75,9 +75,9 @@ enyo.kind({
 	_getPostInfo: function (apiInfo) {
 		var _data = enyo.clone(apiInfo);
 		// _data.key = _data.apiKey;
-		// delete _data.apiKey;
+		delete _data.level;
 		// _data.name = _data.apiName;
-		// delete _data.apiName;
+		delete _data.targetLevel;
 
 		return enyo.json.stringify(_data);
 	},
@@ -136,6 +136,8 @@ enyo.kind({
 	},
 	//*@ public
 	updateApiInfo: function (apiInfo, fn) {
+		//only need id, targetId
+		//(level, targetLevel)need rechecked from serverside by id, targetid.
 		this.setObject(apiInfo);
 		this.commit({
 			apiKey: "updateApiInfo", 

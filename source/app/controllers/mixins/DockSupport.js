@@ -23,7 +23,10 @@ enyo.setPath("Master.controllers.DockSupport", {
 			action: "showUICategories",
 			data: extraData || {}
 		}
-		apiCategories.getApiCategories(this.bind("showUserApiCategories", viewData), 2);
+		var fromLevel = extraData && extraData.fromLevel || 0;
+		var toLevel = extraData && extraData.toLevel || 1;
+
+		apiCategories.getApiCategories(this.bind("showUserApiCategories", viewData), fromLevel, toLevel);
 		// binding view to left dock
 	},
 	// the callback function of getAllCategories().

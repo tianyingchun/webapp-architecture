@@ -9,10 +9,18 @@ enyo.kind({
 	// e.g. http://localhost:8000/debug.html#node/bravo-a/java
 	showUICategories: function (viewModel, extraData) {
 		this.zLog("show user categories view model: ", viewModel, extraData);
+		// save latest dock category level configurations.
+		Master.view.frame.setCurrentCategoryDockConfig(extraData || {
+			fromLevel: 0,
+			toLevel: 1
+		});
 		this.destroyClientControls();
 		var records = viewModel.records;
 		// var categoryKey = extraData && extraData.apiKey;
 		currentNodeKey = location.hash;
+
+		// destroy first.
+		this.$.categoriesContainer.destroyClientControls();
 		
 		this.$.categoriesContainer.createClientComponents([
 			{ kind: "widgets.menus.Accordion", itemNameField:"name",itemChildField:"children",
@@ -29,7 +37,9 @@ enyo.kind({
 	viewReady: function () {
 		this.$.message.show();
 		this.$.categoriesContainer.hide();
+
 	},
+
 	//*@ private hash converter.
 	hashConverterFn: function(item) {
 		var loc = "#";
