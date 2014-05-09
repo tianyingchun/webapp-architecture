@@ -90,7 +90,7 @@ enyo.kind({
 		// apply the global classes to frame.
 		this.addClass(this.getPlatformType());
 		// save current dock categories default config.
-		this.__dockCategoriesConfig = { fromLevel: 0, toLevel: 1 };
+		this.__dockCategoriesConfig = { parentId: 0, level: 0 };
 	},
 	// override reflow workflow.
 	reflow: enyo.inherit(function (sup){

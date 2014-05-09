@@ -14,6 +14,12 @@ enyo.kind({
 			// 	cacheTime: 10 * 60 * 1000 // cache time the expired time enyo.now() + cacheTime.
 			// },
 			dto: "apiCategoriesDataDTO"
+		},
+		categorySiblings:{
+			url: function(){
+				return "/sibling/{parentId}";
+			},
+			dto: "apiCategoriesDataDTO"
 		}
 	},
 	// default we don't need to instance all records as specificed model. 
@@ -34,6 +40,25 @@ enyo.kind({
 			},
 			callback: fn
 		});
+	},
+	/**
+	 * Get all siblings node and it's first level childs.
+	 * @param  {callback} fn 
+	 * @return {}
+	 */
+	getCategorySiblings: function (fn, parentId, level) {
+		// for root level childs use getApiCategories api.
+		if (parentId == "0" || level == 0){
+			this.getApiCategories(fn, 0, 1);
+		} else { 
+			this.fetch({
+				apiKey: "categorySiblings",
+				url: function(){
+					return "/sibling/"+parentId;
+				},
+				callback: fn
+			});
+		}
 	},
 	/**
 	 * Convert category list data

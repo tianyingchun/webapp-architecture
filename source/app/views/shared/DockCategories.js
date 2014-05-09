@@ -11,8 +11,8 @@ enyo.kind({
 		this.zLog("show user categories view model: ", viewModel, extraData);
 		// save latest dock category level configurations.
 		Master.view.frame.setCurrentCategoryDockConfig(extraData || {
-			fromLevel: 0,
-			toLevel: 1
+			parentId: 0,
+			level: 0
 		});
 		this.destroyClientControls();
 		var records = viewModel.records;

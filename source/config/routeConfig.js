@@ -11,25 +11,25 @@
 		// Note: router config has order priority.
 
 		// { path: "profile/login", controller: "ProfileController", "login"},
-		{ path: "profile/node/list/:id/:page", controller: "ProfileController", action:"apiPagedList"},
-		{ path: "profile/node/list/:id", controller: "ProfileController", action:"apiList"},
-		{ path: "profile/node/:id", controller: "ProfileController", action:"editApi"},
-		{ path: "profile/node/new", controller: "ProfileController", action:"addNewApi"},
-		{ path: "profile", controller: "UserController", action:"userInfo"},
+		{ "path": "profile/node/list/:id/:page", "controller": "ProfileController", "action":"apiPagedList"},
+		{ "path": "profile/node/list/:id", "controller": "ProfileController", "action":"apiList"},
+		{ "path": "profile/node/:id", "controller": "ProfileController", "action":"editApi"},
+		{ "path": "profile/node/new", "controller": "ProfileController", "action":"addNewApi"},
+		{ "path": "profile", "controller": "UserController", "action":"userInfo"},
 
 		// static router.
-		{ path: "home", default:true, controller: "HomeController", action: "index"},
+		{ "path": "home", "default":true, "controller": "HomeController", "action": "index"},
 		// api show router config.
-		{ path: "node/:key", controller: "ApiController", action: "detail"},
+		{ "path": "node/:key", "controller": "ApiController", "action": "detail"},
 		
 		// user oauth login resolve token.
-		{ path: "token/oauth", controller: "TokenController", action: "resolveToken"}
+		{ "path": "token/oauth", "controller": "TokenController", "action": "resolveToken"}
 		/**
 		 * dynamic router: controller action -> show().
 		 * 1.match #product/1/  ->show (page:1, id:"");
 		 * 2.match #product/1/100 -> show(page:1, id:100);
 		 * 3.Note: we must put the complexed rules as before simple one, because it will hight priority 
-		 * to match rule path. 
+		 * to match rule "path". 
 		 * e.g. if you input '#product/2/100/200' also {path:"product/:page/:id"} -> params:2,100 ignore 200
 		 * and also matched {path:"product/:id"} -> params:2 so we need to put {path:"product/:page/:id"} on the 
 		 * before of the {path:"product/:id"}.

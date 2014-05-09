@@ -13,7 +13,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 	 * @param inEvent must contain two parameters @viewAction, @viewkindName.
 	 * 
 	 */
-	getUserAllCategories: function (extraData) {
+	getCategorySiblingsAndChilds: function (extraData) {
 		// the collection model won't be cached in __global__ enyo.store.records object
 		// so we don't need to cache this model in current controller.
 		var apiCategories = this.getCollectionInstance("Master.models.apipool.Categories");
@@ -23,10 +23,12 @@ enyo.setPath("Master.controllers.DockSupport", {
 			action: "showUICategories",
 			data: extraData || {}
 		}
-		var fromLevel = extraData && extraData.fromLevel || 0;
-		var toLevel = extraData && extraData.toLevel || 1;
+		// the parentId of current Node
+		var parentId = extraData && extraData.parentId || 0;
+		// parentNode level.
+		var level = extraData && extraData.level || 0;
 
-		apiCategories.getApiCategories(this.bind("showUserApiCategories", viewData), fromLevel, toLevel);
+		apiCategories.getCategorySiblings(this.bind("showUserApiCategories", viewData), parentId, level);
 		// binding view to left dock
 	},
 	// the callback function of getAllCategories().

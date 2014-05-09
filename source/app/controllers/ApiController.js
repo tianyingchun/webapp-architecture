@@ -32,8 +32,8 @@ enyo.kind({
 		//save current user selected language.
 		// this.saveUserApiLanguage(language);
 		var configData = {
-			fromLevel: 0,
-			toLevel: 1,
+			parentId: 0,
+			level: 0,
 			apiKey:apiKey
 		};
 		// fetch api details information here.
@@ -62,13 +62,13 @@ enyo.kind({
 	showDockCategories: function (viewModel) {
 		var currLevel = viewModel.get("level");
 		var configData = {
-			fromLevel: parseInt(currLevel) -1,
-			toLevel: currLevel
+			parentId: viewModel.get("parentId") || 0,
+			level: parseInt(currLevel) -1
 		};
 		// if fromLevel equals -1 correct it.
-		if (!!!~configData.fromLevel) {
-			configData.fromLevel = 0;
-			configData.toLevel = 1;
+		if (!!!~configData.level) {
+			configData.level = 0;
+			configData.parentId = 0;
 		}
 		this.zLog("category list Levels: ", configData);
 
@@ -76,17 +76,16 @@ enyo.kind({
 			|| this.ifRefreshDockCategories(configData)
 			) {
 			// maybe async fetch data here.
-			this.getUserAllCategories(configData);
+			this.getCategorySiblingsAndChilds(configData);
 		}
 	},
 	// *@private indicates if we need to refresh left dock categories.
 	ifRefreshDockCategories: function (configData) {
 		var lastedDockLevelConfig = Master.view.frame.getCurrentCategoryDockConfig() || {
-			fromLevel: 0,
-			toLevel: 1
+			parentId: 0,
+			level: 0
 		};
-		if (lastedDockLevelConfig.fromLevel == configData.fromLevel 
-			&& lastedDockLevelConfig.toLevel == configData.toLevel) {
+		if (lastedDockLevelConfig.level == configData.level) {
 			return false;
 		}
 		return true;
