@@ -2,8 +2,21 @@
 @import "./../mixins/vendor.less";
 .widgets-section {
 	pre{
-		padding: 0;
-		border-radius: 0;
+		overflow-x: scroll;
+		overflow-y: hidden;
+		padding: 5px 10px;
+		background: #fff;
+		border-left: 4px solid #428bca;
+		background: white -webkit-linear-gradient(rgba(225,228,233,0),rgba(225,228,233,0.4));
+		background: white -moz-linear-gradient(rgba(225,228,233,0),rgba(225,228,233,0.4));
+		background: white -ms-linear-gradient(rgba(225,228,233,0),rgba(225,228,233,0.4));
+		background: white -o-linear-gradient(rgba(225,228,233,0),rgba(225,228,233,0.4));
+		background: white linear-gradient(rgba(225,228,233,0),rgba(225,228,233,0.4));
+		background-size: 100% 8px;
+		background-repeat: no-repeat;
+		background-position: 0 100%;
+		.box-shadow(inset 0px 0px 5px 0px rgba(156,165,181,0.3));
+		border-radius: 4px;
 	}
 	.hljs {
 		padding: 1em;
