@@ -14,8 +14,9 @@ enyo.kind({
 			parentId: 0,
 			level: 0
 		});
-		this.destroyClientControls();
 		var records = viewModel.records;
+		
+		this.destroyClientControls();
 		// var categoryKey = extraData && extraData.apiKey;
 		currentNodeKey = location.hash;
 
@@ -23,7 +24,9 @@ enyo.kind({
 		this.$.categoriesContainer.destroyClientControls();
 		
 		this.$.categoriesContainer.createClientComponents([
-			{ 	kind: "widgets.menus.Accordion", 
+			{ 	
+				name:"accordionMenu",
+				kind: "widgets.menus.Accordion", 
 				itemNameField:"name",
 				itemChildField:"children",
 				itemExpendedField:"expanded",
@@ -32,10 +35,16 @@ enyo.kind({
 			}
 		]);
 		this.$.categoriesContainer.render();
+		this.$.categoriesContainer.show();
 		// show categories, hide message.
 		this.$.message.hide();
-		// this.$.dockTitle.show();
-		this.$.categoriesContainer.show();
+	},
+	//*@public
+	//local refresh ui with lastes has location
+	refreshLocal: function (viewModel) {
+		if(this.$.accordionMenu) {
+			this.$.accordionMenu.highlightMenuItem(location.hash);
+		}
 	},
 	//*@override before view render or re-render phase.
 	viewReady: function () {

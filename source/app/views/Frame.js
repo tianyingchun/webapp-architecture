@@ -166,6 +166,13 @@ enyo.kind({
 		}
 		return false;	
 	},
+	//*@public refresh dock categories.
+	refreshDockCategories: function () {
+		var $dockControls = this.$.twoColumnLayout.getDockControls();
+		if ($dockControls.length && $dockControls[0].kindName == "Master.views.shared.DockCategories") {
+			$dockControls[0].refreshLocal();
+		}
+	},
 	// get all config parameters for current displayed categories menu in left dock.
 	getCurrentCategoryDockConfig: function () {
 		return this.__dockCategoriesConfig;

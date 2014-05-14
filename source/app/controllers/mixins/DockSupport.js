@@ -28,7 +28,7 @@ enyo.setPath("Master.controllers.DockSupport", {
 		// parentNode level.
 		var level = extraData && extraData.level || 0;
 		// if current api item.isDisplay ==false if need to display it and it's child.
-		var stopLoop = extraData && extraData.stopLoop || false;
+		var stopLoop = extraData && extraData.stopLoop || true;
 
 		apiCategories.getCategorySiblings(this.bind("showUserApiCategories", viewData), parentId, level, stopLoop);
 		// binding view to left dock

@@ -63,9 +63,16 @@ enyo.kind({
 		var currLevel = viewModel.get("level");
 		var configData = {
 			parentId: viewModel.get("parentId") || 0,
-			level: parseInt(currLevel) -1,
+			level: parseInt(currLevel)-1,
 			stopLoop: true
 		};
+		// if current api has children api show current and it's child api list
+		// else show it's parent and parent silbings and childs.
+		var children = viewModel.get("children");
+		if (children && children.length) {
+			configData.parentId = viewModel.get("id");
+			configData.level++;
+		}
 		// if fromLevel equals -1 correct it.
 		if (!!!~configData.level) {
 			configData.level = 0;
@@ -78,6 +85,9 @@ enyo.kind({
 			) {
 			// maybe async fetch data here.
 			this.getCategorySiblingsAndChilds(configData);
+		} else {
+			//todo maybe need to update the hight menu item here
+			Master.view.frame.refreshDockCategories();
 		}
 	},
 	// *@private indicates if we need to refresh left dock categories.
