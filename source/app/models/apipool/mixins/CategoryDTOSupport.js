@@ -1,6 +1,14 @@
 (function (enyo) {
 	enyo.setPath("Master.models.CategoryDTOSupport",{
 		name: "Master.models.CategoryDTOSupport",
+
+		sortCategories: function (categories) {
+			if(enyo.isArray(categories)){
+				categories.sort(function (a, b) {
+					return a.displayOrder - b.displayOrder  ; // compitible for ie, chrome firefox.
+				});
+			}
+		},
 		/**
 		 * for category basic info convert dto.
 		 * { 	
@@ -14,9 +22,11 @@
 		 * @param  {array} target the target array used to save converted data
 		 * @return {void}  
 		 */
-		categoryBasicInfoDTO: function (source, target) {
+		categoryBasicInfoDTO: function (source, target, stopLoop) {
 			var result = target || [];
 			if (enyo.isArray(source)){
+				// sort categories.
+				this.sortCategories(source);
 				for (var i = 0; i < source.length; i++) {
 					var item = source[i];
 					var convertItem = { 
@@ -38,12 +48,14 @@
 					if(convertItem.parent !== null) {
 						convertItem.targetLevel = convertItem.parent.level;
 					}
-					result.push(convertItem);
-					// loop child source.
-					if (item.children && item.children.length) {
-						this.categoryBasicInfoDTO(item.children, convertItem.children);
+					if (!stopLoop || item.isDisplay){
+						result.push(convertItem);
+						// loop child source.
+						if (item.children && item.children.length) {
+							this.categoryBasicInfoDTO(item.children, convertItem.children, stopLoop);
+						}
 					}
-				};
+				}; 
 			}
 		}
 	});

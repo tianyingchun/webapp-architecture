@@ -63,7 +63,8 @@ enyo.kind({
 		var currLevel = viewModel.get("level");
 		var configData = {
 			parentId: viewModel.get("parentId") || 0,
-			level: parseInt(currLevel) -1
+			level: parseInt(currLevel) -1,
+			stopLoop: true
 		};
 		// if fromLevel equals -1 correct it.
 		if (!!!~configData.level) {

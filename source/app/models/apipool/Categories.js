@@ -28,9 +28,11 @@ enyo.kind({
 	/**
 	 * Get all api doc categories.
 	 * @param  {function} fn the callback function for api doc categories.
+	 * @param {bool} stopLoop for end user if set isDisplay: false, will don't show it and it's childs.
 	 * @return {void}
 	 */
-	getApiCategories: function (fn, fromLevel, toLevel) {
+	getApiCategories: function (fn, fromLevel, toLevel, stopLoop) {
+		stopLoop = stopLoop || false;
 		fromLevel = fromLevel || 0;
 		toLevel = toLevel || 20;
 		this.fetch({
@@ -38,6 +40,7 @@ enyo.kind({
 			url: function () {
 				return "/apis/"+fromLevel+"/"+toLevel;
 			},
+			stopLoop: stopLoop,
 			callback: fn
 		});
 	},
@@ -46,16 +49,19 @@ enyo.kind({
 	 * @param  {callback} fn 
 	 * @return {}
 	 */
-	getCategorySiblings: function (fn, parentId, level) {
+	getCategorySiblings: function (fn, parentId, level, stopLoop) {
+		stopLoop = stopLoop || false;
+
 		// for root level childs use getApiCategories api.
 		if (parentId == "0" || level == 0){
-			this.getApiCategories(fn, 0, 1);
+			this.getApiCategories(fn, 0, 1, stopLoop);
 		} else { 
 			this.fetch({
 				apiKey: "categorySiblings",
 				url: function(){
 					return "/sibling/"+parentId;
 				},
+				stopLoop: stopLoop,
 				callback: fn
 			});
 		}
@@ -64,22 +70,15 @@ enyo.kind({
 	 * Convert category list data
 	 * @param  {object} data category data, it should be array, also can be another object.
 	 */
-	apiCategoriesDataDTO: function (data) {
+	apiCategoriesDataDTO: function (data, options) {
+		var stopLoop = options.stopLoop || false;
 		data = data && enyo.isArray(data) ? data : [];
 		var result = [];
 		// convert source data and saved into result.
-		this.categoryBasicInfoDTO(data, result);
+		this.categoryBasicInfoDTO(data, result, stopLoop);
 		
-		this.sortCategories(result);
 		this.zLog("converted categories: ", result);
 		
 		return result;
-	},
-	sortCategories: function (categories) {
-		if(enyo.isArray(categories)){
-			categories.sort(function (a, b) {
-				return a.displayOrder - b.displayOrder; // compitible for ie, chrome firefox.
-			});
-		}
 	}
 });	
