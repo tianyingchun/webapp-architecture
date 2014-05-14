@@ -56,7 +56,7 @@ enyo.kind({
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "片段(Section)管理"},
 					{classes:"form-item", components:[
-						{name:"testSections", ontap:"testSectionManagerHandler", kind:"onyx.Button",content:"test"},
+						// {name:"testSections", ontap:"testSectionManagerHandler", kind:"onyx.Button",content:"test"},
 						{name:"sectionManager", kind: "widgets.section.SectionManager", model:"edit"}
 						
 					]}
