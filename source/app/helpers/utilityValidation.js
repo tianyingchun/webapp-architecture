@@ -134,17 +134,6 @@ enyo.mixin(utility, {
 	isVersion: function(value) {
 		return (value + "").match(new RegExp("^\\d+\\.\\d+\\.\\d+"));
 	},
-	
-	/**
-	 * Check to see if it is empty string
-	 * @param  {string}  source
-	 * @return {Boolean}
-	 */
-	isEmpty: function(source) {
-		source = enyo.trim(source);
-		return (source.length) == 0;
-	},
-
 
     /**
      * 

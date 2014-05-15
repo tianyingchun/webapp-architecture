@@ -8509,7 +8509,7 @@ a.badge:focus {
  *  preboot basic less mixin libaray
 **//*!
  * 特定厂商的mixin（Vendor mixins）
- */#page{overflow:hidden;clear:both}.page-inner{overflow:hidden}.page-inner img{display:block}.page-inner table{border:1px solid #ccc;width:100%}.page-inner table td{min-width:80px;vertical-align:top;border:1px solid #ccc;padding:5px;text-align:left}.page-inner table td input{width:auto;margin:0}.page-inner table tr:first-child td{background-color:#ebf3fa !important;font-weight:bold}.page-inner table tr:nth-child(odd) td{background-color:#fafcfc}.site-navigator{float:left;font-size:1.1em;height:50px;line-height:50px;padding-left:10px}.site-navigator a{display:block;float:left}.site-navigator span{display:block;float:left;font-size:.9em}.site-navigator i{display:block;float:left;line-height:47px;padding:0 5px}
+ */#page{overflow:hidden;clear:both}.page-inner{overflow:hidden}.page-inner table{border:1px solid #ccc;width:100%}.page-inner table td{min-width:80px;vertical-align:top;border:1px solid #ccc;padding:5px;text-align:left}.page-inner table td input{width:auto;margin:0}.page-inner table tr:first-child td{background-color:#ebf3fa !important;font-weight:bold}.page-inner table tr:nth-child(odd) td{background-color:#fafcfc}.site-navigator{float:left;font-size:1.1em;height:50px;line-height:50px;padding-left:10px}.site-navigator a{display:block;float:left}.site-navigator span{display:block;float:left;font-size:.9em}.site-navigator i{display:block;float:left;line-height:47px;padding:0 5px}
 
 /* lib/theme/bootstrap/css/module/dock.css */
 
