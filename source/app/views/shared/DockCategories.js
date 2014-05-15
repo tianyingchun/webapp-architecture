@@ -2,6 +2,7 @@ enyo.kind({
 	name: "Master.views.shared.DockCategories",
 	kind: "Master.View",
 	components:[
+		{kind: "Signals", onMenuAccrodionUpdate: "menuAccrodionUpdate"},
 		{name:"message", kind:"widgets.base.Spinner",size:25, message: Master.locale.get("LOAD_CATEGORIES", "message")},
 		{name: "categoriesContainer", showing: false}
 	],
@@ -39,9 +40,8 @@ enyo.kind({
 		// show categories, hide message.
 		this.$.message.hide();
 	},
-	//*@public
 	//local refresh ui with lastes has location
-	refreshLocal: function (viewModel) {
+	menuAccrodionUpdate: function () {
 		if(this.$.accordionMenu) {
 			this.$.accordionMenu.highlightMenuItem(location.hash);
 		}

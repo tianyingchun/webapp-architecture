@@ -87,7 +87,7 @@ enyo.kind({
 			this.getCategorySiblingsAndChilds(configData);
 		} else {
 			//todo maybe need to update the hight menu item here
-			Master.view.frame.refreshDockCategories();
+			enyo.Signals.send("onMenuAccrodionUpdate");
 		}
 	},
 	// *@private indicates if we need to refresh left dock categories.
