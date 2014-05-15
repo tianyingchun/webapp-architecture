@@ -6,7 +6,7 @@ enyo.kind({
 	],
 	published: {
 		treeSource: null,
-		treeNode: null	 
+		leafNode: null	 
 	},
 	components:[
 		{ name:"nav", allowHtml:true, content:""}
@@ -16,33 +16,36 @@ enyo.kind({
 			sup.apply(this, arguments);
 		};
 	}),
+	leafNodeChanged: function () {
+		this.refreshNav(this.leafNode);
+	},
 	refreshNav: function (leafNode) {
+		this.zLog("leafNode: ", leafNode);
 		if (this.treeSource && enyo.isObject(this.treeSource)) {
 			var html = this._generateTreeMap(this.treeSource, leafNode);
 			this.$.nav.setContent(html);
 		}
 	},
 	_generateTreeMap: function (treeRoot, treeLeaf) {
-		var path = [];
-		var findNode = this._findTreeNode(treeRoot, treeLeaf);
+		var path = [],findNode = this._findTreeNode(treeRoot, treeLeaf);
 		if (findNode) {
 			do {
-				path.push(findNode);
+				if (findNode.id != 0) {
+					path.push(findNode);
+				}
 				findNode = findNode.parent;
-			} while(findNode.parent != treeRoot);
+			} while(findNode != null);
 		}
-		var navHtml = []; 
-		// generate link
-		var leafText = path.shift(0) ? path.shift(0).name: "";
+		var navHtml = [],leafNode = path.shift(0);
 
 		for (var i = path.length - 1; i >= 0; i--) {
 			var nodeHtml = this._getNodeText(path[i]);
 			if (nodeHtml) {
-				navHtml.push();
+				navHtml.push(nodeHtml);
 			}
 		};
-		navHtml.push(leafText);
-		return navHtml.join("");
+		navHtml.push("<span>"+leafNode.name+"</span>");
+		return navHtml.join("<i class='icon-angle-right'></i>");
 	},
 	_getNodeText: function (node) {
 		var html = "";
@@ -52,9 +55,9 @@ enyo.kind({
 		return html;
 	},
 	_findTreeNode: function (treeRoot, treeLeaf) {
-		if (ttreeRoot && treeLeaf) {
+		if (treeRoot && treeLeaf) {
 			if(treeRoot.id == treeLeaf.id) {
-				return treeLeaf;
+				return treeRoot;
 			}
 			for (var i = 0; i < treeRoot.children.length; i++) {
 				var node = treeRoot.children[i];

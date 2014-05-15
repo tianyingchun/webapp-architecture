@@ -23,9 +23,7 @@ enyo.kind({
 					], 
 					rightContent: [
 						{classes:"content-header", components: [
-							{classes:"content-title", components: [
-								{name:"contentTitle", tag:"h4"}
-							]},
+							{name:"siteNav", kind:"Master.views.controls.SiteNavigator"},
 							{classes:"input-append",components: [
 								{kind:"enyo.Input", type:"text",classes:"span2 search-query", placeholder:"Search here..."},
 								{kind:"enyo.Button", classes:"btn icon-search", content:"搜索"}
@@ -174,6 +172,27 @@ enyo.kind({
 	setCurrentCategoryDockConfig: function (levelConfig) {
 		this.__dockCategoriesConfig = levelConfig
 		this.zLog("latest level config: ", levelConfig);
+	},
+	//*@public tree rootnode.
+	setSiteNavMapTree: function (tree, force) {
+		if (!this.__$siteNav) {
+			this.__$siteNav = this.$.twoColumnLayout.findControlByName("siteNav");
+		}
+		$siteNav = this.__$siteNav;
+		if ($siteNav) {
+			if ($siteNav.get("treeSource") === null || force){
+				$siteNav.set("treeSource", tree);
+			}	
+		}
+	},
+	//*@public the leafNode
+	setSiteNavLeafNode: function (leafNode) {
+		if (!this.__$siteNav) {
+			this.__$siteNav = this.$.twoColumnLayout.findControlByName("siteNav");
+		}
+		$siteNav = this.__$siteNav;
+
+		$siteNav.set("leafNode", leafNode);
 	},
 	showNormalDialog: function (title, htmlContent) {
 		var normalDialog = new widgets.dialog.NormalDialog();

@@ -89,6 +89,12 @@ enyo.kind({
 			//todo maybe need to update the hight menu item here
 			enyo.Signals.send("onMenuAccrodionUpdate");
 		}
+		// while api detail have loaded, then update navigator tree.
+		this.getAllCategoriesTreeData({
+			id: viewModel.get("id"),
+			key: viewModel.get("key"),
+			name: viewModel.get("name")
+		});
 	},
 	// *@private indicates if we need to refresh left dock categories.
 	ifRefreshDockCategories: function (configData) {

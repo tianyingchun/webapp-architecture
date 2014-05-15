@@ -8,6 +8,35 @@ enyo.setPath("Master.controllers.DockSupport", {
 	DOCK_CATEGORY_KIND: "shared.DockCategories",
 	// share view kind name "dock profiles."
 	DOCK_PROFILE_KIND:  "shared.DockProfiles",
+
+	_cachedNavigatorMapTreeSource: null,
+	/**
+	 * for site navigator
+	 * @param {object} currNode the current api node summary info
+	 * @param {boolean} forceUpdate the value indicating whether for udpate site nav datasource. 
+	 */
+	getAllCategoriesTreeData: function (currNode, forceUpdate) {
+		if (forceUpdate || this._cachedNavigatorMapTreeSource === null) {
+			var apiCategories = this.getCollectionInstance("Master.models.apipool.Categories");
+			// preload all sitemap navigator tree source. and cache it.
+			apiCategories.getApiCategories(this.bind("saveTreeSourceToSiteNavMap", forceUpdate, currNode), 0, 20, true);
+		} else {
+			// directly update nav leaf node.
+			Master.view.frame.setSiteNavLeafNode(currNode);
+		}
+	},
+	saveTreeSourceToSiteNavMap: function (forceUpdate, currNode, viewModel) {
+		this._cachedNavigatorMapTreeSource = {
+			parent: null,
+			key: "home",
+			name: "Home",
+			children:  viewModel.records
+		}
+		this.zLog("cached site nav tree: ", this._cachedNavigatorMapTreeSource);
+		Master.view.frame.setSiteNavMapTree(this._cachedNavigatorMapTreeSource, forceUpdate);
+		// set leaf node.
+		Master.view.frame.setSiteNavLeafNode(currNode);
+	},
 	/**
 	 * Get all categories for users.
 	 * @param inEvent must contain two parameters @viewAction, @viewkindName.
@@ -47,7 +76,6 @@ enyo.setPath("Master.controllers.DockSupport", {
 		// notify view to update ui interface.
 		this.notifyView(dockViewKind, viewModel, viewData);
 	},
-
 	// for dock profiles left menu
 	showProfileMenus: function (extraData) {
 		
