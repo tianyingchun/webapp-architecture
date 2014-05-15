@@ -2,6 +2,12 @@
 // markItUp!
 // By Jay Salvat - http://markitup.jaysalvat.com/
 // ------------------------------------------------------------------*/
+.html .markItUpButton{
+	float: left;
+}
+.html .markItUpButton.table {
+	width: auto;
+}
 .html .markItUpButton1 a {
 	background-image:url(images/h1.png); 
 }
@@ -73,6 +79,15 @@
 
 .html .markItUpButton20 a {
 	background-image:url(images/clean.png);
+}
+.markItUp .table a {
+	background-image:url(images/table.png);
+}
+.markItUp .table-col a {
+	background-image:url(images/table-col.png);
+}
+.markItUp .table-row a {
+	background-image:url(images/table-row.png);
 }
 
 .html .preview a {

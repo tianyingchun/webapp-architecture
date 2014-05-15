@@ -5,12 +5,46 @@
     overflow:hidden;
     clear:both;
 }
+// body::selection{
+// 	color: #FFB61B;
+// 	background: #7A7777;
+// }
 .page-inner{
 	overflow:hidden;
+	img {
+		display: block;
+	}
+	table {
+		border: 1px solid #ccc;
+		width: 100%;
+		td{
+			min-width: 80px;
+			vertical-align: top;
+			border: 1px solid  #ccc;
+			padding: 5px;
+			text-align: left;
+			input {
+				width: auto;
+				margin: 0;
+			}
+		}
+		tr:first-child{
+			td {
+				background-color: #ebf3fa !important;
+				font-weight: bold;
+			}
+		}
+		tr:nth-child(odd) {
+			td {
+				background-color: #fafcfc;
+			}
+		}
+	}
 }
+
 .site-navigator{
 	float:left;
-	font-size: 1.2em;
+	font-size: 1.1em;
 	height: 50px;
 	line-height: 50px;
 	padding-left: 10px;
