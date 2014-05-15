@@ -19,11 +19,10 @@
 		 * 	    childs: []
 		 * }
 		 * @param  {array} source the categories 
-		 * @param  {array} target the target array used to save converted data
+		 * @param  {object} target the target tree rootnode used to save converted data
 		 * @return {void}  
 		 */
-		categoryBasicInfoDTO: function (source, target, stopLoop) {
-			var result = target || [];
+		categoryBasicInfoDTO: function (source, rootNode, stopLoop) { 
 			if (enyo.isArray(source)){
 				// sort categories.
 				this.sortCategories(source);
@@ -49,10 +48,12 @@
 						convertItem.targetLevel = convertItem.parent.level;
 					}
 					if (!stopLoop || item.isDisplay){
-						result.push(convertItem);
+						// set parent child node relatetionship.
+						convertItem.parent = rootNode;
+						rootNode.children.push(convertItem);
 						// loop child source.
 						if (item.children && item.children.length) {
-							this.categoryBasicInfoDTO(item.children, convertItem.children, stopLoop);
+							this.categoryBasicInfoDTO(item.children, convertItem, stopLoop);
 						}
 					}
 				}; 

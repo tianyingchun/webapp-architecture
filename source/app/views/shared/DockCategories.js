@@ -40,6 +40,7 @@ enyo.kind({
 		// show categories, hide message.
 		this.$.message.hide();
 	},
+	//*@private for signal event.
 	//local refresh ui with lastes has location
 	menuAccrodionUpdate: function () {
 		if(this.$.accordionMenu) {

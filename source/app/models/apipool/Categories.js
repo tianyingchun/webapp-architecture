@@ -73,12 +73,21 @@ enyo.kind({
 	apiCategoriesDataDTO: function (data, options) {
 		var stopLoop = options.stopLoop || false;
 		data = data && enyo.isArray(data) ? data : [];
-		var result = [];
+		// define root node.
+		var rootNode = {
+			parent: null,
+			parentId: 0,
+			children: [],
+			id: 0,
+			level: -1,
+			name:"Home",
+			key:"home"
+		};
 		// convert source data and saved into result.
-		this.categoryBasicInfoDTO(data, result, stopLoop);
+		this.categoryBasicInfoDTO(data, rootNode, stopLoop);
 		
-		this.zLog("converted categories: ", result);
+		this.zLog("converted category tree: ", rootNode);
 		
-		return result;
+		return rootNode.children;
 	}
 });	

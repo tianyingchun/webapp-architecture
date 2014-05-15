@@ -3,5 +3,6 @@ enyo.depends(
 	"HeaderMenu.js",
 	"FooterLink.js",
 	"ApiEditPanel.js",
-	"ApiChildListPanel.js"
+	"ApiChildListPanel.js",
+	"SiteNavigator.js"
 );
