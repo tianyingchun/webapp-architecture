@@ -36,7 +36,7 @@ enyo.kind({
 					// document display order.
 					{classes:"form-item", components:[
 						{ classes:"title", content:"文档排序"},
-						{name:"api_display_order", value:0, placeholder:"API名称", type:"number", kind:"widgets.forms.InputDecorator", tipMessage:"填写分类排序，数字值越小显示越靠前!", validation: {required:"请输入数字!", number:""}}
+						{name:"api_display_order", value:0, placeholder:"API名称", type:"text", kind:"widgets.forms.InputDecorator", tipMessage:"填写分类排序，数字值越小显示越靠前!", validation: {required:"必填字段！", number:"请输入数字!"}}
 					]},
 					// indicates document if need expanded
 					{classes:"form-item", components:[
@@ -54,7 +54,7 @@ enyo.kind({
 						{ name:"showCategoryDialogBtn", kind:"enyo.Button", classes:"btn", content:"--默认根节点--", ontap:"showCategoryTreeDialog"},
 						{ name:"treeSelectMsg", content:"", tag:"span", style:"color: red;"}
 					]}
-				]}, 
+				]},
 				{kind:"onyx.Groupbox", components: [
 					{kind: "onyx.GroupboxHeader", content: "文档概述"},
 					// api descriptons. text editor.

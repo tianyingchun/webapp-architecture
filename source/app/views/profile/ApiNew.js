@@ -30,7 +30,7 @@ enyo.kind({
 					// document display order.
 					{classes:"form-item", components:[
 						{ classes:"title", content:"文档排序"},
-						{name:"api_display_order", value:0, placeholder:"API名称", type:"number", kind:"widgets.forms.InputDecorator", tipMessage:"填写分类排序，数字值越小显示越靠前!", validation: {required:"请输入数字!", number:""}}
+						{name:"api_display_order", value:0, placeholder:"API名称", type:"text", kind:"widgets.forms.InputDecorator", tipMessage:"填写分类排序，数字值越小显示越靠前!", validation: {required:"必填字段！", number:"请输入数字!"}}
 					]},
 					// indicates document if need expanded
 					{classes:"form-item", components:[

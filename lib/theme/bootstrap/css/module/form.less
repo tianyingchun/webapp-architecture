@@ -10,6 +10,29 @@
 	}
 
 }
+.onyx-groupbox {
+	margin-top: 10px;
+	overflow: hidden;
+	.widgets-section{
+		&:first-child{
+			margin-top: 0;
+			.section-item {
+				margin-top: 0;
+				border: 0;
+			}
+		}
+	}
+}
+.onyx-groupbox-header{
+	color: #303030;
+	background:none;
+	#gradient > .vertical(#fff, #f2f2f2);
+	border: 1px solid #bbb;
+}
+.onyx-groupbox > *{
+	border-color: #d1d1d1;
+}
+
 .onyx-popup.widgets-dropdownlist-menus{
 	.box-shadow(0 5px 10px rgba(0,0,0,0.2));
 	border:1px solid rgba(0,0,0,0.2);

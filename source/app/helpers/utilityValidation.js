@@ -8,8 +8,9 @@ enyo.mixin(utility, {
 	 * 
 	 * @method isRequired
 	 */
-	isRequired: function(obj) {
-		return !this.isEmpty(obj);
+	isRequired: function(str) {
+		str = enyo.trim(str.toString());
+		return !!str;
 	},
 
 
