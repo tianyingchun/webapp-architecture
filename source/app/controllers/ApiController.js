@@ -10,7 +10,8 @@ enyo.kind({
 
 	constants:{
 		// detial view kind name.
-		API_DETAIL_PAGE: "api.Detail"
+		API_DETAIL_PAGE: "api.Detail",
+		API_LIST_SEARCH:"api.Search"
 	},
 	mixins:[
 		//Note we have bindinged view and controller mapping for leftdock view. so 
@@ -25,7 +26,7 @@ enyo.kind({
 	},
 	/**
 	 * Action: node,
-	 * mapping: { path: "node/:api/:language", controller: "ApiController", action: "detail"}
+	 * mapping: { "path": "node/:key", "controller": "ApiController", "action": "detail"},
 	 */
 	detail: function (apiKey) {
 		this.zLog("apiKey: ", apiKey);
@@ -38,6 +39,37 @@ enyo.kind({
 		};
 		// fetch api details information here.
 		this.fetchApiDetailInfo(apiKey);
+	},
+	/**
+	 * action: searxh
+	 * @param  {string} params object string {text:"tag", type:'api'}
+	 * mapping: { "path": "search/:params", "controller": "ApiController", "action": "search"},
+	 */
+	search: function (params) {
+		params = decodeURIComponent(params);
+		var query = null;
+		try {
+			query = enyo.json.parse(params);
+		} catch(err) {
+			query = {
+				text : ""
+			};
+			this.zError(err);
+		}
+		this.zLog("query : ", query);
+		Master.view.frame.setSearchInputTxt(query.text);
+		// show all dock categoryes.
+		this.getCategorySiblingsAndChilds({
+			parentId: 0,
+			level: 0
+		});
+		// search doc list..
+		this.searchApis(query);
+	},
+	searchApis: function (query) {
+		this.bindingViewToContent(this.API_LIST_SEARCH,null,null);
+		// fetch search data from server.
+		
 	},
 	fetchApiDetailInfo: function (apiKey) {
 		// binding view,

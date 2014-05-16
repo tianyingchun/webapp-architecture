@@ -24,10 +24,7 @@ enyo.kind({
 					rightContent: [
 						{classes:"content-header", components: [
 							{name:"siteNav", kind:"Master.views.controls.SiteNavigator"},
-							{classes:"input-append",components: [
-								{kind:"enyo.Input", type:"text",classes:"span2 search-query", placeholder:"Search here..."},
-								{kind:"enyo.Button", classes:"btn icon-search", content:"搜索"}
-							]}
+							{name:"siteSearch", kind:"Master.views.controls.SiteSearch"}
 						]},
 						{name:"colWrapper", classes:"col-wrapper", components: [
 							{name:"mainContent"}
@@ -193,6 +190,13 @@ enyo.kind({
 		$siteNav = this.__$siteNav;
 
 		$siteNav.set("leafNode", leafNode);
+	},
+	// *@public set search input value.
+	setSearchInputTxt: function (searchTxt) {
+		var $siteSearch = this.$.twoColumnLayout.findControlByName("siteSearch");
+		if ($siteSearch) {
+			$siteSearch.setSearchValue(searchTxt);
+		}
 	},
 	showNormalDialog: function (title, htmlContent) {
 		var normalDialog = new widgets.dialog.NormalDialog();

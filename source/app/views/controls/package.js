@@ -4,5 +4,6 @@ enyo.depends(
 	"FooterLink.js",
 	"ApiEditPanel.js",
 	"ApiChildListPanel.js",
-	"SiteNavigator.js"
+	"SiteNavigator.js",
+	"SiteSearch.js"
 );

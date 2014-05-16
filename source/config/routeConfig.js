@@ -21,6 +21,8 @@
 		{ "path": "home", "default":true, "controller": "HomeController", "action": "index"},
 		// api show router config.
 		{ "path": "node/:key", "controller": "ApiController", "action": "detail"},
+		// api show router config.
+		{ "path": "search/:params", "controller": "ApiController", "action": "search"},
 		
 		// user oauth login resolve token.
 		{ "path": "token/oauth", "controller": "TokenController", "action": "resolveToken"}
