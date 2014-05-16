@@ -8,7 +8,7 @@ enyo.kind({
 			]},
 			{classes:"menu-item", tag:"ul", components: [
 				{tag:"li", classes:"item", components: [
-					{tag:"a", attributes: { href:"http://dev.1qianbao.com/blog/",target:"_blank"}, content:"博客"}
+					{tag:"a", attributes: { href:"https://1qianbao.com/merchant/",target:"_blank"}, content:"商户签约"}
 				]},
 				{tag:"li", classes:"item", components: [
 					{tag:"a", attributes: { href:"http://dev.1qianbao.com/forum/",target:"_blank"}, content:"论坛"}
