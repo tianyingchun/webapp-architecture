@@ -6,12 +6,9 @@ enyo.kind({
 	],
 	components: [
 		{name:"searchTxt", kind:"enyo.Input",onkeypress:"searchEnterKey", type:"text",classes:"span2 search-query", placeholder:"Search here..."},
-		{kind:"enyo.Button", classes:"btn icon-search", content:"搜索"}
+		{kind:"enyo.Button", classes:"btn icon-search",ontap:"goSearch", content:"搜索"}
 	],
-	handlers:{
-		"ontap":"tap"
-	},
-	tap: function (inSender, inEvent) {
+	goSearch: function (inSender, inEvent) {
 		var searchTxt = enyo.trim(this.$.searchTxt.getValue());
 		this.search(searchTxt);
 		return true;

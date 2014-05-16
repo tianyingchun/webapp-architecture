@@ -1,0 +1,71 @@
+/*!
+ * The yellow theme skin for pinan.com.cn
+ *
+ * Copyright 2014 
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *  override widget default styles.
+ * Designed by tianyingchun@outlook.com
+ */
+.skin-yellow{
+	 textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+	    border-color: rgba(245, 155, 59, 0.8);
+	    outline: 0;
+	    outline: thin dotted \9;
+	    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(235, 184, 52, 0.6);
+	    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(235, 184, 52, 0.6);
+	    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(235, 184, 52, 0.6);
+	}
+	// for site navigagor. 
+	.site-navigator {
+	    color: #797979;
+	    a {
+	        color: #F6821A;
+	        text-decoration: none;
+	    }
+	    a:hover, a:focus {
+	        color: #F6821A;
+	        text-decoration: underline;
+	    }
+	}
+	//widget site theme 
+	.widget-accordion {
+	    .accordion-header {
+	        background-color: #f6821a;
+	    }
+	    a.selected {
+			border-right: 1px solid #5397FD;
+		} 
+	}
+	.widgets-section {
+		.section-table .header-row td{
+			background-color: #FAF6ED ;
+		}
+		.section-table tr:nth-child(odd) td {
+			background-color: #F8F8F7;
+		}
+		.section-item .section-header{
+			background-color: #FAC290;
+			color: #333;
+			border: 1px solid #EBA462 !important;
+		}
+	}
+	.api-details .section-summary span{
+		background-color: #fcf7ef ;
+		&:hover{
+			background-color: #EEDBBE 
+		}
+	}
+	// for normal text editor 
+	.page-inner table tr:first-child td{
+		background-color: #faf6ed !important;
+		font-weight: bold;
+	}
+	.page-inner table tr:nth-child(odd) td{
+		background-color: #fafcfc ;
+	}
+	// for code snippet.
+	.widgets-section pre{
+		border-left: 4px solid #fac290;
+	}
+}

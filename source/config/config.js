@@ -6,7 +6,8 @@ enyo.singleton({
 	},
 	// #region properties.
 	storageStrategy: "localstorage", //cookie, websql,localstorage
-	
+	// set default theme, for pingan yellow .'skin-yellow'|'skin-default'
+	themeClass:"skin-yellow",
 	defaultHash: "home/index",// redirect to home/index page if we can't find corresponding router handler.
 	appName: "z",// define app name is z (lowercase), z is so cool ^-^.
 	// service request url root.

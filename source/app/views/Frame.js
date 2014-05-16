@@ -82,6 +82,11 @@ enyo.kind({
 		};
 	}),
 	init: function () {
+		// setting current theme class name.
+		var themeClass = Master.config.themeClass;
+		if (themeClass) {
+			this.addClass(themeClass);
+		}
 		// apply the global classes to frame.
 		this.addClass(this.getPlatformType());
 		// save current dock categories default config.
