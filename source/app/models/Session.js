@@ -65,8 +65,8 @@ enyo.kind({
 	// *@logout
 	logout: function () {
 		Master.storage.remove(this._authKey);
-		this._user = null;
-		this._token = null;
+		this.set("user", null);
+		this.set("token", null);
 	},
 	// get current user session token.
 	getAuthenticateTicket: function () {
