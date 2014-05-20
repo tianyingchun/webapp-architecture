@@ -2,20 +2,34 @@ enyo.kind({
 	name: "Master.models.user.UserModel",
 	kind: "Master.Model",
 	apis: {
-		getUserInfo:{
-			url: "/user",
+		login:{
+			url: "/user/login",
 			cache:false,
 			dto: "userInfoDTO"
 		}
 	},
 	attributes: {
-		userName: "",
-		email: "",
-		mobile:""
+		username: "",
+		password: "",
+		token: "",
+		role: "admin"// default roles is admin.
 	},
-	// *@private convert user raw data.
-	userInfoDTO: function (data) {
-		this.zLog("userInfo data: ",data);
+	// user login.
+	login: function (user, fn) {
+		this.commit({
+			apiKey: "login", 
+			method: "POST",
+			data: {
+				username: user.username,
+				password: user.password
+			},
+			callback: fn
+		});
 	},
-	
+	// login callback data dto.
+	userInfoDTO: function(data, options) {
+		return {
+			token: data.token
+		};
+	}
 });

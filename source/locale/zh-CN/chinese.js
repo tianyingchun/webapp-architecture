@@ -93,6 +93,7 @@ enyo.singleton({
 		"HTTP_500": "500 内部错误!",
 		"HTTP_405": "方法不被允许!",
 		"HTTP_400": "400 失败的请求！",
+		"HTTP_401": "访问权限认证失败！",
 		"LOAD_CATEGORIES": "加载API分类列表...",
 		"LOAD_CATEGORY_DETAIL": "加载API详情...",
 		"LOAD_PORFILE_MENUS": "加载Profile菜单列表...",

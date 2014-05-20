@@ -19,8 +19,20 @@ enyo.kind({
 	 */
 	initialize: function () {
 		this.zLog("do session global initialize....");
-		var _this = this;
+		this._authKey = "_auth_";
+		this._token = null;
+		this._user = null;
+
+		//each refresh app page, check if has valid auth ticket information.
+		var user = this.getAuthenticateTicket();
+		if (user) {
+			this._user = user;
+			this._token = user.token;
+		}
+
 		// do ajax initialing maybe .
+		// 
+		// 
 		// do some customized logics.
 		 this._initialized = true;
 	},
@@ -32,8 +44,37 @@ enyo.kind({
 	hasInitialized: function () {
 		return this._initialized;
 	},
-	//*@ public get current user session token.
 	getToken: function () {
-		return Master.config.defaultToken;
+		return this._token;
+	},
+	getUser: function () {
+		return this._user;
+	},
+	// *@logout
+	logout: function () {
+		Master.storage.remove(this._authKey);
+		this._user = null;
+		this._token = null;
+	},
+	// get current user session token.
+	getAuthenticateTicket: function () {
+		var encryptedObj= Master.storage.get(this._authKey);
+		var encryptedStr = encryptedObj && encryptedObj.auth;
+		var user = null;
+		if (encryptedStr) { 
+			try {
+				user =enyo.json.parse(utility.AES.decrypt(encryptedStr));
+			} catch(e) {
+				this.zError(e);
+			}
+		}
+		return user;
+	},
+	//*@public while user login success, save it's information.
+	saveAuthenticateTicket: function (user) {
+		this._token = user.token;
+		this._user = user;
+		var encrypted = utility.AES.encrypt(user);
+		Master.storage.add(this._authKey, {auth: encrypted});
 	}
 });

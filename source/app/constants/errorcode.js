@@ -7,7 +7,8 @@
 		"404": "HTTP_404",
 		"500": "HTTP_500",
 		"405": "HTTP_405",
-		"400": "HTTP_400"
+		"400": "HTTP_400",
+		"401": "HTTP_401"
 	};
 	ns.ErrorCode = errorCode;
 })(window)

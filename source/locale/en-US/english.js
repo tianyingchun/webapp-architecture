@@ -92,6 +92,7 @@ enyo.singleton({
 		"HTTP_500": "500 internal error!",
 		"HTTP_405": "405 Method Not Allowed!",
 		"HTTP_400": "400 Bad request!",
+		"HTTP_401": "Access Denied!",
 		"LOAD_CATEGORIES": "Loading categroies....",
 		"LOAD_CATEGORY_DETAIL": "Loading api details...",
 		"LOAD_PORFILE_MENUS": "Loading profile menus...",
