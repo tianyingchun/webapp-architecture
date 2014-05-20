@@ -10,6 +10,10 @@ enyo.kind({
 			this.initialize();
 		};
 	}),
+	published: {
+		user: null,
+		token: null
+	},
 	//@private
 	_initialized: false,
 	/**
@@ -20,19 +24,9 @@ enyo.kind({
 	initialize: function () {
 		this.zLog("do session global initialize....");
 		this._authKey = "_auth_";
-		this._token = null;
-		this._user = null;
-
 		//each refresh app page, check if has valid auth ticket information.
-		var user = this.getAuthenticateTicket();
-		if (user) {
-			this._user = user;
-			this._token = user.token;
-		}
+		this._verifyTokenValidation();
 
-		// do ajax initialing maybe .
-		// 
-		// 
 		// do some customized logics.
 		 this._initialized = true;
 	},
@@ -44,12 +38,30 @@ enyo.kind({
 	hasInitialized: function () {
 		return this._initialized;
 	},
-	getToken: function () {
-		return this._token;
+	//*@private helper for check if exist validated user session.
+	_verifyTokenValidation: function () {
+		// get current user from current session or localstorage.
+		var user = this.get("user") || this.getAuthenticateTicket();
+		if (user) {
+			var lastActive = user.lastActive || 0;
+			// if has existed logined user session.
+			var diff = enyo.perfNow() - lastActive;
+			if (diff < Master.config.tokenExpire) {
+				// re-save the authenticates.
+				this.saveAuthenticateTicket(user);
+				return true;
+			} else {
+				// clear token.
+				Master.storage.remove(this._authKey);
+				return false;
+			}
+		}
+		return false;
 	},
-	getUser: function () {
-		return this._user;
-	},
+	//*@public invoked in controller security.
+	hasAuthorization: function () {
+		return this._verifyTokenValidation() || false;
+	},	
 	// *@logout
 	logout: function () {
 		Master.storage.remove(this._authKey);
@@ -72,8 +84,10 @@ enyo.kind({
 	},
 	//*@public while user login success, save it's information.
 	saveAuthenticateTicket: function (user) {
-		this._token = user.token;
-		this._user = user;
+		// assign new system clock date for current user session.
+		user.lastActive = enyo.perfNow();
+		this.set("user", user);
+		this.set("token", user.token);
 		var encrypted = utility.AES.encrypt(user);
 		Master.storage.add(this._authKey, {auth: encrypted});
 	}

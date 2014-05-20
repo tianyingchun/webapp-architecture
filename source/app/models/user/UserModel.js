@@ -11,11 +11,14 @@ enyo.kind({
 	attributes: {
 		username: "",
 		password: "",
+		lastActive:"",
 		token: "",
 		role: "admin"// default roles is admin.
 	},
 	// user login.
 	login: function (user, fn) {
+		this.username = user.username;
+		this.password = user.password;
 		this.commit({
 			apiKey: "login", 
 			method: "POST",
@@ -29,7 +32,8 @@ enyo.kind({
 	// login callback data dto.
 	userInfoDTO: function(data, options) {
 		return {
-			token: data.token
+			token: data.token,
+			username: data.username
 		};
 	}
 });

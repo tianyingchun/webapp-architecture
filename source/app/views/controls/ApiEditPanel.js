@@ -12,18 +12,24 @@ enyo.kind({
 		// get all available categories.
 		"onFetchCategoryTree":"",
 		// save api information to server.
-		"onSaveApiInformation":""
+		"onSaveApiInformation":"",
+		// send event to delete api in profile controller
+		"onDeleteApiItem":""
 	},
 	handlers:{
 		"onSectionChanged":"sectionManagerViewChangeHandler",
 		"onTreeNodeClick":"treeNodeClick",
-		"onTreeNodeExpandChanged":"treeNodeExpandChanged"
+		"onTreeNodeExpandChanged":"treeNodeExpandChanged",
+		"onFormButtonTap": "deleteApiItemHandler"
 	},
 	components: [
 		{name: "container", classes:"api-container", components: [
 			{name:"form", submitButtonStyles:"btn btn-primary",submitButtonText:"确认修改", onValidationComplete:"formValidationSubmit", kind:"widgets.forms.FormDecorator", components: [
 				{kind:"onyx.Groupbox", components: [
-					{kind: "onyx.GroupboxHeader", content: "文档基本信息"},
+					{kind: "onyx.GroupboxHeader", classes:"api-edit-header", components: [
+						{classes:"title", content:"文档基本信息"},
+						{kind:"widgets.forms.Button", action:"delete",text:"删除"}
+					]},
 					{classes:"form-item", components:[
 						{ classes:"title", content:"文档 KEY"},
 						{ name:"api_key", placeholder:"文档 KEY", ajax:"checkifKeyExist", kind:"widgets.forms.InputDecorator", tipMessage:"全局唯一，请一定输入不重复的KEY限英文字母", validation: {required:"必填字段！",hash:""}}
@@ -75,6 +81,26 @@ enyo.kind({
 			this.$.api_description.markItUp();
 		};
 	}),
+	deleteApiItemHandler:function (inSender, inEvent) {
+		var action = inEvent.action;
+		if (action == "delete") {
+			var viewModel = this.viewModel;
+			if (viewModel) {
+				this.confirmDeleteApiItem(viewModel.get("id"), viewModel.get("key"), viewModel.get("name"));
+			}
+		}
+		return true;
+	},
+	confirmDeleteApiItem: function (apiId, apiKey, apiName) {
+		Master.view.frame.showConfirmDialog({
+			title: "确认",
+			message: "确认要删除API'"+ apiName+"'吗？",
+			success: this.bindSafely("deleteApiItem", apiId, apiKey)
+		});
+	},
+	deleteApiItem: function (apiId, apiKey) {
+		this.doDeleteApiItem({parentId: this.__selectedCategoryKey, id: apiId, key: apiKey, redirectToParent:true});
+	},
 	viewModelChanged: function () {
 		this.loadingExistApiDetailUI(this.viewModel);
 	},

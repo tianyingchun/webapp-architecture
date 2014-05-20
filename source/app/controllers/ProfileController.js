@@ -5,6 +5,9 @@ enyo.kind({
 		"Master.controllers.DockSupport",
 		"Master.controllers.CategoryTreeSupport"
 	],
+	published: {
+		security: true
+	},
 	handlers:{
 		// add/update
 		"onSaveApiInformation":"saveApiInformationHandler",
@@ -94,16 +97,41 @@ enyo.kind({
 		var apiId = inEvent.id;
 		var apiKey = inEvent.key;
 		var parentId = inEvent.parentId;
+		// indicating default if force redirect to parent node details.
+		var redirectToParent = inEvent.redirectToParent;
+
 		var apiItemModel = this.getApiItemModel({id: apiId});
-		apiItemModel.destroyApi(apiId, this.bind("_destroyApiItemComplete", parentId));
+		apiItemModel.destroyApi(apiId, this.bind("_destroyApiItemComplete", parentId, redirectToParent));
 		return true;
 	},
-	_destroyApiItemComplete: function (parentId, viewModel) {
+	_destroyApiItemComplete: function (parentId, redirectToParent, viewModel) {
 		if(viewModel.restInfo.retCode == 1) {
 			// notify update dock profiles category tree.
 			enyo.Signals.send("onTreeMenuUpdated");
-			// do refresh category list.
-			this.fetchApiList(parentId);
+			if (redirectToParent) {
+
+				if (parentId != 0) {
+					var spinnerId = Master.view.frame.showSpinnerPopup({classes:"white", message:"获取父节点..."});
+
+					var apiItemModel = this.getApiItemModel({id: parentId});
+
+					apiItemModel.getApiDetailById(parentId, function (viewModel) {
+						Master.view.frame.hideSpinnerPopup(spinnerId);
+						var id = viewModel.get("id");
+						var hash = "#profile/node/"+id;
+						if (viewModel.get("children").length) {
+							hash = "#profile/node/list/"+id;
+						}
+						window.location.href= hash;
+					});
+				} else {
+					window.location.href = "#profile";
+				} 
+				
+			} else {
+				// do refresh category list.
+				this.fetchApiList(parentId);
+			}
 		} else {
 			Master.view.frame.showAlertDialog({
 				title: "删除API",

@@ -5,6 +5,9 @@ enyo.kind({
 		"Master.controllers.DockSupport",
 		"Master.controllers.CategoryTreeSupport"
 	],
+	published: {
+		security:true
+	},
 	constants: {
 		USER_DETAIL: "user.Detail",
 	},

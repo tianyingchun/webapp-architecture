@@ -92,17 +92,21 @@ enyo.kind({
 			var user = {
 				username: viewModel.get("username"),
 				password: viewModel.get("password"),
+				lastActive: enyo.perfNow(),
 				role: "admin",
 				token: viewModel.get("token")
 			}
 			// save auth ticket entity.
 			Master.session.saveAuthenticateTicket(user);
+			// update ui login status. (show logout link)
 			this.updateLoginState(true);
+			// hdie spinner. then close dialog.
+			context.hideSpinner();
 			context.closeDialog();
 		} else {
 			// login failed.
 			context.showAuthStatus(loginStatus.retMessage);
+			context.hideSpinner();
 		}
-		context.hideSpinner();
 	}
 });

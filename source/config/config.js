@@ -8,7 +8,7 @@ enyo.singleton({
 	storageStrategy: "localstorage", //cookie, websql,localstorage
 	// set default theme, for pingan yellow .'skin-yellow'|'skin-default'
 	themeClass:"skin-yellow",
-	defaultHash: "home/index",// redirect to home/index page if we can't find corresponding router handler.
+	defaultHash: "home",// redirect to index.html#home page if we can't find corresponding router handler.
 	appName: "z",// define app name is z (lowercase), z is so cool ^-^.
 	// service request url root.
 	urlRoot:"http://192.168.14.145:3000/",
@@ -16,7 +16,8 @@ enyo.singleton({
 	defaultAPILanguage: "java",
 	// default token, we will remove this item in the next phase.
 	// HiU4GlEb8SVQVJtre58416bY1F234Ev2
-	defaultToken: "HiU4GlEb8SVQVJtre58416bY1F234Ev2",
+	// default expire token time 24hours.
+	tokenExpire: 1000*60*60*24,
 
 	cacheBust: true, // ajax cache Bust.
 	// cache settings.
