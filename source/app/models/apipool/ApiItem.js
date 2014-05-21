@@ -48,6 +48,9 @@ enyo.kind({
 				return "/api/"+this.get("id");
 			},
 			cache: false
+		},
+		searchApis: {
+			dto: "searchApisDataDTO"
 		}
 	},
 	// it will automatically append the url request if it has value.
@@ -154,6 +157,15 @@ enyo.kind({
 			callback:fn
 		})
 	},
+	searchApis: function (query, pageIndex, pageSize, fn) {
+		this.fetch({
+			apiKey: "searchApis",
+			url: function () {
+				return "/api/"+pageSize+"/"+pageIndex+"/"+query;
+			},
+			callback: fn
+		})
+	},
 	/**
 	 * Get category item info, it should be contains all api list for this category.
 	 */
@@ -164,6 +176,16 @@ enyo.kind({
 		enyo.mixin(result, tempBasicResult[0]);
 		this.zLog("converted data: ", result);
 		return result;
+	},
+	searchApisDataDTO: function (data, options) {
+		var basic = data && data.list || [];
+		var tempBasicResult = [];
+		this.apiBasicInfoDTO(basic, tempBasicResult);	 
+		var newData = {
+			total: data.total,
+			list: tempBasicResult
+		};
+		return newData;
 	}
 });	
 

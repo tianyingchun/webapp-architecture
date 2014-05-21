@@ -20,9 +20,6 @@ enyo.kind({
 				return "/sibling/{parentId}";
 			},
 			dto: "apiCategoriesDataDTO"
-		},
-		searchApis: {
-			dto: "apiCategoriesDataDTO"
 		}
 	},
 	// default we don't need to instance all records as specificed model. 
@@ -69,15 +66,7 @@ enyo.kind({
 			});
 		}
 	},
-	searchApis: function (query, pageIndex, pageSize, fn) {
-		this.fetch({
-			apiKey: "searchApis",
-			url: function () {
-				return "/"+pageSize+"/"+pageIndex+"/"+query;
-			},
-			callback: fn
-		})
-	},
+	
 	/**
 	 * Convert category list data
 	 * @param  {object} data category data, it should be array, also can be another object.

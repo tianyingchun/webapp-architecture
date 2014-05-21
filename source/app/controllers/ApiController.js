@@ -67,15 +67,21 @@ enyo.kind({
 		this.searchApis(query);
 	},
 	searchApis: function (query, pageIndex) {
-		var pageSize = 10;
+		var pageSize = 10, pageIndex = pageIndex || 1;
 		this.bindingViewToContent(this.API_LIST_SEARCH,null,null);
 		// fetch search data from server.
-		var apiCategories = this.getCollectionInstance("Master.models.apipool.Categories");
+		var apiItem = this.getModelInstance("Master.models.apipool.ApiItem",{id: "searchlist"});
 		// preload all sitemap navigator tree source. and cache it.
-		apiCategories.searchApis(query, pageIndex, pageSize, this.bind("showApiListUI"));
+		apiItem.searchApis(query.text, pageIndex, pageSize, this.bind("showApiListUI", pageIndex, pageSize));
 	},
-	showApiListUI: function (viewModel) {
-		this.notifyView(this.API_LIST_SEARCH, viewModel);
+	showApiListUI: function (pageIndex, pageSize, viewModel) {
+		this.notifyView(this.API_LIST_SEARCH, viewModel, {
+			action: "showApiListUI",
+			data :{
+				pageIndex: pageIndex,
+				pageSize: pageSize
+			}
+		});
 	},
 	fetchApiDetailInfo: function (apiKey) {
 		// binding view,
