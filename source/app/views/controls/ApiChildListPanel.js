@@ -27,7 +27,7 @@ enyo.kind({
 					{tag:"span",content:"添加"}
 				]}
 			]},
-			{ 	name:"docList", showPager:false, kind:"widgets.lists.PagedList",
+			{ 	name:"docList", showPager:false, kind:"widgets.lists.PagedTableRowsList",
 				rowKeyField:"id",
 				fields: ['id','name','key'],
 				header: ['文档ID','文档名称','文档Hash','操作']

@@ -66,10 +66,16 @@ enyo.kind({
 		// search doc list..
 		this.searchApis(query);
 	},
-	searchApis: function (query) {
+	searchApis: function (query, pageIndex) {
+		var pageSize = 10;
 		this.bindingViewToContent(this.API_LIST_SEARCH,null,null);
 		// fetch search data from server.
-		
+		var apiCategories = this.getCollectionInstance("Master.models.apipool.Categories");
+		// preload all sitemap navigator tree source. and cache it.
+		apiCategories.searchApis(query, pageIndex, pageSize, this.bind("showApiListUI"));
+	},
+	showApiListUI: function (viewModel) {
+		this.notifyView(this.API_LIST_SEARCH, viewModel);
 	},
 	fetchApiDetailInfo: function (apiKey) {
 		// binding view,
