@@ -16,6 +16,7 @@
 						id: item._id,
 						key: item.key,
 						name: item.name,
+						tags: item.tags || "",
 						displayOrder: item.displayOrder,
 						expanded: item.expanded || false,
 						parentId: item.parentId,

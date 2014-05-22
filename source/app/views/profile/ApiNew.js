@@ -27,6 +27,11 @@ enyo.kind({
 						{ classes:"title", content:"文档名称"},
 						{ name:"api_name", placeholder:"API名称", kind:"widgets.forms.InputDecorator", tipMessage:"文档名称必须填写！", validation: {required:"必填字段！"}}
 					]},
+					// document name.
+					{classes:"form-item", components:[
+						{ classes:"title", content:"文档标签"},
+						{ name:"api_tags", placeholder:"文档标签,可用于搜索，最好填写", kind:"widgets.forms.InputDecorator"}
+					]},
 					// document display order.
 					{classes:"form-item", components:[
 						{ classes:"title", content:"文档排序"},
@@ -96,6 +101,7 @@ enyo.kind({
 		// selecte category
 		_data.key = this.$.api_key.getValue();
 		_data.name = this.$.api_name.getValue();
+		_data.tags = this.$.api_tags.getValue();
 		_data.expaned = this.$.api_is_expanded.getValue();
 		_data.isDisplay = this.$.api_is_display.getValue();
 		_data.displayOrder = this.$.api_display_order.getValue();

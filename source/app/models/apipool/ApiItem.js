@@ -62,6 +62,7 @@ enyo.kind({
 		id: "", // global unique, don't use key as primary key because in profile page we can edit the key.
 		key: "",
 		name: "",
+		tags:"",
 		parentId:"0",
 		targetId: 0,
 		targetLevel: -1, // if we move to root level targetLevel == -1
@@ -106,6 +107,7 @@ enyo.kind({
 			id: "", // global unique, don't use key as primary key because in profile page we can edit the key.
 			key: "",
 			name: "",
+			tags:"",
 			parentId:"0",
 			level: 0,
 			targetId: 0,
