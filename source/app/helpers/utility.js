@@ -234,6 +234,21 @@
                 return utility.htmlEncode(match);
             });
             return content;
+        },
+        htmlEscapeAMP: function (htmlStr) {
+            if (utility.isEmpty(htmlStr)) {
+                return  "";
+            } else {
+                var tagsToReplace = {
+                    '&': '&amp;'
+                    // '<': '&lt;',
+                    // '>': '&gt;'
+                };
+                //[&<>]
+                return htmlStr.replace(/[&]/g, function(tag) {
+                    return tagsToReplace[tag] || tag;
+                });
+            }
         }
     });
 
