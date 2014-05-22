@@ -8,7 +8,8 @@ enyo.kind({
 			showPager:true, 
 			itemClickKeyProperty: "actionTapPropIndicator",
 			itemDataTemplate:"listViewItemConverter"
-		}
+		},
+		{name:"empty",tag:"h5",content:"对不起，没有搜索到你想要的内容!", showing:false}
 	],
 	itemNumberMapping: {
 		"0":"结果一. ",
@@ -34,18 +35,25 @@ enyo.kind({
 	viewReady: function () {
 		this.$.message.show();
 		this.$.docList.hide();
+		this.$.empty.hide();
 	},
 	showApiListUI: function(viewModel, viewData) {
 		this.zLog("viewModel", viewModel, viewData);
 		// save query text.
 		this.query = viewData.query || {text:""};
 		var $docList = this.$.docList;
-		$docList.set("recordsTotal", viewModel.get("total"));
-		$docList.set("pageIndex", viewData.pageIndex);
-		$docList.set("pageSize", viewData.pageSize);
-		$docList.set("pagerUri","#home");
-		$docList.set("source", viewModel.get("list")|| []);
-	},
+		var total = viewModel.get("total");
+		if (total) {
+			$docList.set("recordsTotal", total);
+			$docList.set("pageIndex", viewData.pageIndex);
+			$docList.set("pageSize", viewData.pageSize);
+			$docList.set("pagerUri","#home");
+			$docList.set("source", viewModel.get("list")|| []);
+		} else {
+			this.$.empty.show();
+			this.$.message.hide();
+		}
+	}, 
 	listViewItemConverter: function (item, index) {
 		// update doc table list page uri
 		var _new = {
