@@ -70,7 +70,7 @@ enyo.kind({
 		this.searchApis(query);
 	},
 	searchApis: function (query, pageIndex, pageSize) {
-		var pageSize = pageSize || 1, pageIndex = pageIndex || 1;
+		var pageSize = pageSize || 10, pageIndex = pageIndex || 1;
 		this.bindingViewToContent(this.API_LIST_SEARCH,null,null);
 		// fetch search data from server.
 		var apiItem = this.getModelInstance("Master.models.apipool.ApiItem",{id: "searchlist"});

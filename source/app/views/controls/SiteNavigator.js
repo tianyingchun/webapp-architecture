@@ -48,6 +48,7 @@ enyo.kind({
 				navHtml.push(nodeHtml);
 			}
 		};
+		leafNode = leafNode || treeLeaf;
 		navHtml.push("<span>"+leafNode.name+"</span>");
 		return navHtml.join("<i class='icon-angle-right'></i>");
 	},
