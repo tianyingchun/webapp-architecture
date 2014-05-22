@@ -5,7 +5,7 @@ enyo.kind({
 		"Master.ClassSupport"
 	],
 	components: [
-		{name:"searchTxt", kind:"enyo.Input",onkeypress:"searchEnterKey", type:"text",classes:"span2 search-query", placeholder:"Search here..."},
+		{name:"searchTxt", kind:"enyo.Input",onkeypress:"searchEnterKey", type:"text",classes:"span2 search-query", placeholder:"请输入搜索关键词..."},
 		{kind:"enyo.Button", classes:"btn icon-search",ontap:"goSearch", content:"搜索"}
 	],
 	goSearch: function (inSender, inEvent) {
@@ -29,10 +29,15 @@ enyo.kind({
 		return true;
 	},
 	search: function(text) {
-		var query = {
-			text: text
-		};
-		var params = encodeURIComponent(enyo.json.stringify(query));
-		window.location.href = "#search/"+params;
+		text = enyo.trim(text);
+		if (text) {
+			var query = {
+				text: text
+			};
+			var params = encodeURIComponent(enyo.json.stringify(query));
+			window.location.href = "#search/"+params;
+		} else {
+			this.$.searchTxt.setAttribute("placeholder","搜索关键词不能为空!");
+		}
 	}
 });

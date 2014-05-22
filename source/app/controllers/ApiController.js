@@ -13,6 +13,9 @@ enyo.kind({
 		API_DETAIL_PAGE: "api.Detail",
 		API_LIST_SEARCH:"api.Search"
 	},
+	handlers: {
+		onSearchPagedChanged:"searchPagedChangedHandler"
+	},
 	mixins:[
 		//Note we have bindinged view and controller mapping for leftdock view. so 
 		//if we need to render main content we need use event bubble to update.
@@ -66,20 +69,27 @@ enyo.kind({
 		// search doc list..
 		this.searchApis(query);
 	},
-	searchApis: function (query, pageIndex) {
-		var pageSize = 10, pageIndex = pageIndex || 1;
+	searchApis: function (query, pageIndex, pageSize) {
+		var pageSize = pageSize || 1, pageIndex = pageIndex || 1;
 		this.bindingViewToContent(this.API_LIST_SEARCH,null,null);
 		// fetch search data from server.
 		var apiItem = this.getModelInstance("Master.models.apipool.ApiItem",{id: "searchlist"});
 		// preload all sitemap navigator tree source. and cache it.
-		apiItem.searchApis(query.text, pageIndex, pageSize, this.bind("showApiListUI", pageIndex, pageSize));
+		apiItem.searchApis(query.text, pageIndex, pageSize, this.bind("showApiListUI", query, pageIndex, pageSize));
 	},
-	showApiListUI: function (pageIndex, pageSize, viewModel) {
+	searchPagedChangedHandler: function (inSender, inEvent) {
+		var query = inEvent.query;
+		var pageIndex = inEvent.pageIndex;
+		var pageSize = inEvent.pageSize;
+		this.searchApis(query, pageIndex, pageSize);
+	},
+	showApiListUI: function (query, pageIndex, pageSize, viewModel) {
 		this.notifyView(this.API_LIST_SEARCH, viewModel, {
 			action: "showApiListUI",
 			data :{
 				pageIndex: pageIndex,
-				pageSize: pageSize
+				pageSize: pageSize,
+				query: query
 			}
 		});
 	},

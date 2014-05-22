@@ -1,3 +1,24 @@
 .widgets-paged-listview{
-	
+	.item {
+		border-bottom: 1px solid #bbb;
+		padding: 10px 0;
+		&:first-child{
+			padding-top: 0;
+		}
+		&:last-child{
+			border-bottom:0;
+		}
+		h4{
+			background: #E9E9E9;
+			padding: 5px;
+			border: 1px solid #bbb;
+			cursor: pointer;
+			&:hover{
+				background:#ccc;
+			}
+		}
+	}
+	.pagination ul > li > a, .pagination ul > li > span{
+		padding: 2px 10px;
+	}
 }

@@ -17,7 +17,11 @@ enyo.kind({
 		};
 	}),
 	leafNodeChanged: function () {
-		this.refreshNav(this.leafNode);
+		// make sure the leafnode 
+		var leafNode = this.leafNode;
+		if (leafNode.id && leafNode.name) {
+			this.refreshNav(leafNode);
+		}
 	},
 	refreshNav: function (leafNode) {
 		this.zLog("leafNode: ", leafNode);
