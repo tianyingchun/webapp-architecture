@@ -39,7 +39,8 @@ enyo.kind({
 		]},
 		{name:"footer", id:"footer", components: [
 			 {kind: "Master.views.controls.FooterLink"}
-		]}
+		]},
+		{name:"scrollTop", content:"返回Top", ontap:"scrolltoTop", classes:"scrollto-top"}
 	],
 	handlers: {
 		onContainerRendered: "twoColumnLayoutRenderedHandler",
@@ -257,5 +258,9 @@ enyo.kind({
 	showConfirmDialog: function (config) {
 		var confirmDialog = new widgets.dialog.ConfirmDialog(config);
         confirmDialog.show();
+	},
+	scrolltoTop: function(inSender, inEvent) {
+		window.scrollTo(0, 0);
+		return true;
 	}
 })

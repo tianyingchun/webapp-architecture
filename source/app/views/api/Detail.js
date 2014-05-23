@@ -39,7 +39,9 @@ enyo.kind({
 			var _components = [];
 			for (var i = 0; i < sections.length; i++) {
 				var section = sections[i];
-				_components.push({tag:"span", sectionIndex:i, action:"scrollTo", content: section.sectionTitle});
+				if((typeof section.displaySectionTitle ==="undefined") || section.displaySectionTitle) { 
+					_components.push({tag:"span", sectionIndex:i, action:"scrollTo", content: section.sectionTitle});
+				}
 			};
 			this.$.sectionSummary.createClientComponents(_components);
 			this.$.sectionSummary.render();
