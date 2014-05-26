@@ -3,7 +3,8 @@ enyo.kind({
 	kind: "Master.View",
 	classes:"api-details",
 	handlers: {
-		ontap:"srollToControl"
+		ontap:"srollToControl",
+		"onSectionChanged":"sectionManagerViewChangeHandler"
 	},
 	components:[
 		{name:"message",kind:"widgets.base.Spinner", message: Master.locale.get("LOAD_CATEGORY_DETAIL", "message")},
@@ -55,5 +56,9 @@ enyo.kind({
 	},
 	initSectionManager: function(section) {
 		this.$.sectionManager.set("sections", section||[]);
+	},
+	sectionManagerViewChangeHandler: function (inSender, inEvent) {
+		Master.view.frame.notifyTwoColumnLayoutReflow();
+		return true;
 	}
 });
