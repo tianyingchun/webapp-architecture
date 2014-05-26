@@ -58,7 +58,7 @@ enyo.kind({
 		this.$.sectionManager.set("sections", section||[]);
 	},
 	sectionManagerViewChangeHandler: function (inSender, inEvent) {
-		Master.view.frame.notifyTwoColumnLayoutReflow();
+		Master.view.frame.notifyTwoColumnLayoutReflow(500);
 		return true;
 	}
 });
