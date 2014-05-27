@@ -3,7 +3,7 @@ enyo.kind({
 	kind: "Master.Model",
 	apis: {
 		login:{
-			url: "/user/login",
+			url: "/login",
 			cache:false,
 			dto: "userInfoDTO"
 		}
