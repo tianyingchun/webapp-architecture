@@ -6,6 +6,11 @@ enyo.kind({
 			url: "/login",
 			cache:false,
 			dto: "userInfoDTO"
+		},
+		resetPwd: {
+			url: "/user/password",
+			cache: false,
+			dto: "userInfoDTO"
 		}
 	},
 	attributes: {
@@ -25,6 +30,18 @@ enyo.kind({
 			data: {
 				username: user.username,
 				password: user.password
+			},
+			callback: fn
+		});
+	},
+	resetPassword: function (user, newPassword, fn) {
+		this.commit({
+			apiKey: "resetPwd",
+			method:"POST",
+			data: {
+				username: user.username,
+				password: user.password,
+				newPassword: newPassword
 			},
 			callback: fn
 		});

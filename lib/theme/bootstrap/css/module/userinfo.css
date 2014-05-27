@@ -1,0 +1,6 @@
+/*!
+ *  http://www.bootcss.com/p/preboot/#mixins-clearfix
+ *  preboot basic less mixin libaray
+**//*!
+ * 特定厂商的mixin（Vendor mixins）
+ */.profile-user-info .reset-button{display:none}.profile-user-info .submit-button{width:30%;margin-left:100px}.profile-user-info .result{padding:10px;text-transform:capitalize}.profile-user-info .result.success{color:#45c31c}.profile-user-info .result.error{color:#f00}

@@ -1,0 +1,21 @@
+@import "../../mixins/utility.less";
+@import "../../mixins/vendor.less";
+.profile-user-info{
+	.reset-button{
+		display:none;
+	}
+	.submit-button{
+		width: 30%;
+		margin-left: 100px;
+	}
+	.result {
+		padding: 10px;
+		text-transform: capitalize;
+		&.success{
+			color: #45C31C;
+		}
+		&.error{
+			color:red;
+		}
+	}
+}

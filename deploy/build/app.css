@@ -8584,3 +8584,12 @@ a.badge:focus {
 **//*!
  * 特定厂商的mixin（Vendor mixins）
  */.api-details{padding-bottom:30px}.api-details .widgets-section .section-item{border:0;padding:0}.api-details .widgets-section .section-item .section-header{padding:0 5px;border:1px solid #e2e2e2}.api-details .widgets-section .section-linklist .link-item{font-size:1em}.api-details .widgets-section pre{margin:10px 0}.api-details .api-basic-info{overflow:hidden}.api-details .api-basic-info .api-title{margin-top:0}.api-details .api-basic-info .api-desc{margin:5px 0 10px}.api-details .section-summary span{background:#f0f0f0;border:1px solid #bbb;padding:2px 5px;display:block;float:left;margin:5px 10px 5px 0;cursor:pointer}.api-details .section-summary span:hover{background:#d6d6d6}
+
+/* lib/theme/bootstrap/css/module/userinfo.css */
+
+/*!
+ *  http://www.bootcss.com/p/preboot/#mixins-clearfix
+ *  preboot basic less mixin libaray
+**//*!
+ * 特定厂商的mixin（Vendor mixins）
+ */.profile-user-info .reset-button{display:none}.profile-user-info .submit-button{width:30%;margin-left:100px}.profile-user-info .result{padding:10px;text-transform:capitalize}.profile-user-info .result.success{color:#45c31c}.profile-user-info .result.error{color:#f00}
