@@ -5,9 +5,10 @@
 		 * for category basic info convert dto.
 		 * @param  {array} source the categories 
 		 * @param  {array} target the target array used to save converted data
+		 * @param {boolean} stopLoop if we specific stopLooop == true, will not show the api if isDisplay == false
 		 * @return {void}  
 		 */
-		apiBasicInfoDTO: function (source, target) {
+		apiBasicInfoDTO: function (source, target, stopLoop) {
 			var result = target || [];
 			if (enyo.isArray(source)){
 				for (var i = 0; i < source.length; i++) {
@@ -32,10 +33,12 @@
 					if(apiItem.parent !== null) {
 						apiItem.targetLevel = apiItem.parent.level;
 					}
-					result.push(apiItem);
-					// loop child source.
-					if (item.children && item.children.length) {
-						this.apiBasicInfoDTO(item.children, apiItem.children);
+					if (!stopLoop || apiItem.isDisplay){
+						result.push(apiItem);
+						// loop child source.
+						if (item.children && item.children.length) {
+							this.apiBasicInfoDTO(item.children, apiItem.children);
+						}
 					}
 				};
 			}

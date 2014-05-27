@@ -43,12 +43,13 @@ enyo.kind({
 		this.query = viewData.query || {text:""};
 		var $docList = this.$.docList;
 		var total = viewModel.get("total");
+		var list = viewModel.get("list") || [];
 		if (total) {
 			$docList.set("recordsTotal", total);
 			$docList.set("pageIndex", viewData.pageIndex);
 			$docList.set("pageSize", viewData.pageSize);
 			$docList.set("pagerUri","#home");
-			$docList.set("source", viewModel.get("list")|| []);
+			$docList.set("source", list);
 		} else {
 			this.$.empty.show();
 			this.$.message.hide();

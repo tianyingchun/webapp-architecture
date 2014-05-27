@@ -183,9 +183,19 @@ enyo.kind({
 		var basic = data && data.list || [];
 		var tempBasicResult = [];
 		this.apiBasicInfoDTO(basic, tempBasicResult);	 
+		//filter API item isDisplay == false 
+		var filterCount = 0, newResult = [];
+		for (var i = 0; i < tempBasicResult.length; i++) {
+			var item = tempBasicResult[i];
+			if (item.isDisplay === false) {
+				filterCount++;
+			} else {
+				newResult.push(item);
+			}
+		};
 		var newData = {
-			total: data.total,
-			list: tempBasicResult
+			total: data.total - filterCount,
+			list: newResult
 		};
 		return newData;
 	}
