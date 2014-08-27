@@ -29,32 +29,32 @@
 				for (var i = 0; i < source.length; i++) {
 					var item = source[i];
 					var convertItem = { 
-						id: item._id,
-						key: item.key,
-						name: item.name,
-						tags: item.tags || "",
-						displayOrder: item.displayOrder,
-						expanded: item.expanded || false,
-						parentId: item.parentId,
-						targetId: item.parentId,
+						id: item.Id,
+						key: item.Key,
+						name: item.Name,
+						tags: item.Tags || "",
+						displayOrder: item.DisplayOrder,
+						expanded: item.IsExpanded || false,
+						parentId: item.ParentId,
+						targetId: item.ParentId,
 						targetLevel: -1,
-						level: item.level,
-						isDisplay: item.isDisplay,
-						parent: item.parent || null,
-						section: item.section || [],
-						description: item.description,
+						level: item.Level,
+						isDisplay: item.IsDisplay,
+						parent: item.Parent || null,
+						section: item.Section || [],
+						description: item.Description,
 						children: []
 					};
 					if(convertItem.parent !== null) {
 						convertItem.targetLevel = convertItem.parent.level;
 					}
-					if (!stopLoop || item.isDisplay){
+					if (!stopLoop || item.IsDisplay){
 						// set parent child node relatetionship.
 						convertItem.parent = rootNode;
 						rootNode.children.push(convertItem);
 						// loop child source.
-						if (item.children && item.children.length) {
-							this.categoryBasicInfoDTO(item.children, convertItem, stopLoop);
+						if (item.Children && item.Children.length) {
+							this.categoryBasicInfoDTO(item.Children, convertItem, stopLoop);
 						}
 					}
 				}; 

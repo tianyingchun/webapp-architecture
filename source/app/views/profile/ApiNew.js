@@ -107,8 +107,8 @@ enyo.kind({
 		_data.displayOrder = this.$.api_display_order.getValue();
 		_data.description = this.$.api_description.getEditorContent();
 		_data.parentId = this.__selectedCategoryKey || 0;
-		// section controls.
-		_data.section = this.$.sectionManager.getResult();
+		// section controls. now store section into database as string 'section'
+		_data.section =enyo.json.stringify(this.$.sectionManager.getResult());
 		return _data;
 	},
 	checkifKeyExist: function (value, callback) {

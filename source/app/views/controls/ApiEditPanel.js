@@ -114,7 +114,11 @@ enyo.kind({
 	},
 	loadingExistApiDetailUI: function (viewModel){
 		this.writeApiDetailInformation(viewModel);
-		this.initSectionManager(viewModel.get("section"));
+		var section = viewModel.get("section");
+		if(enyo.isString(section)){
+			section = enyo.json.parse(section);
+		}
+		this.initSectionManager(section);
 	},
 	formValidationSubmit: function (inSender, inEvent) {
 		var validationResult = inEvent;

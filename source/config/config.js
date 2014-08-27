@@ -11,7 +11,7 @@ enyo.singleton({
 	defaultHash: "home",// redirect to index.html#home page if we can't find corresponding router handler.
 	appName: "z",// define app name is z (lowercase), z is so cool ^-^.
 	// service request url root.
-	urlRoot:"http://192.168.14.145:3000/",
+	urlRoot:"http://192.168.14.218:4000/",
 	// set default language for apipool sdk.
 	defaultAPILanguage: "java",
 	// default token, we will remove this item in the next phase.
