@@ -152,7 +152,7 @@ enyo.kind({
         this.setObject(apiInfo);
         this.commit({
             apiKey: "updateApiInfo",
-            method: "PUT",
+            method: "POST",
             data: this._getPostInfo(apiInfo),
             callback: fn
         })
