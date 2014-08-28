@@ -28,7 +28,7 @@ enyo.kind({
 		this.zLog("viewModel: ", viewModel, "extraData: " ,extraData);	
 		this.$.apiTitle.setContent(viewModel.get("name"));
 		this.$.apiDesc.setContent(utility.stripRiskHtmlCode(viewModel.get("description")));
-		var sections = viewModel.get("section");
+		var sections = enyo.json.parse(viewModel.get("section"));
 		this.showSectionSummary(sections);
 		this.initSectionManager(sections);
 		this.$.message.hide();

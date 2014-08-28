@@ -21,7 +21,7 @@ enyo.kind({
 				]},
 				{ tag:"li", classes:"item seperator"},
 				{ tag:"li", classes:"item",components: [
-					{ tag: "a", attributes:{ target:"_blank", href:"http://www.1qianbao.com/" }, content:"壹钱包官网"}
+					{ tag: "a", attributes:{ target:"_blank", href:"#home" }, content:"壹钱包官网"}
 				]}
 		]}
 	]

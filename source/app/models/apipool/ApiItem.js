@@ -20,7 +20,7 @@ enyo.kind({
         // for admin page.
         apiDetailById: {
             url: function() {
-                return "/doc/get_doc_item_key?docId=" + this.get("id");
+                return "/doc/get_doc_item_id?docId=" + this.get("id");
             },
             cache: {
                 enabled: true,

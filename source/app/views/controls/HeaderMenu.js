@@ -4,7 +4,7 @@ enyo.kind({
 	components: [
 		{ classes: "menubar-inner", components: [
 			{classes:"logo", components: [
-				{tag:"a", attributes: { href:"http://dev.1qianbao.com/",target:"_blank"}, content:"开放平台"}
+				{tag:"a", attributes: { href:"#home"}, content:"开放平台"}
 			]},
 			{classes:"menu-item", tag:"ul", components: [
 				{tag:"li", classes:"item", components: [
