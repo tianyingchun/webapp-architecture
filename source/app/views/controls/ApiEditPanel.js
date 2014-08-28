@@ -169,7 +169,7 @@ enyo.kind({
 		_data.targetId = _data.parentId;
 		_data.id = this._id;
 		// sections  array.
-		_data.section = this.$.sectionManager.getResult() || [];
+		_data.section = enyo.json.stringify(this.$.sectionManager.getResult() || []);
 
 		return _data;
 	},

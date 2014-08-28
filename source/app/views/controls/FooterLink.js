@@ -40,7 +40,8 @@ enyo.kind({
 		};
 	}),
 	init: function () {
-		if(Master.session.getToken()) {
+		// for now always return true.
+		if(true || Master.session.getToken()) {
 			this.updateLoginState(true)	;
 		}
 	},

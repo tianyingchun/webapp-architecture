@@ -40,6 +40,8 @@ enyo.kind({
 	},
 	//*@private helper for check if exist validated user session.
 	_verifyTokenValidation: function () {
+		// for now always return true.
+		return true;
 		// get current user from current session or localstorage.
 		var user = this.get("user") || this.getAuthenticateTicket();
 		if (user) {
