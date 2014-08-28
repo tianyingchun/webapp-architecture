@@ -6,7 +6,7 @@ enyo.kind({
 	],
 	components: [
 		{ tag:"ul", classes:"navbar-inner", components: [
-				{ tag:"li", classes:"item text", content:"欢迎使用壹钱包文档中心！"},
+				{ tag:"li", classes:"item text", content:"欢迎使用Clothesgate合作文档中心！"},
 				// { tag:"li", classes:"item",components: [
 				// 	{ tag: "span", action:"login", content:"登陆"},
 				// 	{ tag: "span", content:"-"},
