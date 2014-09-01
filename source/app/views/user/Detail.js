@@ -13,14 +13,9 @@ enyo.kind({
 					{ classes:"title", content:"用户名: "},
 					{ name:"login_username", placeholder:"admin name", kind:"widgets.forms.InputDecorator", tipMessage:"用户名称必须填写！", validation: {required:"必填字段！"}}
 				]},
-				// document name.
-				{classes:"form-item", components:[
-					{ classes:"title", content:"原始用户密码: "},
-					{ name:"login_password", placeholder:"password", type:"password", kind:"widgets.forms.InputDecorator", tipMessage:"用户密码必须填写！", validation: {required:"必填字段！"}}
-				]},
 				{classes:"form-item", components:[
 					{ classes:"title", content:"输入新密码: "},
-					{ name:"login_new_password", placeholder:"new password",type:"password", kind:"widgets.forms.InputDecorator", tipMessage:"用户密码必须填写！", validation: {required:"必填字段！"}}
+					{ name:"login_password", placeholder:"new password",type:"password", kind:"widgets.forms.InputDecorator", tipMessage:"用户密码必须填写！", validation: {required:"必填字段！"}}
 				]},
 				{classes:"result", name:"modifyResult"}
 			]}
@@ -44,8 +39,7 @@ enyo.kind({
 			username: this.$.login_username.getValue(),
 			password: this.$.login_password.getValue(),
 		};
-		var newPassword = this.$.login_new_password.getValue();
-		userModel.resetPassword(user, newPassword, this.bindSafely("resetPwdCallback"));
+		userModel.resetPassword(user, this.bindSafely("resetPwdCallback"));
 
 	},
 	resetPwdCallback: function (viewModel) {

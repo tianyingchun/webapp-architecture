@@ -75,7 +75,7 @@ enyo.kind({
         this.bindingViewToContent(this.API_LIST_SEARCH, null, null);
         // fetch search data from server.
         var apiItem = this.getModelInstance("Master.models.apipool.ApiItem", {
-            id: "searchlist"
+            key: "searchlist"
         });
         // preload all sitemap navigator tree source. and cache it.
         apiItem.searchApis(query.text, pageIndex, pageSize, this.bind("showApiListUI", query, pageIndex, pageSize));

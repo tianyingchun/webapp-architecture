@@ -8,7 +8,7 @@ enyo.kind({
 			dto: "userInfoDTO"
 		},
 		resetPwd: {
-			url: "/user/password",
+			url: "/user/changePwd",
 			cache: false,
 			dto: "userInfoDTO"
 		}
@@ -34,14 +34,13 @@ enyo.kind({
 			callback: fn
 		});
 	},
-	resetPassword: function (user, newPassword, fn) {
+	resetPassword: function (user, fn) {
 		this.commit({
 			apiKey: "resetPwd",
 			method:"POST",
 			data: {
 				username: user.username,
-				password: user.password,
-				newPassword: newPassword
+				password: user.password
 			},
 			callback: fn
 		});
