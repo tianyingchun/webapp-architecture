@@ -30,8 +30,9 @@ enyo.kind({
 				kind: "widgets.menus.Accordion", 
 				itemNameField:"name",
 				itemChildField:"children",
-				itemExpendedField:"expanded",
-				itemKeyField:"key", linkConverterFn:this.hashConverterFn, 
+				itemExpendedField:"isExpanded",
+				itemKeyField:"key", 
+				linkConverterFn:this.hashConverterFn, 
 				selectedKey:currentNodeKey, source: records
 			}
 		]);

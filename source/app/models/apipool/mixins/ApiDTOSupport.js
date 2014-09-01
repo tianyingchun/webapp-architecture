@@ -19,7 +19,7 @@
                         name: item.Name,
                         tags: item.Tags || "",
                         displayOrder: item.DisplayOrder,
-                        expanded: item.IsExpanded || false,
+                        isExpanded: item.IsExpanded || false,
                         parentId: item.ParentId,
                         targetId: item.ParentId,
                         level: item.Level,

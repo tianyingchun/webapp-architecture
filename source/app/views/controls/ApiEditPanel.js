@@ -142,7 +142,7 @@ enyo.kind({
 		this.$.api_name.setValue(viewModel.get("name"));
 		this.$.api_tags.setValue(viewModel.get("tags"));
 		this.$.api_display_order.setValue(viewModel.get("displayOrder")||0);
-		this.$.api_is_expanded.setValue(viewModel.get("expanded")|| 0);
+		this.$.api_is_expanded.setValue(viewModel.get("isExpanded")|| 0);
 		this.$.api_is_display.setValue(viewModel.get("isDisplay") || 0);
 		this.$.api_description.setEditorContent(viewModel.get("description"));
 		// parentId: 0  level: -1 indecate the root level.
@@ -161,7 +161,7 @@ enyo.kind({
 		_data.key = this.$.api_key.getValue();
 		_data.name = this.$.api_name.getValue();
 		_data.tags = this.$.api_tags.getValue();
-		_data.expanded = this.$.api_is_expanded.getValue();
+		_data.isExpanded = this.$.api_is_expanded.getValue();
 		_data.isDisplay = this.$.api_is_display.getValue();
 		_data.displayOrder = this.$.api_display_order.getValue();
 		_data.description = this.$.api_description.getEditorContent();

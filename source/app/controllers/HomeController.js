@@ -28,7 +28,7 @@ enyo.kind({
 	fetchDefaultApiDetailInfo: function (viewModel) {
  		var apiDetail = viewModel.records[0] || null;
  		//apiModel =  new Master.models.apipool.ApiItem();
- 		var apiModel = this.getModelInstance("Master.models.apipool.ApiItem", {id:apiDetail.id});
+ 		var apiModel = this.getModelInstance("Master.models.apipool.ApiItem", {key:apiDetail.key});
 		apiModel.setObject(apiDetail);
 		var viewData = {
 			action: "showApiDetailUI"

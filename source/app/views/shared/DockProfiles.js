@@ -64,7 +64,7 @@ enyo.kind({
 			//_id: item.id,// 不能用id.因为ENYO 里面组件查找是通过ID 来的容易照成冲突 非常重要。 所以在使用组建的时候一定不能用Id
 			content: item.name,
 			expaned: item.expaned,
-			hash: item.children && item.children.length ? "#profile/node/list/"+item.id: "#profile/node/"+item.id
+			hash: item.children && item.children.length ? "#profile/node/list/"+item.key: "#profile/node/"+item.key
 		};
 	},
 	prepareMenus:function () {

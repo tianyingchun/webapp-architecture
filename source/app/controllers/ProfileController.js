@@ -28,19 +28,19 @@ enyo.kind({
 	 * Action method for all paged api list.
 	 * @param  {number} page the page index
 	 */
-	apiList: function (apiId) {
-		this.zLog("api children list of current api id: ",apiId);
+	apiList: function (apiKey) {
+		this.zLog("api children list of current api id: ",apiKey);
 		this.showProfileDockMenus({menuKey: "api_list"});
 		this.bindingViewToContent(this.PROFILE_API_LIST, null, null);
 
 		// fetch api list.
-		this.fetchApiList(apiId);
+		this.fetchApiList(apiKey);
 	},
-	apiPagedList: function (apiId, page) {
-		this.zLog("api paged list: apiId, page,", apiId, page);
+	apiPagedList: function (apiKey, page) {
+		this.zLog("api paged list: apiKey, page,", apiKey, page);
 
 	},
-	fetchApiList: function (apiId, page) {
+	fetchApiList: function (apiKey, page) {
 		// loading api list.
 		var viewData = {
 			action: "showApiListUI",
@@ -49,8 +49,8 @@ enyo.kind({
 		if (isNaN(page)) {
 			viewData.data.page = 1;
 		}
-		var apiItemModel = this.getApiItemModel({id: apiId});
-		apiItemModel.getApiDetailById(apiId, this.bind("showApiListUI", viewData));
+		var apiItemModel = this.getApiItemModel({key: apiKey});
+		apiItemModel.getApiDetailByKey(apiKey, this.bind("showApiListUI", viewData));
 
 	},
 	/**
@@ -71,16 +71,16 @@ enyo.kind({
 			action:"showAddNewApiUI"
 		});
 	},
-	editApi:function(apiId) {	
-		this.zLog("apiId: ", apiId);
+	editApi:function(apiKey) {	
+		this.zLog("apiKey: ", apiKey);
 		this.showProfileDockMenus({menuKey: "api_edit"});
 		this.bindingViewToContent(this.PROFILE_API_EDIT, null, null);
 		var spinner_uid = Master.view.frame.showSpinnerPopup({
 			message: "Loading...",
 			classes:"white"
 		});
-		var apiItemModel = this.getApiItemModel({id: apiId});
-		apiItemModel.getApiDetailById(apiId, this.bind("_loadingExistApiDetail", spinner_uid));
+		var apiItemModel = this.getApiItemModel({key: apiKey});
+		apiItemModel.getApiDetailByKey(apiKey, this.bind("_loadingExistApiDetail", spinner_uid));
 	},
 	_loadingExistApiDetail: function(spinner_uid, viewModel) {
 		this.notifyView(this.PROFILE_API_EDIT, viewModel,{
@@ -100,7 +100,7 @@ enyo.kind({
 		// indicating default if force redirect to parent node details.
 		var redirectToParent = inEvent.redirectToParent;
 
-		var apiItemModel = this.getApiItemModel({id: apiId});
+		var apiItemModel = this.getApiItemModel({key: apiKey});
 		apiItemModel.destroyApi(apiId, this.bind("_destroyApiItemComplete", parentId, redirectToParent));
 		return true;
 	},
@@ -117,10 +117,10 @@ enyo.kind({
 
 					apiItemModel.getApiDetailById(parentId, function (viewModel) {
 						Master.view.frame.hideSpinnerPopup(spinnerId);
-						var id = viewModel.get("id");
-						var hash = "#profile/node/"+id;
+						var key = viewModel.get("key");
+						var hash = "#profile/node/"+key;
 						if (viewModel.get("children").length) {
-							hash = "#profile/node/list/"+id;
+							hash = "#profile/node/list/"+key;
 						}
 						window.location.href= hash;
 					});
@@ -152,10 +152,10 @@ enyo.kind({
 		var apiData = inEvent.data;
 		var _editModel = inEvent.editModel;
 		if(_editModel) {
-			var _apiItemModel = this.getApiItemModel({id: apiData.id});
+			var _apiItemModel = this.getApiItemModel({key: apiData.key});
 			_apiItemModel.updateApiInfo(apiData, this.bind("_updateApiInfoComplete"));
 		} else {
-			var _apiItemModel = this.getApiItemModel({id: ""});
+			var _apiItemModel = this.getApiItemModel({key: ""});
 			_apiItemModel.addNewApi(apiData, this.bind("_addNewApiComplete"));
 		}
 		return true;

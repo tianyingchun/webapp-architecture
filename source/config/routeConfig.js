@@ -13,7 +13,7 @@
 		// { path: "profile/login", controller: "ProfileController", "login"},
 		{ "path": "profile/node/list/:id/:page", "controller": "ProfileController", "action":"apiPagedList"},
 		{ "path": "profile/node/list/:id", "controller": "ProfileController", "action":"apiList"},
-		{ "path": "profile/node/:id", "controller": "ProfileController", "action":"editApi"},
+		{ "path": "profile/node/:key", "controller": "ProfileController", "action":"editApi"},
 		{ "path": "profile/node/new", "controller": "ProfileController", "action":"addNewApi"},
 		{ "path": "profile", "controller": "UserController", "action":"userInfo"},
 

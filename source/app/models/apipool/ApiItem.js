@@ -17,17 +17,17 @@ enyo.kind({
             },
             dto: "apiDetailDTO"
         },
-        // for admin page.
-        apiDetailById: {
-            url: function() {
-                return "/doc/get_doc_item_id?docId=" + this.get("id");
-            },
-            cache: {
-                enabled: true,
-                cacheTime: 10 * 60 * 1000
-            },
-            dto: "apiDetailDTO"
-        },
+        // // for admin page.
+        // apiDetailById: {
+        //     url: function() {
+        //         return "/doc/get_doc_item_id?docId=" + this.get("id");
+        //     },
+        //     cache: {
+        //         enabled: true,
+        //         cacheTime: 10 * 60 * 1000
+        //     },
+        //     dto: "apiDetailDTO"
+        // },
         // add new api.
         addNewApi: {
             url: "/doc/create",
@@ -62,7 +62,7 @@ enyo.kind({
     // it will automatically append the url request if it has value.
     // Note: the enyo.store is global memory model instance managerment
     // we need to maually manager this object.
-    primaryKey: "id", //default is "id"
+    primaryKey: "key", //default is "id"
     // api detail default fields. it will be auto instanced.
     attributes: {
         id: "", // global unique, don't use key as primary key because in profile page we can edit the key.
@@ -78,7 +78,7 @@ enyo.kind({
         isDisplay: true,
         description: "",
         section: [],
-        expanded: false,
+        isExpanded: false,
         children: []
     },
     //*@ private help method for preparing the submit data.
@@ -123,7 +123,7 @@ enyo.kind({
             isDisplay: true,
             description: "",
             section: [],
-            expanded: false,
+            isExpanded: false,
             children: []
         };
     },
