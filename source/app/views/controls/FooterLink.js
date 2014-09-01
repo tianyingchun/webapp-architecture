@@ -8,26 +8,20 @@ enyo.kind({
 		{ classes:"left-aside", components: [
 			{ classes:"aside-link", tag: "ul", components: [
 				{ tag:"li", classes:"link-item", components:[
-					{tag:"a", attributes: { target:"_blank", href:"http://www.pingan.com/" }, content:"中国平安官网"}
+					{tag:"a", attributes: { target:"_blank", href:"http://www.clothesgate.com/" }, content:"CG 主站(womens)"}
 				]},
 				{ tag:"li", classes:"link-item", components:[
-					{tag:"a", attributes: { target:"_blank", href:"https://www.1qianbao.com/" }, content:"壹钱包"}
+					{tag:"a", attributes: { target:"_blank", href:"http://mens.clothesgate.com/" }, content:"CG Mens"}
 				]},
 				{ tag:"li", classes:"link-item", components:[
-					{tag:"a", attributes: { target:"_blank", href:"http://one.pingan.com/" }, content:"一账通"}
+					{tag:"a", attributes: { target:"_blank", href:"http://www.eka.cn/" }, content:"CG Kids"}
 				]},
 				{ tag:"li", classes:"link-item", components:[
-					{tag:"a", attributes: { target:"_blank", href:"http://www.eka.cn/" }, content:"壹卡会"}
-				]},
-				{ tag:"li", classes:"link-item", components:[
-					{tag:"a", attributes: { target:"_blank", href:"http://bank.pingan.com/index.shtml" }, content:"平安银行"}
-				]},
-				{ tag:"li", classes:"link-item", components:[
-					{tag:"a", attributes: { target:"_blank", href:"http://www.xsme.com/web/" }, content:"平安交易所"}
+					{tag:"a", attributes: { href:"mailto:staff.clothesgate@outlook.com" }, content:"Mail Us"}
 				]}
 			]},
 			{classes:"copyright", components:[
-				{classes:"text", tag:"span", content:"壹钱包权所有 2013-2016 壹钱包版权所有 粤ICP备11100138号-5"},
+				{classes:"text", tag:"span", content:"Copyright © 2014 Clothes Gate. All rights reserved. Powered by clothesgate.com "},
 				{name:"admin", action:"LOGIN", classes:"admin icon-user-md",ontap:"loginTap",tag:"i"},
 				{name:"logout", classes:"logout",showing:false, ontap:"logoutTap", content:"注销"}
 			]}
