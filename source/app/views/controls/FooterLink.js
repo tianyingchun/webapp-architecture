@@ -14,7 +14,7 @@ enyo.kind({
 					{tag:"a", attributes: { target:"_blank", href:"http://mens.clothesgate.com/" }, content:"CG Mens"}
 				]},
 				{ tag:"li", classes:"link-item", components:[
-					{tag:"a", attributes: { target:"_blank", href:"http://www.eka.cn/" }, content:"CG Kids"}
+					{tag:"a", attributes: { target:"_blank", href:"http://kids.clothesgate.com/" }, content:"CG Kids"}
 				]},
 				{ tag:"li", classes:"link-item", components:[
 					{tag:"a", attributes: { href:"mailto:staff.clothesgate@outlook.com" }, content:"Mail Us"}
