@@ -11,15 +11,15 @@ enyo.singleton({
 		"SIGN_IN":"登陆",
 		"REGISTER":"注册",
 		"API_LIST": "文档列表管理",
-		"API_NEW":"添加新API",
+		"API_NEW":"添加新文档",
 		"CATEGORY_LIST":"文档分类管理",
 		"PERSONAL_INFO":"个人信息管理"
 	},
 	// titles
 	title: {
-		"APP_NAME": "ENYO 应用程序！",
-		"LOGO_TEXT": "平安付开发者API浏览器",
-		"API_CATALOG":"API分类",
+		"APP_NAME": "CG 开放文档管理器！",
+		"LOGO_TEXT": "CG开放文档浏览器",
+		"API_CATALOG":"文档分类",
 		"API_DESCRIPTION":"概述",
 		"API_REQUEST": "请求",
 		"API_RESPONSE": "响应",
@@ -38,7 +38,7 @@ enyo.singleton({
 	// navgator links.
 	nav: {
 		"HOME": "首页",
-		"OFFICIAL_SITE": "平安官网"
+		"OFFICIAL_SITE": "CG官网"
 	},
 	//arbitrary page content
 	content: {
@@ -75,7 +75,7 @@ enyo.singleton({
 	},
 	// place holders
 	placeholder: {
-		"SEARCH_HINT": "请输入API名字！"
+		"SEARCH_HINT": "请输入文档名字！"
 	},
 	// form field validation messages
 	validationMsg: {
@@ -94,9 +94,9 @@ enyo.singleton({
 		"HTTP_405": "方法不被允许!",
 		"HTTP_400": "400 失败的请求！",
 		"HTTP_401": "访问权限认证失败！",
-		"LOAD_CATEGORIES": "加载API分类列表...",
-		"LOAD_CATEGORY_DETAIL": "加载API详情...",
-		"LOAD_PORFILE_MENUS": "加载Profile菜单列表...",
-		"LOAD_API_LIST": "加载API 列表信息..."
+		"LOAD_CATEGORIES": "加载文档分类列表...",
+		"LOAD_CATEGORY_DETAIL": "加载文档详情...",
+		"LOAD_PORFILE_MENUS": "加载管理菜单列表...",
+		"LOAD_API_LIST": "加载文档列表信息..."
 	}
 });

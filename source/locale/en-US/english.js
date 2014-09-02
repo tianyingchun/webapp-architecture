@@ -10,16 +10,16 @@ enyo.singleton({
 	menu: {
 		"SIGN_IN":"Log in",
 		"REGISTER":"Register",
-		"API_LIST": "API List",
-		"API_NEW":"Add New Api",
-		"CATEGORY_LIST":"API Categories",
+		"API_LIST": "Doc List",
+		"API_NEW":"Add New Doc",
+		"CATEGORY_LIST":"Doc Categories",
 		"PERSONAL_INFO":"Personal Center"
 	},
 	// titles
 	title: {
-		"APP_NAME": "ENYO APP DEMO",
-		"LOGO_TEXT": "Developer Platform Api Browser",
-		"API_CATALOG":"API Catalog",
+		"APP_NAME": "CG open online doc",
+		"LOGO_TEXT": "Doc Cooperator Browser",
+		"API_CATALOG":"Doc Catalog",
 		"API_DESCRIPTION":"Summary",
 		"API_REQUEST": "Request",
 		"API_RESPONSE": "Response",
@@ -31,13 +31,13 @@ enyo.singleton({
 		"API_REQUEST_PAYLOAD": "Payload",
 		"API_RESPONSE_HEADERS": "Reponse Headers",
 		"API_RESPONSE_BODY": "Response Result",
-		"API_REQUEST_PARAMS":"API Arguments",
+		"API_REQUEST_PARAMS":"Doc Arguments",
 		"API_RESPONSE_PARAMS": "Response Comments",
 		"DIALOG_ALERT_ERROR":"Alert Error"
 	},
 	nav: {
 		"HOME": "Home",
-		"OFFICIAL_SITE": "PingAn China"
+		"OFFICIAL_SITE": "CG Official"
 	},
 	//arbitrary page content
 	content: {
@@ -93,9 +93,9 @@ enyo.singleton({
 		"HTTP_405": "405 Method Not Allowed!",
 		"HTTP_400": "400 Bad request!",
 		"HTTP_401": "Access Denied!",
-		"LOAD_CATEGORIES": "Loading categroies....",
-		"LOAD_CATEGORY_DETAIL": "Loading api details...",
+		"LOAD_CATEGORIES": "Loading doc categroies....",
+		"LOAD_CATEGORY_DETAIL": "Loading doc details...",
 		"LOAD_PORFILE_MENUS": "Loading profile menus...",
-		"LOAD_API_LIST": "Loading api list..."
+		"LOAD_API_LIST": "Loading doc list..."
 	}
 });
